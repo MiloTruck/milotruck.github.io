@@ -2,7 +2,7 @@
 title: "Timisoara CTF 2019 Qualifiers"
 date: 2019-09-20
 tags: [Timisoara CTF, CTF]
-excerpt: "13-18 SEPTEMBER 2019"
+excerpt: "13-18 September 2019"
 --- 
 
 **Team Name:** acsii  
