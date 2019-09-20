@@ -18,7 +18,7 @@ Binary Exploitation
 [Flag Manager Service [400]](/Flag-Manager-Service/){: .btn .btn--inverse}
 
 Reversing  
-[Pipes [200]](/Timisoara-CTF-2019-Qualifiers/){: .btn .btn--inverse}
-[Strange Jump [250]](/Timisoara-CTF-2019-Qualifiers/){: .btn .btn--inverse}
+[Pipes [200]](/Pipes/){: .btn .btn--inverse}
+[Strange Jump [250]](/Strange-Jump/){: .btn .btn--inverse}
 
 ![alt]({{ site.url }}{{ site.baseurl }}/assets/images/Timisoara CTF 2019 Qualification Round - Scoreboard.png)
