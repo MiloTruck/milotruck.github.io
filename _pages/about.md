@@ -1,6 +1,6 @@
 ---
 title: "About"
-permalink: /about/
+permalink: "https://milotruck.github.io/about/"
 header:
 	image: "/assets/images/Logo.png"
 
