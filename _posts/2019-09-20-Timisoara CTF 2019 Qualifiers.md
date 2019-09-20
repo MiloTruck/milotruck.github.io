@@ -1,8 +1,7 @@
 ---
-title: "Timisoara CTF 2019 Qualification Round"
 date: 2019-09-20
 tags: [Timisoara CTF, CTF]
-excerpt: "hi"
+excerpt: "Qualifiers for Timisoara CTF 2019 from 13-18 September"
 --- 
 
 # Timisoara CTF 2019 Qualification Round  
