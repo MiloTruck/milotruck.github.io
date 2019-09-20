@@ -1,7 +1,7 @@
 ---
 layout: archive
 permalink: /CTF/
-title: "Archive of CTFS"
+title: "Archive of CTFs"
 
 ---
 
