@@ -1,9 +1,6 @@
 ---
 layout: archive
 permalink: /CTF/
-title: "Archive of CTFs"
-author_profile: false
+title: "Arhive of CTFS"
 
 ---
-
-Timisoara CTF 2019 Qualfiiers
