@@ -111,11 +111,11 @@ author:
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : 
   location         : "Singapore"
-  email            : "MiloTruckCTF@gmail.com"
+  email            : 
   links:
-    - label: "Email"
+    - label: "MiloTruckCTF@gmail.com"
       icon: "fas fa-fw fa-envelope-square"
-      url: mailto:MiloTruckCTF@gmail.com
+      url: MiloTruckCTF@gmail.com
     - label: "Website"
       icon: "fas fa-fw fa-link"
       # url: "https://your-website.com"
