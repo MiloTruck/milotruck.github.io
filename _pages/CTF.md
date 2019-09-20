@@ -3,10 +3,9 @@ layout: archive
 permalink: /CTF/
 title: "Archive of CTFS"
 header:
-  image: /assets/images/CTF Logo.jpg
+  image: /assets/images/CTF Logo.jpeg
 
 ---
 
-![alt]({{ site.url }}{{ site.baseurl }}/assets/images/CTF Logo.jpg)
 
 
