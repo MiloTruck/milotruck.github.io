@@ -3,7 +3,7 @@ main:
   - title: "About"
     url: /about/
   - title: "CTF"
-    url: "https://github.com/MiloTruck/MiloTruck.github.io"
+    url: /CTF/
   # - title: "About"
   #   url: https://mmistakes.github.io/minimal-mistakes/about/
   # - title: "Sample Posts"
