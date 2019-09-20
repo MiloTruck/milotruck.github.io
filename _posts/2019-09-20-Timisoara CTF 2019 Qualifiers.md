@@ -11,7 +11,7 @@ excerpt: "13-18 September 2019"
 
 ## Challenge Writeups  
 Binary Exploitation  
-[Hiss Hiss Python [50]](/Timisoara-CTF-2019-Qualifiers/){: .btn .btn--inverse}
+[Hiss Hiss Python [50]](/Hiss-Hiss-Python/){: .btn .btn--inverse}
 [Swag [100]](/Timisoara-CTF-2019-Qualifiers/){: .btn .btn--inverse}
 [Bof-server [100]](/Timisoara-CTF-2019-Qualifiers/){: .btn .btn--inverse}
 [Team Manager [300]](/Timisoara-CTF-2019-Qualifiers/){: .btn .btn--inverse}

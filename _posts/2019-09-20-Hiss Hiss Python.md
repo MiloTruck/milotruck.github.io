@@ -1,6 +1,7 @@
 ---
 title: "Hiss Hiss Python [50]"
 tags: [Timisoara CTF, Binary Exploitation]
+excerpt: "Binary Exploitation"
 --- 
 
 **Category:** Binary Exploitation 
