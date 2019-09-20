@@ -2,6 +2,8 @@
 title: "Bof-server [100]"
 tags: [Timisoara CTF, Binary Exploitation]
 excerpt: "Binary Exploitation"
+layout: single
+classes: wide
 --- 
 
 **Category:** Binary Exploitation 

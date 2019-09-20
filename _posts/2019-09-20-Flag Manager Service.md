@@ -2,6 +2,8 @@
 title: "Flag Manager Service [400]"
 tags: [Timisoara CTF, Binary Exploitation]
 excerpt: "Binary Exploitation"
+layout: single
+classes: wide
 --- 
 
 **Category:** Binary Exploitation 
