@@ -5,10 +5,10 @@ title: "CTF and Wargames Archive"
 
 ---
 
-**CTFs**
+# CTFs
 * [Timisoara CTF 2019 Qualifiers](/Timisoara-CTF-2019-Qualifiers/){: .btn .btn--inverse}
 
 
-**Wargames**
+# Wargames
 
 
