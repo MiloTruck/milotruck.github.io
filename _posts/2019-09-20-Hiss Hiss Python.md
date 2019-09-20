@@ -2,7 +2,6 @@
 title: "Hiss Hiss Python [50]"
 tags: [Timisoara CTF, Binary Exploitation]
 excerpt: "Binary Exploitation"
-link: https://blog.efiens.com/efiensctf2019-round2-write-ups/
 --- 
 
 **Category:** Binary Exploitation 
