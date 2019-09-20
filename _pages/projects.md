@@ -1,6 +1,6 @@
 ---
 layout: archive
-permalink: /CTF/
+permalink: /projects/
 title: "Projects"
 ---
 
