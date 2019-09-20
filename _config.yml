@@ -108,8 +108,8 @@ analytics:
 # Site Author
 author:
   name             : "MiloTruck"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : 
+  avatar           : "/assets/images/Logo.png" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  bio              : "Hi. I'm MiloTruck." #Description
   location         : "Singapore"
   email            : 
   links:
