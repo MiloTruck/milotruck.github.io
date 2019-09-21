@@ -2,7 +2,6 @@
 layout: archive
 permalink: /CTF/
 title: "CTFs and Wargames Archive"
-breadcrumbs: true
 ---
 List of Wargames and CTFs MiloTruck has participated in.
 
