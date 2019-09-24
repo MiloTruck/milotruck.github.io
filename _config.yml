@@ -113,9 +113,9 @@ author:
   location         : "Singapore"
   email            : 
   links:
-    - label: "MiloTruckCTF@gmail.com"
-      icon: "fas fa-fw fa-envelope-square"
-      url: "https://milotruck.github.io"
+    #- label: "MiloTruckCTF@gmail.com"
+    #  icon: "fas fa-fw fa-envelope-square"
+    #  url: "https://milotruck.github.io"
     - label: "Blog"
       icon: "fas fa-fw fa-link"
       url: "https://milotruck.github.io"
