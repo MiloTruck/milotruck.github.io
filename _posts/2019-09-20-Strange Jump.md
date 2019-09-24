@@ -10,6 +10,8 @@ classes: wide
 
 > This program likes to jump!
 
+[Challenge Files](https://github.com/MiloTruck/CTF-Archive/tree/master/Timisoara%20CTF%202019%20Qualification%20Round/Reversing/Strange%20Jump%20%5B250%5D){: .btn .btn--primary}
+
 ## Write-up
 Using Ghidra to decompile the binary, notice that there are a lot of functions. Most of the functions in the binary are placed to mislead and distract, and can be ignored. To find the function that contains the flag, look for the string `Yay, you got the flag!\n`.
 
