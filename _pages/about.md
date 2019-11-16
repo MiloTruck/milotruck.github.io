@@ -5,7 +5,7 @@ layout: single
 classes: wide
 ---
 
-Hi, I'm MiloTruck, a guy from Singapore. Usually, I play CTFs under **HATS SG** and **ItzyBitzySpider**/**ascii**. Other ventures include Data Science and Programming competitions, along with other IT-related projects.
+Hi, I'm MiloTruck, a guy from Singapore. Usually, I play CTFs under **HATS SG** and **ItzyBitzySpider**/**acsii**. Other ventures include Data Science and Programming competitions, along with other IT-related projects.
 
 ## Individual Achievements  
 
