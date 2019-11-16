@@ -3,5 +3,4 @@
 * Add and configure Tags page
 * Add and configure Categories page
 * Configure breadcrumbs
-* About page 
 * Add favicon and website logo
