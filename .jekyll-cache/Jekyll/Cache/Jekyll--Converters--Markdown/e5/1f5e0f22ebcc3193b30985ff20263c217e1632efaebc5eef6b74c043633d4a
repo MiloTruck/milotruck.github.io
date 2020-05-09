@@ -1,0 +1,17 @@
+I"˜<p><strong>Category:</strong> Binary Exploitation</p>
+
+<blockquote>
+  <p>This snake likes to h1ss at its input.<br />
+nc 89.38.208.144 11113</p>
+</blockquote>
+
+<p><a href="https://github.com/MiloTruck/CTF-Archive/tree/master/Timisoara%20CTF%202019%20Qualification%20Round/Binary%20Exploitation/Hiss%20Hiss%20Python%20%5B50%5D" class="btn btn--primary">Challenge Files</a></p>
+
+<h2 id="write-up">Write-up</h2>
+<p>Vulnerability: <a href="https://blog.efiens.com/efiensctf2019-round2-write-ups/">https://blog.efiens.com/efiensctf2019-round2-write-ups/</a></p>
+
+<p>Unlike Python 3, Python 2â€™s input() actually evaluates the input instead of taking it as a string. If we feed a command into input(), Python 2 will run the command, which is the vulnerability.
+Giving <code class="highlighter-rouge">__import__('os').system('/bin/sh')</code> as input opens a shell.</p>
+
+<p><strong>Flag:</strong> TIMCTF{h1ss_h1ss_shell}</p>
+:ET

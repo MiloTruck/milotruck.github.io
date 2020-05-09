@@ -1,0 +1,14 @@
+I"<p><strong>Name:</strong> MiloTruck<br />
+<strong>Position:</strong> 1<br />
+<strong>Score:</strong> 7232</p>
+
+<h2 id="challenge-writeups">Challenge Writeups</h2>
+<p>Binary Exploitation<br />
+<a href="/ezprintf/" class="btn btn--inverse">ezprintf [496]</a>
+<a href="/babyvm-pwn/" class="btn btn--inverse">babyvm-pwn [500]</a></p>
+
+<p>Reversing<br />
+<a href="/babyvm-re/" class="btn btn--inverse">babyvm-re [500]</a></p>
+
+<p><img src="http://localhost:4000/assets/images/HATS CTF - Scoreboard.png" alt="alt" /></p>
+:ET

