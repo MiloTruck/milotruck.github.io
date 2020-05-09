@@ -17,8 +17,9 @@ Hi, I'm MiloTruck, a guy from Singapore. Usually, I play CTFs under **HATS SG** 
 
 ## Team Achievements  
 
-| Name                                       | Team                  | Honors                  |
-|--------------------------------------------|-----------------------|-------------------------|
-| Cyber Defenders Discovery Camp (CDDC) 2019 | ItzyBitzySpider/acsii | Silver Award, 7th Place |
-| Cyberthon 2019                             | ItzyBitzySpider/acsii | Participation           |
-| Timisoara CTF 2019 Qualification Round     | ItzyBitzySpider/acsii | 12th Place              |
+| Name                                       | Team                  | Honors                           |
+|--------------------------------------------|-----------------------|----------------------------------|
+| Cyber Defenders Discovery Camp (CDDC) 2019 | ItzyBitzySpider/acsii | Silver Award, 7th Place          |
+| Cyberthon 2019                             | ItzyBitzySpider/acsii | Participation                    |
+| Timisoara CTF 2019 Qualification Round     | ItzyBitzySpider/acsii | 12th Place                       |
+| Cyberthon 2020                             | ItzyBitzySpider/acsii | Overall 3rd, Data Science Winner |
