@@ -27,7 +27,7 @@ repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-m
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 logo                     : # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
 masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
-breadcrumbs            : true # true, false (default)
+breadcrumbs            : false # true, false (default)
 words_per_minute         : 200
 comments:
   provider               : # false (default), "disqus", "discourse", "facebook", "staticman", "staticman_v2", "utterances", "custom"
@@ -113,9 +113,6 @@ author:
   location         : "Singapore"
   email            : 
   links:
-    #- label: "MiloTruckCTF@gmail.com"
-    #  icon: "fas fa-fw fa-envelope-square"
-    #  url: "https://milotruck.github.io"
     - label: "Blog"
       icon: "fas fa-fw fa-link"
       url: "https://milotruck.github.io"
@@ -135,24 +132,21 @@ author:
 # Site Footer
 footer:
   links:
+    - label: "Blog"
+      icon: "fas fa-fw fa-link"
+      url: "https://milotruck.github.io"
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
-      # url:
+      # url: "https://twitter.com/"
     - label: "Facebook"
       icon: "fab fa-fw fa-facebook-square"
-      # url:
+      # url: "https://facebook.com/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      # url:
-    - label: "GitLab"
-      icon: "fab fa-fw fa-gitlab"
-      # url:
-    - label: "Bitbucket"
-      icon: "fab fa-fw fa-bitbucket"
-      # url:
+      url: "https://github.com/MiloTruck"
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
-      # url:
+      # url: "https://instagram.com/"
 
 
 # Reading Files
