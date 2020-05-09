@@ -1,7 +1,7 @@
 ---
 layout: archive
-permalink: /CTF/
-title: "CTFs and Wargames Archive"
+permalink: /Data-Science-and-AI/
+title: "Data Science and AI"
 ---
 List of Wargames and CTFs MiloTruck has participated in.
 

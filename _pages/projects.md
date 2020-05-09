@@ -1,6 +1,6 @@
 ---
 layout: archive
-permalink: /projects/
+permalink: /Projects/
 title: "Projects"
 ---
 
