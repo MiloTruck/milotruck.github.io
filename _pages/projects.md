@@ -1,7 +1,8 @@
 ---
-layout: archive
-permalink: /Projects/
 title: "Projects"
+layout: tag
+permalink: /Projects/
+taxonomy: Projects
 ---
 
-Currently no projects. I know right, what a tragedy.
+Below are my projects that I work on during my free time:
