@@ -1,4 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-05-10T00:52:36+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">MILOTRUCK</title><subtitle>MiloTruck's Portfolio containing Cybersecurity, Data Science, Programming and other IT-related projects.</subtitle><author><name>MiloTruck</name></author><entry><title type="html">HATS CTF</title><link href="http://localhost:4000/HATS-CTF/" rel="alternate" type="text/html" title="HATS CTF" /><published>2019-09-24T00:00:00+08:00</published><updated>2019-09-24T00:00:00+08:00</updated><id>http://localhost:4000/HATS%20CTF</id><content type="html" xml:base="http://localhost:4000/HATS-CTF/">&lt;p&gt;&lt;strong&gt;Name:&lt;/strong&gt; MiloTruck&lt;br /&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-05-10T11:15:18+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">MILOTRUCK</title><subtitle>MiloTruck's Portfolio containing Cybersecurity, Data Science, Programming and other IT-related projects.</subtitle><author><name>MiloTruck</name></author><entry><title type="html">Cyberthon 2020</title><link href="http://localhost:4000/Cyberthon-2020/" rel="alternate" type="text/html" title="Cyberthon 2020" /><published>2020-05-10T00:00:00+08:00</published><updated>2020-05-10T00:00:00+08:00</updated><id>http://localhost:4000/Cyberthon%202020</id><content type="html" xml:base="http://localhost:4000/Cyberthon-2020/">&lt;p&gt;&lt;strong&gt;Team Name:&lt;/strong&gt; acsi-1&lt;br /&gt;
+&lt;strong&gt;Position:&lt;/strong&gt; 3&lt;br /&gt;
+&lt;strong&gt;Score:&lt;/strong&gt; 6856&lt;br /&gt;
+&lt;strong&gt;Other honors:&lt;/strong&gt; Winner of Data Science Category&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/Cyberthon 2020 - Scoreboard.png&quot; alt=&quot;alt&quot; /&gt;&lt;/p&gt;</content><author><name>MiloTruck</name></author><category term="Cyberthon" /><category term="CTF" /><summary type="html">Team Name: acsi-1 Position: 3 Score: 6856 Other honors: Winner of Data Science Category</summary></entry><entry><title type="html">HATS CTF</title><link href="http://localhost:4000/HATS-CTF/" rel="alternate" type="text/html" title="HATS CTF" /><published>2019-09-24T00:00:00+08:00</published><updated>2019-09-24T00:00:00+08:00</updated><id>http://localhost:4000/HATS%20CTF</id><content type="html" xml:base="http://localhost:4000/HATS-CTF/">&lt;p&gt;&lt;strong&gt;Name:&lt;/strong&gt; MiloTruck&lt;br /&gt;
 &lt;strong&gt;Position:&lt;/strong&gt; 1&lt;br /&gt;
 &lt;strong&gt;Score:&lt;/strong&gt; 7232&lt;/p&gt;
 
@@ -857,38 +862,4 @@ Giving &lt;code class=&quot;highlighter-rouge&quot;&gt;__import__('os').system('
 &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;flag&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;strong&gt;Flag:&lt;/strong&gt; TIMCTF{deC3pt1ve_ExceP0ti0n_h4ndLer}&lt;/p&gt;</content><author><name>MiloTruck</name></author><category term="Timisoara CTF" /><category term="Reversing" /><summary type="html">Reversing</summary></entry><entry><title type="html">Swag [100]</title><link href="http://localhost:4000/Swag/" rel="alternate" type="text/html" title="Swag [100]" /><published>2019-09-20T00:00:00+08:00</published><updated>2019-09-20T00:00:00+08:00</updated><id>http://localhost:4000/Swag</id><content type="html" xml:base="http://localhost:4000/Swag/">&lt;p&gt;&lt;strong&gt;Category:&lt;/strong&gt; Binary Exploitation&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;The server only lets hackers in, not script kiddies.&lt;br /&gt;
-nc 89.38.208.144 11111&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/MiloTruck/CTF-Archive/tree/master/Timisoara%20CTF%202019%20Qualification%20Round/Binary%20Exploitation/Swag%20%5B100%5D&quot; class=&quot;btn btn--primary&quot;&gt;Challenge Files&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;write-up&quot;&gt;Write-up&lt;/h2&gt;
-&lt;p&gt;This is probably an unintended solution. Run &lt;code class=&quot;highlighter-rouge&quot;&gt;strings&lt;/code&gt; on the binary and we get the following:&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/lib64/ld-linux-x86-64.so.2
-libc.so.6
-gets
-fflush
-exit
-srand
-puts
-time
-printf
-stdout
-__libc_start_main
-GLIBC_2.2.5
-__gmon_start__
-AWAVI
-AUATL
-[]A\A]A^A_
-Enter your name: 
-Hello, %s
-, it appears you don't have enough swag
-, I really like your swag. Come in!
-Your access code is: TIMCTF{1_am_th3_c00kie_m0nsta}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Flag:&lt;/strong&gt; TIMCTF{1_am_th3_c00kie_m0nsta}&lt;/p&gt;</content><author><name>MiloTruck</name></author><category term="Timisoara CTF" /><category term="Binary Exploitation" /><summary type="html">Binary Exploitation</summary></entry></feed>
+&lt;p&gt;&lt;strong&gt;Flag:&lt;/strong&gt; TIMCTF{deC3pt1ve_ExceP0ti0n_h4ndLer}&lt;/p&gt;</content><author><name>MiloTruck</name></author><category term="Timisoara CTF" /><category term="Reversing" /><summary type="html">Reversing</summary></entry></feed>

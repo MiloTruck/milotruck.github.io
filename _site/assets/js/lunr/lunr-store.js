@@ -58,4 +58,9 @@ var store = [{
         "excerpt":"Category: Binary Exploitation Printf is wonky. Time to exploit its wonkyness. nc challs.hats.sg 1304 Reading material: https://www.exploit-db.com/docs/english/28476-linux-format-string-exploitation.pdf Challenge Files Write-up This challenge is a standard format string challenge. Here’s the simplified decompilation of main: magic = 0; read(0,input,0x400); printf(input); if (magic != 0) { system(\"/bin/sh\"); } Obviously, the line printf(input);...","categories": [],
         "tags": ["HATS CTF","Binary Exploitation"],
         "url": "http://localhost:4000/ezprintf/",
+        "teaser":null},{
+        "title": "Cyberthon 2020",
+        "excerpt":"Team Name: acsi-1  Position: 3  Score: 6856  Other honors: Winner of Data Science Category     ","categories": [],
+        "tags": ["Cyberthon","CTF"],
+        "url": "http://localhost:4000/Cyberthon-2020/",
         "teaser":null}]

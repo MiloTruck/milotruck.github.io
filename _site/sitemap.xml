@@ -49,6 +49,10 @@
 <lastmod>2019-09-24T00:00:00+08:00</lastmod>
 </url>
 <url>
+<loc>http://localhost:4000/Cyberthon-2020/</loc>
+<lastmod>2020-05-10T00:00:00+08:00</lastmod>
+</url>
+<url>
 <loc>http://localhost:4000/_posts/2019-09-20-Bof-server/</loc>
 </url>
 <url>
@@ -83,6 +87,9 @@
 </url>
 <url>
 <loc>http://localhost:4000/_posts/2019-09-24-ezprintf/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/_posts/2020-05-10-Cyberthon%202020/</loc>
 </url>
 <url>
 <loc>http://localhost:4000/Data-Science-and-AI/</loc>
