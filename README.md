@@ -1,6 +1,11 @@
 # To be done:
 * Configure Google Analytics
-* Add and configure Tags page
-* Add and configure Categories page
+* Change favicon
 * Configure breadcrumbs
-* Add favicon and website logo
+* Projects
+    * GA Substitution Cipher: Try to include live demo in the website
+    * Add angr automated crackme solving?
+    * Add other projects
+* Pages
+    * Update about page
+    * Complete competitive programming and DS/AI page
