@@ -10,3 +10,19 @@ main:
     url: /Data-Science-and-AI/
   - title: "Competitive Programming"
     url: /Competitive-Programming/
+
+
+# Table of Contents for GA Substitution Cipher Project
+GA Substitution Cipher TOC:
+  - title: Contents
+    children:
+      - title: "Demo"
+        url: /GA-Substitution-Cipher/#demo
+      - title: "Explanation"
+        url: /GA-Substitution-Cipher/#explanation
+      - title: "Prerequisites"
+        url: /GA-Substitution-Cipher/#prerequisites
+      - title: "Usage"
+        url: /GA-Substitution-Cipher/#usage
+      - title: "References"
+        url: /GA-Substitution-Cipher/#references

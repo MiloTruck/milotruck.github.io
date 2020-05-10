@@ -1,0 +1,756 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.16.6 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Substitution Cipher Decryption with Genetic Algorithms - MILOTRUCK</title>
+<meta name="description" content="  This project implements Genetic Algorithms to decrypt Monoalphabetic Substitution Ciphers using frequency analysis.">
+
+
+  <meta name="author" content="MiloTruck">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="MILOTRUCK">
+<meta property="og:title" content="Substitution Cipher Decryption with Genetic Algorithms">
+<meta property="og:url" content="http://localhost:4000/GA-Substitution-Cipher/">
+
+
+  <meta property="og:description" content="  This project implements Genetic Algorithms to decrypt Monoalphabetic Substitution Ciphers using frequency analysis.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2020-05-10T00:00:00+08:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/GA-Substitution-Cipher/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "MiloTruck",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="_tE-Yah0HQSRNng0bITIKhyyOoGrbpidFdmZFnKylks" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="MILOTRUCK Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/Favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/Favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/Favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/Favicon/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/Favicon/safari-pinned-tab.svg" color="#636363">
+<link rel="shortcut icon" href="/assets/images/Favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#000000">
+<meta name="msapplication-config" content="/assets/images/Favicon/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          MILOTRUCK
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/About/" >About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/Projects/" >Projects</a>
+            </li><li class="masthead__menu-item">
+              <a href="/Cybersecurity/" >Cybersecurity</a>
+            </li><li class="masthead__menu-item">
+              <a href="/Data-Science-and-AI/" >Data Science and AI</a>
+            </li><li class="masthead__menu-item">
+              <a href="/Competitive-Programming/" >Competitive Programming</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/Logo.png" alt="MiloTruck" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">MiloTruck</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>Hi. I’m MiloTruck.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Singapore</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://milotruck.github.io" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Blog</a></li>
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/MiloTruck" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">Contents</span>
+        
+
+        
+        <ul>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/GA-Substitution-Cipher/#demo" class="">Demo</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/GA-Substitution-Cipher/#explanation" class="">Explanation</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/GA-Substitution-Cipher/#prerequisites" class="">Prerequisites</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/GA-Substitution-Cipher/#usage" class="">Usage</a></li>
+          
+            
+            
+
+            
+            
+
+            <li><a href="/GA-Substitution-Cipher/#references" class="">References</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+    
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Substitution Cipher Decryption with Genetic Algorithms">
+    <meta itemprop="description" content="  This project implements Genetic Algorithms to decrypt Monoalphabetic Substitution Ciphers using frequency analysis.">
+    <meta itemprop="datePublished" content="May 10, 2020">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Substitution Cipher Decryption with Genetic Algorithms
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <blockquote>
+  <p>This project implements Genetic Algorithms to decrypt Monoalphabetic Substitution Ciphers using frequency analysis.</p>
+</blockquote>
+
+<p><a href="https://github.com/MiloTruck/GA_SubstitutionCipher" class="btn btn--primary">Project Files</a></p>
+
+<h2 id="demo">Demo</h2>
+<p>The plaintext used is from the opening line of <strong>The Great Gatsby</strong>:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'In my younger and more vulnerable years my father gave me some advice that I've been
+turning over in my mind ever since. Whenever you feel like criticizing anyone, he told
+me, just remember that all the people in this world haven't had the advantages that you've
+had.
+</code></pre></div></div>
+
+<p>The ciphertext is obtained by encrypting the plaintext using substitution cipher with the key <code class="highlighter-rouge">ZYXWVUTSRQPONMLKJIHGFEDCBA</code>:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'Rm nb blfmtvi zmw nliv efomvizyov bvzih nb uzgsvi tzev nv hlnv zwerxv gszg R'ev yvvm
+gfimrmt levi rm nb nrmw vevi hrmxv. Dsvmvevi blf uvvo orpv xirgrxrarmt zmblmv, sv glow nv,
+qfhg ivnvnyvi gszg zoo gsv kvlkov rm gsrh dliow szevm'g szw gsv zwezmgztvh gszg blf'ev szw.
+</code></pre></div></div>
+
+<p>After running the decryption program <code class="highlighter-rouge">main.py</code>, we obtain the original plaintext without knowing the decryption key:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-------------------------------------------------------------------------------------------
+Average Fitness: 423.55366352956
+Max Fitness: 774.6525013478013
+Key: ZYXWVUTSRQPONMLKJIHGFEDCBA
+Decrypted Text: 'IN MY YOUNGER AND MORE VULNERABLE YEARS MY FATHER GAVE ME SOME ADVICE THAT
+I'VE BEEN TURNING OVER IN MY MIND EVER SINCE. WHENEVER YOU FEEL LIKE CRITICIZING ANYONE, HE
+TOLD ME, JUST REMEMBER THAT ALL THE PEOPLE IN THIS WORLD HAVEN'T HAD THE ADVANTAGES THAT
+YOU'VE HAD.
+-------------------------------------------------------------------------------------------
+</code></pre></div></div>
+
+<h2 id="explanation">Explanation</h2>
+<p>In the English language, some sequences of letters appear more often than others, such as “AND”. By analysing the frequency of bi-grams (2 letters) and tri-grams (3 letters) in English text, we are able to observe a pattern in letter frequencies in the English language. In this project, I obtained the letter frequencies using <strong>The Great Gatsby</strong> as training text.</p>
+
+<p>The algorithm repeatedly generates random keys and decrypts the ciphertext using these keys. The key is assigned a fitness value based on how much the letter frequencies of the decrypted text matches the letter frequencies from the training text. Over numerous generations, the keys’ fitness improves, which increases the chance of the key decrypting the ciphertext correctly.</p>
+
+<p>Thus, frequency analysis can be used to break substitution ciphers although individual letters are substituted with others. The plaintext, after decryption with a generated key, which matches the frequency of ngrams in English, has the highest probability of being the correct key.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+<p>This project requires <strong>Python 3</strong> and the <code class="highlighter-rouge">nltk</code> module, which can be installed using <code class="highlighter-rouge">pip</code>:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip3 install nltk
+</code></pre></div></div>
+
+<p>All other modules used are built-in, and should come with the installation of <strong>Python 3</strong>.</p>
+
+<h2 id="usage">Usage</h2>
+
+<h3 id="obtaining-n-gram-frequency">Obtaining n-gram frequency</h3>
+<p><code class="highlighter-rouge">ngramGenerator.py</code> is used to generate the frequencies of n-grams in the training text. The result is stored in the <code class="highlighter-rouge">data/</code> directory as a CSV file.</p>
+
+<p>To obtain n-gram frequency, run <code class="highlighter-rouge">ngramGenerator.py</code> in a terminal using python3:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 ngramGenerator.py
+</code></pre></div></div>
+
+<p>The script will ask for 2 parameters, <em>filename</em> and <em>n-gram length</em> :</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Name of CSV file to output result: 
+Length of n-grams: 
+</code></pre></div></div>
+<ul>
+  <li><em>filename</em> refers to the name of the CSV file where the n-gram frequency will be stored.</li>
+  <li><em>n-gram length</em> refers to the length of n-grams to extract. I recommend using a length of 2 as it gave the provided results.</li>
+</ul>
+
+<h3 id="substitution-cipher-decryption">Substitution Cipher Decryption</h3>
+<p>To run the decryption program, run the <code class="highlighter-rouge">main.py</code> python script in a terminal using the command:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 main.py
+</code></pre></div></div>
+
+<p>The script will ask for the ciphertext to decrypt, which can just be pasted:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Ciphertext: 
+</code></pre></div></div>
+
+<p>The program will then output the average and highest fitness, decryption key and plaintext obtained using that key every generation. As seen in the demo above:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>------------------------------------------------------
+Average Fitness: 423.55366352956
+Max Fitness: 774.6525013478013
+Key: ZYXWVUTSRQPONMLKJIHGFEDCBA
+Decrypted Text: 'IN MY YOUNGER AND MORE VULNERABLE...
+------------------------------------------------------
+</code></pre></div></div>
+
+<p>If you wish to experiment with the genetic algorithm, the algorithm’s parameters can be changed in <code class="highlighter-rouge">config.py</code>:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Genetic Algorithm Parameters
+</span><span class="n">generations</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">population_size</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">tournament_size</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">tournament_winner_probability</span> <span class="o">=</span> <span class="mf">0.75</span>
+<span class="n">crossover_probability</span> <span class="o">=</span> <span class="mf">0.65</span>
+<span class="n">crossover_points_count</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">mutation_probability</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">elitism_percentage</span> <span class="o">=</span> <span class="mf">0.15</span>
+<span class="n">selection_method</span> <span class="o">=</span> <span class="s">'TS'</span>
+
+<span class="c1"># Other parameters
+</span><span class="n">bigram_weight</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">trigram_weight</span> <span class="o">=</span> <span class="mf">1.0</span>
+</code></pre></div></div>
+
+<h2 id="references">References</h2>
+
+<p>To obtain the frequency of ngrams, the novel “The Great Gatsby” was used. The training text <code class="highlighter-rouge">TheGreatGatsby.txt</code> was obtained from Project Gutenberg:<br />
+<a href="http://gutenberg.net.au/ebooks02/0200041.txt">http://gutenberg.net.au/ebooks02/0200041.txt</a></p>
+
+<p>This project was heavily inspired by the paper <strong>Decrypting Substitution Ciphers with Genetic Algorithms</strong> by <strong>Jason Brownbridge</strong>. The method used for this project is well explained in this paper. All credits go to him for the original idea. A copy of the paper can be obtained here:<br />
+<a href="https://people.cs.uct.ac.za/~jkenwood/JasonBrownbridge.pdf">https://people.cs.uct.ac.za/~jkenwood/JasonBrownbridge.pdf</a></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#genetic-algorithms" class="page__taxonomy-item" rel="tag">Genetic Algorithms</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#projects" class="page__taxonomy-item" rel="tag">Projects</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#substitution-cipher" class="page__taxonomy-item" rel="tag">Substitution Cipher</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-05-10T00:00:00+08:00">May 10, 2020</time></p>
+        
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/Cyberthon-2020/" class="pagination--pager" title="Cyberthon 2020
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Cyberthon-2020/" rel="permalink">Cyberthon 2020
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  less than 1 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Team Name: acsi-1
+Position: 3
+Score: 6856
+Other honors: Winner of Data Science Category
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/ezprintf/" rel="permalink">ezprintf [496]
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  1 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Binary Exploitation
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/babyvm-re/" rel="permalink">babyvm-re [500]
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Reversing
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/babyvm-pwn/" rel="permalink">babyvm-pwn [500]
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Binary Exploitation
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://milotruck.github.io" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Blog</a></li>
+        
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/MiloTruck" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 MiloTruck. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -63,4 +63,9 @@ var store = [{
         "excerpt":"Team Name: acsi-1  Position: 3  Score: 6856  Other honors: Winner of Data Science Category     ","categories": [],
         "tags": ["Cyberthon","CTF"],
         "url": "http://localhost:4000/Cyberthon-2020/",
+        "teaser":null},{
+        "title": "Substitution Cipher Decryption with Genetic Algorithms",
+        "excerpt":"This project implements Genetic Algorithms to decrypt Monoalphabetic Substitution Ciphers using frequency analysis. Project Files Demo The plaintext used is from the opening line of The Great Gatsby: 'In my younger and more vulnerable years my father gave me some advice that I've been turning over in my mind ever...","categories": [],
+        "tags": ["Genetic Algorithms","Substitution Cipher","Projects"],
+        "url": "http://localhost:4000/GA-Substitution-Cipher/",
         "teaser":null}]

@@ -28,12 +28,9 @@ HATS CTF:
     btn_class: "btn--primary"
 ---
 
+
+
 ## Capture-The-Flag (CTF) Competitions
-
-  
-
 {% include feature_row id="Cyberthon 2020" type="left" %}
-
 {% include feature_row id="Timisoara CTF 2019 Qualifiers" type="left" %}
-
 {% include feature_row id="HATS CTF" type="left" %}
