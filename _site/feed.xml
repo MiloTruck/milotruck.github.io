@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-05-10T19:59:52+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">MILOTRUCK</title><subtitle>MiloTruck's Portfolio containing Cybersecurity, Data Science, Programming and other IT-related projects.</subtitle><author><name>MiloTruck</name></author><entry><title type="html">Cyberthon 2020</title><link href="http://localhost:4000/Cyberthon-2020/" rel="alternate" type="text/html" title="Cyberthon 2020" /><published>2020-05-10T00:00:00+08:00</published><updated>2020-05-10T00:00:00+08:00</updated><id>http://localhost:4000/Cyberthon%202020</id><content type="html" xml:base="http://localhost:4000/Cyberthon-2020/">&lt;p&gt;&lt;strong&gt;Team Name:&lt;/strong&gt; acsi-1&lt;br /&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-05-10T20:06:50+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">MILOTRUCK</title><subtitle>MiloTruck's Portfolio containing Cybersecurity, Data Science, Programming and other IT-related projects.</subtitle><author><name>MiloTruck</name></author><entry><title type="html">Cyberthon 2020</title><link href="http://localhost:4000/Cyberthon-2020/" rel="alternate" type="text/html" title="Cyberthon 2020" /><published>2020-05-10T00:00:00+08:00</published><updated>2020-05-10T00:00:00+08:00</updated><id>http://localhost:4000/Cyberthon%202020</id><content type="html" xml:base="http://localhost:4000/Cyberthon-2020/">&lt;p&gt;&lt;strong&gt;Team Name:&lt;/strong&gt; acsi-1&lt;br /&gt;
 &lt;strong&gt;Position:&lt;/strong&gt; 3&lt;br /&gt;
 &lt;strong&gt;Score:&lt;/strong&gt; 6856&lt;br /&gt;
 &lt;strong&gt;Other honors:&lt;/strong&gt; Winner of Data Science Category&lt;/p&gt;
@@ -19,20 +19,21 @@ had.
 
 &lt;p&gt;The ciphertext is obtained by encrypting the plaintext using substitution cipher with the key &lt;code class=&quot;highlighter-rouge&quot;&gt;ZYXWVUTSRQPONMLKJIHGFEDCBA&lt;/code&gt;:&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'Rm nb blfmtvi zmw nliv efomvizyov bvzih nb uzgsvi tzev nv hlnv zwerxv gszg R'ev yvvm
-gfimrmt levi rm nb nrmw vevi hrmxv. Dsvmvevi blf uvvo orpv xirgrxrarmt zmblmv, sv glow nv,
-qfhg ivnvnyvi gszg zoo gsv kvlkov rm gsrh dliow szevm'g szw gsv zwezmgztvh gszg blf'ev szw.
+gfimrmt levi rm nb nrmw vevi hrmxv. Dsvmvevi blf uvvo orpv xirgrxrarmt zmblmv, sv glow
+nv, qfhg ivnvnyvi gszg zoo gsv kvlkov rm gsrh dliow szevm'g szw gsv zwezmgztvh gszg
+blf'ev szw.
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;After running the decryption program &lt;code class=&quot;highlighter-rouge&quot;&gt;main.py&lt;/code&gt;, we obtain the original plaintext without knowing the decryption key:&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;-------------------------------------------------------------------------------------------
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;------------------------------------------------------------------------------------------
 Average Fitness: 423.55366352956
 Max Fitness: 774.6525013478013
 Key: ZYXWVUTSRQPONMLKJIHGFEDCBA
-Decrypted Text: 'IN MY YOUNGER AND MORE VULNERABLE YEARS MY FATHER GAVE ME SOME ADVICE THAT
-I'VE BEEN TURNING OVER IN MY MIND EVER SINCE. WHENEVER YOU FEEL LIKE CRITICIZING ANYONE, HE
-TOLD ME, JUST REMEMBER THAT ALL THE PEOPLE IN THIS WORLD HAVEN'T HAD THE ADVANTAGES THAT
-YOU'VE HAD.
--------------------------------------------------------------------------------------------
+Decrypted Text: 'IN MY YOUNGER AND MORE VULNERABLE YEARS MY FATHER GAVE ME SOME ADVICE 
+THAT I'VE BEEN TURNING OVER IN MY MIND EVER SINCE. WHENEVER YOU FEEL LIKE CRITICIZING 
+ANYONE, HE TOLD ME, JUST REMEMBER THAT ALL THE PEOPLE IN THIS WORLD HAVEN'T HAD THE 
+ADVANTAGES THAT YOU'VE HAD.
+------------------------------------------------------------------------------------------
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;explanation&quot;&gt;Explanation&lt;/h2&gt;
@@ -107,7 +108,7 @@ Decrypted Text: 'IN MY YOUNGER AND MORE VULNERABLE...
 &lt;p&gt;To obtain the frequency of ngrams, the novel “The Great Gatsby” was used. The training text &lt;code class=&quot;highlighter-rouge&quot;&gt;TheGreatGatsby.txt&lt;/code&gt; was obtained from Project Gutenberg:&lt;br /&gt;
 &lt;a href=&quot;http://gutenberg.net.au/ebooks02/0200041.txt&quot;&gt;http://gutenberg.net.au/ebooks02/0200041.txt&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;This project was heavily inspired by the paper &lt;strong&gt;Decrypting Substitution Ciphers with Genetic Algorithms&lt;/strong&gt; by &lt;strong&gt;Jason Brownbridge&lt;/strong&gt;. The method used for this project is well explained in this paper. All credits go to him for the original idea. A copy of the paper can be obtained here:&lt;br /&gt;
+&lt;p&gt;This project was heavily inspired by the paper &lt;strong&gt;Decrypting Substitution Ciphers with Genetic Algorithms&lt;/strong&gt; by &lt;strong&gt;Jason Brownbridge&lt;/strong&gt;. The algorithm implemented in this project is well explained in this paper. All credits go to him for the original idea. A copy of the paper can be obtained here:&lt;br /&gt;
 &lt;a href=&quot;https://people.cs.uct.ac.za/~jkenwood/JasonBrownbridge.pdf&quot;&gt;https://people.cs.uct.ac.za/~jkenwood/JasonBrownbridge.pdf&lt;/a&gt;&lt;/p&gt;</content><author><name>MiloTruck</name></author><category term="Genetic Algorithms" /><category term="Substitution Cipher" /><category term="Projects" /><summary type="html">This project implements Genetic Algorithms to decrypt Monoalphabetic Substitution Ciphers using frequency analysis.</summary></entry><entry><title type="html">HATS CTF</title><link href="http://localhost:4000/HATS-CTF/" rel="alternate" type="text/html" title="HATS CTF" /><published>2019-09-24T00:00:00+08:00</published><updated>2019-09-24T00:00:00+08:00</updated><id>http://localhost:4000/HATS%20CTF</id><content type="html" xml:base="http://localhost:4000/HATS-CTF/">&lt;p&gt;&lt;strong&gt;Name:&lt;/strong&gt; MiloTruck&lt;br /&gt;
 &lt;strong&gt;Position:&lt;/strong&gt; 1&lt;br /&gt;
 &lt;strong&gt;Score:&lt;/strong&gt; 7232&lt;/p&gt;

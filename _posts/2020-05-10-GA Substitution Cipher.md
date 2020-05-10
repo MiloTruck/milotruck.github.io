@@ -23,21 +23,22 @@ had.
 The ciphertext is obtained by encrypting the plaintext using substitution cipher with the key `ZYXWVUTSRQPONMLKJIHGFEDCBA`:
 ```
 'Rm nb blfmtvi zmw nliv efomvizyov bvzih nb uzgsvi tzev nv hlnv zwerxv gszg R'ev yvvm
-gfimrmt levi rm nb nrmw vevi hrmxv. Dsvmvevi blf uvvo orpv xirgrxrarmt zmblmv, sv glow nv,
-qfhg ivnvnyvi gszg zoo gsv kvlkov rm gsrh dliow szevm'g szw gsv zwezmgztvh gszg blf'ev szw.
+gfimrmt levi rm nb nrmw vevi hrmxv. Dsvmvevi blf uvvo orpv xirgrxrarmt zmblmv, sv glow
+nv, qfhg ivnvnyvi gszg zoo gsv kvlkov rm gsrh dliow szevm'g szw gsv zwezmgztvh gszg
+blf'ev szw.
 ```
 
 After running the decryption program `main.py`, we obtain the original plaintext without knowing the decryption key:
 ```
--------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
 Average Fitness: 423.55366352956
 Max Fitness: 774.6525013478013
 Key: ZYXWVUTSRQPONMLKJIHGFEDCBA
-Decrypted Text: 'IN MY YOUNGER AND MORE VULNERABLE YEARS MY FATHER GAVE ME SOME ADVICE THAT
-I'VE BEEN TURNING OVER IN MY MIND EVER SINCE. WHENEVER YOU FEEL LIKE CRITICIZING ANYONE, HE
-TOLD ME, JUST REMEMBER THAT ALL THE PEOPLE IN THIS WORLD HAVEN'T HAD THE ADVANTAGES THAT
-YOU'VE HAD.
--------------------------------------------------------------------------------------------
+Decrypted Text: 'IN MY YOUNGER AND MORE VULNERABLE YEARS MY FATHER GAVE ME SOME ADVICE 
+THAT I'VE BEEN TURNING OVER IN MY MIND EVER SINCE. WHENEVER YOU FEEL LIKE CRITICIZING 
+ANYONE, HE TOLD ME, JUST REMEMBER THAT ALL THE PEOPLE IN THIS WORLD HAVEN'T HAD THE 
+ADVANTAGES THAT YOU'VE HAD.
+------------------------------------------------------------------------------------------
 ```
 
 ## Explanation
@@ -118,5 +119,5 @@ trigram_weight = 1.0
 To obtain the frequency of ngrams, the novel "The Great Gatsby" was used. The training text `TheGreatGatsby.txt` was obtained from Project Gutenberg:  
 [http://gutenberg.net.au/ebooks02/0200041.txt](http://gutenberg.net.au/ebooks02/0200041.txt) 
 
-This project was heavily inspired by the paper **Decrypting Substitution Ciphers with Genetic Algorithms** by **Jason Brownbridge**. The method used for this project is well explained in this paper. All credits go to him for the original idea. A copy of the paper can be obtained here:  
+This project was heavily inspired by the paper **Decrypting Substitution Ciphers with Genetic Algorithms** by **Jason Brownbridge**. The algorithm implemented in this project is well explained in this paper. All credits go to him for the original idea. A copy of the paper can be obtained here:  
 [https://people.cs.uct.ac.za/~jkenwood/JasonBrownbridge.pdf](https://people.cs.uct.ac.za/~jkenwood/JasonBrownbridge.pdf)
