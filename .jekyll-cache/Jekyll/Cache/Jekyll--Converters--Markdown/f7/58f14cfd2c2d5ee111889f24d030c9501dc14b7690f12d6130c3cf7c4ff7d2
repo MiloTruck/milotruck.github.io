@@ -1,0 +1,222 @@
+I"gé<p><strong>Category:</strong> Mobile</p>
+
+<h2 id="challenge-description">Challenge Description</h2>
+<blockquote>
+  <p>Over here, members learn all about COViD, and COViD wants to enlighten everyone about the organisation. Go on, read them all!</p>
+
+  <p><strong>Flag Format:</strong> <code class="highlighter-rouge">govtech-csg{alphanumeric-and-special-characters-string</code></p>
+</blockquote>
+
+<h2 id="initial-analysis">Initial Analysis</h2>
+<p>This challenge to the activity launched by <code class="highlighter-rouge">CovidInfoActivity.java</code>. Launching the activity in an emulator, the following screen is displayed:</p>
+
+<p><img src="https://i.imgur.com/5wY8QST.jpg" alt="" /></p>
+
+<p>The text field asks for the flag, and upon submission, displays a toast showing <code class="highlighter-rouge">Flag is wrong!</code>. We now know the flag entered is most probably checked in the <code class="highlighter-rouge">onClick()</code> function of the submit button.</p>
+
+<p>Using <a href="https://github.com/skylot/jadx">JADX</a>, we can obtain the decompiled Java source code of the apk. As mentioned above, we look for the <code class="highlighter-rouge">onClick()</code> function in <code class="highlighter-rouge">CovidInfoActivity.java</code>:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">onClick</span><span class="o">(</span><span class="nc">View</span> <span class="n">v</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">f2970b</span><span class="o">.</span><span class="na">encryptOrNull</span><span class="o">(((</span><span class="nc">EditText</span><span class="o">)</span> <span class="nc">CovidInfoActivity</span><span class="o">.</span><span class="na">this</span><span class="o">.</span><span class="na">findViewById</span><span class="o">(</span><span class="no">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">editText_enteredFlag</span><span class="o">)).</span><span class="na">getText</span><span class="o">().</span><span class="na">toString</span><span class="o">()).</span><span class="na">replaceAll</span><span class="o">(</span><span class="s">"\\n"</span><span class="o">,</span> <span class="nc">BuildConfig</span><span class="o">.</span><span class="na">FLAVOR</span><span class="o">).</span><span class="na">equalsIgnoreCase</span><span class="o">(</span><span class="nc">CovidInfoActivity</span><span class="o">.</span><span class="na">this</span><span class="o">.</span><span class="na">f2969b</span><span class="o">))</span> <span class="o">{</span>
+        <span class="n">c</span><span class="o">.</span><span class="na">a</span> <span class="n">builder</span> <span class="o">=</span> <span class="k">new</span> <span class="n">c</span><span class="o">.</span><span class="na">a</span><span class="o">(</span><span class="nc">CovidInfoActivity</span><span class="o">.</span><span class="na">this</span><span class="o">);</span>
+        <span class="nc">View</span> <span class="n">view</span> <span class="o">=</span> <span class="nc">LayoutInflater</span><span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="nc">CovidInfoActivity</span><span class="o">.</span><span class="na">this</span><span class="o">).</span><span class="na">inflate</span><span class="o">(</span><span class="no">R</span><span class="o">.</span><span class="na">layout</span><span class="o">.</span><span class="na">custom_alert</span><span class="o">,</span> <span class="o">(</span><span class="nc">ViewGroup</span><span class="o">)</span> <span class="kc">null</span><span class="o">);</span>
+        <span class="o">((</span><span class="nc">TextView</span><span class="o">)</span> <span class="n">view</span><span class="o">.</span><span class="na">findViewById</span><span class="o">(</span><span class="no">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">title</span><span class="o">)).</span><span class="na">setText</span><span class="o">(</span><span class="s">"Congrats!"</span><span class="o">);</span>
+        <span class="o">((</span><span class="nc">TextView</span><span class="o">)</span> <span class="n">view</span><span class="o">.</span><span class="na">findViewById</span><span class="o">(</span><span class="no">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">alert_detail</span><span class="o">)).</span><span class="na">setText</span><span class="o">(</span><span class="s">"Well done!"</span><span class="o">);</span>
+        <span class="n">f</span><span class="o">.</span><span class="na">a</span><span class="o">.</span><span class="na">a</span><span class="o">.</span><span class="na">a</span><span class="o">.</span><span class="na">a</span><span class="o">.</span><span class="na">e</span><span class="o">.</span><span class="na">b</span><span class="o">.</span><span class="na">a</span><span class="o">().</span><span class="na">d</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
+        <span class="n">builder</span><span class="o">.</span><span class="na">h</span><span class="o">(</span><span class="s">"Proceed"</span><span class="o">,</span> <span class="k">new</span> <span class="nc">DialogInterface</span><span class="n">$OnClickListenerC0073a</span><span class="o">());</span>
+        <span class="n">builder</span><span class="o">.</span><span class="na">f</span><span class="o">(</span><span class="s">"Close"</span><span class="o">,</span> <span class="k">new</span> <span class="n">b</span><span class="o">());</span>
+        <span class="n">builder</span><span class="o">.</span><span class="na">k</span><span class="o">(</span><span class="n">view</span><span class="o">);</span>
+        <span class="n">builder</span><span class="o">.</span><span class="na">l</span><span class="o">();</span>
+        <span class="nc">Toast</span><span class="o">.</span><span class="na">makeText</span><span class="o">(</span><span class="nc">CovidInfoActivity</span><span class="o">.</span><span class="na">this</span><span class="o">.</span><span class="na">getApplicationContext</span><span class="o">(),</span> <span class="s">"Flag is correct!"</span><span class="o">,</span> <span class="mi">0</span><span class="o">).</span><span class="na">show</span><span class="o">();</span>
+        <span class="k">return</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="nc">Toast</span><span class="o">.</span><span class="na">makeText</span><span class="o">(</span><span class="nc">CovidInfoActivity</span><span class="o">.</span><span class="na">this</span><span class="o">.</span><span class="na">getApplicationContext</span><span class="o">(),</span> <span class="s">"Flag is wrong!"</span><span class="o">,</span> <span class="mi">0</span><span class="o">).</span><span class="na">show</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Our entered flag is retrieved by the activity using:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">CovidInfoActivity</span><span class="o">.</span><span class="na">this</span><span class="o">.</span><span class="na">findViewById</span><span class="o">(</span><span class="no">R</span><span class="o">.</span><span class="na">id</span><span class="o">.</span><span class="na">editText_enteredFlag</span><span class="o">)).</span><span class="na">getText</span><span class="o">().</span><span class="na">toString</span><span class="o">()</span>
+</code></pre></div></div>
+
+<p>It is then encrypted using a function named <code class="highlighter-rouge">encryptOrNull()</code>, before being compared to <code class="highlighter-rouge">CovidInfoActivity.this.f2969b</code>. By looking at the code in the same file, we see the following relevant code:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nc">String</span> <span class="n">f2969b</span> <span class="o">=</span> <span class="s">"jeldexs+ktquD8iQ1CAEnHIc+SSPc5TcyirRSIYxA/g="</span><span class="o">;</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">se.simbio.encryption.Encryption</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">final</span> <span class="nc">Encryption</span> <span class="n">f2970b</span><span class="o">;</span>
+<span class="kd">public</span> <span class="nf">a</span><span class="o">(</span><span class="nc">Encryption</span> <span class="n">encryption</span><span class="o">)</span> <span class="o">{</span>
+	<span class="k">this</span><span class="o">.</span><span class="na">f2970b</span> <span class="o">=</span> <span class="n">encryption</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">CovidInfoActivity.this.f2969b</code> refers to the flag after it is encrypted using  <code class="highlighter-rouge">encryptOrNull()</code>. We also see that <code class="highlighter-rouge">encryptOrNull()</code> is a function imported from <code class="highlighter-rouge">Encryption.java</code>,  another Java file in the apk. Thus, we take a closer look at that file:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nc">String</span> <span class="nf">encryptOrNull</span><span class="o">(</span><span class="nc">String</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nf">encrypt</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e2</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">e2</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The <code class="highlighter-rouge">encryptOrNull()</code> function calls another function <code class="highlighter-rouge">encrypt()</code>, which calls more functions and so on‚Ä¶ Manually reversing the code through static analysis seems too tedious, thus we look for another method. Scrolling through <code class="highlighter-rouge">Encryption.java</code>, we see there is a function named <code class="highlighter-rouge">decryptOrNull()</code>:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="nc">String</span> <span class="nf">decryptOrNull</span><span class="o">(</span><span class="nc">String</span> <span class="n">data</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="nf">decrypt</span><span class="o">(</span><span class="n">data</span><span class="o">);</span>
+    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e2</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">e2</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Seeing that it is similar to <code class="highlighter-rouge">encryptOrNull()</code>, it is same to assume this function decrypts data passed into it. As we have the encrypted flag, we just need to find a way to pass it into <code class="highlighter-rouge">decryptOrNull()</code> and obtain the output.</p>
+
+<h2 id="patching-the-apk">Patching the APK</h2>
+<p>As mentioned above, we want to call <code class="highlighter-rouge">decryptOrNull()</code> on the encrypted flag to get the flag. This would be possible with <a href="https://frida.re/">Frida</a>, however, I chose to patch the apk as that was more familiar to me.</p>
+
+<p>To obtain the smali code of the apk, we use <a href="https://ibotpeaches.github.io/Apktool/">ApkTool</a>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apktool <span class="nt">-r</span> d mobile-challenge.apk <span class="nt">-o</span> &lt;OUTPUT_DIR&gt;
+</code></pre></div></div>
+
+<p>As the relevant code in Java is in <code class="highlighter-rouge">CovidActivity.java</code>, we look for the smali files related to that. The <code class="highlighter-rouge">OnClick()</code> function is found in <code class="highlighter-rouge">CovidInfoActivity$a.smali</code>:</p>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">.method</span><span class="w"> </span><span class="n">public</span><span class="w"> </span><span class="n">onClick</span><span class="p">(</span><span class="n">Landroid</span><span class="o">/</span><span class="n">view</span><span class="o">/</span><span class="n">View</span><span class="p">;)</span><span class="n">V</span><span class="w">
+	</span><span class="n">.locals</span><span class="w"> </span><span class="m">11</span><span class="w">
+    </span><span class="n">.param</span><span class="w"> </span><span class="n">p1</span><span class="p">,</span><span class="w"> </span><span class="s2">"v"</span><span class="w">    </span><span class="c1"># Landroid/view/View;</span><span class="w">
+	
+	</span><span class="n">...</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Before diving into patching the code, we identify what we need to do:</p>
+<ul>
+  <li>Call <code class="highlighter-rouge">decryptOrNull()</code> on input entered by us</li>
+  <li>Display the output in the apk</li>
+</ul>
+
+<p>Fortunately, smali code is similar to assembly, making it easier for me to identify the code parts I needed to patch.</p>
+
+<h3 id="smali-code-analysis">Smali Code Analysis</h3>
+
+<p>By analyzing the smali code, we see that <code class="highlighter-rouge">encryptOrNull()</code> is called on our input, and the encrypted input is stored in the variable <code class="highlighter-rouge">v2</code>:</p>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">.line</span><span class="w"> </span><span class="m">48</span><span class="w">
+</span><span class="n">.local</span><span class="w"> </span><span class="n">v1</span><span class="p">,</span><span class="w"> </span><span class="s2">"enteredFlagString"</span><span class="o">:</span><span class="n">Ljava</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="n">String</span><span class="p">;</span><span class="w">
+</span><span class="n">iget</span><span class="o">-</span><span class="n">object</span><span class="w"> </span><span class="n">v2</span><span class="p">,</span><span class="w"> </span><span class="n">p0</span><span class="p">,</span><span class="w"> </span><span class="n">Lsg</span><span class="o">/</span><span class="n">gov</span><span class="o">/</span><span class="n">tech</span><span class="o">/</span><span class="n">ctf</span><span class="o">/</span><span class="n">mobile</span><span class="o">/</span><span class="n">Info</span><span class="o">/</span><span class="n">CovidInfoActivity</span><span class="o">$</span><span class="n">a</span><span class="p">;</span><span class="o">-&gt;</span><span class="n">b</span><span class="o">:</span><span class="n">Lse</span><span class="o">/</span><span class="n">simbio</span><span class="o">/</span><span class="n">encryption</span><span class="o">/</span><span class="n">Encryption</span><span class="p">;</span><span class="w">
+
+</span><span class="n">invoke</span><span class="o">-</span><span class="n">virtual</span><span class="w"> </span><span class="p">{</span><span class="n">v2</span><span class="p">,</span><span class="w"> </span><span class="n">v1</span><span class="p">},</span><span class="w"> </span><span class="n">Lse</span><span class="o">/</span><span class="n">simbio</span><span class="o">/</span><span class="n">encryption</span><span class="o">/</span><span class="n">Encryption</span><span class="p">;</span><span class="o">-&gt;</span><span class="n">encryptOrNull</span><span class="p">(</span><span class="n">Ljava</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="n">String</span><span class="p">;)</span><span class="n">Ljava</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="n">String</span><span class="p">;</span><span class="w">
+
+</span><span class="n">move</span><span class="o">-</span><span class="n">result</span><span class="o">-</span><span class="n">object</span><span class="w"> </span><span class="n">v2</span><span class="w">
+</span></code></pre></div></div>
+
+<p>The encrypted flag is then fetched and stored in <code class="highlighter-rouge">v3</code>, and compared to our encrypted input in <code class="highlighter-rouge">v2</code>. The code then jumps to <code class="highlighter-rouge">:cond_0</code> if they are not equal:</p>
+
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">.line</span><span class="w"> </span><span class="m">51</span><span class="w">
+</span><span class="n">iget</span><span class="o">-</span><span class="n">object</span><span class="w"> </span><span class="n">v3</span><span class="p">,</span><span class="w"> </span><span class="n">p0</span><span class="p">,</span><span class="w"> </span><span class="n">Lsg</span><span class="o">/</span><span class="n">gov</span><span class="o">/</span><span class="n">tech</span><span class="o">/</span><span class="n">ctf</span><span class="o">/</span><span class="n">mobile</span><span class="o">/</span><span class="n">Info</span><span class="o">/</span><span class="n">CovidInfoActivity</span><span class="o">$</span><span class="n">a</span><span class="p">;</span><span class="o">-&gt;</span><span class="n">c</span><span class="o">:</span><span class="n">Lsg</span><span class="o">/</span><span class="n">gov</span><span class="o">/</span><span class="n">tech</span><span class="o">/</span><span class="n">ctf</span><span class="o">/</span><span class="n">mobile</span><span class="o">/</span><span class="n">Info</span><span class="o">/</span><span class="n">CovidInfoActivity</span><span class="p">;</span><span class="w">
+
+</span><span class="n">iget</span><span class="o">-</span><span class="n">object</span><span class="w"> </span><span class="n">v3</span><span class="p">,</span><span class="w"> </span><span class="n">v3</span><span class="p">,</span><span class="w"> </span><span class="n">Lsg</span><span class="o">/</span><span class="n">gov</span><span class="o">/</span><span class="n">tech</span><span class="o">/</span><span class="n">ctf</span><span class="o">/</span><span class="n">mobile</span><span class="o">/</span><span class="n">Info</span><span class="o">/</span><span class="n">CovidInfoActivity</span><span class="p">;</span><span class="o">-&gt;</span><span class="n">b</span><span class="o">:</span><span class="n">Ljava</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="n">String</span><span class="p">;</span><span class="w">
+
+</span><span class="n">invoke</span><span class="o">-</span><span class="n">virtual</span><span class="w"> </span><span class="p">{</span><span class="n">v2</span><span class="p">,</span><span class="w"> </span><span class="n">v3</span><span class="p">},</span><span class="w"> </span><span class="n">Ljava</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="n">String</span><span class="p">;</span><span class="o">-&gt;</span><span class="n">equalsIgnoreCase</span><span class="p">(</span><span class="n">Ljava</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="n">String</span><span class="p">;)</span><span class="n">Z</span><span class="w">
+
+</span><span class="n">move</span><span class="o">-</span><span class="n">result</span><span class="w"> </span><span class="n">v3</span><span class="w">
+
+</span><span class="n">const</span><span class="o">/</span><span class="m">4</span><span class="w"> </span><span class="n">v4</span><span class="p">,</span><span class="w"> </span><span class="mh">0x0</span><span class="w">
+
+</span><span class="k">if</span><span class="o">-</span><span class="n">eqz</span><span class="w"> </span><span class="n">v3</span><span class="p">,</span><span class="w"> </span><span class="o">:</span><span class="n">cond_0</span><span class="w">
+</span></code></pre></div></div>
+
+<p>We see that <code class="highlighter-rouge">:cond_0</code> displays <code class="highlighter-rouge">Flag is wrong!</code> in a toast, hence we do not want to jump to <code class="highlighter-rouge">:cond_0</code>:</p>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">.line</span><span class="w"> </span><span class="m">86</span><span class="w">
+</span><span class="o">:</span><span class="n">cond_0</span><span class="w">
+</span><span class="n">iget</span><span class="o">-</span><span class="n">object</span><span class="w"> </span><span class="n">v3</span><span class="p">,</span><span class="w"> </span><span class="n">p0</span><span class="p">,</span><span class="w"> </span><span class="n">Lsg</span><span class="o">/</span><span class="n">gov</span><span class="o">/</span><span class="n">tech</span><span class="o">/</span><span class="n">ctf</span><span class="o">/</span><span class="n">mobile</span><span class="o">/</span><span class="n">Info</span><span class="o">/</span><span class="n">CovidInfoActivity</span><span class="o">$</span><span class="n">a</span><span class="p">;</span><span class="o">-&gt;</span><span class="n">c</span><span class="o">:</span><span class="n">Lsg</span><span class="o">/</span><span class="n">gov</span><span class="o">/</span><span class="n">tech</span><span class="o">/</span><span class="n">ctf</span><span class="o">/</span><span class="n">mobile</span><span class="o">/</span><span class="n">Info</span><span class="o">/</span><span class="n">CovidInfoActivity</span><span class="p">;</span><span class="w">
+
+</span><span class="n">invoke</span><span class="o">-</span><span class="n">virtual</span><span class="w"> </span><span class="p">{</span><span class="n">v3</span><span class="p">},</span><span class="w"> </span><span class="n">Landroid</span><span class="o">/</span><span class="n">app</span><span class="o">/</span><span class="n">Activity</span><span class="p">;</span><span class="o">-&gt;</span><span class="n">getApplicationContext</span><span class="p">()</span><span class="n">Landroid</span><span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">Context</span><span class="p">;</span><span class="w">
+
+</span><span class="n">move</span><span class="o">-</span><span class="n">result</span><span class="o">-</span><span class="n">object</span><span class="w"> </span><span class="n">v3</span><span class="w">
+
+</span><span class="n">const</span><span class="o">-</span><span class="n">string</span><span class="w"> </span><span class="n">v5</span><span class="p">,</span><span class="w"> </span><span class="s2">"Flag is wrong!"</span><span class="w">
+
+</span><span class="n">invoke</span><span class="o">-</span><span class="n">static</span><span class="w"> </span><span class="p">{</span><span class="n">v3</span><span class="p">,</span><span class="w"> </span><span class="n">v5</span><span class="p">,</span><span class="w"> </span><span class="n">v4</span><span class="p">},</span><span class="w"> </span><span class="n">Landroid</span><span class="o">/</span><span class="n">widget</span><span class="o">/</span><span class="n">Toast</span><span class="p">;</span><span class="o">-&gt;</span><span class="n">makeText</span><span class="p">(</span><span class="n">Landroid</span><span class="o">/</span><span class="n">content</span><span class="o">/</span><span class="n">Context</span><span class="p">;</span><span class="n">Ljava</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="n">CharSequence</span><span class="p">;</span><span class="n">I</span><span class="p">)</span><span class="n">Landroid</span><span class="o">/</span><span class="n">widget</span><span class="o">/</span><span class="n">Toast</span><span class="p">;</span><span class="w">
+
+</span><span class="n">move</span><span class="o">-</span><span class="n">result</span><span class="o">-</span><span class="n">object</span><span class="w"> </span><span class="n">v3</span><span class="w">
+
+</span><span class="n">invoke</span><span class="o">-</span><span class="n">virtual</span><span class="w"> </span><span class="p">{</span><span class="n">v3</span><span class="p">},</span><span class="w"> </span><span class="n">Landroid</span><span class="o">/</span><span class="n">widget</span><span class="o">/</span><span class="n">Toast</span><span class="p">;</span><span class="o">-&gt;</span><span class="n">show</span><span class="p">()</span><span class="n">V</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Should the code not jump to <code class="highlighter-rouge">:cond_0</code>, it displays a Congratulations message:</p>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">.line</span><span class="w"> </span><span class="m">57</span><span class="w">
+</span><span class="n">.local</span><span class="w"> </span><span class="n">v7</span><span class="p">,</span><span class="w"> </span><span class="s2">"details"</span><span class="o">:</span><span class="n">Landroid</span><span class="o">/</span><span class="n">widget</span><span class="o">/</span><span class="n">TextView</span><span class="p">;</span><span class="w">
+</span><span class="n">const</span><span class="o">-</span><span class="n">string</span><span class="w"> </span><span class="n">v8</span><span class="p">,</span><span class="w"> </span><span class="s2">"Congrats!"</span><span class="w">
+
+</span><span class="n">invoke</span><span class="o">-</span><span class="n">virtual</span><span class="w"> </span><span class="p">{</span><span class="n">v6</span><span class="p">,</span><span class="w"> </span><span class="n">v8</span><span class="p">},</span><span class="w"> </span><span class="n">Landroid</span><span class="o">/</span><span class="n">widget</span><span class="o">/</span><span class="n">TextView</span><span class="p">;</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="n">Ljava</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="n">CharSequence</span><span class="p">;)</span><span class="n">V</span><span class="w">
+</span></code></pre></div></div>
+
+<p>A more in-depth explanation:</p>
+<ul>
+  <li><code class="highlighter-rouge">equalsIgnoreCase</code>  is similar to <code class="highlighter-rouge">cmp</code> assembly. It returns true (1) if both strings are equal, else it returns false (0). The result is then stored in <code class="highlighter-rouge">v3</code></li>
+  <li><code class="highlighter-rouge">if-eqz</code>, similar to <code class="highlighter-rouge">jz</code> in assembly, jumps to <code class="highlighter-rouge">cond_0</code> if the value stored in <code class="highlighter-rouge">v3</code> is equal to 0.</li>
+  <li>This allows the app to jump to <code class="highlighter-rouge">cond_0</code> and display <code class="highlighter-rouge">Flag is wrong!</code> when the input entered is not equal to the flag.</li>
+</ul>
+
+<h3 id="patching-smali-code">Patching Smali Code</h3>
+<p>With the smali code snippets above, we can actually patch the apk to give us the flag:</p>
+<ul>
+  <li>Call <code class="highlighter-rouge">decryptOrNull()</code> instead of <code class="highlighter-rouge">encryptOrNull()</code> on input of the  <code class="highlighter-rouge">editText</code>.</li>
+  <li>Jump to <code class="highlighter-rouge">:cond_0</code> when input is <strong>equal</strong> to the flag, instead of when the flag is wrong. This would allow us to see the congratulations window when we enter a wrong flag instead of a correct one.</li>
+  <li>Patch the code to display the output from <code class="highlighter-rouge">decryptOrNull()</code> instead of <code class="highlighter-rouge">Congrats!</code> in the congratulations window.</li>
+</ul>
+
+<p>To call <code class="highlighter-rouge">decryptOnNull()</code> instead, we simply change the function call in <code class="highlighter-rouge">.line 48</code> :</p>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># From:</span><span class="w">
+</span><span class="n">invoke</span><span class="o">-</span><span class="n">virtual</span><span class="w"> </span><span class="p">{</span><span class="n">v2</span><span class="p">,</span><span class="w"> </span><span class="n">v1</span><span class="p">},</span><span class="w"> </span><span class="n">Lse</span><span class="o">/</span><span class="n">simbio</span><span class="o">/</span><span class="n">encryption</span><span class="o">/</span><span class="n">Encryption</span><span class="p">;</span><span class="o">-&gt;</span><span class="n">encryptOrNull</span><span class="p">(</span><span class="n">Ljava</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="n">String</span><span class="p">;)</span><span class="n">Ljava</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="n">String</span><span class="p">;</span><span class="w">
+
+</span><span class="c1"># Changed to:</span><span class="w">
+</span><span class="n">invoke</span><span class="o">-</span><span class="n">virtual</span><span class="w"> </span><span class="p">{</span><span class="n">v2</span><span class="p">,</span><span class="w"> </span><span class="n">v1</span><span class="p">},</span><span class="w"> </span><span class="n">Lse</span><span class="o">/</span><span class="n">simbio</span><span class="o">/</span><span class="n">encryption</span><span class="o">/</span><span class="n">Encryption</span><span class="p">;</span><span class="o">-&gt;</span><span class="n">decryptOrNull</span><span class="p">(</span><span class="n">Ljava</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="n">String</span><span class="p">;)</span><span class="n">Ljava</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="n">String</span><span class="p">;</span><span class="w">
+</span></code></pre></div></div>
+
+<p>In <code class="highlighter-rouge">.line 51</code>, we find the instruction opposite of <code class="highlighter-rouge">if-eqz</code>, which is <code class="highlighter-rouge">if-nez</code>, and make the change:</p>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># From:</span><span class="w">
+</span><span class="k">if</span><span class="o">-</span><span class="n">eqz</span><span class="w"> </span><span class="n">v3</span><span class="p">,</span><span class="w"> </span><span class="o">:</span><span class="n">cond_0</span><span class="w">
+
+</span><span class="c1"># Changed to:</span><span class="w">
+</span><span class="k">if</span><span class="o">-</span><span class="n">nez</span><span class="w"> </span><span class="n">v3</span><span class="p">,</span><span class="w"> </span><span class="o">:</span><span class="n">cond_0</span><span class="w">
+</span></code></pre></div></div>
+
+<p>The return value of <code class="highlighter-rouge">decryptOrNull()</code> is stored in <code class="highlighter-rouge">v2</code>, while the <code class="highlighter-rouge">Congrats!</code> message is stored in <code class="highlighter-rouge">v8</code>. We make the appropriate changes to <code class="highlighter-rouge">.line 57</code>:</p>
+<div class="language-s highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># From:</span><span class="w">
+</span><span class="n">invoke</span><span class="o">-</span><span class="n">virtual</span><span class="w"> </span><span class="p">{</span><span class="n">v6</span><span class="p">,</span><span class="w"> </span><span class="n">v8</span><span class="p">},</span><span class="w"> </span><span class="n">Landroid</span><span class="o">/</span><span class="n">widget</span><span class="o">/</span><span class="n">TextView</span><span class="p">;</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="n">Ljava</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="n">CharSequence</span><span class="p">;)</span><span class="n">V</span><span class="w">
+
+</span><span class="c1"># Changed to:</span><span class="w">
+</span><span class="n">invoke</span><span class="o">-</span><span class="n">virtual</span><span class="w"> </span><span class="p">{</span><span class="n">v6</span><span class="p">,</span><span class="w"> </span><span class="n">v2</span><span class="p">},</span><span class="w"> </span><span class="n">Landroid</span><span class="o">/</span><span class="n">widget</span><span class="o">/</span><span class="n">TextView</span><span class="p">;</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="n">Ljava</span><span class="o">/</span><span class="n">lang</span><span class="o">/</span><span class="n">CharSequence</span><span class="p">;)</span><span class="n">V</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="building-patched-apk">Building patched APK</h3>
+<p>To build the apk from smali code, we use <code class="highlighter-rouge">apktool</code>:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apktool b &lt;OUTPUT_DIR&gt;
+</code></pre></div></div>
+
+<p>To sign the apk, we follow the steps in <a href="https://stackoverflow.com/questions/10930331/how-to-sign-an-already-compiled-apk">this post</a>:</p>
+<ul>
+  <li>Create a key using:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>keytool <span class="nt">-genkey</span> <span class="nt">-v</span> <span class="nt">-keystore</span> my-release-key.keystore <span class="nt">-alias</span> alias_name <span class="nt">-keyalg</span> RSA <span class="nt">-keysize</span> 2048 <span class="nt">-validity</span> 10000
+</code></pre></div>    </div>
+  </li>
+  <li>Sign the apk with:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jarsigner <span class="nt">-verbose</span> <span class="nt">-sigalg</span> SHA1withRSA <span class="nt">-digestalg</span> SHA1 <span class="nt">-keystore</span> my-release-key.keystore mobile-challenge.apk alias_name
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="getting-the-flag">Getting the Flag</h3>
+<p>We install the patched APK on an emulator and run it normally. Instead of entering the flag in the Info Page, we key in the encrypted flag:</p>
+
+<p><img src="https://i.imgur.com/7yaWgHV.png" alt="" /></p>
+
+<p>This displays the congratulations window with the flag:</p>
+
+<p><img src="https://i.imgur.com/OQ5Bo7x.png" alt="" /></p>
+
+<p><strong>Flag:</strong> <code class="highlighter-rouge">govtech-csg{1 L0V3 y0U 3oO0}</code></p>
+:ET

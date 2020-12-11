@@ -1,0 +1,604 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.16.6 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Can you trick OrgX into giving away their credentials? [2000] - MILOTRUCK</title>
+<meta name="description" content="Social Engineering">
+
+
+  <meta name="author" content="MiloTruck">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="MILOTRUCK">
+<meta property="og:title" content="Can you trick OrgX into giving away their credentials? [2000]">
+<meta property="og:url" content="http://localhost:4000/Can-you-trick-OrgX-into-giving-away-their-credentials/">
+
+
+  <meta property="og:description" content="Social Engineering">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2020-12-12T00:00:00+08:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/Can-you-trick-OrgX-into-giving-away-their-credentials/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "MiloTruck",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+  <meta name="google-site-verification" content="_tE-Yah0HQSRNng0bITIKhyyOoGrbpidFdmZFnKylks" />
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="MILOTRUCK Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE ]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/Favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/Favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/Favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/Favicon/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/Favicon/safari-pinned-tab.svg" color="#636363">
+<link rel="shortcut icon" href="/assets/images/Favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#000000">
+<meta name="msapplication-config" content="/assets/images/Favicon/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          MILOTRUCK
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/About/" >About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/Projects/" >Projects</a>
+            </li><li class="masthead__menu-item">
+              <a href="/Cybersecurity/" >Cybersecurity</a>
+            </li><li class="masthead__menu-item">
+              <a href="/Data-Science-and-AI/" >Data Science and AI</a>
+            </li><li class="masthead__menu-item">
+              <a href="/Competitive-Programming/" >Competitive Programming</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+
+      
+        <img src="/assets/images/Logo.png" alt="MiloTruck" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">MiloTruck</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>Hi. I’m MiloTruck.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Singapore</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://milotruck.github.io" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Blog</a></li>
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/MiloTruck" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Can you trick OrgX into giving away their credentials? [2000]">
+    <meta itemprop="description" content="Social Engineering">
+    <meta itemprop="datePublished" content="December 12, 2020">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Can you trick OrgX into giving away their credentials? [2000]
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  1 minute read
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p><strong>Category:</strong> Social Engineering</p>
+
+<h2 id="challenge-description">Challenge Description</h2>
+<blockquote>
+  <p>With the information gathered, figure out who has access to the key and contact the person</p>
+</blockquote>
+
+<h2 id="finding-the-target">Finding the Target</h2>
+<p>Since we need to contact a person, it’s most likely a phone number or email.</p>
+
+<p>A quick note on sending emails during CTFs:
+In the <a href="https://twitter.com/scba/status/1335987654253395972">wise words of Sarah Miller</a>, “First rule of OSINT: if the subject discovers that you’re investigating them, you’ve probably failed”. Do NOT use your own email address to send the email. Instead, use temporary email sites such as https://www.guerrillamail.com/compose. For this challenge, we attempted to use such temporary emails, however, we suspect that due to black/whitelists, there was no reply. An alternative is to use a burner email address which you do not use for anything else. Now back to the challenge.</p>
+
+<p>From the previous OSINT challenge “<a href="#Who-are-the-possible-kidnappers?">Who are the possible kidnappers?</a>”, we identified multiple email addresses, including <code class="highlighter-rouge">ictadmin@korovax.org</code>. When sending an email to most Korovax emails such as Sarah Miller, we are replied with “Thank you for trying”. This is NOT the endpoint. It is to tell you that it is a dead end. Afterall, there is no flag.</p>
+
+<p>When sending any email to ictadmin, we are replied with “Almost got it, missing something”. This means we are closer and that we need to have something in our email that ictadmin “wants”.</p>
+
+<h2 id="sending-the-correct-email">Sending the Correct Email</h2>
+<p>Recall that in the previous challenge, on https://csgctf.wordpress.com/never-gonna/, the first letter of each line in list of words forms “Rickroll”. This is a <a href="https://knowyourmeme.com/memes/rickroll">reference</a> to the song “Never Gonna Give You Up” by Rick Astley.</p>
+
+<p>Since the website tells us we need to “include” the keywords, we can basically spam a large amount of related text. Having a short amount of time left to the end of the CTF, we spammed as much related text including the full music video name, the artist, song lyrics and Youtube link. We also included the words “Rickroll” and “Rick roll”.</p>
+
+<p><img src="https://i.imgur.com/sblgpW9.jpg" alt="" /></p>
+
+<p>The bot then sends the flag to us with a hint for the next social engineering challenge which we had no time to do.</p>
+
+<p><img src="https://i.imgur.com/8r8AIHi.jpg" alt="" /></p>
+
+<p>After the CTF, we proceeded to try shrinking our “payload” to find the right answer. The bot was specifically looking for the word “Rickroll”.</p>
+
+<p><strong>Flag:</strong> <code class="highlighter-rouge">govtech-csg{CE236F40A35E48F51E921AD5D28CF320265F33B3}</code></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#social-engineering" class="page__taxonomy-item" rel="tag">Social Engineering</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#stack-2020" class="page__taxonomy-item" rel="tag">Stack 2020</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2020-12-12T00:00:00+08:00">December 12, 2020</time></p>
+        
+      </footer>
+
+      
+
+      
+  <nav class="pagination">
+    
+      <a href="/Can-COViD-steal-Bob's-idea/" class="pagination--pager" title="Can COViD steal Bob’s idea? [960]
+">Previous</a>
+    
+    
+      <a href="/Find-the-leaking-bucket!/" class="pagination--pager" title="Find the leaking bucket! [978]
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You may also enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Working-on/" rel="permalink">What is he working on? Some high value project? [790]
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  1 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Open Source Intelligence (OSINT)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Who-are-the-possible-kidnappers/" rel="permalink">Who are the possible kidnappers? [1990]
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  5 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Open Source Intelligence (OSINT)
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Walking-down-a-colourful-memory-lane/" rel="permalink">Walking down a colourful memory lane [992]
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  5 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Forensics
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Voices-in-the-head/" rel="permalink">Voices in the head [1692]
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Forensics
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://milotruck.github.io" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Blog</a></li>
+        
+      
+        
+      
+        
+      
+        
+          <li><a href="https://github.com/MiloTruck" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 MiloTruck. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

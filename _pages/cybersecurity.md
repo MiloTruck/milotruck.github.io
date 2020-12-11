@@ -4,6 +4,14 @@ classes: wide
 permalink: /Cybersecurity/
 title: "Cybersecurity"
 
+Stack the Flags 2020:
+  - title: "Stack the Flags 2020"
+    excerpt: "CTF hosted in Singapore by GovTech"
+    image_path: /assets/images/Stack 2020 - Logo.JPG
+    url: /Stack-the-Flags-2020/
+    btn_label: "Explore"
+    btn_class: "btn--primary"
+
 Cyberthon 2020:
   - title: "Cyberthon 2020"
     excerpt: "Organized by HCI, in collaboration with DCO and CSIT, Cyberthon is a CTF competition for JC students."
@@ -32,6 +40,7 @@ HATS CTF:
 
 
 ## Capture-The-Flag (CTF) Competitions
+{% include feature_row id="Stack the Flags 2020" type="left" %}
 {% include feature_row id="Cyberthon 2020" type="left" %}
 {% include feature_row id="Timisoara CTF 2019 Qualifiers" type="left" %}
 {% include feature_row id="HATS CTF" type="left" %}

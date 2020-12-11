@@ -1,0 +1,89 @@
+I"<p><strong>Category:</strong> Open Source Intelligence (OSINT)</p>
+
+<h2 id="challenge-description">Challenge Description</h2>
+<blockquote>
+  <p>After solving the past two incidents, COViD sent a death threat via email today. Can you help us investigate the origins of the email and identify the suspect that is working for COViD? We will need as much information as possible so that we can perform our arrest!</p>
+
+  <p><strong>Example Flag:</strong> <code class="highlighter-rouge">govtech-csg{JohnLeeHaoHao-123456789-888888}</code><br />
+<strong>Flag Format:</strong> <code class="highlighter-rouge">govtech-csg{fullname-phone number[9digits]-residential postal code[6digits]}</code></p>
+</blockquote>
+
+<h2 id="analysing-the-email">Analysing the Email</h2>
+<p>We are given an eml file. Opening it in a text editor reveals the following.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">X-Pm-Origin: internal
+X-Pm-Content-Encryption: end-to-end
+Subject: YOU ARE WARNED!
+From: theOne &lt;theOne@c0v1d.cf&gt;
+Date: Fri, 4 Dec 2020 21:27:07 +0800
+Mime-Version: 1.0
+Content-Type: multipart/mixed;boundary=---------------------9d9b7a65470a533c33537323d475531b
+To: cyberdefenders@panjang.cdg &lt;cyberdefenders@panjang.cdg&gt;
+</span>
+-----------------------9d9b7a65470a533c33537323d475531b
+<span class="p">Content-Type: multipart/related;boundary=---------------------618fd3b1e5dbb594048e34eeb9e9fcdb
+</span>
+-----------------------618fd3b1e5dbb594048e34eeb9e9fcdb
+<span class="p">Content-Type: text/html;charset=utf-8
+Content-Transfer-Encoding: base64
+</span>
+PGRpdj5USEVSRSBXSUxMIEJFIE5PIFNFQ09ORCBDSEFOQ0UuIEJFIFBSRVBBUkVELjwvZGl2Pg==
+<span class="gd">-----------------------618fd3b1e5dbb594048e34eeb9e9fcdb--
+-----------------------9d9b7a65470a533c33537323d475531b--
+</span></code></pre></div></div>
+
+<p>The base64 decodes to a death threat which doesn’t have much importance. As for the rest of the email, not much information can be traced to the sender. However, we do know the domain of the sender’s email address - <code class="highlighter-rouge">c0v1d.cf</code>.</p>
+
+<h2 id="tracing-the-domain">Tracing the Domain</h2>
+<p>Initially, we tried to use a DNS lookup site, namely <a href="https://securitytrails.com/">https://securitytrails.com/</a>, to search up the domain but to no avail. We soon hit a dead end as it returned nothing.</p>
+
+<p>Pro tip: If you are stuck on a CTF challenge, come back to it an hour or two later. That’s exactly what we did.</p>
+
+<p>Using a <a href="https://dnschecker.org/all-dns-records-of-domain.php?query=c0v1d.cf&amp;rtype=ANY">different DNS lookup site</a>, we found a TXT record:
+<code class="highlighter-rouge">user=lionelcxy contact=lionelcheng@protonmail.com</code></p>
+
+<h2 id="stalking-lionel-cheng">Stalking Lionel Cheng</h2>
+<p>Googling his email gives us his <a href="https://sg.linkedin.com/in/cheng-xiang-yi-0a4b891b9">LinkedIn account</a>. We now know his full name.</p>
+
+<blockquote>
+  <p>Lionel Cheng Xiang Yi</p>
+</blockquote>
+
+<p>Googling his userid <code class="highlighter-rouge">lionelcxy</code> then returns his <a href="https://www.instagram.com/lionelcxy/">Instagram</a> and <a href="https://www.carousell.sg/lionelcxy/">Carousell</a> accounts.</p>
+
+<h2 id="retrieving-phone-number">Retrieving Phone Number</h2>
+
+<p>Now we just need his phone number. We turn to carousell to look for it. Carousell is a marketplace used mainly in Singapore. Having used the app before, we knew that it was not uncommon for users to put their phone number there for those that prefer to communicate through other mediums rather than the built in carousell chat.</p>
+
+<p>Visiting his profile, we see a listing for a Playstation 1. And in the product description, we find his phone number. 
+<img src="https://i.imgur.com/BVfJ36z.png" alt="" /></p>
+
+<h2 id="finding-location">Finding Location</h2>
+
+<p>From his instagram, there are 2 posts on his account. First is him sharing his bike ride recorded using the Strava app.</p>
+
+<p><img src="https://i.imgur.com/C41IAxj.png" alt="" /></p>
+
+<p>And the most recent post is of a street hawker stall. More important than the picture is the location geotag which is at Lau Pa Sat a 24 hour market located at Raffles.</p>
+
+<p><img src="https://i.imgur.com/Vzf6i4V.png" alt="" /></p>
+
+<p>We go on further to inspect his strava profile. Being avid runners ourselves (totally), we find his profile using the strava app and we see another one of his rides with a clue to where he stays.</p>
+
+<p><img src="https://i.imgur.com/zahOKX1.png" alt="" /></p>
+
+<p>Using these pieces of information, we sort of know what he did.</p>
+<ol>
+  <li>He went for a bike ride</li>
+  <li>He got hungry and wanted food</li>
+  <li>Initially wanted to go to Social Space at his block, but it was closed</li>
+  <li>Went to Lau Pa Sat which is close to his home to eat</li>
+</ol>
+
+<p>Googling the location of Social Space we see that there are 2 branches.</p>
+
+<p><img src="https://i.imgur.com/NPYQ5rF.png" alt="" /></p>
+
+<p>However we also know that Lau Pa Sat is just a few minutes away. Hence it is more likely that he was referring to the branch at Marina One rather than the one at Outram. Now we have our postal code: 018925. Our final flag is</p>
+
+<p><strong>Flag:</strong> <code class="highlighter-rouge">govtech-csg{LionelChengXiangYi_963672918_018925}</code></p>
+:ET

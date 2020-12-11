@@ -89,10 +89,11 @@ GEM
 
 PLATFORMS
   ruby
+  x86_64-linux
 
 DEPENDENCIES
   jekyll
   minimal-mistakes-jekyll!
 
 BUNDLED WITH
-   2.1.4
+   2.2.0

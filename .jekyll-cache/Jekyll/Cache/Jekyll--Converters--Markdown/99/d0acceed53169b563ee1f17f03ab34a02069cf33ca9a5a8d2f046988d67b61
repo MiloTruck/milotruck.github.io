@@ -1,0 +1,43 @@
+I"k<p><strong>Category:</strong> Open Source Intelligence (OSINT)</p>
+
+<h2 id="challenge-description">Challenge Description</h2>
+<blockquote>
+  <p>The lead Smart Nation engineer is missing! He has not responded to our calls for 3 days and is suspected to be kidnapped! Can you find out some of the projects he has been working on? Perhaps this will give us some insights on why he was kidnapped…maybe some high-value projects! This is one of the latest work, maybe it serves as a good starting point to start hunting.</p>
+
+  <p>Flag is the repository name!</p>
+
+  <p>Developer’s Portal - STACK the Flags</p>
+</blockquote>
+
+<p>Opening the link provided, there is nothing that stands out at first glance. Since the flag is a repository name, we know we have to find some sort of clue that is related. Perhaps there is something we can find in the page source.</p>
+
+<p>After slowly analyzing the page source, we find a html comment left by the devs.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://ctf.tech.gov.sg/"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h3</span> <span class="na">style=</span><span class="s">"text-align: center;"</span><span class="nt">&gt;</span>Check out STACK the Flags here!<span class="nt">&lt;/h3&gt;</span>
+<span class="nt">&lt;/a&gt;</span>
+
+<span class="c">&lt;!-- Will fork to our gitlab - @joshhky --&gt;</span>
+
+    <span class="nt">&lt;p&gt;</span>
+      <span class="nt">&lt;em&gt;</span>
+        Last updated 04 December 2020
+      <span class="nt">&lt;/em&gt;</span>
+    <span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div></div>
+
+<p>Hmm… Let’s follow the path and search for @joshhky on gitlab. We can view his profile on gitlab using this <a href="https://gitlab.com/joshhky">link</a>. We can confirm that we are on the right path as we see several projects with “KoroVax” in them, suggesting that this user was indeed created for the purpose of the CTF.</p>
+
+<p>At this stage, we viewed all the repositories and projects he created/imported trying to find any clues. However, majority of them were empty. The only anomaly out of his entire activity was the commit which contained changes in the project README. We can<br />
+click on the commit ID to view more details about it.</p>
+
+<p><img src="https://i.imgur.com/mlINEyj.png" alt="" /></p>
+
+<p>Upon closer inspection, we see that in the Todo, there is a point about how not all repositories should be public. From this, we can guess that the repository that we are searching for is private. However, just above that, there is also another point which notes that Josh (our target) is in charge of <code class="highlighter-rouge">krs-admin-portal</code>. This seems suspicious. Perhaps it may be a repository name? No harm trying right?</p>
+
+<p>After wrapping it in the flag format, we try to submit the flag and… it was correct after all :)</p>
+
+<p><strong>Flag:</strong> <code class="highlighter-rouge">govtech-csg{krs-admin-portal}</code></p>
+:ET

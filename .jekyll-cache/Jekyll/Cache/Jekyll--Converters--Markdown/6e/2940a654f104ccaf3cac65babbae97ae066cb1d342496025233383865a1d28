@@ -1,0 +1,451 @@
+I"p�<p><strong>Category:</strong> Internet of Things (IoT)</p>
+
+<h2 id="challenge-description">Challenge Description</h2>
+<blockquote>
+  <p>Agent 47, we were able to retrieve the enemy’s security log from our QA technician’s file! It has come to our attention that the technology used is a 2.4 GHz wireless transmission protocol. We need your expertise to analyse the traffic and identify the communication between them and uncover some secrets! The fate of the world is on you agent, good luck.</p>
+
+  <p><strong>Flag Format:</strong><code class="highlighter-rouge">govtech-csg{derived-value}</code></p>
+</blockquote>
+
+<h2 id="initial-analysis">Initial Analysis</h2>
+<p>We are provided with a <code class="highlighter-rouge">iot-challenge-3.pcap</code> file, which can be analysed using Wireshark. As usual, I use a simple <code class="highlighter-rouge">strings</code> command first to check for anything interesting:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Galaxy S7 edge
+_tk
+Bro: Dude did u ate my chips
+/lib/ld-linu
+x-armhf.so.3
+(Too cool 4 u) TK: Emma owes me $36 for the dinner
+|fUa
+libc.so
+exit
+puts
+stdin
+printf
+fgets
+strlen
+ibc_start_main
+Boss: I will not be in the office
+_gmon_start__
+IBC_2.4
+Boss: Can u help me check smth on my com real quick
+</code></pre></div></div>
+<p>It seems there is unencrypted data in the given file. We can tell there are two things to be extracted:</p>
+<ul>
+  <li>Messages, such as <code class="highlighter-rouge">Bro: Dude did u ate my chips</code></li>
+  <li>An <code class="highlighter-rouge">ELF executable, ARM</code>, which can be seen from the presence of common glibc functions and <code class="highlighter-rouge">x-armhf.so.3</code></li>
+</ul>
+
+<h2 id="pcap-analysis">PCAP Analysis</h2>
+<p><em>Keep in mind the focus is to find and extract those data bytes, and filter out all other packets</em></p>
+
+<p>By opening the pcap file in Wireshark, we see <code class="highlighter-rouge">ATT</code> and other protocols. As usual, we turn to Google for unfamiliar stuff.</p>
+
+<p>From <a href="https://www.oreilly.com/library/view/building-bluetooth-low/9781786461087/3323a094-8c3b-4c99-b28a-b284745a61b5.xhtml">this website</a>:</p>
+
+<blockquote>
+  <p><strong>Attribute Protocol (ATT)</strong>
+Bluetooth Low Energy brought two core specifications and every Low Energy profile is supposed to use them. Attribute Protocol and Generic Attribute Profile.</p>
+
+  <p>Attribute Protocol is a low-level layer that defines how to transfer data. It identifies the device discovery, reading and writing attributes on a fellow device.</p>
+
+  <p>On the other hand, Generic Attribute Profile is built on the top of ATT to give high-level services to the manufacturer implementing LE. These services are basically used to manage the data transfer process in a more systematic way. For example, GATT defines if a device’s role is going to be Server or Client.</p>
+</blockquote>
+
+<p>We now know that <strong>ATT</strong> is used in <strong>Bluetooth Low Energy (BLE)</strong>, and used to transfer data. To learn more in-depth about the <strong>ATT</strong> protocol, check out this <a href="https://stackoverflow.com/questions/30034541/low-level-bluetooth-packet-analysis">this post</a> on StackOverflow. As we want to extract data, we filter out the other protocols using <code class="highlighter-rouge">btatt</code>in the Wireshark display filter:</p>
+
+<p><img src="https://i.imgur.com/fxw9JZQ.jpg" alt="" /></p>
+
+<p>We notice that data is transfered through the <code class="highlighter-rouge">Value</code> field in packets. Also, by scrolling through the packets, we notice only two specific <code class="highlighter-rouge">Handle</code> values contain relevant data:</p>
+<ul>
+  <li><code class="highlighter-rouge">Handle 0x008f</code> contains text messages</li>
+  <li><code class="highlighter-rouge">Handle 0x008c</code> contains bytes of an <code class="highlighter-rouge">ELF executable</code></li>
+</ul>
+
+<p>Packets with these two <code class="highlighter-rouge">Handle</code> values, can be filtered using these display filters:</p>
+<ul>
+  <li><code class="highlighter-rouge">btatt.handle==0x008f</code></li>
+  <li><code class="highlighter-rouge">btatt.handle==0x008c</code></li>
+</ul>
+
+<p>Also, only packets with a length above 14 contain data. Hence, we add the following to our display filter:</p>
+<ul>
+  <li><code class="highlighter-rouge">frame.len&gt;14</code></li>
+</ul>
+
+<p>By combining the two, we view only relevant packets with data, such as:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>btatt.handle==0x008c &amp;&amp; frame.len&gt;14
+</code></pre></div></div>
+<p><em>Note: Check out <a href="https://www.wireshark.org/docs/wsug_html_chunked/ChWorkBuildDisplayFilterSection.html">Wireshark’s display filter expressions</a> if unfamilar</em></p>
+
+<p><img src="https://i.imgur.com/f6Zieoi.jpg" alt="" /></p>
+
+<h2 id="extracting-data-bytes">Extracting data bytes</h2>
+<p>Now that we know how to filter the relevant packets, we need to extract the data bytes from these packets. This can be done using <code class="highlighter-rouge">tshark</code>. Using <code class="highlighter-rouge">tshark -h</code>, we find these relevant options:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Option and Format</th>
+      <th>Explanation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">-r &lt;infile&gt;, --read-file &lt;infile&gt;</code></td>
+      <td>set the filename to read from (or ‘-‘ for stdin)</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">-Y &lt;display filter&gt;, --display-filter &lt;display filter&gt;</code></td>
+      <td>packet display filter in Wireshark display filter</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">-T pdml|ps|psml|json|jsonraw|ek|tabs|text|fields</code></td>
+      <td>format of text output</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">-e &lt;field&gt;</code></td>
+      <td>field to print if -Tfields selected (e.g. tcp.port)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Thus, data can be extracted using the command:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tshark -r iot-challenge-3.pcap -T -Y "frame.len&gt;14 &amp;&amp; btatt.handle==0x008f" -e "btatt.value"
+</code></pre></div></div>
+
+<p>The output from <code class="highlighter-rouge">tshark</code> can be piped into a file using the <code class="highlighter-rouge">&gt;</code> operator. I used the following python code to convert the data bytes into their corresponding files:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># To parse messages
+</span><span class="n">raw_data</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'messages_raw'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span>
+<span class="n">lines</span> <span class="o">=</span> <span class="n">raw_data</span><span class="p">.</span><span class="n">readlines</span><span class="p">()</span>
+
+<span class="n">messages</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="n">line</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="n">decode</span><span class="p">(</span><span class="s">'hex'</span><span class="p">)</span>
+    <span class="n">messages</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">message</span> <span class="o">+</span> <span class="s">'</span><span class="si">\</span><span class="se">n</span><span class="s">'</span><span class="p">)</span>
+
+<span class="n">message_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'messages.txt'</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span>
+<span class="n">message_file</span><span class="p">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">messages</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># To parse data into ELF
+</span><span class="kn">import</span> <span class="nn">binascii</span>
+
+<span class="n">raw_data</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'data'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span>
+<span class="n">lines</span> <span class="o">=</span> <span class="n">raw_data</span><span class="p">.</span><span class="n">readlines</span><span class="p">()</span>
+
+<span class="n">elf</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'elf_file'</span><span class="p">,</span> <span class="s">'wb'</span><span class="p">)</span>
+
+<span class="n">messages</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+    <span class="n">byte_string</span> <span class="o">=</span> <span class="n">binascii</span><span class="p">.</span><span class="n">unhexlify</span><span class="p">(</span><span class="n">line</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">elf</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">byte_string</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>We end up with the following messages, which do not seem to be important:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Bro: Dude did u ate my chips
+(Too cool 4 u) TK: Emma owes me $36 for the dinner
+Boss: I will not be in the office
+Boss: Can u help me check smth on my com real quick
+Boss: Check my calendar for today
+Boss: It's on my desk
+(Too cool 4 u) Emma: $36??
+(Too cool 4 u) TK: Well $26 for the steak $10 for the drinks
+(Too cool 4 u): Max: Cool..
+Boss: Any updates?
+Boss: Zzzzz
+Boss: What is taking so long?!
+(Too cool 4 u) Brad: Last night was LITTTT
+Mom: I made dinner
+Boss: U got to be kidding me
+Boss: Password I gave is right
+(Too cool 4 u) Meg: Thanks for the dinner outing!
+Boss: Do u even know how to use a com??!
+John: He's onto you again huh?
+Tammy: U free tonight?
+(Too cool 4 u) Don: Dinner anyone?
+Tammy: Urgent text me ASAP
+Boss: WELL??
+(Too cool 4 u) Brad: Sure where to?
+(Too cool 4 u) Brad: PM me
+</code></pre></div></div>
+
+<p>We also end up with the following executable, which can be identified using <code class="highlighter-rouge">file &lt;ELF_FILE&gt;</code>:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ELF 32-bit LSB executable, ARM, EABI5 version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux-armhf.so.3, for GNU/Linux 2.6.32, BuildID[sha1]=d73f4011dd87812b66a3128e7f0cd1dcd813f543, not stripped
+</code></pre></div></div>
+
+<h2 id="reversing-static-analysis">Reversing: Static Analysis</h2>
+<p>Using a decompiler, such as <strong>Ghidra</strong> or <strong>IDA</strong>, we can see the program logic. Below is a cleaned-up version of the decompilation:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">**</span><span class="n">envp</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">printf</span><span class="p">(</span><span class="s">"Secret?"</span><span class="p">);</span>
+  <span class="n">fgets</span><span class="p">(</span><span class="o">&amp;</span><span class="n">buf</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">stdin</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span> <span class="n">strlen</span><span class="p">(</span><span class="o">&amp;</span><span class="n">buf</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">8</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="n">puts</span><span class="p">(</span><span class="s">"Sorry wrong secret! An alert has been sent!"</span><span class="p">);</span>
+    <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">buf_len</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="o">&amp;</span><span class="n">buf</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span> <span class="n">buf</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">magic</span><span class="p">(</span><span class="mi">105</span> <span class="o">-</span> <span class="n">buf_len</span><span class="p">)</span> <span class="p">)</span> <span class="o">++</span><span class="n">i</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span> <span class="n">buf</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">magic</span><span class="p">(</span><span class="mi">105</span> <span class="o">^</span> <span class="mh">0x27</span><span class="p">)</span> <span class="p">)</span> <span class="o">++</span><span class="n">i</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span> <span class="n">buf</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">magic</span><span class="p">(</span><span class="mi">105</span> <span class="o">+</span> <span class="mi">11</span><span class="p">)</span> <span class="p">)</span> <span class="o">++</span><span class="n">i</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span> <span class="n">buf</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="n">magic</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">buf</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">51</span><span class="p">)</span> <span class="p">)</span> <span class="o">++</span><span class="n">i</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span> <span class="n">buf</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="n">magic</span><span class="p">(</span><span class="mh">0x42</span><span class="p">)</span> <span class="p">)</span> <span class="o">++</span><span class="n">i</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span> <span class="n">buf</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">==</span> <span class="n">magic</span><span class="p">((</span><span class="mi">8</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">|</span> <span class="mi">1</span><span class="p">)</span> <span class="p">)</span> <span class="o">++</span><span class="n">i</span><span class="p">;</span>
+
+  <span class="n">temp</span> <span class="o">=</span> <span class="n">buf</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="n">buf</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">+</span> <span class="n">buf</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+  <span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="n">temp</span> <span class="o">^</span> <span class="p">(</span><span class="n">buf</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="n">buf</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">+</span> <span class="mi">66</span><span class="p">))</span> <span class="o">+</span> <span class="mi">101</span><span class="p">;</span>
+  <span class="k">if</span> <span class="p">(</span> <span class="n">buf</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">==</span> <span class="n">magic</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="p">)</span> <span class="o">++</span><span class="n">i</span><span class="p">;</span>
+
+  <span class="k">if</span> <span class="p">(</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">7</span> <span class="p">)</span>
+    <span class="n">puts</span><span class="p">(</span><span class="s">"Authorised!"</span><span class="p">);</span>
+  <span class="k">else</span>
+    <span class="n">puts</span><span class="p">(</span><span class="s">"Sorry wrong secret! An alert has been sent!"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>We see that the program takes in input of 10 bytes using <code class="highlighter-rouge">fgets()</code>:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fgets</span><span class="p">(</span><span class="o">&amp;</span><span class="n">buf</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">stdin</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>The program checks if the length of the input is 8 bytes long, and terminates with a wrong message if it isn’t:<br />
+<em>Note: The correct input actually has a length of 7 as fgets() appends a \n character to the end of input</em></p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span> <span class="n">strlen</span><span class="p">(</span><span class="o">&amp;</span><span class="n">buf</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">8</span> <span class="p">)</span> <span class="p">{</span>
+    <span class="n">puts</span><span class="p">(</span><span class="s">"Sorry wrong secret! An alert has been sent!"</span><span class="p">);</span>
+    <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The program then compares each byte to a value generated using a <code class="highlighter-rouge">magic()</code> function, and increments <code class="highlighter-rouge">i</code> by 1 if true.</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="n">buf_len</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="o">&amp;</span><span class="n">buf</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span> <span class="n">buf</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">magic</span><span class="p">(</span><span class="mi">105</span> <span class="o">-</span> <span class="n">buf_len</span><span class="p">)</span> <span class="p">)</span> <span class="o">++</span><span class="n">i</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span> <span class="n">buf</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">magic</span><span class="p">(</span><span class="mi">105</span> <span class="o">^</span> <span class="mh">0x27</span><span class="p">)</span> <span class="p">)</span> <span class="o">++</span><span class="n">i</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span> <span class="n">buf</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">magic</span><span class="p">(</span><span class="mi">105</span> <span class="o">+</span> <span class="mi">11</span><span class="p">)</span> <span class="p">)</span> <span class="o">++</span><span class="n">i</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span> <span class="n">buf</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="n">magic</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">buf</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">51</span><span class="p">)</span> <span class="p">)</span> <span class="o">++</span><span class="n">i</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span> <span class="n">buf</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="n">magic</span><span class="p">(</span><span class="mh">0x42</span><span class="p">)</span> <span class="p">)</span> <span class="o">++</span><span class="n">i</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span> <span class="n">buf</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">==</span> <span class="n">magic</span><span class="p">((</span><span class="mi">8</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">|</span> <span class="mi">1</span><span class="p">)</span> <span class="p">)</span> <span class="o">++</span><span class="n">i</span><span class="p">;</span>
+
+<span class="n">temp</span> <span class="o">=</span> <span class="n">buf</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="n">buf</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">+</span> <span class="n">buf</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+<span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="n">temp</span> <span class="o">^</span> <span class="p">(</span><span class="n">buf</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="n">buf</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">+</span> <span class="mi">66</span><span class="p">))</span> <span class="o">+</span> <span class="mi">101</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span> <span class="n">buf</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">==</span> <span class="n">magic</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="p">)</span> <span class="o">++</span><span class="n">i</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>At the end, it checks if <code class="highlighter-rouge">i</code> equals 7, and prints a success or fail message accordingly:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">7</span> <span class="p">)</span>
+    <span class="n">puts</span><span class="p">(</span><span class="s">"Authorised!"</span><span class="p">);</span>
+<span class="k">else</span>
+    <span class="nf">puts</span><span class="p">(</span><span class="s">"Sorry wrong secret! An alert has been sent!"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>It would be possible to obtain the flag purely by static analysis of the <code class="highlighter-rouge">magic()</code> function. However:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">magic()</code> actually contains four other nested functions, making it tedious to reverse.</li>
+  <li><strong>I am lazy.</strong></li>
+</ul>
+
+<p>Thus, we move on to dynamic analysis.</p>
+
+<h2 id="reversing-dynamic-analysis">Reversing: Dynamic Analysis</h2>
+<h3 id="setup">Setup</h3>
+<p>To setup Linux to run arm binaries, check out <a href="https://ownyourbits.com/2018/06/13/transparently-running-binaries-from-any-architecture-in-linux-with-qemu-and-binfmt_misc/">this post</a>.</p>
+
+<p>To perform dynamic analysis, we will debug the binary with <code class="highlighter-rouge">gdb</code>. To setup:</p>
+<ul>
+  <li>Install <strong>gdb-multiarch</strong> with <code class="highlighter-rouge">sudo apt-get install gdb-multiarch</code></li>
+  <li>In one terminal window, run the binary with <code class="highlighter-rouge">qemu-arm -g &lt;PORT&gt; ./&lt;ELF_FILE&gt;</code>. For example: <code class="highlighter-rouge">qemu-arm -g 1234 ./elf_file</code></li>
+  <li>In another terminal window, run:
+    <ul>
+      <li><code class="highlighter-rouge">gdb-multiarch &lt;ELF_FILE&gt;</code></li>
+      <li><code class="highlighter-rouge">target remote HOST:PORT</code>, for example: <code class="highlighter-rouge">target remote localhost:1234</code></li>
+      <li><code class="highlighter-rouge">c</code>, to continue execution of the program</li>
+    </ul>
+  </li>
+</ul>
+
+<p>This allows us to run the binary normally, and pause execution in <strong>gdb</strong> using <code class="highlighter-rouge">&lt;ctrl-c&gt;</code> to debug.</p>
+
+<h3 id="obtaining-the-flag">Obtaining the flag</h3>
+<p>As mentioned before, the binary compares each byte to a value returned by <code class="highlighter-rouge">magic()</code>. We notice that:</p>
+<ul>
+  <li>The bytes are checked from index 0 to 6</li>
+  <li>Following bytes do not affect the check of previous bytes. This means, that <code class="highlighter-rouge">buf[6]</code> will not affect the value returned by <code class="highlighter-rouge">magic()</code> when checking <code class="highlighter-rouge">buf[3]</code>, or any other previous bytes.</li>
+</ul>
+
+<p>This means we can obtain the correct character at any position if we know the correct characters in previous positions. As such, we do the following:</p>
+<ul>
+  <li>Set a breakpoint in <code class="highlighter-rouge">magic()</code> to find its return value</li>
+  <li>Run the binary until breakpoint is hit</li>
+  <li>Print the return value of <code class="highlighter-rouge">magic()</code></li>
+  <li>Append this value to the input</li>
+  <li>Repeat until we get the entire password</li>
+</ul>
+
+<p><em>Before diving into gdb, remember that the aim is to obtain the return values of magic()</em><br />
+We use the <code class="highlighter-rouge">disas</code> command to obtain the disassembly of the <code class="highlighter-rouge">magic()</code> function:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(gdb) disas magic
+Dump of assembler code for function magic:
+   0x000107c8 &lt;+0&gt;:     push    {r11, lr}
+   0x000107cc &lt;+4&gt;:     add     r11, sp, #4
+   0x000107d0 &lt;+8&gt;:     sub     sp, sp, #8
+   0x000107d4 &lt;+12&gt;:    mov     r3, r0
+   0x000107d8 &lt;+16&gt;:    strb    r3, [r11, #-5]
+   0x000107dc &lt;+20&gt;:    ldrb    r3, [r11, #-5]
+   0x000107e0 &lt;+24&gt;:    mov     r0, r3
+   0x000107e4 &lt;+28&gt;:    bl      0x10820 &lt;magic2&gt;
+   0x000107e8 &lt;+32&gt;:    mov     r3, r0
+   0x000107ec &lt;+36&gt;:    strb    r3, [r11, #-5]
+   0x000107f0 &lt;+40&gt;:    mov     r0, #3
+   0x000107f4 &lt;+44&gt;:    mov     r1, #2
+   0x000107f8 &lt;+48&gt;:    bl      0x10980 &lt;min&gt;
+   0x000107fc &lt;+52&gt;:    mov     r3, r0
+   0x00010800 &lt;+56&gt;:    uxtb    r2, r3
+   0x00010804 &lt;+60&gt;:    ldrb    r3, [r11, #-5]
+   0x00010808 &lt;+64&gt;:    add     r3, r2, r3
+   0x0001080c &lt;+68&gt;:    strb    r3, [r11, #-5]
+   0x00010810 &lt;+72&gt;:    ldrb    r3, [r11, #-5]
+   0x00010814 &lt;+76&gt;:    mov     r0, r3
+   0x00010818 &lt;+80&gt;:    sub     sp, r11, #4
+   0x0001081c &lt;+84&gt;:    pop     {r11, pc}
+End of assembler dump.
+</code></pre></div></div>
+<p>In <code class="highlighter-rouge">x86 ARM</code> architecture, return values are stored in registers (<code class="highlighter-rouge">r0</code> in this case). We set a breakpoint right before <code class="highlighter-rouge">magic()</code> ends, with the following:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(gdb) b *magic+84
+Breakpoint 1 at 0x1081c
+</code></pre></div></div>
+<p>As we want to print the value stored in <code class="highlighter-rouge">r0</code> as a character everytime the breakpoint is hit, we can use the <code class="highlighter-rouge">define hook-stop</code> command:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(gdb) define hook-stop
+Type commands for definition of "hook-stop".
+End with a line saying just "end".
+&gt;print (char) $r0
+&gt;end
+</code></pre></div></div>
+
+<p>We then continue execution three times until the character printed is no longer correct.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(gdb) c
+Continuing.
+$8 = 97 'a'
+
+Breakpoint 1, 0x0001081c in magic ()
+(gdb) c
+Continuing.
+$9 = 78 'N'
+
+Breakpoint 1, 0x0001081c in magic ()
+(gdb) c
+Continuing.
+$10 = 116 't'
+
+(gdb) c
+Continuing.
+$11 = 143 '\217'
+
+Breakpoint 1, 0x0001081c in magic ()
+</code></pre></div></div>
+
+<p>This is because the return value of <code class="highlighter-rouge">magic()</code> now depends on previous characters, as seen in this code:</p>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span> <span class="n">buf</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="n">magic</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">buf</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">51</span><span class="p">)</span> <span class="p">)</span> <span class="o">++</span><span class="n">i</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Thus, we restart execution and enter <code class="highlighter-rouge">aNtaaaa</code> as input:<br />
+<em>In gdb terminal window</em></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(gdb) kill
+Kill the program being debugged? (y or n) y
+[Inferior 1 (process 1) killed]
+(gdb) target remote localhost:1234
+Remote debugging using localhost:1234
+(gdb) c
+</code></pre></div></div>
+
+<p><em>In other terminal window</em></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> $ qemu-arm -g 1234 ./elf_file
+ Secret?aNtaaaa
+</code></pre></div></div>
+
+<p>This allows us to obtain more correct characters in <strong>gdb</strong>:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> (gdb) c
+Continuing.
+$13 = 97 'a'
+
+Breakpoint 1, 0x0001081c in magic ()
+(gdb) c
+Continuing.
+$14 = 78 'N'
+
+Breakpoint 1, 0x0001081c in magic ()
+(gdb)
+Continuing.
+$15 = 116 't'
+
+Breakpoint 1, 0x0001081c in magic ()
+(gdb)
+Continuing.
+$16 = 105 'i'
+
+Breakpoint 1, 0x0001081c in magic ()
+(gdb)
+Continuing.
+$17 = 66 'B'
+
+Breakpoint 1, 0x0001081c in magic ()
+(gdb)
+Continuing.
+$18 = 17 '\021'
+
+Breakpoint 1, 0x0001081c in magic ()
+</code></pre></div></div>
+
+<p>We repeat the process, which gives us the entire flag before the program terminates:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(</span>gdb<span class="o">)</span> c
+Continuing.
+<span class="nv">$21</span> <span class="o">=</span> 97 <span class="s1">'a'</span>
+
+Breakpoint 1, 0x0001081c <span class="k">in </span>magic <span class="o">()</span>
+<span class="o">(</span>gdb<span class="o">)</span> c
+Continuing.
+<span class="nv">$22</span> <span class="o">=</span> 78 <span class="s1">'N'</span>
+
+Breakpoint 1, 0x0001081c <span class="k">in </span>magic <span class="o">()</span>
+<span class="o">(</span>gdb<span class="o">)</span>
+Continuing.
+<span class="nv">$23</span> <span class="o">=</span> 116 <span class="s1">'t'</span>
+
+Breakpoint 1, 0x0001081c <span class="k">in </span>magic <span class="o">()</span>
+<span class="o">(</span>gdb<span class="o">)</span>
+Continuing.
+<span class="nv">$24</span> <span class="o">=</span> 105 <span class="s1">'i'</span>
+
+Breakpoint 1, 0x0001081c <span class="k">in </span>magic <span class="o">()</span>
+<span class="o">(</span>gdb<span class="o">)</span>
+Continuing.
+<span class="nv">$25</span> <span class="o">=</span> 66 <span class="s1">'B'</span>
+
+Breakpoint 1, 0x0001081c <span class="k">in </span>magic <span class="o">()</span>
+<span class="o">(</span>gdb<span class="o">)</span>
+Continuing.
+<span class="nv">$26</span> <span class="o">=</span> 33 <span class="s1">'!'</span>
+
+Breakpoint 1, 0x0001081c <span class="k">in </span>magic <span class="o">()</span>
+<span class="o">(</span>gdb<span class="o">)</span>
+Continuing.
+<span class="nv">$27</span> <span class="o">=</span> 101 <span class="s1">'e'</span>
+
+Breakpoint 1, 0x0001081c <span class="k">in </span>magic <span class="o">()</span>
+<span class="o">(</span>gdb<span class="o">)</span>
+Continuing.
+<span class="o">[</span>Inferior 1 <span class="o">(</span>process 1<span class="o">)</span> exited normally]
+Error <span class="k">while </span>running hook_stop:
+No registers
+</code></pre></div></div>
+
+<p>The above shows us the secret pass is <code class="highlighter-rouge">aNtiB!e</code>. Let us check:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>qemu-arm elf_file
+Secret?aNtiB!e
+Authorised!
+</code></pre></div></div>
+
+<p>It is correct, hence the flag is <code class="highlighter-rouge">govtech-csg{aNtiB!e}</code></p>
+
+<p><strong>Flag:</strong> <code class="highlighter-rouge">govtech-csg{aNtiB!e}</code></p>
+:ET
