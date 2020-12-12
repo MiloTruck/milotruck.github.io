@@ -5,7 +5,7 @@ layout: single
 classes: wide
 ---
 
-Hi, I'm MiloTruck, a student from Singapore. I regularly participate in Competitive Programming, Capture-The-Flag (CTF) and Data Science/AI competitions. Usually, I play CTFs under **HATS SG** and participate in other competitions with **ItzyBitzySpider**/**acsii**. I also work on other projects in my free time.
+Hi, I'm MiloTruck, a student from Singapore. I regularly participate in Competitive Programming, Capture-The-Flag (CTF) and Data Science/AI competitions. Usually, I play CTFs under **HATS SG** and participate in other competitions with **ItzyBitzySpider**. I also work on other projects in my free time.
 
 ## Individual Achievements  
 
