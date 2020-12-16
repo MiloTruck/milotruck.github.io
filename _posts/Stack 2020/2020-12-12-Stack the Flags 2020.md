@@ -12,8 +12,6 @@ excerpt: "12-12 December 2020"
 Participated in this CTF with my regular teammates in the JC category, [@jloh02](https://jloh02.github.io/), [@OceanKoh](http://dihydrogen.monoxide.tech/), [@NyxTo](https://github.com/Nyxto). Not all the writeups below are by me, so credits to them.
 
 ## Challenge Writeups  
-Binary Exploitation  
-
 Reversing  
 [An invitation [981]](/An-invitation/){: .btn .btn--inverse}
 
