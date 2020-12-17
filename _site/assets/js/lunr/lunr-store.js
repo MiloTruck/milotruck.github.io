@@ -120,7 +120,7 @@ var store = [{
         "url": "http://localhost:4000/Sounds-of-freedom!/",
         "teaser":null},{
         "title": "Stack the Flags 2020",
-        "excerpt":"Name: ItzyBitzySpider Position: 3 Score: 37754 Participated in this CTF with my regular teammates in the JC category, @jloh02, @OceanKoh, @NyxTo. Not all the writeups below are by me, so credits to them. Challenge Writeups Binary Exploitation Reversing An invitation [981] Web Unlock Me [905] Cryptography Can COViD steal Bob’s...","categories": [],
+        "excerpt":"Name: ItzyBitzySpider Position: 3 Score: 37754 Participated in this CTF with my regular teammates in the JC category, @jloh02, @OceanKoh, @NyxTo. Not all the writeups below are by me, so credits to them. Challenge Writeups Reversing An invitation [981] Web Unlock Me [905] Cryptography Can COViD steal Bob’s idea? [960]...","categories": [],
         "tags": ["Stack 2020","CTF"],
         "url": "http://localhost:4000/Stack-the-Flags-2020/",
         "teaser":null},{
@@ -148,4 +148,24 @@ var store = [{
         "excerpt":"Category: Open Source Intelligence (OSINT) Challenge Description The lead Smart Nation engineer is missing! He has not responded to our calls for 3 days and is suspected to be kidnapped! Can you find out some of the projects he has been working on? Perhaps this will give us some insights...","categories": [],
         "tags": ["Stack 2020","OSINT"],
         "url": "http://localhost:4000/Working-on/",
+        "teaser":null},{
+        "title": "Binary Exploitation Notes",
+        "excerpt":"Heap Techniques     House of Force   ","categories": [],
+        "tags": ["Binary Exploitation"],
+        "url": "http://localhost:4000/Binary-Exploitation/",
+        "teaser":null},{
+        "title": "House of Force",
+        "excerpt":"Requirements Control of top chunk size, usually through heap overflow Full control of size of allocated chunks Process Arbitrary Write Primitive Overwrite size of top chunk to 0xffffffffffffffff Allocate chunk with size of offset, using malloc() If target &lt; top_chunk: offset = top_chunk - target + allocated_chunks_size If target &gt;...","categories": [],
+        "tags": ["Binary Exploitation","Heap"],
+        "url": "http://localhost:4000/House-of-Force/",
+        "teaser":null},{
+        "title": "Binary exploitation",
+        "excerpt":"Heap Techniques     House of Force   ","categories": [],
+        "tags": [],
+        "url": "http://localhost:4000/Binary-Exploitation/",
+        "teaser":null},{
+        "title": "House of force",
+        "excerpt":"Requirements Control size of top chunk, usually through heap overflow Freely control malloc size Process Arbitrary Write Primitive Overwrite size of top chunk to 0xffffffffffffffff Allocate chunk with size of offset, using malloc() If target &lt; top_chunk: offset = top_chunk - target + allocated_chunks_size If target &gt; top_chunk: offset =...","categories": [],
+        "tags": [],
+        "url": "http://localhost:4000/House-of-Force/",
         "teaser":null}]

