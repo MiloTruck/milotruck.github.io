@@ -38,7 +38,7 @@ HATS CTF:
 ---
 
 ## Notes
-[Binary Exploitation](/Binary-Exploitation/)
+* [Binary Exploitation](/Binary-Exploitation/)
 
 ## Capture-The-Flag (CTF) Competitions
 {% include feature_row id="Stack the Flags 2020" type="left" %}
