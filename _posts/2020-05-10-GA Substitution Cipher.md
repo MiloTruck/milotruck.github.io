@@ -131,8 +131,6 @@ Below is an explanation of each paramter. I recommend reading the paper **Decryp
 
 ## References
 
-To obtain the frequency of ngrams, the novel "The Great Gatsby" was used. The training text `TheGreatGatsby.txt` was obtained from Project Gutenberg:  
-http://gutenberg.net.au/ebooks02/0200041.txt 
+To obtain the frequency of ngrams, the novel "The Great Gatsby" was used. The training text `TheGreatGatsby.txt` was obtained from [Project Gutenberg](http://gutenberg.net.au/ebooks02/0200041.txt) 
 
-This project was heavily inspired by the paper **Decrypting Substitution Ciphers with Genetic Algorithms** by **Jason Brownbridge**. The method used for this project is well explained in this paper. All credits go to him for the original idea. A copy of the paper can be obtained here:  
-https://people.cs.uct.ac.za/~jkenwood/JasonBrownbridge.pdf
+This project was heavily inspired by the paper **Decrypting Substitution Ciphers with Genetic Algorithms** by **Jason Brownbridge**. The method used for this project is well explained in this paper. All credits go to him for the original idea. A copy of the paper can be obtained [here](https://people.cs.uct.ac.za/~jkenwood/JasonBrownbridge.pdf)
