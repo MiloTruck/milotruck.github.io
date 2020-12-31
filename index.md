@@ -17,15 +17,10 @@ feature_row:
     url: /Cybersecurity/
     btn_label: "Learn More"
     btn_class: "btn--primary"
-  - title: "Artificial Intelligence, Data Science"
-    excerpt: "Includes DS/AI related projects and Kaggle competitions. I also write about the competitions I have participated in."
-    url: /Data-Science-and-AI/
-    btn_label: "Learn More"
-    btn_class: "btn--primary"
-  - title: "Competitive Programming"
-    excerpt: "Consists of CP competitions and resources. I might also post solutions for problems on Hackerrank and Kattis."
-    url: /Competitive-Programming/
-    btn_label: "Learn More"
+  - title: "Posts"
+    excerpt: "Recent posts written by me."
+    url: /Posts/
+    btn_label: "Explore"
     btn_class: "btn--primary"
 feature_row2:
   - title: "Projects"

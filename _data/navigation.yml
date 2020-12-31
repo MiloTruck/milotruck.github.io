@@ -6,11 +6,8 @@ main:
     url: /Projects/
   - title: "Cybersecurity"
     url: /Cybersecurity/
-  - title: "Data Science and AI"
-    url: /Data-Science-and-AI/
-  - title: "Competitive Programming"
-    url: /Competitive-Programming/
-
+  - title: "Posts"
+    url: /Posts/
 
 # Table of Contents for GA Substitution Cipher Project
 GA Substitution Cipher TOC:
