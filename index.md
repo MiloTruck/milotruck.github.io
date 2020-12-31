@@ -23,7 +23,7 @@ feature_row:
     btn_label: "Explore"
     btn_class: "btn--primary"
   - title: "Achievements"
-    excerpt: "List of achievements I am proud of..."
+    excerpt: "List of achievements and awards I have attained from participating in competititons." 
     url: /About/
     btn_label: "Explore"
     btn_class: "btn--primary"
