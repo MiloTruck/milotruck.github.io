@@ -18,12 +18,12 @@ feature_row:
     btn_label: "Explore"
     btn_class: "btn--primary"
   - title: "Posts"
-    excerpt: "Recent posts written by me."
+    excerpt: "Recent posts written by me. Mostly contains CTF writeups."
     url: /Posts/
     btn_label: "Explore"
     btn_class: "btn--primary"
   - title: "Achievements"
-    excerpt: 'Over the years of competing in various STEM-related competitions, these are the achievements I have attained, with many more to come...'
+    excerpt: "List of achievements I am proud of..."
     url: /About/
     btn_label: "Explore"
     btn_class: "btn--primary"
