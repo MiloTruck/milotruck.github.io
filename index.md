@@ -15,11 +15,16 @@ feature_row:
   - title: "Cybersecurity"
     excerpt: "Contains mostly CTF writeups and experiences. I also occasionally post about Cybersec experiences and resources I find helpful."
     url: /Cybersecurity/
-    btn_label: "Learn More"
+    btn_label: "Explore"
     btn_class: "btn--primary"
   - title: "Posts"
     excerpt: "Recent posts written by me."
     url: /Posts/
+    btn_label: "Explore"
+    btn_class: "btn--primary"
+  - title: "Achievements"
+    excerpt: 'Over the years of competing in various STEM-related competitions, these are the achievements I have attained, with many more to come...'
+    url: /About/
     btn_label: "Explore"
     btn_class: "btn--primary"
 feature_row2:
@@ -29,13 +34,6 @@ feature_row2:
     btn_label: "Explore"
     btn_class: "btn--primary"
     image_path: /assets/images/Projects.png
-feature_row3:
-  - title: "Achievements"
-    excerpt: 'Over the years of competing in various STEM-related competitions, these are the achievements I have attained, with many more to come...'
-    image_path: /assets/images/Achievements.jpg
-    url: /About/
-    btn_label: "Explore"
-    btn_class: "btn--primary"
 ---
 
 {% include feature_row id="intro" type="center" %}

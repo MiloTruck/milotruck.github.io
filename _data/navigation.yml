@@ -2,12 +2,12 @@
 main:
   - title: "About"
     url: /About/
+  - title: "Posts"
+    url: /Posts/
   - title: "Projects"
     url: /Projects/
   - title: "Cybersecurity"
     url: /Cybersecurity/
-  - title: "Posts"
-    url: /Posts/
 
 # Table of Contents for GA Substitution Cipher Project
 GA Substitution Cipher TOC:
