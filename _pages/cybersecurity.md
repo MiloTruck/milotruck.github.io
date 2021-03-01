@@ -5,7 +5,7 @@ permalink: /Cybersecurity/
 title: "Cybersecurity"
 
 DSO NUS CTF 2021:
-  - title: "DSO NUS CTF 2021"
+  - title: "DSO-NUS CTF 2021"
     excerpt: "CTF hosted by DSO and NUS"
     image_path: /assets/images/DSO NUS CTF - Logo.JPG
     url: /DSO-NUS-CTF-2021/
