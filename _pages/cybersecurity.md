@@ -4,6 +4,14 @@ classes: wide
 permalink: /Cybersecurity/
 title: "Cybersecurity"
 
+DSO NUS CTF 2021:
+  - title: "DSO NUS CTF 2021"
+    excerpt: "CTF hosted by DSO and NUS"
+    image_path: /assets/images/DSO NUS CTF - Logo.JPG
+    url: /DSO-NUS-CTF-2021/
+    btn_label: "Explore"
+    btn_class: "btn--primary"
+
 Stack the Flags 2020:
   - title: "Stack the Flags 2020"
     excerpt: "CTF hosted in Singapore by GovTech"
@@ -41,6 +49,7 @@ HATS CTF:
 * [Binary Exploitation](/Binary-Exploitation/)
 
 ## Capture-The-Flag (CTF) Competitions
+{% include feature_row id="DSO NUS CTF 2021" type="left" %}
 {% include feature_row id="Stack the Flags 2020" type="left" %}
 {% include feature_row id="Cyberthon 2020" type="left" %}
 {% include feature_row id="Timisoara CTF 2019 Qualifiers" type="left" %}
