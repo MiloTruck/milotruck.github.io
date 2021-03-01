@@ -28,4 +28,5 @@ Hi, I'm MiloTruck, a student from Singapore. I regularly participate in Competit
 | Whitehacks 2020                            | ItzyBitzySpider       | 4th Place                        |
 | Cyber SEA Games (CSG) 2020                 | Singapore             | 1st Place                        |
 | Stack the Flags 2020                       | ItzyBitzySpider       | 3rd Place, JC Category           |
+| NUS DSO CTF 2021                           | It'z Me               | 6th Place                        |
 
