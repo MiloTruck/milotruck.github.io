@@ -5,7 +5,11 @@ layout: single
 classes: wide
 ---
 
-Hi, I'm MiloTruck, a student from Singapore. I regularly participate in Competitive Programming, Capture-The-Flag (CTF) and Data Science/AI competitions. Usually, I play CTFs under **HATS SG** and participate in other competitions with **ItzyBitzySpider**. I also work on other projects in my free time.
+Hi, I'm MiloTruck, a student from Singapore. I regularly participate in Competitive Programming and Capture-The-Flag (CTF) competitions. Usually, I play CTFs under **HATS SG** and participate in other competitions with **ItzyBitzySpider**. I also work on other projects in my free time and have an interest in cybersecurity.
+
+## CVE
+
+(CVE-2021-33760)[https://msrc.microsoft.com/update-guide/vulnerability/CVE-2021-33760]
 
 ## Individual Achievements  
 
