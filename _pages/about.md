@@ -9,7 +9,7 @@ Hi, I'm MiloTruck, a student from Singapore. I regularly participate in Competit
 
 ## CVE
 
-(CVE-2021-33760)[https://msrc.microsoft.com/update-guide/vulnerability/CVE-2021-33760]
+[CVE-2021-33760](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2021-33760)
 
 ## Individual Achievements  
 
