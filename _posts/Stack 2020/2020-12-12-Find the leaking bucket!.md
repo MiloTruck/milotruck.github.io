@@ -1,9 +1,5 @@
 ---
 title: "Find the leaking bucket! [978]"
-tags: [Stack 2020, Cloud]
-excerpt: "Cloud"
-layout: single
-classes: wide
 --- 
 
 **Category:** Cloud

@@ -1,15 +1,13 @@
 ---
 title: "Stack the Flags 2020"
 date: 2020-12-12
-tags: [Stack 2020, CTF]
-excerpt: "12-12 December 2020"
+categories: CTF
+toc: false
 --- 
 
-**Name:** ItzyBitzySpider  
-**Position:** 3  
-**Score:** 37754
+A local Singaporean CTF hosted by GovTech, where we managed to place 3rd under the name **ItzyBitzySpider**. I participated in this CTF with my regular teammates in the JC category, [@jloh02](https://jloh02.github.io/), [@OceanKoh](http://blog.puddle.sg), [@NyxTo](https://github.com/Nyxto). Many of the writeups below were written by them, so credits to them.
 
-Participated in this CTF with my regular teammates in the JC category, [@jloh02](https://jloh02.github.io/), [@OceanKoh](http://dihydrogen.monoxide.tech/), [@NyxTo](https://github.com/Nyxto). Not all the writeups below are by me, so credits to them.
+![alt]({{ site.url }}{{ site.baseurl }}/assets/images/Stack 2020 - Scoreboard.jpg)
 
 ## Challenge Writeups  
 Reversing  
@@ -46,4 +44,3 @@ Open Source Intelligence (OSINT)
 Social Engineering  
 [Can you trick OrgX into giving away their credentials? [2000]](/Can-you-trick-OrgX-into-giving-away-their-credentials/){: .btn .btn--inverse}
 
-![alt]({{ site.url }}{{ site.baseurl }}/assets/images/Stack 2020 - Scoreboard.jpg)

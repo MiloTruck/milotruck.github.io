@@ -1,0 +1,14 @@
+I"?<ul class="toc__menu">
+  <li><a href="#challenge-description">Challenge Description</a></li>
+  <li><a href="#initial-analysis">Initial Analysis</a></li>
+  <li><a href="#pcap-analysis">PCAP Analysis</a></li>
+  <li><a href="#extracting-data-bytes">Extracting data bytes</a></li>
+  <li><a href="#reversing-static-analysis">Reversing: Static Analysis</a></li>
+  <li><a href="#reversing-dynamic-analysis">Reversing: Dynamic Analysis</a>
+    <ul>
+      <li><a href="#setup">Setup</a></li>
+      <li><a href="#obtaining-the-flag">Obtaining the flag</a></li>
+    </ul>
+  </li>
+</ul>
+:ET

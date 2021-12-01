@@ -1,9 +1,5 @@
 ---
 title: "Sounds of freedom! [750]"
-tags: [Stack 2020, OSINT]
-excerpt: "Open Source Intelligence (OSINT)"
-layout: single
-classes: wide
 --- 
 
 **Category:** Open Source Intelligence (OSINT)

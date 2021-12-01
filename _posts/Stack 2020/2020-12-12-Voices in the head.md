@@ -1,9 +1,5 @@
 ---
 title: "Voices in the head [1692]"
-tags: [Stack 2020, Forensics]
-excerpt: "Forensics"
-layout: single
-classes: wide
 --- 
 
 **Category:** Forensics

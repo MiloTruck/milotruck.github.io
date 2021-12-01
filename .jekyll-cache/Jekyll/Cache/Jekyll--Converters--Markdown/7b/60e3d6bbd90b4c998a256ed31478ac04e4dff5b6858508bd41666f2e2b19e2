@@ -1,0 +1,42 @@
+I"	<p><strong>Name:</strong> ItzyBitzySpider<br />
+<strong>Position:</strong> 3<br />
+<strong>Score:</strong> 37754</p>
+
+<p>A local Singaporean CTF hosted by GovTech. I participated in this CTF with my regular teammates in the JC category, <a href="https://jloh02.github.io/">@jloh02</a>, <a href="http://dihydrogen.monoxide.tech/">@OceanKoh</a>, <a href="https://github.com/Nyxto">@NyxTo</a>. Many of the writeups below are by me, so credits to them.</p>
+
+<h2 id="challenge-writeups">Challenge Writeups</h2>
+<p>Reversing<br />
+<a href="/An-invitation/" class="btn btn--inverse">An invitation [981]</a></p>
+
+<p>Web<br />
+<a href="/Unlock-Me/" class="btn btn--inverse">Unlock Me [905]</a></p>
+
+<p>Cryptography<br />
+<a href="/Can-COViD-steal-Bob's-idea/" class="btn btn--inverse">Can COViD steal Bob’s idea? [960]</a></p>
+
+<p>Forensics<br />
+<a href="/Walking-down-a-colourful-memory-lane/" class="btn btn--inverse">Walking down a colourful memory lane [992]</a>
+<a href="/Voices-in-the-head/" class="btn btn--inverse">Voices in the head [1692]</a></p>
+
+<p>Mobile<br />
+<a href="/A-to-Z-of-COViD!/" class="btn btn--inverse">A to Z of COViD! [1986]</a></p>
+
+<p>Internet of Things (IoT)<br />
+<a href="/COVID's-Communication-Technology!/" class="btn btn--inverse">COVID’s Communication Technology! [984]</a>
+<a href="/I-smell-updates!/" class="btn btn--inverse">I smell updates! [1986]</a></p>
+
+<p>Cloud<br />
+<a href="/Find-the-leaking-bucket!/" class="btn btn--inverse">Find the leaking bucket! [978]</a></p>
+
+<p>Open Source Intelligence (OSINT)<br />
+<a href="/Only-time-will-tell!/" class="btn btn--inverse">Only time will tell! [691]</a>
+<a href="/Sounds-of-freedom!/" class="btn btn--inverse">Sounds of freedom! [750]</a>
+<a href="/Working-on/" class="btn btn--inverse">What is he working on? Some high value project? [790]</a>
+<a href="/Hunt-him-down!/" class="btn btn--inverse">Hunt him down! [970]</a>
+<a href="/Who-are-the-possible-kidnappers/" class="btn btn--inverse">Who are the possible kidnappers? [1990]</a></p>
+
+<p>Social Engineering<br />
+<a href="/Can-you-trick-OrgX-into-giving-away-their-credentials/" class="btn btn--inverse">Can you trick OrgX into giving away their credentials? [2000]</a></p>
+
+<p><img src="http://localhost:4000/assets/images/Stack 2020 - Scoreboard.jpg" alt="alt" /></p>
+:ET

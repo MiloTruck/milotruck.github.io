@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Can you trick OrgX into giving away their credentials? [2000] - MILOTRUCK</title>
-<meta name="description" content="Social Engineering">
+<!-- begin _includes/seo.html --><title>Can you trick OrgX into giving away their credentials? [2000] - Home</title>
+<meta name="description" content="Category: Social EngineeringChallenge Description  With the information gathered, figure out who has access to the key and contact the personFinding the TargetSince we need to contact a person, it’s most likely a phone number or email.A quick note on sending emails during CTFs:In the wise words of Sarah Miller, “First rule of OSINT: if the subject discovers that you’re investigating them, you’ve probably failed”. Do NOT use your own email address to send the email. Instead, use temporary email sites such as https://www.guerrillamail.com/compose. For this challenge, we attempted to use such temporary emails, however, we suspect that due to black/whitelists, there was no reply. An alternative is to use a burner email address which you do not use for anything else. Now back to the challenge.From the previous OSINT challenge “Who are the possible kidnappers?”, we identified multiple email addresses, including ictadmin@korovax.org. When sending an email to most Korovax emails such as Sarah Miller, we are replied with “Thank you for trying”. This is NOT the endpoint. It is to tell you that it is a dead end. Afterall, there is no flag.When sending any email to ictadmin, we are replied with “Almost got it, missing something”. This means we are closer and that we need to have something in our email that ictadmin “wants”.Sending the Correct EmailRecall that in the previous challenge, on https://csgctf.wordpress.com/never-gonna/, the first letter of each line in list of words forms “Rickroll”. This is a reference to the song “Never Gonna Give You Up” by Rick Astley.Since the website tells us we need to “include” the keywords, we can basically spam a large amount of related text. Having a short amount of time left to the end of the CTF, we spammed as much related text including the full music video name, the artist, song lyrics and Youtube link. We also included the words “Rickroll” and “Rick roll”.The bot then sends the flag to us with a hint for the next social engineering challenge which we had no time to do.After the CTF, we proceeded to try shrinking our “payload” to find the right answer. The bot was specifically looking for the word “Rickroll”.Flag: govtech-csg{CE236F40A35E48F51E921AD5D28CF320265F33B3}">
 
 
   <meta name="author" content="MiloTruck">
@@ -18,12 +18,12 @@
 
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
-<meta property="og:site_name" content="MILOTRUCK">
+<meta property="og:site_name" content="Home">
 <meta property="og:title" content="Can you trick OrgX into giving away their credentials? [2000]">
 <meta property="og:url" content="http://localhost:4000/Can-you-trick-OrgX-into-giving-away-their-credentials/">
 
 
-  <meta property="og:description" content="Social Engineering">
+  <meta property="og:description" content="Category: Social EngineeringChallenge Description  With the information gathered, figure out who has access to the key and contact the personFinding the TargetSince we need to contact a person, it’s most likely a phone number or email.A quick note on sending emails during CTFs:In the wise words of Sarah Miller, “First rule of OSINT: if the subject discovers that you’re investigating them, you’ve probably failed”. Do NOT use your own email address to send the email. Instead, use temporary email sites such as https://www.guerrillamail.com/compose. For this challenge, we attempted to use such temporary emails, however, we suspect that due to black/whitelists, there was no reply. An alternative is to use a burner email address which you do not use for anything else. Now back to the challenge.From the previous OSINT challenge “Who are the possible kidnappers?”, we identified multiple email addresses, including ictadmin@korovax.org. When sending an email to most Korovax emails such as Sarah Miller, we are replied with “Thank you for trying”. This is NOT the endpoint. It is to tell you that it is a dead end. Afterall, there is no flag.When sending any email to ictadmin, we are replied with “Almost got it, missing something”. This means we are closer and that we need to have something in our email that ictadmin “wants”.Sending the Correct EmailRecall that in the previous challenge, on https://csgctf.wordpress.com/never-gonna/, the first letter of each line in list of words forms “Rickroll”. This is a reference to the song “Never Gonna Give You Up” by Rick Astley.Since the website tells us we need to “include” the keywords, we can basically spam a large amount of related text. Having a short amount of time left to the end of the CTF, we spammed as much related text including the full music video name, the artist, song lyrics and Youtube link. We also included the words “Rickroll” and “Rick roll”.The bot then sends the flag to us with a hint for the next social engineering challenge which we had no time to do.After the CTF, we proceeded to try shrinking our “payload” to find the right answer. The bot was specifically looking for the word “Rickroll”.Flag: govtech-csg{CE236F40A35E48F51E921AD5D28CF320265F33B3}">
 
 
 
@@ -68,7 +68,7 @@
 <!-- end _includes/seo.html -->
 
 
-<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="MILOTRUCK Feed">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Home Feed">
 
 <!-- https://t.co/dKP3o1e -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -136,19 +136,17 @@
       <nav id="site-nav" class="greedy-nav">
         
         <a class="site-title" href="/">
-          MILOTRUCK
+          Home
           
         </a>
         <ul class="visible-links"><li class="masthead__menu-item">
               <a href="/About/" >About</a>
             </li><li class="masthead__menu-item">
+              <a href="/categories/#ctf" >CTF Writeups</a>
+            </li><li class="masthead__menu-item">
               <a href="/Projects/" >Projects</a>
             </li><li class="masthead__menu-item">
               <a href="/Cybersecurity/" >Cybersecurity</a>
-            </li><li class="masthead__menu-item">
-              <a href="/Data-Science-and-AI/" >Data Science and AI</a>
-            </li><li class="masthead__menu-item">
-              <a href="/Competitive-Programming/" >Competitive Programming</a>
             </li></ul>
         
         <button class="search__toggle" type="button">
@@ -215,8 +213,6 @@
 
       
         
-          
-            <li><a href="https://milotruck.github.io" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Blog</a></li>
           
         
           
@@ -296,7 +292,7 @@
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Can you trick OrgX into giving away their credentials? [2000]">
-    <meta itemprop="description" content="Social Engineering">
+    <meta itemprop="description" content="Category: Social EngineeringChallenge Description  With the information gathered, figure out who has access to the key and contact the personFinding the TargetSince we need to contact a person, it’s most likely a phone number or email.A quick note on sending emails during CTFs:In the wise words of Sarah Miller, “First rule of OSINT: if the subject discovers that you’re investigating them, you’ve probably failed”. Do NOT use your own email address to send the email. Instead, use temporary email sites such as https://www.guerrillamail.com/compose. For this challenge, we attempted to use such temporary emails, however, we suspect that due to black/whitelists, there was no reply. An alternative is to use a burner email address which you do not use for anything else. Now back to the challenge.From the previous OSINT challenge “Who are the possible kidnappers?”, we identified multiple email addresses, including ictadmin@korovax.org. When sending an email to most Korovax emails such as Sarah Miller, we are replied with “Thank you for trying”. This is NOT the endpoint. It is to tell you that it is a dead end. Afterall, there is no flag.When sending any email to ictadmin, we are replied with “Almost got it, missing something”. This means we are closer and that we need to have something in our email that ictadmin “wants”.Sending the Correct EmailRecall that in the previous challenge, on https://csgctf.wordpress.com/never-gonna/, the first letter of each line in list of words forms “Rickroll”. This is a reference to the song “Never Gonna Give You Up” by Rick Astley.Since the website tells us we need to “include” the keywords, we can basically spam a large amount of related text. Having a short amount of time left to the end of the CTF, we spammed as much related text including the full music video name, the artist, song lyrics and Youtube link. We also included the words “Rickroll” and “Rick roll”.The bot then sends the flag to us with a hint for the next social engineering challenge which we had no time to do.After the CTF, we proceeded to try shrinking our “payload” to find the right answer. The bot was specifically looking for the word “Rickroll”.Flag: govtech-csg{CE236F40A35E48F51E921AD5D28CF320265F33B3}">
     <meta itemprop="datePublished" content="December 12, 2020">
     
 
@@ -319,6 +315,17 @@
 
       <section class="page__content" itemprop="text">
         
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#challenge-description">Challenge Description</a></li>
+  <li><a href="#finding-the-target">Finding the Target</a></li>
+  <li><a href="#sending-the-correct-email">Sending the Correct Email</a></li>
+</ul>
+            </nav>
+          </aside>
+        
         <p><strong>Category:</strong> Social Engineering</p>
 
 <h2 id="challenge-description">Challenge Description</h2>
@@ -332,7 +339,7 @@
 <p>A quick note on sending emails during CTFs:
 In the <a href="https://twitter.com/scba/status/1335987654253395972">wise words of Sarah Miller</a>, “First rule of OSINT: if the subject discovers that you’re investigating them, you’ve probably failed”. Do NOT use your own email address to send the email. Instead, use temporary email sites such as https://www.guerrillamail.com/compose. For this challenge, we attempted to use such temporary emails, however, we suspect that due to black/whitelists, there was no reply. An alternative is to use a burner email address which you do not use for anything else. Now back to the challenge.</p>
 
-<p>From the previous OSINT challenge “<a href="#Who-are-the-possible-kidnappers?">Who are the possible kidnappers?</a>”, we identified multiple email addresses, including <code class="highlighter-rouge">ictadmin@korovax.org</code>. When sending an email to most Korovax emails such as Sarah Miller, we are replied with “Thank you for trying”. This is NOT the endpoint. It is to tell you that it is a dead end. Afterall, there is no flag.</p>
+<p>From the previous OSINT challenge “<a href="#Who-are-the-possible-kidnappers?">Who are the possible kidnappers?</a>”, we identified multiple email addresses, including <code class="language-plaintext highlighter-rouge">ictadmin@korovax.org</code>. When sending an email to most Korovax emails such as Sarah Miller, we are replied with “Thank you for trying”. This is NOT the endpoint. It is to tell you that it is a dead end. Afterall, there is no flag.</p>
 
 <p>When sending any email to ictadmin, we are replied with “Almost got it, missing something”. This means we are closer and that we need to have something in our email that ictadmin “wants”.</p>
 
@@ -349,7 +356,7 @@ In the <a href="https://twitter.com/scba/status/1335987654253395972">wise words 
 
 <p>After the CTF, we proceeded to try shrinking our “payload” to find the right answer. The bot was specifically looking for the word “Rickroll”.</p>
 
-<p><strong>Flag:</strong> <code class="highlighter-rouge">govtech-csg{CE236F40A35E48F51E921AD5D28CF320265F33B3}</code></p>
+<p><strong>Flag:</strong> <code class="language-plaintext highlighter-rouge">govtech-csg{CE236F40A35E48F51E921AD5D28CF320265F33B3}</code></p>
 
         
       </section>
@@ -357,29 +364,6 @@ In the <a href="https://twitter.com/scba/status/1335987654253395972">wise words 
       <footer class="page__meta">
         
         
-  
-
-
-  
-  
-  
-
-  <p class="page__taxonomy">
-    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
-    <span itemprop="keywords">
-    
-      
-      
-      <a href="/tags/#social-engineering" class="page__taxonomy-item" rel="tag">Social Engineering</a><span class="sep">, </span>
-    
-      
-      
-      <a href="/tags/#stack-2020" class="page__taxonomy-item" rel="tag">Stack 2020</a>
-    
-    </span>
-  </p>
-
-
 
 
         
@@ -387,7 +371,18 @@ In the <a href="https://twitter.com/scba/status/1335987654253395972">wise words 
         
       </footer>
 
-      
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Can+you+trick+OrgX+into+giving+away+their+credentials%3F+%5B2000%5D%20http%3A%2F%2Flocalhost%3A4000%2FCan-you-trick-OrgX-into-giving-away-their-credentials%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2FCan-you-trick-OrgX-into-giving-away-their-credentials%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2FCan-you-trick-OrgX-into-giving-away-their-credentials%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
 
       
   <nav class="pagination">
@@ -421,7 +416,62 @@ In the <a href="https://twitter.com/scba/status/1335987654253395972">wise words 
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/House-of-Force/" rel="permalink">House of force
+        <a href="/ctf/DSO-NUS-CTF-2021/" rel="permalink">DSO-NUS CTF 2021
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  15 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">A local Singaporean CTF hosted by DSO National Laboratories and the National University of Singapore (NUS). I played this CTF with my regular teammate, @Ocea...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Unsafe-Unlink/" rel="permalink">Unsafe Unlink
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Unsafe Unlink
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Fastbin-Dupe/" rel="permalink">Fastbin Dupe
 </a>
       
     </h2>
@@ -434,11 +484,7 @@ In the <a href="https://twitter.com/scba/status/1335987654253395972">wise words 
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">Requirements
-
-  Control size of top chunk, usually through heap overflow
-  Freely control malloc size
-
+    <p class="archive__item-excerpt" itemprop="description">Fastbin Dupe
 </p>
   </article>
 </div>
@@ -453,7 +499,7 @@ In the <a href="https://twitter.com/scba/status/1335987654253395972">wise words 
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/Binary-Exploitation/" rel="permalink">Binary exploitation
+        <a href="/ret2stack/" rel="permalink">ret2stack
 </a>
       
     </h2>
@@ -466,66 +512,7 @@ In the <a href="https://twitter.com/scba/status/1335987654253395972">wise words 
   less than 1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">Heap Techniques
-
-  House of Force
-
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/House-of-Force/" rel="permalink">House of Force
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
-
-
-
-
-  1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">House of Force
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/Binary-Exploitation/" rel="permalink">Binary Exploitation Notes
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
-
-
-
-
-  less than 1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">Notes for Binary Exploitation
+    <p class="archive__item-excerpt" itemprop="description">Making stack executable
 </p>
   </article>
 </div>
@@ -585,7 +572,7 @@ In the <a href="https://twitter.com/scba/status/1335987654253395972">wise words 
   </ul>
 </div>
 
-<div class="page__footer-copyright">&copy; 2020 MiloTruck. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2021 MiloTruck. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
 
       </footer>
     </div>

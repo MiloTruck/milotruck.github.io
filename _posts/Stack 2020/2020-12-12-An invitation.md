@@ -1,9 +1,5 @@
 ---
 title: "An invitation [981]"
-tags: [Stack 2020, Reversing]
-excerpt: "Reversing"
-layout: single
-classes: wide
 --- 
 
 **Category:** Web

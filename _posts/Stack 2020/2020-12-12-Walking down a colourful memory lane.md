@@ -1,9 +1,5 @@
 ---
 title: "Walking down a colourful memory lane [992]"
-tags: [Stack 2020, Forensics]
-excerpt: "Forensics"
-layout: single
-classes: wide
 --- 
 
 **Category:** Forensics

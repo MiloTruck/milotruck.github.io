@@ -2,9 +2,6 @@
 title: "Substitution Cipher Decryption with Genetic Algorithms"
 date: 2020-05-10
 tags: [Genetic Algorithms, Substitution Cipher, Projects]
-sidebar:
-  nav: "GA Substitution Cipher TOC"
-#author_profile: false
 --- 
 
 > This project uses Genetic Algorithms to decrypt substitution ciphers by frequency analysis.

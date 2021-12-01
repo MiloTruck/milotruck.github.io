@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Unlock Me [905] - MILOTRUCK</title>
-<meta name="description" content="Web">
+<!-- begin _includes/seo.html --><title>Unlock Me [905] - Home</title>
+<meta name="description" content="Category: WebOpening the webpage we try to login with the credentials given to us user: minion, password: banana. This however returns a message saying that only admins are allowed into HQ.Using a proxy like ZAP allows us to inspect the request further. We notice that the login process consists of 2 steps.      A post request is sent to the server with the credentials. This returns an accessToken that resembles a JSON Web Token (JWT).          A GET request is then made with the access token in the Authorization request header.  Extracting the access token, we can view its contents either by manually decoding the base64, using an online tool such as jwt.io or using any tool of your choice.=====================Decoded Token Values:=====================Token header values:[+] alg = &quot;RS256&quot;[+] typ = &quot;JWT&quot;Token payload values:[+] username = &quot;minion&quot;[+] role = &quot;user&quot;[+] iat = 1607533875    ==&gt; TIMESTAMP = 2020-12-10 01:11:15 (UTC)Baed on the error message, it is quite clear that we have to somehow change the role from “user” to “admin” and at the same time, update the timestamp. At this point, the first way I thought to bypass the signing was to set the algorithm to None. This essentially means that no signing is required. However, this vulnerability will only affect unpatched implementations of JWT. In this case, &quot;alg&quot;:&quot;None&quot; did not work. Next I thought of trying to crack the JWT password, but that only works if the JWT used the HS256  algorithm which is uses symmetric encryption to sign the token. At this point, I was stuck and decided to go back to the site for clues that I may have missed. Sure enough, I did miss out something. Found in the HTML was a TODO comment// TODO: Add client-side verification using public.pemThis immediately reminds us of another JWT vulnerability. We can change the JWT algorithm to HS256. So what happens when we change the signing algorithm from symmetric to asymmetric. Well, if the algorithm is not specified when verifying the token, the server might simply use the public key to verify the token. So what are the implications of this?For tokens using HS256, the key is meant to be kept secret, whereas with RS256, the public key is known. If the key used for HS256 is compromised, then we can craft any token we want.To download, the public key, we can simply append /public.pem to the back of the url. Now we just need to change the contents which is simple base64 encoding and sign the token with public.pem.Since I’m lazy to code and there are already many existing tools on github for JWTs I just used this tool to sign the token. Our tampered jwt looks like this:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1pbmlvbiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYwNzUzNDg3NX0.Unoy8MAMqqoEqqLVWf5DQ6_oljR1L9f8oahKA9Zp8SQIts decoded contents:=====================Decoded Token Values:=====================Token header values:[+] alg = &quot;HS256&quot;[+] typ = &quot;JWT&quot;Token payload values:[+] username = &quot;minion&quot;[+] role = &quot;admin&quot;[+] iat = 1607534875    ==&gt; TIMESTAMP = 2020-12-10 01:27:55 (UTC)Now we just need to submit use this token to make the GET request and sure enough we have our flag.Flag: govtech-csg{5!gN_0F_+h3_T!m3S}This took me a while because I only saw the hint after about 30 mins to an hour of trying. I guess my biggest takeaway from this challenge is to always do recon properly first and don’t just blindly jump straight in and try exploit.">
 
 
   <meta name="author" content="MiloTruck">
@@ -18,12 +18,12 @@
 
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
-<meta property="og:site_name" content="MILOTRUCK">
+<meta property="og:site_name" content="Home">
 <meta property="og:title" content="Unlock Me [905]">
 <meta property="og:url" content="http://localhost:4000/Unlock-Me/">
 
 
-  <meta property="og:description" content="Web">
+  <meta property="og:description" content="Category: WebOpening the webpage we try to login with the credentials given to us user: minion, password: banana. This however returns a message saying that only admins are allowed into HQ.Using a proxy like ZAP allows us to inspect the request further. We notice that the login process consists of 2 steps.      A post request is sent to the server with the credentials. This returns an accessToken that resembles a JSON Web Token (JWT).          A GET request is then made with the access token in the Authorization request header.  Extracting the access token, we can view its contents either by manually decoding the base64, using an online tool such as jwt.io or using any tool of your choice.=====================Decoded Token Values:=====================Token header values:[+] alg = &quot;RS256&quot;[+] typ = &quot;JWT&quot;Token payload values:[+] username = &quot;minion&quot;[+] role = &quot;user&quot;[+] iat = 1607533875    ==&gt; TIMESTAMP = 2020-12-10 01:11:15 (UTC)Baed on the error message, it is quite clear that we have to somehow change the role from “user” to “admin” and at the same time, update the timestamp. At this point, the first way I thought to bypass the signing was to set the algorithm to None. This essentially means that no signing is required. However, this vulnerability will only affect unpatched implementations of JWT. In this case, &quot;alg&quot;:&quot;None&quot; did not work. Next I thought of trying to crack the JWT password, but that only works if the JWT used the HS256  algorithm which is uses symmetric encryption to sign the token. At this point, I was stuck and decided to go back to the site for clues that I may have missed. Sure enough, I did miss out something. Found in the HTML was a TODO comment// TODO: Add client-side verification using public.pemThis immediately reminds us of another JWT vulnerability. We can change the JWT algorithm to HS256. So what happens when we change the signing algorithm from symmetric to asymmetric. Well, if the algorithm is not specified when verifying the token, the server might simply use the public key to verify the token. So what are the implications of this?For tokens using HS256, the key is meant to be kept secret, whereas with RS256, the public key is known. If the key used for HS256 is compromised, then we can craft any token we want.To download, the public key, we can simply append /public.pem to the back of the url. Now we just need to change the contents which is simple base64 encoding and sign the token with public.pem.Since I’m lazy to code and there are already many existing tools on github for JWTs I just used this tool to sign the token. Our tampered jwt looks like this:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1pbmlvbiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYwNzUzNDg3NX0.Unoy8MAMqqoEqqLVWf5DQ6_oljR1L9f8oahKA9Zp8SQIts decoded contents:=====================Decoded Token Values:=====================Token header values:[+] alg = &quot;HS256&quot;[+] typ = &quot;JWT&quot;Token payload values:[+] username = &quot;minion&quot;[+] role = &quot;admin&quot;[+] iat = 1607534875    ==&gt; TIMESTAMP = 2020-12-10 01:27:55 (UTC)Now we just need to submit use this token to make the GET request and sure enough we have our flag.Flag: govtech-csg{5!gN_0F_+h3_T!m3S}This took me a while because I only saw the hint after about 30 mins to an hour of trying. I guess my biggest takeaway from this challenge is to always do recon properly first and don’t just blindly jump straight in and try exploit.">
 
 
 
@@ -68,7 +68,7 @@
 <!-- end _includes/seo.html -->
 
 
-<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="MILOTRUCK Feed">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Home Feed">
 
 <!-- https://t.co/dKP3o1e -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -136,19 +136,17 @@
       <nav id="site-nav" class="greedy-nav">
         
         <a class="site-title" href="/">
-          MILOTRUCK
+          Home
           
         </a>
         <ul class="visible-links"><li class="masthead__menu-item">
               <a href="/About/" >About</a>
             </li><li class="masthead__menu-item">
+              <a href="/categories/#ctf" >CTF Writeups</a>
+            </li><li class="masthead__menu-item">
               <a href="/Projects/" >Projects</a>
             </li><li class="masthead__menu-item">
               <a href="/Cybersecurity/" >Cybersecurity</a>
-            </li><li class="masthead__menu-item">
-              <a href="/Data-Science-and-AI/" >Data Science and AI</a>
-            </li><li class="masthead__menu-item">
-              <a href="/Competitive-Programming/" >Competitive Programming</a>
             </li></ul>
         
         <button class="search__toggle" type="button">
@@ -215,8 +213,6 @@
 
       
         
-          
-            <li><a href="https://milotruck.github.io" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Blog</a></li>
           
         
           
@@ -296,7 +292,7 @@
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Unlock Me [905]">
-    <meta itemprop="description" content="Web">
+    <meta itemprop="description" content="Category: WebOpening the webpage we try to login with the credentials given to us user: minion, password: banana. This however returns a message saying that only admins are allowed into HQ.Using a proxy like ZAP allows us to inspect the request further. We notice that the login process consists of 2 steps.      A post request is sent to the server with the credentials. This returns an accessToken that resembles a JSON Web Token (JWT).          A GET request is then made with the access token in the Authorization request header.  Extracting the access token, we can view its contents either by manually decoding the base64, using an online tool such as jwt.io or using any tool of your choice.=====================Decoded Token Values:=====================Token header values:[+] alg = &quot;RS256&quot;[+] typ = &quot;JWT&quot;Token payload values:[+] username = &quot;minion&quot;[+] role = &quot;user&quot;[+] iat = 1607533875    ==&gt; TIMESTAMP = 2020-12-10 01:11:15 (UTC)Baed on the error message, it is quite clear that we have to somehow change the role from “user” to “admin” and at the same time, update the timestamp. At this point, the first way I thought to bypass the signing was to set the algorithm to None. This essentially means that no signing is required. However, this vulnerability will only affect unpatched implementations of JWT. In this case, &quot;alg&quot;:&quot;None&quot; did not work. Next I thought of trying to crack the JWT password, but that only works if the JWT used the HS256  algorithm which is uses symmetric encryption to sign the token. At this point, I was stuck and decided to go back to the site for clues that I may have missed. Sure enough, I did miss out something. Found in the HTML was a TODO comment// TODO: Add client-side verification using public.pemThis immediately reminds us of another JWT vulnerability. We can change the JWT algorithm to HS256. So what happens when we change the signing algorithm from symmetric to asymmetric. Well, if the algorithm is not specified when verifying the token, the server might simply use the public key to verify the token. So what are the implications of this?For tokens using HS256, the key is meant to be kept secret, whereas with RS256, the public key is known. If the key used for HS256 is compromised, then we can craft any token we want.To download, the public key, we can simply append /public.pem to the back of the url. Now we just need to change the contents which is simple base64 encoding and sign the token with public.pem.Since I’m lazy to code and there are already many existing tools on github for JWTs I just used this tool to sign the token. Our tampered jwt looks like this:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1pbmlvbiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYwNzUzNDg3NX0.Unoy8MAMqqoEqqLVWf5DQ6_oljR1L9f8oahKA9Zp8SQIts decoded contents:=====================Decoded Token Values:=====================Token header values:[+] alg = &quot;HS256&quot;[+] typ = &quot;JWT&quot;Token payload values:[+] username = &quot;minion&quot;[+] role = &quot;admin&quot;[+] iat = 1607534875    ==&gt; TIMESTAMP = 2020-12-10 01:27:55 (UTC)Now we just need to submit use this token to make the GET request and sure enough we have our flag.Flag: govtech-csg{5!gN_0F_+h3_T!m3S}This took me a while because I only saw the hint after about 30 mins to an hour of trying. I guess my biggest takeaway from this challenge is to always do recon properly first and don’t just blindly jump straight in and try exploit.">
     <meta itemprop="datePublished" content="December 12, 2020">
     
 
@@ -319,28 +315,35 @@
 
       <section class="page__content" itemprop="text">
         
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              
+            </nav>
+          </aside>
+        
         <p><strong>Category:</strong> Web</p>
 
 <p>Opening the webpage we try to login with the credentials given to us 
-<code class="highlighter-rouge">user: minion, password: banana</code>. This however returns a message saying that only admins are allowed into HQ.</p>
+<code class="language-plaintext highlighter-rouge">user: minion, password: banana</code>. This however returns a message saying that only admins are allowed into HQ.</p>
 
 <p><img src="https://i.imgur.com/qSh8oiu.png" alt="" /></p>
 
 <p>Using a proxy like ZAP allows us to inspect the request further. We notice that the login process consists of 2 steps.</p>
 <ol>
   <li>
-    <p>A post request is sent to the server with the credentials. This returns an <code class="highlighter-rouge">accessToken</code> that resembles a JSON Web Token (JWT). 
+    <p>A post request is sent to the server with the credentials. This returns an <code class="language-plaintext highlighter-rouge">accessToken</code> that resembles a JSON Web Token (JWT). 
  <img src="https://i.imgur.com/L1LTobM.png" alt="" /></p>
   </li>
   <li>
-    <p>A GET request is then made with the access token in the <code class="highlighter-rouge">Authorization</code> request header.
+    <p>A GET request is then made with the access token in the <code class="language-plaintext highlighter-rouge">Authorization</code> request header.
 <img src="https://i.imgur.com/ZSDmQBQ.png" alt="" /></p>
   </li>
 </ol>
 
 <p>Extracting the access token, we can view its contents either by manually decoding the base64, using an online tool such as <a href="https://jwt.io">jwt.io</a> or using any <a href="https://github.com/ticarpi/jwt_tool">tool</a> of your choice.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>=====================
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>=====================
 Decoded Token Values:
 =====================
 
@@ -354,22 +357,22 @@ Token payload values:
 [+] iat = 1607533875    ==&gt; TIMESTAMP = 2020-12-10 01:11:15 (UTC)
 </code></pre></div></div>
 
-<p>Baed on the error message, it is quite clear that we have to somehow change the role from “user” to “admin” and at the same time, update the timestamp. At this point, the first way I thought to bypass the signing was to set the algorithm to <code class="highlighter-rouge">None</code>. This essentially means that no signing is required. However, this vulnerability will only affect unpatched implementations of JWT. In this case, <code class="highlighter-rouge">"alg":"None"</code> did not work. Next I thought of trying to crack the JWT password, but that only works if the JWT used the <code class="highlighter-rouge">HS256 </code> algorithm which is uses symmetric encryption to sign the token. At this point, I was stuck and decided to go back to the site for clues that I may have missed. Sure enough, I did miss out something. Found in the HTML was a TODO comment</p>
+<p>Baed on the error message, it is quite clear that we have to somehow change the role from “user” to “admin” and at the same time, update the timestamp. At this point, the first way I thought to bypass the signing was to set the algorithm to <code class="language-plaintext highlighter-rouge">None</code>. This essentially means that no signing is required. However, this vulnerability will only affect unpatched implementations of JWT. In this case, <code class="language-plaintext highlighter-rouge">"alg":"None"</code> did not work. Next I thought of trying to crack the JWT password, but that only works if the JWT used the <code class="language-plaintext highlighter-rouge">HS256 </code> algorithm which is uses symmetric encryption to sign the token. At this point, I was stuck and decided to go back to the site for clues that I may have missed. Sure enough, I did miss out something. Found in the HTML was a TODO comment</p>
 
-<p><code class="highlighter-rouge">// TODO: Add client-side verification using public.pem</code></p>
+<p><code class="language-plaintext highlighter-rouge">// TODO: Add client-side verification using public.pem</code></p>
 
 <p>This immediately reminds us of another JWT vulnerability. We can change the JWT algorithm to HS256. So what happens when we change the signing algorithm from symmetric to asymmetric. Well, if the algorithm is not specified when verifying the token, the server might simply use the public key to verify the token. So what are the implications of this?</p>
 
-<p>For tokens using <code class="highlighter-rouge">HS256</code>, the key is meant to be kept secret, whereas with RS256, the public key is known. If the key used for <code class="highlighter-rouge">HS256</code> is compromised, then we can craft any token we want.</p>
+<p>For tokens using <code class="language-plaintext highlighter-rouge">HS256</code>, the key is meant to be kept secret, whereas with RS256, the public key is known. If the key used for <code class="language-plaintext highlighter-rouge">HS256</code> is compromised, then we can craft any token we want.</p>
 
-<p>To download, the public key, we can simply append <code class="highlighter-rouge">/public.pem</code> to the back of the url. Now we just need to change the contents which is simple base64 encoding and sign the token with <code class="highlighter-rouge">public.pem</code>.</p>
+<p>To download, the public key, we can simply append <code class="language-plaintext highlighter-rouge">/public.pem</code> to the back of the url. Now we just need to change the contents which is simple base64 encoding and sign the token with <code class="language-plaintext highlighter-rouge">public.pem</code>.</p>
 
 <p>Since I’m lazy to code and there are already many existing tools on github for JWTs I just used this tool to sign the token. Our tampered jwt looks like this:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1pbmlvbiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYwNzUzNDg3NX0.Unoy8MAMqqoEqqLVWf5DQ6_oljR1L9f8oahKA9Zp8SQ
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1pbmlvbiIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTYwNzUzNDg3NX0.Unoy8MAMqqoEqqLVWf5DQ6_oljR1L9f8oahKA9Zp8SQ
 </code></pre></div></div>
 
 <p>Its decoded contents:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>=====================
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>=====================
 Decoded Token Values:
 =====================
 
@@ -387,7 +390,7 @@ Token payload values:
 
 <p><img src="https://i.imgur.com/r0HqOCy.png" alt="" /></p>
 
-<p><strong>Flag:</strong> <code class="highlighter-rouge">govtech-csg{5!gN_0F_+h3_T!m3S}</code></p>
+<p><strong>Flag:</strong> <code class="language-plaintext highlighter-rouge">govtech-csg{5!gN_0F_+h3_T!m3S}</code></p>
 
 <p>This took me a while because I only saw the hint after about 30 mins to an hour of trying. I guess my biggest takeaway from this challenge is to always do recon properly first and don’t just blindly jump straight in and try exploit.</p>
 
@@ -397,29 +400,6 @@ Token payload values:
       <footer class="page__meta">
         
         
-  
-
-
-  
-  
-  
-
-  <p class="page__taxonomy">
-    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
-    <span itemprop="keywords">
-    
-      
-      
-      <a href="/tags/#stack-2020" class="page__taxonomy-item" rel="tag">Stack 2020</a><span class="sep">, </span>
-    
-      
-      
-      <a href="/tags/#web" class="page__taxonomy-item" rel="tag">Web</a>
-    
-    </span>
-  </p>
-
-
 
 
         
@@ -427,12 +407,23 @@ Token payload values:
         
       </footer>
 
-      
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Unlock+Me+%5B905%5D%20http%3A%2F%2Flocalhost%3A4000%2FUnlock-Me%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2FUnlock-Me%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2FUnlock-Me%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
 
       
   <nav class="pagination">
     
-      <a href="/Stack-the-Flags-2020/" class="pagination--pager" title="Stack the Flags 2020
+      <a href="/ctf/Stack-the-Flags-2020/" class="pagination--pager" title="Stack the Flags 2020
 ">Previous</a>
     
     
@@ -461,7 +452,62 @@ Token payload values:
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/House-of-Force/" rel="permalink">House of force
+        <a href="/ctf/DSO-NUS-CTF-2021/" rel="permalink">DSO-NUS CTF 2021
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  15 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">A local Singaporean CTF hosted by DSO National Laboratories and the National University of Singapore (NUS). I played this CTF with my regular teammate, @Ocea...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Unsafe-Unlink/" rel="permalink">Unsafe Unlink
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Unsafe Unlink
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Fastbin-Dupe/" rel="permalink">Fastbin Dupe
 </a>
       
     </h2>
@@ -474,11 +520,7 @@ Token payload values:
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">Requirements
-
-  Control size of top chunk, usually through heap overflow
-  Freely control malloc size
-
+    <p class="archive__item-excerpt" itemprop="description">Fastbin Dupe
 </p>
   </article>
 </div>
@@ -493,7 +535,7 @@ Token payload values:
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/Binary-Exploitation/" rel="permalink">Binary exploitation
+        <a href="/ret2stack/" rel="permalink">ret2stack
 </a>
       
     </h2>
@@ -506,66 +548,7 @@ Token payload values:
   less than 1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">Heap Techniques
-
-  House of Force
-
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/House-of-Force/" rel="permalink">House of Force
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
-
-
-
-
-  1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">House of Force
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/Binary-Exploitation/" rel="permalink">Binary Exploitation Notes
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
-
-
-
-
-  less than 1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">Notes for Binary Exploitation
+    <p class="archive__item-excerpt" itemprop="description">Making stack executable
 </p>
   </article>
 </div>
@@ -625,7 +608,7 @@ Token payload values:
   </ul>
 </div>
 
-<div class="page__footer-copyright">&copy; 2020 MiloTruck. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2021 MiloTruck. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
 
       </footer>
     </div>

@@ -1,9 +1,5 @@
 ---
 title: "I smell updates! [1986]"
-tags: [Stack 2020, IoT]
-excerpt: "Internet of Things (IoT)"
-layout: single
-classes: wide
 --- 
 
 **Category:** Internet of Things (IoT) 

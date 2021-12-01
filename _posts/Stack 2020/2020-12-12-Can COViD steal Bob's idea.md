@@ -1,9 +1,5 @@
 ---
 title: "Can COViD steal Bob's idea? [960]"
-tags: [Stack 2020, Cryptography]
-excerpt: "Cryptography"
-layout: single
-classes: wide
 --- 
 
 **Category:** Cryptography

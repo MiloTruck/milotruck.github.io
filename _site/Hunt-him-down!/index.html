@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Hunt him down! [970] - MILOTRUCK</title>
-<meta name="description" content="Open Source Intelligence (OSINT)">
+<!-- begin _includes/seo.html --><title>Hunt him down! [970] - Home</title>
+<meta name="description" content="Category: Open Source Intelligence (OSINT)Challenge Description  After solving the past two incidents, COViD sent a death threat via email today. Can you help us investigate the origins of the email and identify the suspect that is working for COViD? We will need as much information as possible so that we can perform our arrest!  Example Flag: govtech-csg{JohnLeeHaoHao-123456789-888888}Flag Format: govtech-csg{fullname-phone number[9digits]-residential postal code[6digits]}Analysing the EmailWe are given an eml file. Opening it in a text editor reveals the following.X-Pm-Origin: internalX-Pm-Content-Encryption: end-to-endSubject: YOU ARE WARNED!From: theOne &lt;theOne@c0v1d.cf&gt;Date: Fri, 4 Dec 2020 21:27:07 +0800Mime-Version: 1.0Content-Type: multipart/mixed;boundary=---------------------9d9b7a65470a533c33537323d475531bTo: cyberdefenders@panjang.cdg &lt;cyberdefenders@panjang.cdg&gt;-----------------------9d9b7a65470a533c33537323d475531bContent-Type: multipart/related;boundary=---------------------618fd3b1e5dbb594048e34eeb9e9fcdb-----------------------618fd3b1e5dbb594048e34eeb9e9fcdbContent-Type: text/html;charset=utf-8Content-Transfer-Encoding: base64PGRpdj5USEVSRSBXSUxMIEJFIE5PIFNFQ09ORCBDSEFOQ0UuIEJFIFBSRVBBUkVELjwvZGl2Pg==-----------------------618fd3b1e5dbb594048e34eeb9e9fcdb-------------------------9d9b7a65470a533c33537323d475531b--The base64 decodes to a death threat which doesn’t have much importance. As for the rest of the email, not much information can be traced to the sender. However, we do know the domain of the sender’s email address - c0v1d.cf.Tracing the DomainInitially, we tried to use a DNS lookup site, namely https://securitytrails.com/, to search up the domain but to no avail. We soon hit a dead end as it returned nothing.Pro tip: If you are stuck on a CTF challenge, come back to it an hour or two later. That’s exactly what we did.Using a different DNS lookup site, we found a TXT record:user=lionelcxy contact=lionelcheng@protonmail.comStalking Lionel ChengGoogling his email gives us his LinkedIn account. We now know his full name.  Lionel Cheng Xiang YiGoogling his userid lionelcxy then returns his Instagram and Carousell accounts.Retrieving Phone NumberNow we just need his phone number. We turn to carousell to look for it. Carousell is a marketplace used mainly in Singapore. Having used the app before, we knew that it was not uncommon for users to put their phone number there for those that prefer to communicate through other mediums rather than the built in carousell chat.Visiting his profile, we see a listing for a Playstation 1. And in the product description, we find his phone number. Finding LocationFrom his instagram, there are 2 posts on his account. First is him sharing his bike ride recorded using the Strava app.And the most recent post is of a street hawker stall. More important than the picture is the location geotag which is at Lau Pa Sat a 24 hour market located at Raffles.We go on further to inspect his strava profile. Being avid runners ourselves (totally), we find his profile using the strava app and we see another one of his rides with a clue to where he stays.Using these pieces of information, we sort of know what he did.  He went for a bike ride  He got hungry and wanted food  Initially wanted to go to Social Space at his block, but it was closed  Went to Lau Pa Sat which is close to his home to eatGoogling the location of Social Space we see that there are 2 branches.However we also know that Lau Pa Sat is just a few minutes away. Hence it is more likely that he was referring to the branch at Marina One rather than the one at Outram. Now we have our postal code: 018925. Our final flag is:Flag: govtech-csg{LionelChengXiangYi_963672918_018925}">
 
 
   <meta name="author" content="MiloTruck">
@@ -18,12 +18,12 @@
 
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
-<meta property="og:site_name" content="MILOTRUCK">
+<meta property="og:site_name" content="Home">
 <meta property="og:title" content="Hunt him down! [970]">
 <meta property="og:url" content="http://localhost:4000/Hunt-him-down!/">
 
 
-  <meta property="og:description" content="Open Source Intelligence (OSINT)">
+  <meta property="og:description" content="Category: Open Source Intelligence (OSINT)Challenge Description  After solving the past two incidents, COViD sent a death threat via email today. Can you help us investigate the origins of the email and identify the suspect that is working for COViD? We will need as much information as possible so that we can perform our arrest!  Example Flag: govtech-csg{JohnLeeHaoHao-123456789-888888}Flag Format: govtech-csg{fullname-phone number[9digits]-residential postal code[6digits]}Analysing the EmailWe are given an eml file. Opening it in a text editor reveals the following.X-Pm-Origin: internalX-Pm-Content-Encryption: end-to-endSubject: YOU ARE WARNED!From: theOne &lt;theOne@c0v1d.cf&gt;Date: Fri, 4 Dec 2020 21:27:07 +0800Mime-Version: 1.0Content-Type: multipart/mixed;boundary=---------------------9d9b7a65470a533c33537323d475531bTo: cyberdefenders@panjang.cdg &lt;cyberdefenders@panjang.cdg&gt;-----------------------9d9b7a65470a533c33537323d475531bContent-Type: multipart/related;boundary=---------------------618fd3b1e5dbb594048e34eeb9e9fcdb-----------------------618fd3b1e5dbb594048e34eeb9e9fcdbContent-Type: text/html;charset=utf-8Content-Transfer-Encoding: base64PGRpdj5USEVSRSBXSUxMIEJFIE5PIFNFQ09ORCBDSEFOQ0UuIEJFIFBSRVBBUkVELjwvZGl2Pg==-----------------------618fd3b1e5dbb594048e34eeb9e9fcdb-------------------------9d9b7a65470a533c33537323d475531b--The base64 decodes to a death threat which doesn’t have much importance. As for the rest of the email, not much information can be traced to the sender. However, we do know the domain of the sender’s email address - c0v1d.cf.Tracing the DomainInitially, we tried to use a DNS lookup site, namely https://securitytrails.com/, to search up the domain but to no avail. We soon hit a dead end as it returned nothing.Pro tip: If you are stuck on a CTF challenge, come back to it an hour or two later. That’s exactly what we did.Using a different DNS lookup site, we found a TXT record:user=lionelcxy contact=lionelcheng@protonmail.comStalking Lionel ChengGoogling his email gives us his LinkedIn account. We now know his full name.  Lionel Cheng Xiang YiGoogling his userid lionelcxy then returns his Instagram and Carousell accounts.Retrieving Phone NumberNow we just need his phone number. We turn to carousell to look for it. Carousell is a marketplace used mainly in Singapore. Having used the app before, we knew that it was not uncommon for users to put their phone number there for those that prefer to communicate through other mediums rather than the built in carousell chat.Visiting his profile, we see a listing for a Playstation 1. And in the product description, we find his phone number. Finding LocationFrom his instagram, there are 2 posts on his account. First is him sharing his bike ride recorded using the Strava app.And the most recent post is of a street hawker stall. More important than the picture is the location geotag which is at Lau Pa Sat a 24 hour market located at Raffles.We go on further to inspect his strava profile. Being avid runners ourselves (totally), we find his profile using the strava app and we see another one of his rides with a clue to where he stays.Using these pieces of information, we sort of know what he did.  He went for a bike ride  He got hungry and wanted food  Initially wanted to go to Social Space at his block, but it was closed  Went to Lau Pa Sat which is close to his home to eatGoogling the location of Social Space we see that there are 2 branches.However we also know that Lau Pa Sat is just a few minutes away. Hence it is more likely that he was referring to the branch at Marina One rather than the one at Outram. Now we have our postal code: 018925. Our final flag is:Flag: govtech-csg{LionelChengXiangYi_963672918_018925}">
 
 
 
@@ -68,7 +68,7 @@
 <!-- end _includes/seo.html -->
 
 
-<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="MILOTRUCK Feed">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Home Feed">
 
 <!-- https://t.co/dKP3o1e -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -136,19 +136,17 @@
       <nav id="site-nav" class="greedy-nav">
         
         <a class="site-title" href="/">
-          MILOTRUCK
+          Home
           
         </a>
         <ul class="visible-links"><li class="masthead__menu-item">
               <a href="/About/" >About</a>
             </li><li class="masthead__menu-item">
+              <a href="/categories/#ctf" >CTF Writeups</a>
+            </li><li class="masthead__menu-item">
               <a href="/Projects/" >Projects</a>
             </li><li class="masthead__menu-item">
               <a href="/Cybersecurity/" >Cybersecurity</a>
-            </li><li class="masthead__menu-item">
-              <a href="/Data-Science-and-AI/" >Data Science and AI</a>
-            </li><li class="masthead__menu-item">
-              <a href="/Competitive-Programming/" >Competitive Programming</a>
             </li></ul>
         
         <button class="search__toggle" type="button">
@@ -215,8 +213,6 @@
 
       
         
-          
-            <li><a href="https://milotruck.github.io" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Blog</a></li>
           
         
           
@@ -296,7 +292,7 @@
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Hunt him down! [970]">
-    <meta itemprop="description" content="Open Source Intelligence (OSINT)">
+    <meta itemprop="description" content="Category: Open Source Intelligence (OSINT)Challenge Description  After solving the past two incidents, COViD sent a death threat via email today. Can you help us investigate the origins of the email and identify the suspect that is working for COViD? We will need as much information as possible so that we can perform our arrest!  Example Flag: govtech-csg{JohnLeeHaoHao-123456789-888888}Flag Format: govtech-csg{fullname-phone number[9digits]-residential postal code[6digits]}Analysing the EmailWe are given an eml file. Opening it in a text editor reveals the following.X-Pm-Origin: internalX-Pm-Content-Encryption: end-to-endSubject: YOU ARE WARNED!From: theOne &lt;theOne@c0v1d.cf&gt;Date: Fri, 4 Dec 2020 21:27:07 +0800Mime-Version: 1.0Content-Type: multipart/mixed;boundary=---------------------9d9b7a65470a533c33537323d475531bTo: cyberdefenders@panjang.cdg &lt;cyberdefenders@panjang.cdg&gt;-----------------------9d9b7a65470a533c33537323d475531bContent-Type: multipart/related;boundary=---------------------618fd3b1e5dbb594048e34eeb9e9fcdb-----------------------618fd3b1e5dbb594048e34eeb9e9fcdbContent-Type: text/html;charset=utf-8Content-Transfer-Encoding: base64PGRpdj5USEVSRSBXSUxMIEJFIE5PIFNFQ09ORCBDSEFOQ0UuIEJFIFBSRVBBUkVELjwvZGl2Pg==-----------------------618fd3b1e5dbb594048e34eeb9e9fcdb-------------------------9d9b7a65470a533c33537323d475531b--The base64 decodes to a death threat which doesn’t have much importance. As for the rest of the email, not much information can be traced to the sender. However, we do know the domain of the sender’s email address - c0v1d.cf.Tracing the DomainInitially, we tried to use a DNS lookup site, namely https://securitytrails.com/, to search up the domain but to no avail. We soon hit a dead end as it returned nothing.Pro tip: If you are stuck on a CTF challenge, come back to it an hour or two later. That’s exactly what we did.Using a different DNS lookup site, we found a TXT record:user=lionelcxy contact=lionelcheng@protonmail.comStalking Lionel ChengGoogling his email gives us his LinkedIn account. We now know his full name.  Lionel Cheng Xiang YiGoogling his userid lionelcxy then returns his Instagram and Carousell accounts.Retrieving Phone NumberNow we just need his phone number. We turn to carousell to look for it. Carousell is a marketplace used mainly in Singapore. Having used the app before, we knew that it was not uncommon for users to put their phone number there for those that prefer to communicate through other mediums rather than the built in carousell chat.Visiting his profile, we see a listing for a Playstation 1. And in the product description, we find his phone number. Finding LocationFrom his instagram, there are 2 posts on his account. First is him sharing his bike ride recorded using the Strava app.And the most recent post is of a street hawker stall. More important than the picture is the location geotag which is at Lau Pa Sat a 24 hour market located at Raffles.We go on further to inspect his strava profile. Being avid runners ourselves (totally), we find his profile using the strava app and we see another one of his rides with a clue to where he stays.Using these pieces of information, we sort of know what he did.  He went for a bike ride  He got hungry and wanted food  Initially wanted to go to Social Space at his block, but it was closed  Went to Lau Pa Sat which is close to his home to eatGoogling the location of Social Space we see that there are 2 branches.However we also know that Lau Pa Sat is just a few minutes away. Hence it is more likely that he was referring to the branch at Marina One rather than the one at Outram. Now we have our postal code: 018925. Our final flag is:Flag: govtech-csg{LionelChengXiangYi_963672918_018925}">
     <meta itemprop="datePublished" content="December 12, 2020">
     
 
@@ -319,19 +315,33 @@
 
       <section class="page__content" itemprop="text">
         
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#challenge-description">Challenge Description</a></li>
+  <li><a href="#analysing-the-email">Analysing the Email</a></li>
+  <li><a href="#tracing-the-domain">Tracing the Domain</a></li>
+  <li><a href="#stalking-lionel-cheng">Stalking Lionel Cheng</a></li>
+  <li><a href="#retrieving-phone-number">Retrieving Phone Number</a></li>
+  <li><a href="#finding-location">Finding Location</a></li>
+</ul>
+            </nav>
+          </aside>
+        
         <p><strong>Category:</strong> Open Source Intelligence (OSINT)</p>
 
 <h2 id="challenge-description">Challenge Description</h2>
 <blockquote>
   <p>After solving the past two incidents, COViD sent a death threat via email today. Can you help us investigate the origins of the email and identify the suspect that is working for COViD? We will need as much information as possible so that we can perform our arrest!</p>
 
-  <p><strong>Example Flag:</strong> <code class="highlighter-rouge">govtech-csg{JohnLeeHaoHao-123456789-888888}</code><br />
-<strong>Flag Format:</strong> <code class="highlighter-rouge">govtech-csg{fullname-phone number[9digits]-residential postal code[6digits]}</code></p>
+  <p><strong>Example Flag:</strong> <code class="language-plaintext highlighter-rouge">govtech-csg{JohnLeeHaoHao-123456789-888888}</code><br />
+<strong>Flag Format:</strong> <code class="language-plaintext highlighter-rouge">govtech-csg{fullname-phone number[9digits]-residential postal code[6digits]}</code></p>
 </blockquote>
 
 <h2 id="analysing-the-email">Analysing the Email</h2>
 <p>We are given an eml file. Opening it in a text editor reveals the following.</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">X-Pm-Origin: internal
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>X-Pm-Origin: internal
 X-Pm-Content-Encryption: end-to-end
 Subject: YOU ARE WARNED!
 From: theOne &lt;theOne@c0v1d.cf&gt;
@@ -339,20 +349,20 @@ Date: Fri, 4 Dec 2020 21:27:07 +0800
 Mime-Version: 1.0
 Content-Type: multipart/mixed;boundary=---------------------9d9b7a65470a533c33537323d475531b
 To: cyberdefenders@panjang.cdg &lt;cyberdefenders@panjang.cdg&gt;
-</span>
------------------------9d9b7a65470a533c33537323d475531b
-<span class="p">Content-Type: multipart/related;boundary=---------------------618fd3b1e5dbb594048e34eeb9e9fcdb
-</span>
------------------------618fd3b1e5dbb594048e34eeb9e9fcdb
-<span class="p">Content-Type: text/html;charset=utf-8
-Content-Transfer-Encoding: base64
-</span>
-PGRpdj5USEVSRSBXSUxMIEJFIE5PIFNFQ09ORCBDSEFOQ0UuIEJFIFBSRVBBUkVELjwvZGl2Pg==
-<span class="gd">-----------------------618fd3b1e5dbb594048e34eeb9e9fcdb--
------------------------9d9b7a65470a533c33537323d475531b--
-</span></code></pre></div></div>
 
-<p>The base64 decodes to a death threat which doesn’t have much importance. As for the rest of the email, not much information can be traced to the sender. However, we do know the domain of the sender’s email address - <code class="highlighter-rouge">c0v1d.cf</code>.</p>
+-----------------------9d9b7a65470a533c33537323d475531b
+Content-Type: multipart/related;boundary=---------------------618fd3b1e5dbb594048e34eeb9e9fcdb
+
+-----------------------618fd3b1e5dbb594048e34eeb9e9fcdb
+Content-Type: text/html;charset=utf-8
+Content-Transfer-Encoding: base64
+
+PGRpdj5USEVSRSBXSUxMIEJFIE5PIFNFQ09ORCBDSEFOQ0UuIEJFIFBSRVBBUkVELjwvZGl2Pg==
+-----------------------618fd3b1e5dbb594048e34eeb9e9fcdb--
+-----------------------9d9b7a65470a533c33537323d475531b--
+</code></pre></div></div>
+
+<p>The base64 decodes to a death threat which doesn’t have much importance. As for the rest of the email, not much information can be traced to the sender. However, we do know the domain of the sender’s email address - <code class="language-plaintext highlighter-rouge">c0v1d.cf</code>.</p>
 
 <h2 id="tracing-the-domain">Tracing the Domain</h2>
 <p>Initially, we tried to use a DNS lookup site, namely <a href="https://securitytrails.com/">https://securitytrails.com/</a>, to search up the domain but to no avail. We soon hit a dead end as it returned nothing.</p>
@@ -360,7 +370,7 @@ PGRpdj5USEVSRSBXSUxMIEJFIE5PIFNFQ09ORCBDSEFOQ0UuIEJFIFBSRVBBUkVELjwvZGl2Pg==
 <p>Pro tip: If you are stuck on a CTF challenge, come back to it an hour or two later. That’s exactly what we did.</p>
 
 <p>Using a <a href="https://dnschecker.org/all-dns-records-of-domain.php?query=c0v1d.cf&amp;rtype=ANY">different DNS lookup site</a>, we found a TXT record:
-<code class="highlighter-rouge">user=lionelcxy contact=lionelcheng@protonmail.com</code></p>
+<code class="language-plaintext highlighter-rouge">user=lionelcxy contact=lionelcheng@protonmail.com</code></p>
 
 <h2 id="stalking-lionel-cheng">Stalking Lionel Cheng</h2>
 <p>Googling his email gives us his <a href="https://sg.linkedin.com/in/cheng-xiang-yi-0a4b891b9">LinkedIn account</a>. We now know his full name.</p>
@@ -369,7 +379,7 @@ PGRpdj5USEVSRSBXSUxMIEJFIE5PIFNFQ09ORCBDSEFOQ0UuIEJFIFBSRVBBUkVELjwvZGl2Pg==
   <p>Lionel Cheng Xiang Yi</p>
 </blockquote>
 
-<p>Googling his userid <code class="highlighter-rouge">lionelcxy</code> then returns his <a href="https://www.instagram.com/lionelcxy/">Instagram</a> and <a href="https://www.carousell.sg/lionelcxy/">Carousell</a> accounts.</p>
+<p>Googling his userid <code class="language-plaintext highlighter-rouge">lionelcxy</code> then returns his <a href="https://www.instagram.com/lionelcxy/">Instagram</a> and <a href="https://www.carousell.sg/lionelcxy/">Carousell</a> accounts.</p>
 
 <h2 id="retrieving-phone-number">Retrieving Phone Number</h2>
 
@@ -406,7 +416,7 @@ PGRpdj5USEVSRSBXSUxMIEJFIE5PIFNFQ09ORCBDSEFOQ0UuIEJFIFBSRVBBUkVELjwvZGl2Pg==
 
 <p>However we also know that Lau Pa Sat is just a few minutes away. Hence it is more likely that he was referring to the branch at Marina One rather than the one at Outram. Now we have our postal code: 018925. Our final flag is:</p>
 
-<p><strong>Flag:</strong> <code class="highlighter-rouge">govtech-csg{LionelChengXiangYi_963672918_018925}</code></p>
+<p><strong>Flag:</strong> <code class="language-plaintext highlighter-rouge">govtech-csg{LionelChengXiangYi_963672918_018925}</code></p>
 
         
       </section>
@@ -414,29 +424,6 @@ PGRpdj5USEVSRSBXSUxMIEJFIE5PIFNFQ09ORCBDSEFOQ0UuIEJFIFBSRVBBUkVELjwvZGl2Pg==
       <footer class="page__meta">
         
         
-  
-
-
-  
-  
-  
-
-  <p class="page__taxonomy">
-    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
-    <span itemprop="keywords">
-    
-      
-      
-      <a href="/tags/#osint" class="page__taxonomy-item" rel="tag">OSINT</a><span class="sep">, </span>
-    
-      
-      
-      <a href="/tags/#stack-2020" class="page__taxonomy-item" rel="tag">Stack 2020</a>
-    
-    </span>
-  </p>
-
-
 
 
         
@@ -444,7 +431,18 @@ PGRpdj5USEVSRSBXSUxMIEJFIE5PIFNFQ09ORCBDSEFOQ0UuIEJFIFBSRVBBUkVELjwvZGl2Pg==
         
       </footer>
 
-      
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Hunt+him+down%21+%5B970%5D%20http%3A%2F%2Flocalhost%3A4000%2FHunt-him-down%21%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2FHunt-him-down%21%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2FHunt-him-down%21%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
 
       
   <nav class="pagination">
@@ -478,7 +476,62 @@ PGRpdj5USEVSRSBXSUxMIEJFIE5PIFNFQ09ORCBDSEFOQ0UuIEJFIFBSRVBBUkVELjwvZGl2Pg==
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/House-of-Force/" rel="permalink">House of force
+        <a href="/ctf/DSO-NUS-CTF-2021/" rel="permalink">DSO-NUS CTF 2021
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  15 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">A local Singaporean CTF hosted by DSO National Laboratories and the National University of Singapore (NUS). I played this CTF with my regular teammate, @Ocea...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Unsafe-Unlink/" rel="permalink">Unsafe Unlink
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Unsafe Unlink
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Fastbin-Dupe/" rel="permalink">Fastbin Dupe
 </a>
       
     </h2>
@@ -491,11 +544,7 @@ PGRpdj5USEVSRSBXSUxMIEJFIE5PIFNFQ09ORCBDSEFOQ0UuIEJFIFBSRVBBUkVELjwvZGl2Pg==
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">Requirements
-
-  Control size of top chunk, usually through heap overflow
-  Freely control malloc size
-
+    <p class="archive__item-excerpt" itemprop="description">Fastbin Dupe
 </p>
   </article>
 </div>
@@ -510,7 +559,7 @@ PGRpdj5USEVSRSBXSUxMIEJFIE5PIFNFQ09ORCBDSEFOQ0UuIEJFIFBSRVBBUkVELjwvZGl2Pg==
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/Binary-Exploitation/" rel="permalink">Binary exploitation
+        <a href="/ret2stack/" rel="permalink">ret2stack
 </a>
       
     </h2>
@@ -523,66 +572,7 @@ PGRpdj5USEVSRSBXSUxMIEJFIE5PIFNFQ09ORCBDSEFOQ0UuIEJFIFBSRVBBUkVELjwvZGl2Pg==
   less than 1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">Heap Techniques
-
-  House of Force
-
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/House-of-Force/" rel="permalink">House of Force
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
-
-
-
-
-  1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">House of Force
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/Binary-Exploitation/" rel="permalink">Binary Exploitation Notes
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
-
-
-
-
-  less than 1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">Notes for Binary Exploitation
+    <p class="archive__item-excerpt" itemprop="description">Making stack executable
 </p>
   </article>
 </div>
@@ -642,7 +632,7 @@ PGRpdj5USEVSRSBXSUxMIEJFIE5PIFNFQ09ORCBDSEFOQ0UuIEJFIFBSRVBBUkVELjwvZGl2Pg==
   </ul>
 </div>
 
-<div class="page__footer-copyright">&copy; 2020 MiloTruck. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2021 MiloTruck. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
 
       </footer>
     </div>

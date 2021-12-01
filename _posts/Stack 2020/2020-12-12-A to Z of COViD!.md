@@ -1,9 +1,5 @@
 ---
 title: "A to Z of COViD! [1986]"
-tags: [Stack 2020, Mobile]
-excerpt: "Mobile"
-layout: single
-classes: wide
 --- 
 
 **Category:** Mobile

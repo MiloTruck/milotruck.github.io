@@ -1,9 +1,5 @@
 ---
 title: "Who are the possible kidnappers? [1990]"
-tags: [Stack 2020, OSINT]
-excerpt: "Open Source Intelligence (OSINT)"
-layout: single
-classes: wide
 --- 
 
 **Category:** Open Source Intelligence (OSINT)

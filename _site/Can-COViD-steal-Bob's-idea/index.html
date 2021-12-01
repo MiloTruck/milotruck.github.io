@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Can COViD steal Bob’s idea? [960] - MILOTRUCK</title>
-<meta name="description" content="Cryptography">
+<!-- begin _includes/seo.html --><title>Can COViD steal Bob’s idea? [960] - Home</title>
+<meta name="description" content="Category: CryptographyChallenge Description  Bob wants Alice to help him design the stream cipher’s keystream generator base on his rough idea. Can COViD steal Bob’s “protected” idea?MethodTo handle the .pcapng file, we open it in WireShark. We can extract the following text:  p = 298161833288328455288826827978944092433g = 216590906870332474191827756801961881648g^a = 181553548982634226931709548695881171814g^b = 64889049934231151703132324484506000958Hi Alice, could you please help me to design a keystream generator according to the file I share in the file server so that I can use it to encrypt my 500-bytes secret message? Please make sure it run with maximum period without repeating the keystream. The password to protect the file is our shared Diffie-Hellman key in digits. Thanks.As stated in the message, this is the usual set-up for a Diffie-Hellman key exchange, and we are given the publicly-known parameters. The challenge also mentions that the flag is just a number wrapped in the flag format govtech-csg{numeric-string}, so we can safely take it that the shared key, g^(ab), is required.The most efficient way to solve the Diffie-Hellman problem is to take the discrete logarithm, in particular to find what the private exponents, a and b are. To do this we utilise the discrete_log function in the SageMath software. As the given parameters do not have too large an order of magnitude, it would not take too long to execute the program.Since the modulus, p is prime, we take the parameters as elements on the Galois Field of order p.p = 298161833288328455288826827978944092433g = 216590906870332474191827756801961881648g_a = 181553548982634226931709548695881171814g_b = 64889049934231151703132324484506000958F = GF(p)a = discrete_log(F(g_a), F(g))b = discrete_log(F(g_b), F(g))pow(g, a*b, p)After several seconds of running the above in SageMath, we get the shared key pop out, 246544130863363089867058587807471986686. Simply wrap it in the required flag format.Flag: govtech-csg{246544130863363089867058587807471986686}">
 
 
   <meta name="author" content="MiloTruck">
@@ -18,12 +18,12 @@
 
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
-<meta property="og:site_name" content="MILOTRUCK">
+<meta property="og:site_name" content="Home">
 <meta property="og:title" content="Can COViD steal Bob’s idea? [960]">
 <meta property="og:url" content="http://localhost:4000/Can-COViD-steal-Bob's-idea/">
 
 
-  <meta property="og:description" content="Cryptography">
+  <meta property="og:description" content="Category: CryptographyChallenge Description  Bob wants Alice to help him design the stream cipher’s keystream generator base on his rough idea. Can COViD steal Bob’s “protected” idea?MethodTo handle the .pcapng file, we open it in WireShark. We can extract the following text:  p = 298161833288328455288826827978944092433g = 216590906870332474191827756801961881648g^a = 181553548982634226931709548695881171814g^b = 64889049934231151703132324484506000958Hi Alice, could you please help me to design a keystream generator according to the file I share in the file server so that I can use it to encrypt my 500-bytes secret message? Please make sure it run with maximum period without repeating the keystream. The password to protect the file is our shared Diffie-Hellman key in digits. Thanks.As stated in the message, this is the usual set-up for a Diffie-Hellman key exchange, and we are given the publicly-known parameters. The challenge also mentions that the flag is just a number wrapped in the flag format govtech-csg{numeric-string}, so we can safely take it that the shared key, g^(ab), is required.The most efficient way to solve the Diffie-Hellman problem is to take the discrete logarithm, in particular to find what the private exponents, a and b are. To do this we utilise the discrete_log function in the SageMath software. As the given parameters do not have too large an order of magnitude, it would not take too long to execute the program.Since the modulus, p is prime, we take the parameters as elements on the Galois Field of order p.p = 298161833288328455288826827978944092433g = 216590906870332474191827756801961881648g_a = 181553548982634226931709548695881171814g_b = 64889049934231151703132324484506000958F = GF(p)a = discrete_log(F(g_a), F(g))b = discrete_log(F(g_b), F(g))pow(g, a*b, p)After several seconds of running the above in SageMath, we get the shared key pop out, 246544130863363089867058587807471986686. Simply wrap it in the required flag format.Flag: govtech-csg{246544130863363089867058587807471986686}">
 
 
 
@@ -68,7 +68,7 @@
 <!-- end _includes/seo.html -->
 
 
-<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="MILOTRUCK Feed">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Home Feed">
 
 <!-- https://t.co/dKP3o1e -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -136,19 +136,17 @@
       <nav id="site-nav" class="greedy-nav">
         
         <a class="site-title" href="/">
-          MILOTRUCK
+          Home
           
         </a>
         <ul class="visible-links"><li class="masthead__menu-item">
               <a href="/About/" >About</a>
             </li><li class="masthead__menu-item">
+              <a href="/categories/#ctf" >CTF Writeups</a>
+            </li><li class="masthead__menu-item">
               <a href="/Projects/" >Projects</a>
             </li><li class="masthead__menu-item">
               <a href="/Cybersecurity/" >Cybersecurity</a>
-            </li><li class="masthead__menu-item">
-              <a href="/Data-Science-and-AI/" >Data Science and AI</a>
-            </li><li class="masthead__menu-item">
-              <a href="/Competitive-Programming/" >Competitive Programming</a>
             </li></ul>
         
         <button class="search__toggle" type="button">
@@ -215,8 +213,6 @@
 
       
         
-          
-            <li><a href="https://milotruck.github.io" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Blog</a></li>
           
         
           
@@ -296,7 +292,7 @@
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Can COViD steal Bob’s idea? [960]">
-    <meta itemprop="description" content="Cryptography">
+    <meta itemprop="description" content="Category: CryptographyChallenge Description  Bob wants Alice to help him design the stream cipher’s keystream generator base on his rough idea. Can COViD steal Bob’s “protected” idea?MethodTo handle the .pcapng file, we open it in WireShark. We can extract the following text:  p = 298161833288328455288826827978944092433g = 216590906870332474191827756801961881648g^a = 181553548982634226931709548695881171814g^b = 64889049934231151703132324484506000958Hi Alice, could you please help me to design a keystream generator according to the file I share in the file server so that I can use it to encrypt my 500-bytes secret message? Please make sure it run with maximum period without repeating the keystream. The password to protect the file is our shared Diffie-Hellman key in digits. Thanks.As stated in the message, this is the usual set-up for a Diffie-Hellman key exchange, and we are given the publicly-known parameters. The challenge also mentions that the flag is just a number wrapped in the flag format govtech-csg{numeric-string}, so we can safely take it that the shared key, g^(ab), is required.The most efficient way to solve the Diffie-Hellman problem is to take the discrete logarithm, in particular to find what the private exponents, a and b are. To do this we utilise the discrete_log function in the SageMath software. As the given parameters do not have too large an order of magnitude, it would not take too long to execute the program.Since the modulus, p is prime, we take the parameters as elements on the Galois Field of order p.p = 298161833288328455288826827978944092433g = 216590906870332474191827756801961881648g_a = 181553548982634226931709548695881171814g_b = 64889049934231151703132324484506000958F = GF(p)a = discrete_log(F(g_a), F(g))b = discrete_log(F(g_b), F(g))pow(g, a*b, p)After several seconds of running the above in SageMath, we get the shared key pop out, 246544130863363089867058587807471986686. Simply wrap it in the required flag format.Flag: govtech-csg{246544130863363089867058587807471986686}">
     <meta itemprop="datePublished" content="December 12, 2020">
     
 
@@ -319,6 +315,16 @@
 
       <section class="page__content" itemprop="text">
         
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#challenge-description">Challenge Description</a></li>
+  <li><a href="#method">Method</a></li>
+</ul>
+            </nav>
+          </aside>
+        
         <p><strong>Category:</strong> Cryptography</p>
 
 <h2 id="challenge-description">Challenge Description</h2>
@@ -329,21 +335,21 @@
 
 <h2 id="method">Method</h2>
 
-<p>To handle the <code class="highlighter-rouge">.pcapng</code> file, we open it in WireShark. We can extract the following text:</p>
+<p>To handle the <code class="language-plaintext highlighter-rouge">.pcapng</code> file, we open it in WireShark. We can extract the following text:</p>
 
 <blockquote>
-  <p><code class="highlighter-rouge">p = 298161833288328455288826827978944092433</code><br />
-<code class="highlighter-rouge">g = 216590906870332474191827756801961881648</code><br />
-<code class="highlighter-rouge">g^a = 181553548982634226931709548695881171814</code><br />
-<code class="highlighter-rouge">g^b = 64889049934231151703132324484506000958</code><br />
-<code class="highlighter-rouge">Hi Alice, could you please help me to design a keystream generator according to the file I share in the file server so that I can use it to encrypt my 500-bytes secret message? Please make sure it run with maximum period without repeating the keystream. The password to protect the file is our shared Diffie-Hellman key in digits. Thanks.</code></p>
+  <p><code class="language-plaintext highlighter-rouge">p = 298161833288328455288826827978944092433</code><br />
+<code class="language-plaintext highlighter-rouge">g = 216590906870332474191827756801961881648</code><br />
+<code class="language-plaintext highlighter-rouge">g^a = 181553548982634226931709548695881171814</code><br />
+<code class="language-plaintext highlighter-rouge">g^b = 64889049934231151703132324484506000958</code><br />
+<code class="language-plaintext highlighter-rouge">Hi Alice, could you please help me to design a keystream generator according to the file I share in the file server so that I can use it to encrypt my 500-bytes secret message? Please make sure it run with maximum period without repeating the keystream. The password to protect the file is our shared Diffie-Hellman key in digits. Thanks.</code></p>
 </blockquote>
 
-<p>As stated in the message, this is the usual set-up for a Diffie-Hellman key exchange, and we are given the publicly-known parameters. The challenge also mentions that the flag is just a number wrapped in the flag format <code class="highlighter-rouge">govtech-csg{numeric-string}</code>, so we can safely take it that the shared key, <code class="highlighter-rouge">g^(ab)</code>, is required.</p>
+<p>As stated in the message, this is the usual set-up for a Diffie-Hellman key exchange, and we are given the publicly-known parameters. The challenge also mentions that the flag is just a number wrapped in the flag format <code class="language-plaintext highlighter-rouge">govtech-csg{numeric-string}</code>, so we can safely take it that the shared key, <code class="language-plaintext highlighter-rouge">g^(ab)</code>, is required.</p>
 
-<p>The most efficient way to solve the Diffie-Hellman problem is to take the discrete logarithm, in particular to find what the private exponents, <code class="highlighter-rouge">a</code> and <code class="highlighter-rouge">b</code> are. To do this we utilise the <code class="highlighter-rouge">discrete_log</code> function in the <a href="https://www.sagemath.org/">SageMath</a> software. As the given parameters do not have too large an order of magnitude, it would not take too long to execute the program.</p>
+<p>The most efficient way to solve the Diffie-Hellman problem is to take the discrete logarithm, in particular to find what the private exponents, <code class="language-plaintext highlighter-rouge">a</code> and <code class="language-plaintext highlighter-rouge">b</code> are. To do this we utilise the <code class="language-plaintext highlighter-rouge">discrete_log</code> function in the <a href="https://www.sagemath.org/">SageMath</a> software. As the given parameters do not have too large an order of magnitude, it would not take too long to execute the program.</p>
 
-<p>Since the modulus, <code class="highlighter-rouge">p</code> is prime, we take the parameters as elements on the Galois Field of order <code class="highlighter-rouge">p</code>.</p>
+<p>Since the modulus, <code class="language-plaintext highlighter-rouge">p</code> is prime, we take the parameters as elements on the Galois Field of order <code class="language-plaintext highlighter-rouge">p</code>.</p>
 
 <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p</span> <span class="o">=</span> <span class="mi">298161833288328455288826827978944092433</span>
 <span class="n">g</span> <span class="o">=</span> <span class="mi">216590906870332474191827756801961881648</span>
@@ -356,9 +362,9 @@
 <span class="nb">pow</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>After several seconds of running the above in SageMath, we get the shared key pop out, <code class="highlighter-rouge">246544130863363089867058587807471986686</code>. Simply wrap it in the required flag format.</p>
+<p>After several seconds of running the above in SageMath, we get the shared key pop out, <code class="language-plaintext highlighter-rouge">246544130863363089867058587807471986686</code>. Simply wrap it in the required flag format.</p>
 
-<p><strong>Flag:</strong> <code class="highlighter-rouge">govtech-csg{246544130863363089867058587807471986686}</code></p>
+<p><strong>Flag:</strong> <code class="language-plaintext highlighter-rouge">govtech-csg{246544130863363089867058587807471986686}</code></p>
 
         
       </section>
@@ -366,29 +372,6 @@
       <footer class="page__meta">
         
         
-  
-
-
-  
-  
-  
-
-  <p class="page__taxonomy">
-    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
-    <span itemprop="keywords">
-    
-      
-      
-      <a href="/tags/#cryptography" class="page__taxonomy-item" rel="tag">Cryptography</a><span class="sep">, </span>
-    
-      
-      
-      <a href="/tags/#stack-2020" class="page__taxonomy-item" rel="tag">Stack 2020</a>
-    
-    </span>
-  </p>
-
-
 
 
         
@@ -396,7 +379,18 @@
         
       </footer>
 
-      
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Can+COViD+steal+Bob%27s+idea%3F+%5B960%5D%20http%3A%2F%2Flocalhost%3A4000%2FCan-COViD-steal-Bob%27s-idea%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2FCan-COViD-steal-Bob%27s-idea%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2FCan-COViD-steal-Bob%27s-idea%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
 
       
   <nav class="pagination">
@@ -430,7 +424,62 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/House-of-Force/" rel="permalink">House of force
+        <a href="/ctf/DSO-NUS-CTF-2021/" rel="permalink">DSO-NUS CTF 2021
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  15 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">A local Singaporean CTF hosted by DSO National Laboratories and the National University of Singapore (NUS). I played this CTF with my regular teammate, @Ocea...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Unsafe-Unlink/" rel="permalink">Unsafe Unlink
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Unsafe Unlink
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Fastbin-Dupe/" rel="permalink">Fastbin Dupe
 </a>
       
     </h2>
@@ -443,11 +492,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">Requirements
-
-  Control size of top chunk, usually through heap overflow
-  Freely control malloc size
-
+    <p class="archive__item-excerpt" itemprop="description">Fastbin Dupe
 </p>
   </article>
 </div>
@@ -462,7 +507,7 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/Binary-Exploitation/" rel="permalink">Binary exploitation
+        <a href="/ret2stack/" rel="permalink">ret2stack
 </a>
       
     </h2>
@@ -475,66 +520,7 @@
   less than 1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">Heap Techniques
-
-  House of Force
-
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/House-of-Force/" rel="permalink">House of Force
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
-
-
-
-
-  1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">House of Force
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/Binary-Exploitation/" rel="permalink">Binary Exploitation Notes
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
-
-
-
-
-  less than 1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">Notes for Binary Exploitation
+    <p class="archive__item-excerpt" itemprop="description">Making stack executable
 </p>
   </article>
 </div>
@@ -594,7 +580,7 @@
   </ul>
 </div>
 
-<div class="page__footer-copyright">&copy; 2020 MiloTruck. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2021 MiloTruck. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
 
       </footer>
     </div>

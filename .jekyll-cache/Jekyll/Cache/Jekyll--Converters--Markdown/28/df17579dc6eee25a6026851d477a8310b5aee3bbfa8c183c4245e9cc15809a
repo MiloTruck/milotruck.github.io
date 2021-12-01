@@ -1,6 +1,0 @@
-I"ù<h2 id="requirements">Requirements</h2>
-<ul>
-  <li>Control size of top chunk, usually through heap overflow</li>
-  <li>Freely control malloc size</li>
-</ul>
-:ET

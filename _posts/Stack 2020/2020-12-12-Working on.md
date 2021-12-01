@@ -1,9 +1,5 @@
 ---
 title: "What is he working on? Some high value project? [790]"
-tags: [Stack 2020, OSINT]
-excerpt: "Open Source Intelligence (OSINT)"
-layout: single
-classes: wide
 --- 
 
 **Category:** Open Source Intelligence (OSINT)

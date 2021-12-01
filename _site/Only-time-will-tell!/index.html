@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Only time will tell! [691] - MILOTRUCK</title>
-<meta name="description" content="Open Source Intelligence (OSINT)">
+<!-- begin _includes/seo.html --><title>Only time will tell! [691] - Home</title>
+<meta name="description" content="Category: Open Source Intelligence (OSINT)Challenge Description  This picture was taken sent to us! It seems like a bomb threat! Are you able to tell where and when this photo was taken? This will help the investigating officers to narrow down their search! All we can tell is that it’s taken during the day!  If you think that it’s 7.24pm in which the photo was taken. Please take the associated 2 hour block. This will be 1900-2100. If you think it is 10.11am, it will be 1000-1200.  Flag Example: govtech-csg{1.401146_103.927020_1990:12:30_2000-2200}Flag Format: govtech-csg{lat_long_date_[two hour block format]}Use this calculator!Maximum attempts: 3 (Removed later in competition)Initial AnalysisWe are given a jpg image. We are supposed to find the coordinate location (latitude and longitude), the date, as well as a rough time that the image was taken (using a 2h block).Common sense tells us to scan the barcode on the image. Using barcode scanning apps on our phone such as the Cognex scanner - which is good for scanning other codes as well - we get the text “25 October 2020”. Great! We’ve got one part of the flag. Just need to convert it to the right form for the challenge. (YYYY:MM:DD as seen from the example given)  2020:10:25The common tool to use when we analyze this image is exiftool. This can give us metadata about the image such as time and location. However, time is pretty much out of the question as the file had to be downloaded, likely altering the creation and modification timestamps.$ exiftool osint-challenge-6.jpgExifTool Version Number         : 11.88File Name                       : osint-challenge-6.jpgFile Size                       : 123 kBFile Modification Date/Time     : 2020:12:04 23:58:48+08:00File Access Date/Time           : 2020:12:09 00:36:23+08:00File Inode Change Date/Time     : 2020:12:04 23:59:24+08:00File Permissions                : rwxrwxrwxFile Type                       : JPEGFile Type Extension             : jpgMIME Type                       : image/jpegJFIF Version                    : 1.01X Resolution                    : 96Y Resolution                    : 96Exif Byte Order                 : Big-endian (Motorola, MM)Make                            : COViDResolution Unit                 : inchesY Cb Cr Positioning             : CenteredGPS Latitude Ref                : NorthGPS Longitude Ref               : EastImage Width                     : 551Image Height                    : 736Encoding Process                : Baseline DCT, Huffman codingBits Per Sample                 : 8Color Components                : 3Y Cb Cr Sub Sampling            : YCbCr4:2:0 (2 2)Image Size                      : 551x736Megapixels                      : 0.406GPS Latitude                    : 1 deg 17&#39; 11.93&quot; NGPS Longitude                   : 103 deg 50&#39; 48.61&quot; EGPS Position                    : 1 deg 17&#39; 11.93&quot; N, 103 deg 50&#39; 48.61&quot; EGetting Coordinate LocationAt the bottom of the output, we have the GPS latitude and longitude in Degree Minute Seconds (DMS) form. You can convert this form to what the challenge desires (Simply in degrees) on the calculator website given by the challenge. In DMS, the degrees are in whole numbers and the minutes and seconds are used as “decimals”. Placing the latitude and longitude into the calculator, we can get the desired form - Decimal Degrees (DD). There is no need for rounding. The calculator is given by the challenge so we just use whatever precision the calculator gives.  Latitude: 1.286647Longitude: 103.846836Finding TimeNow we are left with time. From the image, it looks like the only clue we have for time is the shadow. One method is to use use sun calculations. The second is to use our experience to tell the time. We decided to try the latter as we are convinced that the timing was either from 10-11am or 2-4pm due to the scorching sun. However, we need to find out if the shadow is pointing East or West.Google Maps shall be our tool of choice. Although this sign points to a familiar place “Speaker’s Corner” in Singapore, the coordinates should be used in order to determine its exact location on a big grassy field.We can use background buildings in the photo to determine where the photo is facing. In the photo, we see a uniquely shaped (somewhat triangular) building. This is similar to the shapes of the Furama City Center building in Google Maps.A quick Google search of the building reveals it is the same building. We can further confirm it using street view on the nearby road. We can’t really see the background buildings well, but it sure looks like the UOL building in the photo. Anyways, we can see the Speaker’s Corner sign in the correct orientation, signalling we are on the right track.Furama City Centre is to the West of the sign. This is because on the web client of Google Maps, North is defaulted to upwards. We thus know that the photographer is facing West. Since the shadow is towards the photographer, it is pointing East, hence, the sun is in the West, concluding the fact that it is in the afternoon.Our estimates tell us it is somewhere between 2-4pm. This gives us 3 timing answers  1400-16001500-17001600-1800 (Highly unlikely)Since we have 3 attempts, we can try the timings until the flag is accepted. This is “smarter” brute forcing. Rather just narrowing it to a 50/50 without the need to learn sun calculations. The correct timing was 1500-1700. This means the photo was taken awhile after 3pm. This is exactly in the middle of what our initial guess was.  1500-1700Flag: govtech-csg{1.286647_103.846836_2020:10:25_1500-1700}">
 
 
   <meta name="author" content="MiloTruck">
@@ -18,12 +18,12 @@
 
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
-<meta property="og:site_name" content="MILOTRUCK">
+<meta property="og:site_name" content="Home">
 <meta property="og:title" content="Only time will tell! [691]">
 <meta property="og:url" content="http://localhost:4000/Only-time-will-tell!/">
 
 
-  <meta property="og:description" content="Open Source Intelligence (OSINT)">
+  <meta property="og:description" content="Category: Open Source Intelligence (OSINT)Challenge Description  This picture was taken sent to us! It seems like a bomb threat! Are you able to tell where and when this photo was taken? This will help the investigating officers to narrow down their search! All we can tell is that it’s taken during the day!  If you think that it’s 7.24pm in which the photo was taken. Please take the associated 2 hour block. This will be 1900-2100. If you think it is 10.11am, it will be 1000-1200.  Flag Example: govtech-csg{1.401146_103.927020_1990:12:30_2000-2200}Flag Format: govtech-csg{lat_long_date_[two hour block format]}Use this calculator!Maximum attempts: 3 (Removed later in competition)Initial AnalysisWe are given a jpg image. We are supposed to find the coordinate location (latitude and longitude), the date, as well as a rough time that the image was taken (using a 2h block).Common sense tells us to scan the barcode on the image. Using barcode scanning apps on our phone such as the Cognex scanner - which is good for scanning other codes as well - we get the text “25 October 2020”. Great! We’ve got one part of the flag. Just need to convert it to the right form for the challenge. (YYYY:MM:DD as seen from the example given)  2020:10:25The common tool to use when we analyze this image is exiftool. This can give us metadata about the image such as time and location. However, time is pretty much out of the question as the file had to be downloaded, likely altering the creation and modification timestamps.$ exiftool osint-challenge-6.jpgExifTool Version Number         : 11.88File Name                       : osint-challenge-6.jpgFile Size                       : 123 kBFile Modification Date/Time     : 2020:12:04 23:58:48+08:00File Access Date/Time           : 2020:12:09 00:36:23+08:00File Inode Change Date/Time     : 2020:12:04 23:59:24+08:00File Permissions                : rwxrwxrwxFile Type                       : JPEGFile Type Extension             : jpgMIME Type                       : image/jpegJFIF Version                    : 1.01X Resolution                    : 96Y Resolution                    : 96Exif Byte Order                 : Big-endian (Motorola, MM)Make                            : COViDResolution Unit                 : inchesY Cb Cr Positioning             : CenteredGPS Latitude Ref                : NorthGPS Longitude Ref               : EastImage Width                     : 551Image Height                    : 736Encoding Process                : Baseline DCT, Huffman codingBits Per Sample                 : 8Color Components                : 3Y Cb Cr Sub Sampling            : YCbCr4:2:0 (2 2)Image Size                      : 551x736Megapixels                      : 0.406GPS Latitude                    : 1 deg 17&#39; 11.93&quot; NGPS Longitude                   : 103 deg 50&#39; 48.61&quot; EGPS Position                    : 1 deg 17&#39; 11.93&quot; N, 103 deg 50&#39; 48.61&quot; EGetting Coordinate LocationAt the bottom of the output, we have the GPS latitude and longitude in Degree Minute Seconds (DMS) form. You can convert this form to what the challenge desires (Simply in degrees) on the calculator website given by the challenge. In DMS, the degrees are in whole numbers and the minutes and seconds are used as “decimals”. Placing the latitude and longitude into the calculator, we can get the desired form - Decimal Degrees (DD). There is no need for rounding. The calculator is given by the challenge so we just use whatever precision the calculator gives.  Latitude: 1.286647Longitude: 103.846836Finding TimeNow we are left with time. From the image, it looks like the only clue we have for time is the shadow. One method is to use use sun calculations. The second is to use our experience to tell the time. We decided to try the latter as we are convinced that the timing was either from 10-11am or 2-4pm due to the scorching sun. However, we need to find out if the shadow is pointing East or West.Google Maps shall be our tool of choice. Although this sign points to a familiar place “Speaker’s Corner” in Singapore, the coordinates should be used in order to determine its exact location on a big grassy field.We can use background buildings in the photo to determine where the photo is facing. In the photo, we see a uniquely shaped (somewhat triangular) building. This is similar to the shapes of the Furama City Center building in Google Maps.A quick Google search of the building reveals it is the same building. We can further confirm it using street view on the nearby road. We can’t really see the background buildings well, but it sure looks like the UOL building in the photo. Anyways, we can see the Speaker’s Corner sign in the correct orientation, signalling we are on the right track.Furama City Centre is to the West of the sign. This is because on the web client of Google Maps, North is defaulted to upwards. We thus know that the photographer is facing West. Since the shadow is towards the photographer, it is pointing East, hence, the sun is in the West, concluding the fact that it is in the afternoon.Our estimates tell us it is somewhere between 2-4pm. This gives us 3 timing answers  1400-16001500-17001600-1800 (Highly unlikely)Since we have 3 attempts, we can try the timings until the flag is accepted. This is “smarter” brute forcing. Rather just narrowing it to a 50/50 without the need to learn sun calculations. The correct timing was 1500-1700. This means the photo was taken awhile after 3pm. This is exactly in the middle of what our initial guess was.  1500-1700Flag: govtech-csg{1.286647_103.846836_2020:10:25_1500-1700}">
 
 
 
@@ -68,7 +68,7 @@
 <!-- end _includes/seo.html -->
 
 
-<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="MILOTRUCK Feed">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Home Feed">
 
 <!-- https://t.co/dKP3o1e -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -136,19 +136,17 @@
       <nav id="site-nav" class="greedy-nav">
         
         <a class="site-title" href="/">
-          MILOTRUCK
+          Home
           
         </a>
         <ul class="visible-links"><li class="masthead__menu-item">
               <a href="/About/" >About</a>
             </li><li class="masthead__menu-item">
+              <a href="/categories/#ctf" >CTF Writeups</a>
+            </li><li class="masthead__menu-item">
               <a href="/Projects/" >Projects</a>
             </li><li class="masthead__menu-item">
               <a href="/Cybersecurity/" >Cybersecurity</a>
-            </li><li class="masthead__menu-item">
-              <a href="/Data-Science-and-AI/" >Data Science and AI</a>
-            </li><li class="masthead__menu-item">
-              <a href="/Competitive-Programming/" >Competitive Programming</a>
             </li></ul>
         
         <button class="search__toggle" type="button">
@@ -215,8 +213,6 @@
 
       
         
-          
-            <li><a href="https://milotruck.github.io" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Blog</a></li>
           
         
           
@@ -296,7 +292,7 @@
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Only time will tell! [691]">
-    <meta itemprop="description" content="Open Source Intelligence (OSINT)">
+    <meta itemprop="description" content="Category: Open Source Intelligence (OSINT)Challenge Description  This picture was taken sent to us! It seems like a bomb threat! Are you able to tell where and when this photo was taken? This will help the investigating officers to narrow down their search! All we can tell is that it’s taken during the day!  If you think that it’s 7.24pm in which the photo was taken. Please take the associated 2 hour block. This will be 1900-2100. If you think it is 10.11am, it will be 1000-1200.  Flag Example: govtech-csg{1.401146_103.927020_1990:12:30_2000-2200}Flag Format: govtech-csg{lat_long_date_[two hour block format]}Use this calculator!Maximum attempts: 3 (Removed later in competition)Initial AnalysisWe are given a jpg image. We are supposed to find the coordinate location (latitude and longitude), the date, as well as a rough time that the image was taken (using a 2h block).Common sense tells us to scan the barcode on the image. Using barcode scanning apps on our phone such as the Cognex scanner - which is good for scanning other codes as well - we get the text “25 October 2020”. Great! We’ve got one part of the flag. Just need to convert it to the right form for the challenge. (YYYY:MM:DD as seen from the example given)  2020:10:25The common tool to use when we analyze this image is exiftool. This can give us metadata about the image such as time and location. However, time is pretty much out of the question as the file had to be downloaded, likely altering the creation and modification timestamps.$ exiftool osint-challenge-6.jpgExifTool Version Number         : 11.88File Name                       : osint-challenge-6.jpgFile Size                       : 123 kBFile Modification Date/Time     : 2020:12:04 23:58:48+08:00File Access Date/Time           : 2020:12:09 00:36:23+08:00File Inode Change Date/Time     : 2020:12:04 23:59:24+08:00File Permissions                : rwxrwxrwxFile Type                       : JPEGFile Type Extension             : jpgMIME Type                       : image/jpegJFIF Version                    : 1.01X Resolution                    : 96Y Resolution                    : 96Exif Byte Order                 : Big-endian (Motorola, MM)Make                            : COViDResolution Unit                 : inchesY Cb Cr Positioning             : CenteredGPS Latitude Ref                : NorthGPS Longitude Ref               : EastImage Width                     : 551Image Height                    : 736Encoding Process                : Baseline DCT, Huffman codingBits Per Sample                 : 8Color Components                : 3Y Cb Cr Sub Sampling            : YCbCr4:2:0 (2 2)Image Size                      : 551x736Megapixels                      : 0.406GPS Latitude                    : 1 deg 17&#39; 11.93&quot; NGPS Longitude                   : 103 deg 50&#39; 48.61&quot; EGPS Position                    : 1 deg 17&#39; 11.93&quot; N, 103 deg 50&#39; 48.61&quot; EGetting Coordinate LocationAt the bottom of the output, we have the GPS latitude and longitude in Degree Minute Seconds (DMS) form. You can convert this form to what the challenge desires (Simply in degrees) on the calculator website given by the challenge. In DMS, the degrees are in whole numbers and the minutes and seconds are used as “decimals”. Placing the latitude and longitude into the calculator, we can get the desired form - Decimal Degrees (DD). There is no need for rounding. The calculator is given by the challenge so we just use whatever precision the calculator gives.  Latitude: 1.286647Longitude: 103.846836Finding TimeNow we are left with time. From the image, it looks like the only clue we have for time is the shadow. One method is to use use sun calculations. The second is to use our experience to tell the time. We decided to try the latter as we are convinced that the timing was either from 10-11am or 2-4pm due to the scorching sun. However, we need to find out if the shadow is pointing East or West.Google Maps shall be our tool of choice. Although this sign points to a familiar place “Speaker’s Corner” in Singapore, the coordinates should be used in order to determine its exact location on a big grassy field.We can use background buildings in the photo to determine where the photo is facing. In the photo, we see a uniquely shaped (somewhat triangular) building. This is similar to the shapes of the Furama City Center building in Google Maps.A quick Google search of the building reveals it is the same building. We can further confirm it using street view on the nearby road. We can’t really see the background buildings well, but it sure looks like the UOL building in the photo. Anyways, we can see the Speaker’s Corner sign in the correct orientation, signalling we are on the right track.Furama City Centre is to the West of the sign. This is because on the web client of Google Maps, North is defaulted to upwards. We thus know that the photographer is facing West. Since the shadow is towards the photographer, it is pointing East, hence, the sun is in the West, concluding the fact that it is in the afternoon.Our estimates tell us it is somewhere between 2-4pm. This gives us 3 timing answers  1400-16001500-17001600-1800 (Highly unlikely)Since we have 3 attempts, we can try the timings until the flag is accepted. This is “smarter” brute forcing. Rather just narrowing it to a 50/50 without the need to learn sun calculations. The correct timing was 1500-1700. This means the photo was taken awhile after 3pm. This is exactly in the middle of what our initial guess was.  1500-1700Flag: govtech-csg{1.286647_103.846836_2020:10:25_1500-1700}">
     <meta itemprop="datePublished" content="December 12, 2020">
     
 
@@ -319,6 +315,18 @@
 
       <section class="page__content" itemprop="text">
         
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#challenge-description">Challenge Description</a></li>
+  <li><a href="#initial-analysis">Initial Analysis</a></li>
+  <li><a href="#getting-coordinate-location">Getting Coordinate Location</a></li>
+  <li><a href="#finding-time">Finding Time</a></li>
+</ul>
+            </nav>
+          </aside>
+        
         <p><strong>Category:</strong> Open Source Intelligence (OSINT)</p>
 
 <h2 id="challenge-description">Challenge Description</h2>
@@ -327,8 +335,8 @@
 
   <p>If you think that it’s 7.24pm in which the photo was taken. Please take the associated 2 hour block. This will be 1900-2100. If you think it is 10.11am, it will be 1000-1200.</p>
 
-  <p><strong>Flag Example:</strong> <code class="highlighter-rouge">govtech-csg{1.401146_103.927020_1990:12:30_2000-2200}</code><br />
-<strong>Flag Format:</strong> <code class="highlighter-rouge">govtech-csg{lat_long_date_[two hour block format]}</code><br />
+  <p><strong>Flag Example:</strong> <code class="language-plaintext highlighter-rouge">govtech-csg{1.401146_103.927020_1990:12:30_2000-2200}</code><br />
+<strong>Flag Format:</strong> <code class="language-plaintext highlighter-rouge">govtech-csg{lat_long_date_[two hour block format]}</code><br />
 Use this <a href="https://www.pgc.umn.edu/apps/convert/">calculator</a>!</p>
 </blockquote>
 
@@ -345,7 +353,7 @@ Use this <a href="https://www.pgc.umn.edu/apps/convert/">calculator</a>!</p>
   <p>2020:10:25</p>
 </blockquote>
 
-<p>The common tool to use when we analyze this image is <code class="highlighter-rouge">exiftool</code>. This can give us metadata about the image such as time and location. However, time is pretty much out of the question as the file had to be downloaded, likely altering the creation and modification timestamps.</p>
+<p>The common tool to use when we analyze this image is <code class="language-plaintext highlighter-rouge">exiftool</code>. This can give us metadata about the image such as time and location. However, time is pretty much out of the question as the file had to be downloaded, likely altering the creation and modification timestamps.</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>exiftool osint-challenge-6.jpg
 ExifTool Version Number         : 11.88
@@ -421,7 +429,7 @@ Longitude: 103.846836</p>
   <p>1500-1700</p>
 </blockquote>
 
-<p><strong>Flag:</strong> <code class="highlighter-rouge">govtech-csg{1.286647_103.846836_2020:10:25_1500-1700}</code></p>
+<p><strong>Flag:</strong> <code class="language-plaintext highlighter-rouge">govtech-csg{1.286647_103.846836_2020:10:25_1500-1700}</code></p>
 
         
       </section>
@@ -429,29 +437,6 @@ Longitude: 103.846836</p>
       <footer class="page__meta">
         
         
-  
-
-
-  
-  
-  
-
-  <p class="page__taxonomy">
-    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
-    <span itemprop="keywords">
-    
-      
-      
-      <a href="/tags/#osint" class="page__taxonomy-item" rel="tag">OSINT</a><span class="sep">, </span>
-    
-      
-      
-      <a href="/tags/#stack-2020" class="page__taxonomy-item" rel="tag">Stack 2020</a>
-    
-    </span>
-  </p>
-
-
 
 
         
@@ -459,7 +444,18 @@ Longitude: 103.846836</p>
         
       </footer>
 
-      
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Only+time+will+tell%21+%5B691%5D%20http%3A%2F%2Flocalhost%3A4000%2FOnly-time-will-tell%21%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2FOnly-time-will-tell%21%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2FOnly-time-will-tell%21%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
 
       
   <nav class="pagination">
@@ -493,7 +489,62 @@ Longitude: 103.846836</p>
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/House-of-Force/" rel="permalink">House of force
+        <a href="/ctf/DSO-NUS-CTF-2021/" rel="permalink">DSO-NUS CTF 2021
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  15 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">A local Singaporean CTF hosted by DSO National Laboratories and the National University of Singapore (NUS). I played this CTF with my regular teammate, @Ocea...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Unsafe-Unlink/" rel="permalink">Unsafe Unlink
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Unsafe Unlink
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Fastbin-Dupe/" rel="permalink">Fastbin Dupe
 </a>
       
     </h2>
@@ -506,11 +557,7 @@ Longitude: 103.846836</p>
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">Requirements
-
-  Control size of top chunk, usually through heap overflow
-  Freely control malloc size
-
+    <p class="archive__item-excerpt" itemprop="description">Fastbin Dupe
 </p>
   </article>
 </div>
@@ -525,7 +572,7 @@ Longitude: 103.846836</p>
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/Binary-Exploitation/" rel="permalink">Binary exploitation
+        <a href="/ret2stack/" rel="permalink">ret2stack
 </a>
       
     </h2>
@@ -538,66 +585,7 @@ Longitude: 103.846836</p>
   less than 1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">Heap Techniques
-
-  House of Force
-
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/House-of-Force/" rel="permalink">House of Force
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
-
-
-
-
-  1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">House of Force
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/Binary-Exploitation/" rel="permalink">Binary Exploitation Notes
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
-
-
-
-
-  less than 1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">Notes for Binary Exploitation
+    <p class="archive__item-excerpt" itemprop="description">Making stack executable
 </p>
   </article>
 </div>
@@ -657,7 +645,7 @@ Longitude: 103.846836</p>
   </ul>
 </div>
 
-<div class="page__footer-copyright">&copy; 2020 MiloTruck. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2021 MiloTruck. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
 
       </footer>
     </div>

@@ -1,0 +1,13 @@
+I"<ul class="toc__menu">
+  <li><a href="#challenge-description">Challenge Description</a></li>
+  <li><a href="#initial-analysis">Initial Analysis</a></li>
+  <li><a href="#patching-the-apk">Patching the APK</a>
+    <ul>
+      <li><a href="#smali-code-analysis">Smali Code Analysis</a></li>
+      <li><a href="#patching-smali-code">Patching Smali Code</a></li>
+      <li><a href="#building-patched-apk">Building patched APK</a></li>
+      <li><a href="#getting-the-flag">Getting the Flag</a></li>
+    </ul>
+  </li>
+</ul>
+:ET

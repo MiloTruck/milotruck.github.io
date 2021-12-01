@@ -1,9 +1,5 @@
 ---
 title: "Can you trick OrgX into giving away their credentials? [2000]"
-tags: [Stack 2020, Social Engineering]
-excerpt: "Social Engineering"
-layout: single
-classes: wide
 --- 
 
 **Category:** Social Engineering

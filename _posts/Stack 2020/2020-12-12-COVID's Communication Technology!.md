@@ -1,9 +1,5 @@
 ---
 title: "COVID's Communication Technology! [984]"
-tags: [Stack 2020, IoT]
-excerpt: "Internet of Things (IoT)"
-layout: single
-classes: wide
 --- 
 
 **Category:** Internet of Things (IoT) 

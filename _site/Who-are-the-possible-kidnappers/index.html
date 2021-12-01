@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Who are the possible kidnappers? [1990] - MILOTRUCK</title>
-<meta name="description" content="Open Source Intelligence (OSINT)">
+<!-- begin _includes/seo.html --><title>Who are the possible kidnappers? [1990] - Home</title>
+<meta name="description" content="Category: Open Source Intelligence (OSINT)Challenge Description  Perform OSINT to gather information on the organisation’s online presence. Start by identifying a related employee and obtain more information. Information are often posted online to build the organization’s or the individual’s online presence (i.e. blog post). Flag format is the name of the employee and the credentials, separated by an underscore. For example, the name is Tina Lee and the credentials is MyPassword is s3cure. The flag will be govtech-csg{TinaLee_MyPassword is s3cure}  Addendum:      Look through the content! Have you looked through ALL the pages? If you believe that you have all the information required, take a step back and analyse what you have.    In Red Team operations, it is common for Red Team operators to target the human element of an organisation. Social medias such as “Twitter” often have information which Red Team operators can use to pivot into the organisation. Also, there might be hidden portal(s) that can be discovered through “sitemap(s)”?  Information GatheringThroughout the CTF, we see 2 organisations - COViD and Korovax. A quick Google search on Korovax reveals 2 similar websites - https://csgctf.wordpress.com/ and http://korovax.org/. By the time we started investing time in this challenge, the addendum hints had been given. Thus, we proceeded to use sitemap and gain information. I shall only put the relevant sites below.  /never-gonna/          Tells us to include “keywords in email”. First letter of each line spells “Rickroll”. Title of page is “Never gonna” (Irrelevant for this challenge. Used in next challenge)        /oh-ho/          There lies a link to the “secret social media page” http://fb.korovax.org/. And gives us more information about the passowrd that we were looking for.                        I forgot my password to our KoroVax social media page.          I think it’s stored on our corporate page with …blue…something….communication…          Cant remember now. Would have to look through my archived tweets                      /2020/10/01/example-post-3/          After painfully scrolling through the posts on the website, we manage to find a twitter handle @scba at the bottom of the post. Perhaps this may be our target?      Exploring “Facebook”Note: No screenshots for this section as website was taken down before writeup was written.We find the company’s social media at http://fb.korovax.org/. This is likely the attack point as “credentials” are required. We can simply login to the social media by creating a fake account. On the website, a user’s profile can be viewed using http://fb.korovax.org/users/&lt;account_id&gt;. Since account ids are given in chronological order, we view the first 10 accounts. We can then gain the following information.  Amanda Lee          There are many posts and comments left by her. And among those we can find                  The email for IT admin ictadmin@korovax.org          Her Instagram @amanda.hidden          Mention of a telegram bot named @DAViD                      Sarah Miller          There are many posts by her from about 2 months back. And while they do reveal some information, what stood out more was that there were more recent comments from 2h ago which seemed to be someone “impersonating” her.      This helped us confirm that she was probably the target for the challenge        Other accounts which we forgot          A mention of emailing ictadmin@korovax.org and how a specific phrase is required (Irrelevant for this challenge. Used in next challenge)      Exploring TwitterThe twitter account “@scba” belongs to an actual person “Sarah Miller” who also appears in the Korovax team page. On /oh-ho/ on the Korovax website, we recall her password is “blue…something…communications”. Since Sarah Miller is actually a real person, we used a dummy twitter account for this part of the challenge. Apart from not revealing your identity, it also helps to start with fresh twitter feed with her account being the only one we followed. Searching for “blue” on the @scba twitter account, filtering by people we follow, there were only a handful of tweets that were relevant. Amongst those were: https://twitter.com/scba/status/858009339642077186.  Blue sky communicationsThis phrase seemed to fit the clue found on the korovax site. Entering this as her password with her email on the fb site allows us to login, confirming the flag.Flag: govtech-csg{SarahMiller_Blue sky communications}Rabbit Holes and DeadendsLike any CTF writeup, solving the challenge was much harder than what the writeup may suggest. These were some of the rabbit holes and deadends we encountered when we were searching. A lot of these were because we were too impulsive and immediately clicked the secret social media link without reading the rest of the page on /oh-ho/ which is arguably more important than the facebook. And many of such problems were resolved when we decided to ping admin for help.  One of the most common ways that people accidentally reveal information is probably through pictures which objects in the background may contain crucial information  We assumed that might have been the case for Sarah Miller and we dedcided to serach through all her media posted on twitter  Since the korovax site had a line about keeping about conference speakers, and Sarah Miller herself has spoken in several conferences, we thought that maybe she might’ve used a personal example in her slides which could contain an old password  This led us to searching through her slides on slideshare  Then there were her cats butters and pixel which we though might contain a clue on her password. Since we couldn’t find relevant media on her main twitter account. So we decided to search through her cats’ twitters.  We also looked for the password for the hidden document on the wordpress which we managed to find/guess. It was ouroboros. But unlocking only revealed a sad pepe.    We also ventured into challenges that we’ve yet to unlocked. This included searching for Amanda’s Instagram, emailing ictadmin, looking for the telegram bot DAViD, finding korovax on google maps and calling the number. Listening in to one of Amanda’s recorded conversations.After finishing the challenge, I guess the most important thing we learnt was to know clearly what you’re searching for. It reduces search space by a lot.">
 
 
   <meta name="author" content="MiloTruck">
@@ -18,12 +18,12 @@
 
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
-<meta property="og:site_name" content="MILOTRUCK">
+<meta property="og:site_name" content="Home">
 <meta property="og:title" content="Who are the possible kidnappers? [1990]">
 <meta property="og:url" content="http://localhost:4000/Who-are-the-possible-kidnappers/">
 
 
-  <meta property="og:description" content="Open Source Intelligence (OSINT)">
+  <meta property="og:description" content="Category: Open Source Intelligence (OSINT)Challenge Description  Perform OSINT to gather information on the organisation’s online presence. Start by identifying a related employee and obtain more information. Information are often posted online to build the organization’s or the individual’s online presence (i.e. blog post). Flag format is the name of the employee and the credentials, separated by an underscore. For example, the name is Tina Lee and the credentials is MyPassword is s3cure. The flag will be govtech-csg{TinaLee_MyPassword is s3cure}  Addendum:      Look through the content! Have you looked through ALL the pages? If you believe that you have all the information required, take a step back and analyse what you have.    In Red Team operations, it is common for Red Team operators to target the human element of an organisation. Social medias such as “Twitter” often have information which Red Team operators can use to pivot into the organisation. Also, there might be hidden portal(s) that can be discovered through “sitemap(s)”?  Information GatheringThroughout the CTF, we see 2 organisations - COViD and Korovax. A quick Google search on Korovax reveals 2 similar websites - https://csgctf.wordpress.com/ and http://korovax.org/. By the time we started investing time in this challenge, the addendum hints had been given. Thus, we proceeded to use sitemap and gain information. I shall only put the relevant sites below.  /never-gonna/          Tells us to include “keywords in email”. First letter of each line spells “Rickroll”. Title of page is “Never gonna” (Irrelevant for this challenge. Used in next challenge)        /oh-ho/          There lies a link to the “secret social media page” http://fb.korovax.org/. And gives us more information about the passowrd that we were looking for.                        I forgot my password to our KoroVax social media page.          I think it’s stored on our corporate page with …blue…something….communication…          Cant remember now. Would have to look through my archived tweets                      /2020/10/01/example-post-3/          After painfully scrolling through the posts on the website, we manage to find a twitter handle @scba at the bottom of the post. Perhaps this may be our target?      Exploring “Facebook”Note: No screenshots for this section as website was taken down before writeup was written.We find the company’s social media at http://fb.korovax.org/. This is likely the attack point as “credentials” are required. We can simply login to the social media by creating a fake account. On the website, a user’s profile can be viewed using http://fb.korovax.org/users/&lt;account_id&gt;. Since account ids are given in chronological order, we view the first 10 accounts. We can then gain the following information.  Amanda Lee          There are many posts and comments left by her. And among those we can find                  The email for IT admin ictadmin@korovax.org          Her Instagram @amanda.hidden          Mention of a telegram bot named @DAViD                      Sarah Miller          There are many posts by her from about 2 months back. And while they do reveal some information, what stood out more was that there were more recent comments from 2h ago which seemed to be someone “impersonating” her.      This helped us confirm that she was probably the target for the challenge        Other accounts which we forgot          A mention of emailing ictadmin@korovax.org and how a specific phrase is required (Irrelevant for this challenge. Used in next challenge)      Exploring TwitterThe twitter account “@scba” belongs to an actual person “Sarah Miller” who also appears in the Korovax team page. On /oh-ho/ on the Korovax website, we recall her password is “blue…something…communications”. Since Sarah Miller is actually a real person, we used a dummy twitter account for this part of the challenge. Apart from not revealing your identity, it also helps to start with fresh twitter feed with her account being the only one we followed. Searching for “blue” on the @scba twitter account, filtering by people we follow, there were only a handful of tweets that were relevant. Amongst those were: https://twitter.com/scba/status/858009339642077186.  Blue sky communicationsThis phrase seemed to fit the clue found on the korovax site. Entering this as her password with her email on the fb site allows us to login, confirming the flag.Flag: govtech-csg{SarahMiller_Blue sky communications}Rabbit Holes and DeadendsLike any CTF writeup, solving the challenge was much harder than what the writeup may suggest. These were some of the rabbit holes and deadends we encountered when we were searching. A lot of these were because we were too impulsive and immediately clicked the secret social media link without reading the rest of the page on /oh-ho/ which is arguably more important than the facebook. And many of such problems were resolved when we decided to ping admin for help.  One of the most common ways that people accidentally reveal information is probably through pictures which objects in the background may contain crucial information  We assumed that might have been the case for Sarah Miller and we dedcided to serach through all her media posted on twitter  Since the korovax site had a line about keeping about conference speakers, and Sarah Miller herself has spoken in several conferences, we thought that maybe she might’ve used a personal example in her slides which could contain an old password  This led us to searching through her slides on slideshare  Then there were her cats butters and pixel which we though might contain a clue on her password. Since we couldn’t find relevant media on her main twitter account. So we decided to search through her cats’ twitters.  We also looked for the password for the hidden document on the wordpress which we managed to find/guess. It was ouroboros. But unlocking only revealed a sad pepe.    We also ventured into challenges that we’ve yet to unlocked. This included searching for Amanda’s Instagram, emailing ictadmin, looking for the telegram bot DAViD, finding korovax on google maps and calling the number. Listening in to one of Amanda’s recorded conversations.After finishing the challenge, I guess the most important thing we learnt was to know clearly what you’re searching for. It reduces search space by a lot.">
 
 
 
@@ -68,7 +68,7 @@
 <!-- end _includes/seo.html -->
 
 
-<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="MILOTRUCK Feed">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Home Feed">
 
 <!-- https://t.co/dKP3o1e -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -136,19 +136,17 @@
       <nav id="site-nav" class="greedy-nav">
         
         <a class="site-title" href="/">
-          MILOTRUCK
+          Home
           
         </a>
         <ul class="visible-links"><li class="masthead__menu-item">
               <a href="/About/" >About</a>
             </li><li class="masthead__menu-item">
+              <a href="/categories/#ctf" >CTF Writeups</a>
+            </li><li class="masthead__menu-item">
               <a href="/Projects/" >Projects</a>
             </li><li class="masthead__menu-item">
               <a href="/Cybersecurity/" >Cybersecurity</a>
-            </li><li class="masthead__menu-item">
-              <a href="/Data-Science-and-AI/" >Data Science and AI</a>
-            </li><li class="masthead__menu-item">
-              <a href="/Competitive-Programming/" >Competitive Programming</a>
             </li></ul>
         
         <button class="search__toggle" type="button">
@@ -215,8 +213,6 @@
 
       
         
-          
-            <li><a href="https://milotruck.github.io" rel="nofollow noopener noreferrer"><i class="fas fa-fw fa-link" aria-hidden="true"></i> Blog</a></li>
           
         
           
@@ -296,7 +292,7 @@
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Who are the possible kidnappers? [1990]">
-    <meta itemprop="description" content="Open Source Intelligence (OSINT)">
+    <meta itemprop="description" content="Category: Open Source Intelligence (OSINT)Challenge Description  Perform OSINT to gather information on the organisation’s online presence. Start by identifying a related employee and obtain more information. Information are often posted online to build the organization’s or the individual’s online presence (i.e. blog post). Flag format is the name of the employee and the credentials, separated by an underscore. For example, the name is Tina Lee and the credentials is MyPassword is s3cure. The flag will be govtech-csg{TinaLee_MyPassword is s3cure}  Addendum:      Look through the content! Have you looked through ALL the pages? If you believe that you have all the information required, take a step back and analyse what you have.    In Red Team operations, it is common for Red Team operators to target the human element of an organisation. Social medias such as “Twitter” often have information which Red Team operators can use to pivot into the organisation. Also, there might be hidden portal(s) that can be discovered through “sitemap(s)”?  Information GatheringThroughout the CTF, we see 2 organisations - COViD and Korovax. A quick Google search on Korovax reveals 2 similar websites - https://csgctf.wordpress.com/ and http://korovax.org/. By the time we started investing time in this challenge, the addendum hints had been given. Thus, we proceeded to use sitemap and gain information. I shall only put the relevant sites below.  /never-gonna/          Tells us to include “keywords in email”. First letter of each line spells “Rickroll”. Title of page is “Never gonna” (Irrelevant for this challenge. Used in next challenge)        /oh-ho/          There lies a link to the “secret social media page” http://fb.korovax.org/. And gives us more information about the passowrd that we were looking for.                        I forgot my password to our KoroVax social media page.          I think it’s stored on our corporate page with …blue…something….communication…          Cant remember now. Would have to look through my archived tweets                      /2020/10/01/example-post-3/          After painfully scrolling through the posts on the website, we manage to find a twitter handle @scba at the bottom of the post. Perhaps this may be our target?      Exploring “Facebook”Note: No screenshots for this section as website was taken down before writeup was written.We find the company’s social media at http://fb.korovax.org/. This is likely the attack point as “credentials” are required. We can simply login to the social media by creating a fake account. On the website, a user’s profile can be viewed using http://fb.korovax.org/users/&lt;account_id&gt;. Since account ids are given in chronological order, we view the first 10 accounts. We can then gain the following information.  Amanda Lee          There are many posts and comments left by her. And among those we can find                  The email for IT admin ictadmin@korovax.org          Her Instagram @amanda.hidden          Mention of a telegram bot named @DAViD                      Sarah Miller          There are many posts by her from about 2 months back. And while they do reveal some information, what stood out more was that there were more recent comments from 2h ago which seemed to be someone “impersonating” her.      This helped us confirm that she was probably the target for the challenge        Other accounts which we forgot          A mention of emailing ictadmin@korovax.org and how a specific phrase is required (Irrelevant for this challenge. Used in next challenge)      Exploring TwitterThe twitter account “@scba” belongs to an actual person “Sarah Miller” who also appears in the Korovax team page. On /oh-ho/ on the Korovax website, we recall her password is “blue…something…communications”. Since Sarah Miller is actually a real person, we used a dummy twitter account for this part of the challenge. Apart from not revealing your identity, it also helps to start with fresh twitter feed with her account being the only one we followed. Searching for “blue” on the @scba twitter account, filtering by people we follow, there were only a handful of tweets that were relevant. Amongst those were: https://twitter.com/scba/status/858009339642077186.  Blue sky communicationsThis phrase seemed to fit the clue found on the korovax site. Entering this as her password with her email on the fb site allows us to login, confirming the flag.Flag: govtech-csg{SarahMiller_Blue sky communications}Rabbit Holes and DeadendsLike any CTF writeup, solving the challenge was much harder than what the writeup may suggest. These were some of the rabbit holes and deadends we encountered when we were searching. A lot of these were because we were too impulsive and immediately clicked the secret social media link without reading the rest of the page on /oh-ho/ which is arguably more important than the facebook. And many of such problems were resolved when we decided to ping admin for help.  One of the most common ways that people accidentally reveal information is probably through pictures which objects in the background may contain crucial information  We assumed that might have been the case for Sarah Miller and we dedcided to serach through all her media posted on twitter  Since the korovax site had a line about keeping about conference speakers, and Sarah Miller herself has spoken in several conferences, we thought that maybe she might’ve used a personal example in her slides which could contain an old password  This led us to searching through her slides on slideshare  Then there were her cats butters and pixel which we though might contain a clue on her password. Since we couldn’t find relevant media on her main twitter account. So we decided to search through her cats’ twitters.  We also looked for the password for the hidden document on the wordpress which we managed to find/guess. It was ouroboros. But unlocking only revealed a sad pepe.    We also ventured into challenges that we’ve yet to unlocked. This included searching for Amanda’s Instagram, emailing ictadmin, looking for the telegram bot DAViD, finding korovax on google maps and calling the number. Listening in to one of Amanda’s recorded conversations.After finishing the challenge, I guess the most important thing we learnt was to know clearly what you’re searching for. It reduces search space by a lot.">
     <meta itemprop="datePublished" content="December 12, 2020">
     
 
@@ -319,11 +315,24 @@
 
       <section class="page__content" itemprop="text">
         
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#challenge-description">Challenge Description</a></li>
+  <li><a href="#information-gathering">Information Gathering</a></li>
+  <li><a href="#exploring-facebook">Exploring “Facebook”</a></li>
+  <li><a href="#exploring-twitter">Exploring Twitter</a></li>
+  <li><a href="#rabbit-holes-and-deadends">Rabbit Holes and Deadends</a></li>
+</ul>
+            </nav>
+          </aside>
+        
         <p><strong>Category:</strong> Open Source Intelligence (OSINT)</p>
 
 <h2 id="challenge-description">Challenge Description</h2>
 <blockquote>
-  <p>Perform OSINT to gather information on the organisation’s online presence. Start by identifying a related employee and obtain more information. Information are often posted online to build the organization’s or the individual’s online presence (i.e. blog post). Flag format is the name of the employee and the credentials, separated by an underscore. For example, the name is Tina Lee and the credentials is MyPassword is s3cure. The flag will be <code class="highlighter-rouge">govtech-csg{TinaLee_MyPassword is s3cure}</code></p>
+  <p>Perform OSINT to gather information on the organisation’s online presence. Start by identifying a related employee and obtain more information. Information are often posted online to build the organization’s or the individual’s online presence (i.e. blog post). Flag format is the name of the employee and the credentials, separated by an underscore. For example, the name is Tina Lee and the credentials is MyPassword is s3cure. The flag will be <code class="language-plaintext highlighter-rouge">govtech-csg{TinaLee_MyPassword is s3cure}</code></p>
 </blockquote>
 
 <blockquote>
@@ -367,14 +376,14 @@
 <h2 id="exploring-facebook">Exploring “Facebook”</h2>
 <p>Note: No screenshots for this section as website was taken down before writeup was written.</p>
 
-<p>We find the company’s social media at http://fb.korovax.org/. This is likely the attack point as “credentials” are required. We can simply login to the social media by creating a fake account. On the website, a user’s profile can be viewed using <code class="highlighter-rouge">http://fb.korovax.org/users/&lt;account_id&gt;</code>. Since account ids are given in chronological order, we view the first 10 accounts. We can then gain the following information.</p>
+<p>We find the company’s social media at http://fb.korovax.org/. This is likely the attack point as “credentials” are required. We can simply login to the social media by creating a fake account. On the website, a user’s profile can be viewed using <code class="language-plaintext highlighter-rouge">http://fb.korovax.org/users/&lt;account_id&gt;</code>. Since account ids are given in chronological order, we view the first 10 accounts. We can then gain the following information.</p>
 
 <ul>
   <li>Amanda Lee
     <ul>
       <li>There are many posts and comments left by her. And among those we can find
         <ol>
-          <li>The email for IT admin <code class="highlighter-rouge">ictadmin@korovax.org</code></li>
+          <li>The email for IT admin <code class="language-plaintext highlighter-rouge">ictadmin@korovax.org</code></li>
           <li>Her Instagram @amanda.hidden</li>
           <li>Mention of a telegram bot named @DAViD</li>
         </ol>
@@ -403,7 +412,7 @@
 
 <p>This phrase seemed to fit the clue found on the korovax site. Entering this as her password with her email on the fb site allows us to login, confirming the flag.</p>
 
-<p><strong>Flag:</strong> <code class="highlighter-rouge">govtech-csg{SarahMiller_Blue sky communications}</code></p>
+<p><strong>Flag:</strong> <code class="language-plaintext highlighter-rouge">govtech-csg{SarahMiller_Blue sky communications}</code></p>
 
 <h2 id="rabbit-holes-and-deadends">Rabbit Holes and Deadends</h2>
 <p>Like any CTF writeup, solving the challenge was much harder than what the writeup may suggest. These were some of the rabbit holes and deadends we encountered when we were searching. A lot of these were because we were too impulsive and immediately clicked the secret social media link without reading the rest of the page on /oh-ho/ which is arguably more important than the facebook. And many of such problems were resolved when we decided to ping admin for help.</p>
@@ -426,29 +435,6 @@
       <footer class="page__meta">
         
         
-  
-
-
-  
-  
-  
-
-  <p class="page__taxonomy">
-    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
-    <span itemprop="keywords">
-    
-      
-      
-      <a href="/tags/#osint" class="page__taxonomy-item" rel="tag">OSINT</a><span class="sep">, </span>
-    
-      
-      
-      <a href="/tags/#stack-2020" class="page__taxonomy-item" rel="tag">Stack 2020</a>
-    
-    </span>
-  </p>
-
-
 
 
         
@@ -456,7 +442,18 @@
         
       </footer>
 
-      
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Who+are+the+possible+kidnappers%3F+%5B1990%5D%20http%3A%2F%2Flocalhost%3A4000%2FWho-are-the-possible-kidnappers%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2FWho-are-the-possible-kidnappers%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2FWho-are-the-possible-kidnappers%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
 
       
   <nav class="pagination">
@@ -490,7 +487,62 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/House-of-Force/" rel="permalink">House of force
+        <a href="/ctf/DSO-NUS-CTF-2021/" rel="permalink">DSO-NUS CTF 2021
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  15 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">A local Singaporean CTF hosted by DSO National Laboratories and the National University of Singapore (NUS). I played this CTF with my regular teammate, @Ocea...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Unsafe-Unlink/" rel="permalink">Unsafe Unlink
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  2 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Unsafe Unlink
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/Fastbin-Dupe/" rel="permalink">Fastbin Dupe
 </a>
       
     </h2>
@@ -503,11 +555,7 @@
   1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">Requirements
-
-  Control size of top chunk, usually through heap overflow
-  Freely control malloc size
-
+    <p class="archive__item-excerpt" itemprop="description">Fastbin Dupe
 </p>
   </article>
 </div>
@@ -522,7 +570,7 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/Binary-Exploitation/" rel="permalink">Binary exploitation
+        <a href="/ret2stack/" rel="permalink">ret2stack
 </a>
       
     </h2>
@@ -535,66 +583,7 @@
   less than 1 minute read
 </p>
     
-    <p class="archive__item-excerpt" itemprop="description">Heap Techniques
-
-  House of Force
-
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/House-of-Force/" rel="permalink">House of Force
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
-
-
-
-
-  1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">House of Force
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/Binary-Exploitation/" rel="permalink">Binary Exploitation Notes
-</a>
-      
-    </h2>
-    
-      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
-
-
-
-
-  less than 1 minute read
-</p>
-    
-    <p class="archive__item-excerpt" itemprop="description">Notes for Binary Exploitation
+    <p class="archive__item-excerpt" itemprop="description">Making stack executable
 </p>
   </article>
 </div>
@@ -654,7 +643,7 @@
   </ul>
 </div>
 
-<div class="page__footer-copyright">&copy; 2020 MiloTruck. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2021 MiloTruck. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
 
       </footer>
     </div>
