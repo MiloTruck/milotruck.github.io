@@ -115,7 +115,7 @@ var store = [{
         "url": "http://localhost:4000/ctf/DSO-NUS-CTF-2021/",
         "teaser":null},{
         "title": "CVE-2021-33760",
-        "excerpt":"Windows Media Foundation Out-of-Bounds Read Vulnerability (mfsrcsnk.dll) Summary A vulnerability is present in mfsrcsnk.dll, which is part of the Microsoft Media Foundation framework. An integer underflow leads to an Out-of-Bounds (OOB) Read when parsing an MP3 frame header. The vulnerability can be triggered by right-clicking on the file poc.mp3 in...","categories": ["Blog"],
+        "excerpt":"Windows Media Foundation Information Disclosure Vulnerability (mfsrcsnk.dll) Summary A vulnerability is present in mfsrcsnk.dll, which is part of the Microsoft Media Foundation framework. An integer underflow leads to an Out-of-Bounds (OOB) Read when parsing an MP3 frame header. The vulnerability can be triggered by right-clicking on the file poc.mp3 in...","categories": ["Blog"],
         "tags": [],
         "url": "http://localhost:4000/blog/CVE-2021-33760/",
         "teaser":null}]
