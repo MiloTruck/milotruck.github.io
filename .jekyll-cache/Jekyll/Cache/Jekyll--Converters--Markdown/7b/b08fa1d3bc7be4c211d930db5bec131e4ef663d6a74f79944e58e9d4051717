@@ -1,0 +1,21 @@
+I"'<ul class="toc__menu">
+  <li><a href="#cheatsheet">Cheatsheet</a>
+    <ul>
+      <li><a href="#calling-convention">Calling Convention</a></li>
+      <li><a href="#pwntools">pwntools</a></li>
+      <li><a href="#ret2syscall">ret2syscall</a></li>
+    </ul>
+  </li>
+  <li><a href="#techniques">Techniques</a>
+    <ul>
+      <li><a href="#rop">ROP</a>
+        <ul>
+          <li><a href="#ret2stack">ret2stack</a></li>
+        </ul>
+      </li>
+      <li><a href="#example">Example</a></li>
+      <li><a href="#heap">Heap</a></li>
+    </ul>
+  </li>
+</ul>
+:ET

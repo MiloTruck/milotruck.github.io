@@ -1,0 +1,57 @@
+I"¹<p>Some notes and techniques for Binary Exploitation challenges in CTFs.</p>
+
+<h1 id="general-cheatsheet">General Cheatsheet</h1>
+<h2 id="calling-convention">Calling Convention</h2>
+<ul>
+  <li>64-bit: <code class="language-plaintext highlighter-rouge">rdi, rsi, rdx, rcx, r8, r9</code></li>
+</ul>
+
+<p><strong>ret2syscall</strong></p>
+<ul>
+  <li>64-bit: <code class="language-plaintext highlighter-rouge">rax = 59, rdi = /bin/sh, rsi = 0, rdx = 0</code></li>
+  <li>32-bit: <code class="language-plaintext highlighter-rouge">eax = 11, ebx = /bin/sh, ecx = 0, edx = 0</code></li>
+  <li><a href="https://chromium.googlesource.com/chromiumos/docs/+/master/constants/syscalls.md">Syscall Table</a></li>
+</ul>
+
+<p><strong>pwntools</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Code</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Shellcode</td>
+      <td><code class="language-plaintext highlighter-rouge">shellcode = asm(shellcraft.sh())</code></td>
+    </tr>
+    <tr>
+      <td>Strings</td>
+      <td><code class="language-plaintext highlighter-rouge">binsh = libc.search('/bin/sh\x00;).next()</code></td>
+    </tr>
+    <tr>
+      <td>Gadgets</td>
+      <td><code class="language-plaintext highlighter-rouge">gadget = exe.search(asm('pop rdi; ret')).next()</code></td>
+    </tr>
+    <tr>
+      <td>Address of Section</td>
+      <td><code class="language-plaintext highlighter-rouge">data = exe.get_section_by_name('.data').header.sh_addr</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="rop-techniques">ROP Techniques</h2>
+<ul>
+  <li><a href="/ret2stack/">ret2stack</a>: Making the stack executable</li>
+  <li><a href="https://www.voidsecurity.in/2013/07/some-gadget-sequence-for-x8664-rop.html?m=1">ret2csu</a>: Lack of gadgets in 64-bit</li>
+</ul>
+
+<h2 id="heap-techniques">Heap Techniques</h2>
+<ul>
+  <li><a href="/House-of-Force/">House of Force</a>: Exploiting Top Chunk header to gain nearly-arbitrary write primitive</li>
+  <li><a href="/Fastbin-Dupe/">Fastbin Dupe</a>: Tricking malloc into returning an already-allocated heap pointer by abusing the fastbin freelist.</li>
+  <li><a href="/Unsafe-Unlink/">Unsafe Unlink</a>: Exploiting free on a corrupted chunk to get arbitrary write.</li>
+</ul>
+:ET

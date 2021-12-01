@@ -1,17 +1,19 @@
 ---
 title: "About"
-permalink: /About/
+permalink: /about/
 layout: single
 classes: wide
 ---
 
-Hi, I'm MiloTruck, a student from Singapore. I regularly participate in Competitive Programming and Capture-The-Flag (CTF) competitions. Usually, I play CTFs under **HATS SG** and participate in other competitions with **ItzyBitzySpider**. I also work on other projects in my free time and have an interest in cybersecurity.
+Hi, I'm MiloTruck, a student from Singapore. I often participate in CTF competitions with **HATS SG** and **ItzyBitzySpider**. Also, I have a general interest in tech and cybersecurity related things.
 
-## CVE
+## CVEs
 
-[CVE-2021-33760](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2021-33760)
+* [CVE-2021-33760](/blog/CVE-2021-33760)
 
-## Individual Achievements  
+## Competitions
+
+### Individual   
 
 | Name                                                  | Honors                   	|
 |-------------------------------------------------------|--------------------------	|
@@ -20,13 +22,12 @@ Hi, I'm MiloTruck, a student from Singapore. I regularly participate in Competit
 | National Olympiad of Informatics (NOI) Singapore 2020 | Bronze Medal            	| 
 
 
-## Team Achievements  
+### Team   
 
 | Name                                       | Team                  | Honors                           |
 |--------------------------------------------|-----------------------|----------------------------------|
 | Cyber Defenders Discovery Camp (CDDC) 2019 | ItzyBitzySpider/acsii | Silver Award, 7th Place          |
 | Cyberthon 2019                             | ItzyBitzySpider/acsii | Participation                    |
-| Timisoara CTF 2019 Qualification Round     | ItzyBitzySpider/acsii | 12th Place                       |
 | Cyberthon 2020                             | ItzyBitzySpider       | Overall 3rd, Data Science Winner |
 | Cyber Defenders Discovery Camp (CDDC) 2020 | ItzyBitzySpider       | 4th Place, JC Category           |
 | Whitehacks 2020                            | ItzyBitzySpider       | 4th Place                        |

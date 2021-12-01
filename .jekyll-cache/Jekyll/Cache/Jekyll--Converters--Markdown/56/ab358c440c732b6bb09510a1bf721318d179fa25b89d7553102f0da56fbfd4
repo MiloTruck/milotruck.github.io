@@ -1,0 +1,10 @@
+I"3<ul class="toc__menu">
+  <li><a href="#windows-media-foundation-out-of-bounds-read-vulnerability">Windows Media Foundation Out-of-Bounds Read Vulnerability</a>
+      - {:.} <a href="#cve-number">CVE Number</a>
+      - {:.} <a href="#revision-record">Revision record</a>
+      - {:.} <a href="#description-of-the-vulnerability">Description of the vulnerability</a>
+      - {:.} <a href="#technical-details">Technical Details</a>
+      - {:.} <a href="#vulnerability-analysis">Vulnerability Analysis</a>
+      - {:.} <a href="#conclusion">Conclusion</a></li>
+</ul>
+:ET

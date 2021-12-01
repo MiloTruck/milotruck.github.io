@@ -1,8 +1,6 @@
 ---
 title: "Projects"
-layout: tag
-permalink: /Projects/
+layout: category
+permalink: /projects/
 taxonomy: Projects
 ---
-
-Below are my projects that I work on during my free time:

@@ -1,7 +1,7 @@
 ---
 title: "Substitution Cipher Decryption with Genetic Algorithms"
 date: 2020-05-10
-tags: [Genetic Algorithms, Substitution Cipher, Projects]
+categories: Projects
 --- 
 
 > This project uses Genetic Algorithms to decrypt substitution ciphers by frequency analysis.

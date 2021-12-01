@@ -15,9 +15,9 @@ var store = [{
         "url": "http://localhost:4000/ctf/Cyberthon-2020/",
         "teaser":null},{
         "title": "Substitution Cipher Decryption with Genetic Algorithms",
-        "excerpt":"This project uses Genetic Algorithms to decrypt substitution ciphers by frequency analysis. Project Files In the English language, some sequences of letters appear more often than others, such as “AND”. By analysing the frequency of bi-grams (2 letters) and tri-grams (3 letters) in English text, we are able to observe...","categories": [],
-        "tags": ["Genetic Algorithms","Substitution Cipher","Projects"],
-        "url": "http://localhost:4000/GA-Substitution-Cipher/",
+        "excerpt":"This project uses Genetic Algorithms to decrypt substitution ciphers by frequency analysis. Project Files In the English language, some sequences of letters appear more often than others, such as “AND”. By analysing the frequency of bi-grams (2 letters) and tri-grams (3 letters) in English text, we are able to observe...","categories": ["Projects"],
+        "tags": [],
+        "url": "http://localhost:4000/projects/GA-Substitution-Cipher/",
         "teaser":null},{
         "title": "A to Z of COViD! [1986]",
         "excerpt":"Category: Mobile Challenge Description Over here, members learn all about COViD, and COViD wants to enlighten everyone about the organisation. Go on, read them all! Flag Format: govtech-csg{alphanumeric-and-special-characters-string Initial Analysis This challenge to the activity launched by CovidInfoActivity.java. Launching the activity in an emulator, the following screen is displayed: The...","categories": [],
@@ -99,33 +99,23 @@ var store = [{
         "tags": [],
         "url": "http://localhost:4000/Working-on/",
         "teaser":null},{
-        "title": "Binary Exploitation Notes",
-        "excerpt":"General Notes Calling Convention 64-bit: rdi, rsi, rdx, rcx, r8, r9 ret2syscall 64-bit: rax = 59, rdi = /bin/sh, rsi = 0, rdx = 0 32-bit: eax = 11, ebx = /bin/sh, ecx = 0, edx = 0 Syscall Table pwntools Item Code Shellcode shellcode = asm(shellcraft.sh()) Strings binsh =...","categories": [],
-        "tags": ["Binary Exploitation"],
-        "url": "http://localhost:4000/Binary-Exploitation/",
+        "title": "Binary Exploitation Cheatsheet",
+        "excerpt":"Cheatsheet Calling Convention Arch Registers Linux (x64) rdi, rsi, rdx, rcx, r8, r9 Windows (x64) rcx, rdx, r8, r9 pwntools Item Code Shellcode shellcode = asm(shellcraft.sh()) Strings binsh = libc.search('/bin/sh\\x00;).next() Gadgets gadget = exe.search(asm('pop rdi; ret')).next() Address of Section data = exe.get_section_by_name('.data').header.sh_addr ret2syscall execve(/bin/sh) 64-bit: rax = 59, rdi =...","categories": ["Blog"],
+        "tags": [],
+        "url": "http://localhost:4000/blog/Binary-Exploitation-Cheatsheet/",
         "teaser":null},{
-        "title": "House of Force",
-        "excerpt":"Exploiting Top Chunk header to gain nearly-arbitrary write primitive. Requirements Control of top chunk size, usually through heap overflow Full control of size of allocated chunks Process Arbitrary Write Primitive Overwrite size of top chunk to 0xffffffffffffffff Allocate chunk with size of offset, using malloc() If target &lt; top_chunk: offset...","categories": [],
-        "tags": ["Binary Exploitation","Heap"],
-        "url": "http://localhost:4000/House-of-Force/",
-        "teaser":null},{
-        "title": "ret2stack",
-        "excerpt":"Making the stack executable Set value of __stack_prot to 7 Call _dl_make_stack_executable(__libc_stack_end, __stack_prot) Jump to shellcode Example shellcode = asm(shellcraft.sh()) _dl_make_stack_executable = elf.symbols['_dl_make_stack_executable'] __stack_prot = elf.symbols['__stack_prot'] __libc_stack_end = elf.symbols['__libc_stack_end'] payload = 'A'*120 payload += p64(0x0000000000410ca3) # pop rsi ; ret payload += p64(__stack_prot) payload += p64(0x00000000004163f4) # pop rax ;...","categories": [],
-        "tags": ["Binary Exploitation"],
-        "url": "http://localhost:4000/ret2stack/",
-        "teaser":null},{
-        "title": "Fastbin Dupe",
-        "excerpt":"Tricking malloc into returning an already-allocated heap pointer by abusing the fastbin freelist. This can be used to gain an arbitrary write primitive. Requirements Allocate chunks in fastbin size, 0x20 - 0x80 Ability to free chunks in any order Ability to forge or find fake chunk Process Arbitrary Write Primitive...","categories": [],
-        "tags": ["Binary Exploitation","Heap"],
-        "url": "http://localhost:4000/Fastbin-Dupe/",
-        "teaser":null},{
-        "title": "Unsafe Unlink",
-        "excerpt":"Exploiting free on a corrupted chunk to get arbitrary write. Unsafe unlinking process will result in a reflected arbitrary 8-byte write anywhere. Requirements Allocate chunks in the unsorted bin, 120 - 1000 bytes Ability to corrupt prev_size and prev_in_use flag of a chunk, usually through heap overflow Ability to forge...","categories": [],
-        "tags": ["Binary Exploitation","Heap"],
-        "url": "http://localhost:4000/Unsafe-Unlink/",
+        "title": "Binary Exploitation Techniques",
+        "excerpt":"ROP ret2stack: Making the stack executable Set value of __stack_prot to 7 Call _dl_make_stack_executable(__libc_stack_end, __stack_prot) Jump to shellcode Example shellcode = asm(shellcraft.sh()) _dl_make_stack_executable = elf.symbols['_dl_make_stack_executable'] __stack_prot = elf.symbols['__stack_prot'] __libc_stack_end = elf.symbols['__libc_stack_end'] payload = 'A'*120 payload += p64(0x0000000000410ca3) # pop rsi ; ret payload += p64(__stack_prot) payload += p64(0x00000000004163f4) # pop...","categories": ["Blog"],
+        "tags": [],
+        "url": "http://localhost:4000/blog/Binary-Exploitation-Techniques/",
         "teaser":null},{
         "title": "DSO-NUS CTF 2021",
         "excerpt":"A local Singaporean CTF hosted by DSO National Laboratories and the National University of Singapore (NUS). I played this CTF with my regular teammate, @OceanKoh, under the name It’z Me. We managed to get 6th place, which I’m quite satisified with. Not bad for the first official CTF of 2021....","categories": ["CTF"],
         "tags": [],
         "url": "http://localhost:4000/ctf/DSO-NUS-CTF-2021/",
+        "teaser":null},{
+        "title": "CVE-2021-33760",
+        "excerpt":"Windows Media Foundation Out-of-Bounds Read Vulnerability (mfsrcsnk.dll) Summary A vulnerability is present in mfsrcsnk.dll, which is part of the Microsoft Media Foundation framework. An integer underflow leads to an Out-of-Bounds (OOB) Read when parsing an MP3 frame header. The vulnerability can be triggered by right-clicking on the file poc.mp3 in...","categories": ["Blog"],
+        "tags": [],
+        "url": "http://localhost:4000/blog/CVE-2021-33760/",
         "teaser":null}]

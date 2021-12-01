@@ -1,0 +1,170 @@
+I"<5<h2 id="windows-media-foundation-out-of-bounds-read-vulnerability">Windows Media Foundation Out-of-Bounds Read Vulnerability</h2>
+
+<h3 id="cve-number">CVE Number</h3>
+<p><a href="https://msrc.microsoft.com/update-guide/vulnerability/CVE-2021-33760">CVE-2021-33760</a></p>
+
+<h3 id="revision-record">Revision record</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Product Version</th>
+      <th>Change Description</th>
+      <th>Author</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>23/10/2021</td>
+      <td>10.0.19041.1316</td>
+      <td>Vulnerability Report</td>
+      <td>Brandon Chong</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="description-of-the-vulnerability">Description of the vulnerability</h3>
+
+<p>The vulnerability is present in <code class="language-plaintext highlighter-rouge">mfsrcsnk.dll</code>, which is part of the Microsoft Media Foundation framework.<br />
+An integer underflow leads to an Out-of-Bounds (OOB) Read when parsing an MP3 frame header. The crash can be triggered by navigating into a folder containing <code class="language-plaintext highlighter-rouge">poc.mp3</code>.</p>
+
+<h3 id="technical-details">Technical Details</h3>
+
+<p>The crash occurs in <code class="language-plaintext highlighter-rouge">mfsrcsnk.dll</code>:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0:000&gt; g
+<span class="o">(</span>56c8.7dc4<span class="o">)</span>: Access violation - code c0000005 <span class="o">(</span>first/second chance not available<span class="o">)</span>
+First chance exceptions are reported before any exception handling.
+This exception may be expected and handled.
+Time Travel Position: B8573:0
+mfsrcsnk!CMPEGFrame::DeSerializeFrameHeader+0x42:
+00007ffb<span class="sb">`</span>2629f872 418b0e          mov     ecx,dword ptr <span class="o">[</span>r14] ds:000001c7<span class="sb">`</span><span class="nv">29218504</span><span class="o">=</span>????????
+0:000&gt; k
+ <span class="c"># Child-SP          RetAddr               Call Site</span>
+00 0000003f<span class="sb">`</span>dc7cde80 00007ffb<span class="sb">`</span>2629d50c     mfsrcsnk!CMPEGFrame::DeSerializeFrameHeader+0x42
+01 0000003f<span class="sb">`</span>dc7cdf00 00007ffb<span class="sb">`</span>2629cb58     mfsrcsnk!CMP3MediaSourcePlugin::ReadMPEGFrameHeader+0x78
+02 0000003f<span class="sb">`</span>dc7cdf70 00007ffb<span class="sb">`</span>2629e8bc     mfsrcsnk!CMP3MediaSourcePlugin::DoReadFrameHeader+0x5c
+03 0000003f<span class="sb">`</span>dc7cdff0 00007ffb<span class="sb">`</span>2629f1fa     mfsrcsnk!CMP3MediaSourcePlugin::ParseHeader+0x1cc
+04 0000003f<span class="sb">`</span>dc7ce0d0 00007ffb<span class="sb">`</span>2629f060     mfsrcsnk!CMFMP3PropertyHandler::FeedNextBufferToPlugin+0x12e
+05 0000003f<span class="sb">`</span>dc7ce170 00007ffb<span class="sb">`</span>262992e3     mfsrcsnk!CMFMP3PropertyHandler::FeedBuffersToPlugin+0x9c
+06 0000003f<span class="sb">`</span>dc7ce230 00007ffb<span class="sb">`</span>262a9da4     mfsrcsnk!CMFMP3PropertyHandler::InternalInitialize+0x103
+07 0000003f<span class="sb">`</span>dc7ce300 00007ffb<span class="sb">`</span>5f400df9     mfsrcsnk!CMFPropHandlerBase::Initialize+0x84
+08 0000003f<span class="sb">`</span>dc7ce360 00007ffb<span class="sb">`</span>5f3fdcfb     windows_storage!InitializeFileHandlerWithStream+0x175
+09 0000003f<span class="sb">`</span>dc7ce420 00007ffb<span class="sb">`</span>5f43a345     windows_storage!CFileSysItemString::HandlerCreateInstance+0x2c7
+0a 0000003f<span class="sb">`</span>dc7ce510 00007ffb<span class="sb">`</span>5f3de47a     windows_storage!CFileSysItemString::_PropertyHandlerCreateInstance+0xad
+0b 0000003f<span class="sb">`</span>dc7ce5c0 00007ffb<span class="sb">`</span>5f3ece20     windows_storage!CFileSysItemString::LoadHandler+0x1aa
+0c 0000003f<span class="sb">`</span>dc7ce710 00007ffb<span class="sb">`</span>5f3c9d95     windows_storage!CFSFolder::LoadHandler+0xe0
+0d 0000003f<span class="sb">`</span>dc7cea70 00007ffb<span class="sb">`</span>5f3caeca     windows_storage!CFSPropertyStoreFactory::_GetFileStore+0x165
+0e 0000003f<span class="sb">`</span>dc7ceb40 00007ffb<span class="sb">`</span>5f3cb042     windows_storage!CFSPropertyStoreFactory::_GetPropertyStore+0x20e
+0f 0000003f<span class="sb">`</span>dc7cec30 00007ffb<span class="sb">`</span>5f3ca824     windows_storage!CFSPropertyStoreFactory::GetPropertyStore+0x22
+10 0000003f<span class="sb">`</span>dc7cec70 00007ffb<span class="sb">`</span>5f3ca3cb     windows_storage!CShellItem::_GetPropertyStoreWorker+0x384
+11 0000003f<span class="sb">`</span>dc7cf1b0 00007ffb<span class="sb">`</span>5fd09e3b     windows_storage!CShellItem::GetPropertyStore+0xdb
+12 0000003f<span class="sb">`</span>dc7cf480 00007ff6<span class="sb">`</span>10d611ab     SHELL32!SHGetPropertyStoreFromParsingName+0x5b
+13 0000003f<span class="sb">`</span>dc7cf4f0 00007ff6<span class="sb">`</span>10d6111d     harness!fuzzme+0x3b
+14 0000003f<span class="sb">`</span>dc7cf540 00007ff6<span class="sb">`</span>10d615f4     harness!wmain+0x11d
+15 0000003f<span class="sb">`</span>dc7cf7a0 00007ffb<span class="sb">`</span>611f7c24     harness!fuzzme+0x484
+16 0000003f<span class="sb">`</span>dc7cf7e0 00007ffb<span class="sb">`</span>61aad721     KERNEL32!BaseThreadInitThunk+0x14
+17 0000003f<span class="sb">`</span>dc7cf810 00000000<span class="sb">`</span>00000000     ntdll!RtlUserThreadStart+0x21
+0:000&gt; <span class="o">!</span>heap <span class="nt">-p</span> <span class="nt">-a</span> @r14
+    address 000001c729218504 found <span class="k">in
+    </span>_DPH_HEAP_ROOT @ 1c7290a1000
+    <span class="k">in </span>busy allocation <span class="o">(</span>  DPH_HEAP_BLOCK:         UserAddr         UserSize -         VirtAddr         VirtSize<span class="o">)</span>
+                             1c7290a5d68:      1c729214000             4000 -      1c729213000             6000
+    00007ffb61b4462f ntdll!RtlDebugAllocateHeap+0x000000000000003f
+    00007ffb61af501e ntdll!RtlpAllocateHeap+0x0000000000078cce
+    00007ffb61a7b4bb ntdll!RtlpAllocateHeapInternal+0x0000000000000a1b
+    00007ffb60209da0 msvcrt!malloc+0x0000000000000070
+    00007ffb541aad4b MFPlat!operator new+0x0000000000000023
+    00007ffb541a1d76 MFPlat!MFCreateMemoryBuffer+0x0000000000000056
+    00007ffb2629f140 mfsrcsnk!CMFMP3PropertyHandler::FeedNextBufferToPlugin+0x0000000000000074
+    00007ffb2629f060 mfsrcsnk!CMFMP3PropertyHandler::FeedBuffersToPlugin+0x000000000000009c
+    00007ffb262992e3 mfsrcsnk!CMFMP3PropertyHandler::InternalInitialize+0x0000000000000103
+    00007ffb262a9da4 mfsrcsnk!CMFPropHandlerBase::Initialize+0x0000000000000084
+    00007ffb5f400df9 windows_storage!InitializeFileHandlerWithStream+0x0000000000000175
+    00007ffb5f3fdcfb windows_storage!CFileSysItemString::HandlerCreateInstance+0x00000000000002c7
+    00007ffb5f43a345 windows_storage!CFileSysItemString::_PropertyHandlerCreateInstance+0x00000000000000ad
+    00007ffb5f3de47a windows_storage!CFileSysItemString::LoadHandler+0x00000000000001aa
+    00007ffb5f3ece20 windows_storage!CFSFolder::LoadHandler+0x00000000000000e0
+    00007ffb5f3c9d95 windows_storage!CFSPropertyStoreFactory::_GetFileStore+0x0000000000000165
+    00007ffb5f3caeca windows_storage!CFSPropertyStoreFactory::_GetPropertyStore+0x000000000000020e
+    00007ffb5f3cb042 windows_storage!CFSPropertyStoreFactory::GetPropertyStore+0x0000000000000022
+    00007ffb5f3ca824 windows_storage!CShellItem::_GetPropertyStoreWorker+0x0000000000000384
+    00007ffb5f3ca3cb windows_storage!CShellItem::GetPropertyStore+0x00000000000000db
+    00007ffb5fd09e3b SHELL32!SHGetPropertyStoreFromParsingName+0x000000000000005b
+    00007ff610d611ab harness!fuzzme+0x000000000000003b
+    00007ff610d6111d harness!wmain+0x000000000000011d
+    00007ff610d615f4 harness!fuzzme+0x0000000000000484
+    00007ffb611f7c24 KERNEL32!BaseThreadInitThunk+0x0000000000000014
+    00007ffb61aad721 ntdll!RtlUserThreadStart+0x0000000000000021
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">@r14</code> points to an invalid region on the heap.</p>
+
+<h3 id="vulnerability-analysis">Vulnerability Analysis</h3>
+
+<p>At <code class="language-plaintext highlighter-rouge">CMP3MediaSourcePlugin::ParseHeader+0x314 (mfsrcsnk.dll+0xea04)</code>, the function <code class="language-plaintext highlighter-rouge">CMP3MediaSourcePlugin::DoScanForFrameHeader()</code> is called. This stores the value <code class="language-plaintext highlighter-rouge">0x2282</code> into the variable <code class="language-plaintext highlighter-rouge">offset</code>.</p>
+
+<pre><code class="language-C">// buf = 0x000001c729214000, remaining_size = 0x00000000000022e6, &amp;offset = 0x0000003fdc7ce060
+hr = CMP3MediaSourcePlugin::DoScanForFrameHeader(MPEGFrame, buf, remaining_size, &amp;offset);
+</code></pre>
+
+<p>At <code class="language-plaintext highlighter-rouge">CMP3MediaSourcePlugin::ParseHeader+0x20e (mfsrcsnk.dll+0xe8fe)</code> the variables <code class="language-plaintext highlighter-rouge">remaining_size</code> and <code class="language-plaintext highlighter-rouge">buf</code> are updated.</p>
+
+<pre><code class="language-C">LABEL_29:
+    LODWORD(v34) = offset;
+    remaining_size -= offset; // 0x00000000000022e6 - 0x0000000000002282 = 0x0000000000000064 
+    buf += offset;            // 0x000001c729214000 + 0x0000000000002282 = 0x000001c729216282
+    goto LABEL_30;
+}
+</code></pre>
+
+<p>At <code class="language-plaintext highlighter-rouge">CMP3MediaSourcePlugin::ParseHeader+0x2d9 (mfsrcsnk.dll+0xe9c9)</code>, the function <code class="language-plaintext highlighter-rouge">CMP3MediaSourcePlugin::DoReadFirstFrameBody()</code> is called.</p>
+
+<pre><code class="language-C">// buf=000001c729216282, remaining_size=0000000000000064, &amp;offset=0000003fdc7ce060
+hr = CMP3MediaSourcePlugin::DoReadFirstFrameBody(MPEGFrame, buf, remaining_size, &amp;offset);
+</code></pre>
+
+<p>Eventually, the function <code class="language-plaintext highlighter-rouge">CMPEGFrame::DeSerializeFrameBody()</code> is called with the same arguments:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0:000&gt; k
+ <span class="c"># Child-SP          RetAddr               Call Site</span>
+00 0000003f<span class="sb">`</span>dc7cdee8 00007ffb<span class="sb">`</span>2629f789     mfsrcsnk!CMPEGFrame::DeSerializeFrameBody
+01 0000003f<span class="sb">`</span>dc7cdef0 00007ffb<span class="sb">`</span>2629aaa1     mfsrcsnk!CMP3MediaSourcePlugin::ReadMPEGFrameBody+0x49
+02 0000003f<span class="sb">`</span>dc7cdf60 00007ffb<span class="sb">`</span>2629e9ce     mfsrcsnk!CMP3MediaSourcePlugin::DoReadFirstFrameBody+0x41
+0:000&gt; r rcx, rdx, r8, r9
+<span class="nv">rcx</span><span class="o">=</span>000001c72921bea0 <span class="nv">rdx</span><span class="o">=</span>000001c729216282 <span class="nv">r8</span><span class="o">=</span>0000000000000064 <span class="nv">r9</span><span class="o">=</span>0000003fdc7ce060
+</code></pre></div></div>
+
+<p>At <code class="language-plaintext highlighter-rouge">CMPEGFrame::DeSerializeFrameBody+0x2fe5f (mfsrcsnk.dll+0x3f15f)</code>, as <code class="language-plaintext highlighter-rouge">remaining_size</code> is less than <code class="language-plaintext highlighter-rouge">required_size</code>, the check fails and the function immediately returns with <code class="language-plaintext highlighter-rouge">HRESULT 0</code>. The value of <code class="language-plaintext highlighter-rouge">offset</code> is not updated and remains <code class="language-plaintext highlighter-rouge">0x2282</code>.</p>
+<pre><code class="language-C">if ( body_tag == 'ofnI' ) {
+    LODWORD(required_size) = required_size + 0x74;
+    if ( remaining_size &lt; required_size ) // required_size = 0x74
+        goto LABEL_22;
+}
+</code></pre>
+
+<pre><code class="language-C">LABEL_22:
+    CallStackScopeTrace::~CallStackScopeTrace(v13);
+    return hr;
+}
+</code></pre>
+
+<p>At <code class="language-plaintext highlighter-rouge">CMP3MediaSourcePlugin::ParseHeader+0x2f7 (mfsrcsnk.dll+0xe9eb)</code>, the variables <code class="language-plaintext highlighter-rouge">remaining_size</code> and <code class="language-plaintext highlighter-rouge">buf</code> are updated again. However, as <code class="language-plaintext highlighter-rouge">remaining_size</code> is an <code class="language-plaintext highlighter-rouge">unsigned int</code>, an integer underflow occurs, causing <code class="language-plaintext highlighter-rouge">remaining_size</code> to store a large value. Also, <code class="language-plaintext highlighter-rouge">buf</code> now points to an invalid heap region.</p>
+
+<pre><code class="language-C">    LODWORD(v34) = offset;
+    remaining_size -= offset; // 0x0000000000000064 - 0x0000000000002282 = 0x00000000ffffdde2
+    buf += offset;            // 0x000001c729216282 + 0x0000000000002282 = 000001c729218504
+</code></pre>
+
+<p>At <code class="language-plaintext highlighter-rouge">CMPEGFrame::DeSerializeFrameHeader+0x39 (mfsrcsnk.dll+0xf869)</code>, a check is performed. Since <code class="language-plaintext highlighter-rouge">remaining_size</code> contains a large value, the check is passed. Execution flow continues, causing an OOB Read and a crash when trying to access the invalid pointer stored in <code class="language-plaintext highlighter-rouge">buf</code>.</p>
+
+<pre><code class="language-C">if ( remaining_size &lt; 4 ) {
+    ... // Irrelevant Code
+}
+v10 = *buf; // OOB Read
+</code></pre>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>This vulnerability could result in code execution when chained with other vulnerabilities.</p>
+
+:ET
