@@ -12,7 +12,7 @@ Hi, I'm MiloTruck, a student from Singapore. I often participate in CTF competit
 Microsoft Media Foundation
 * [CVE-2021-33760](/blog/CVE-2021-33760)
 * [CVE-2022-21977](/blog/CVE-2022-21977)
-* [CVE-2021-22010](/blog/CVE-2022-22010)
+* [CVE-2022-22010](/blog/CVE-2022-22010)
 
 ## Competitions
 
