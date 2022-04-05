@@ -10,8 +10,8 @@ Hi, I'm MiloTruck, a student from Singapore. I often participate in CTF competit
 ## CVEs
 
 * [CVE-2021-33760: Microsoft Media Foundation Information Disclosure Vulnerability (mfsrcsnk.dll)](/blog/CVE-2021-33760)
-* [CVE-2022-21977: Microsoft Media Foundation Unchecked Size Vulnerability (mfmp4srcsnk.dll)](/blog/CVE-2021-21977)
-* [CVE-2021-22010: Microsoft Media Foundation CQTTrack::CreateChildAtom Information Disclosure Vulnerability (mfmp4srcsnk.dll)](/blog/CVE-2021-22010)
+* [CVE-2022-21977: Microsoft Media Foundation Unchecked Size Vulnerability (mfmp4srcsnk.dll)](/blog/CVE-2022-21977)
+* [CVE-2021-22010: Microsoft Media Foundation CQTTrack::CreateChildAtom Information Disclosure Vulnerability (mfmp4srcsnk.dll)](/blog/CVE-2022-22010)
 
 ## Competitions
 
