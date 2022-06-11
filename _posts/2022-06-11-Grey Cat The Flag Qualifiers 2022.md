@@ -64,9 +64,9 @@ Especially since the `binary` is written in `go`, which might be harder to rever
 > 
 > 5. If the last 3-byte block has only 2 bytes of input data, pad 1 byte of zero `\x00`. After encoding it as a normal block, overwrite the last 1 character with 1 equal sign `=`, so the decoding process knows 1 byte of zero was padded.
 
-Essentially, the input is divided into blocks of 3 characters and converted to binary (24 bit). Then, every 6 bits is converted into a new Base64 character, resulting in 4 bytes of encrypted text. If the last block has less than 3 characters, it is encoded to Base64 and then padded with `=` to become 4 bytes.
+Essentially, the input is divided into blocks of 3 characters and converted to binary (24 bits). Then, every 6 bits is converted into a new Base64 character, resulting in 4 bytes of encrypted text. If the last block has less than 3 characters, it is encoded to Base64 and then padded with `=` to become 4 bytes.
 
-Now that we have a rough understanding of how Base64 works, we attempt to reverse the binary. The `main_main()` function of the decompiled code is shown:
+Now that we have a rough understanding of how Base64 works, we can attempt to reverse the binary. The `main_main()` function of the decompiled code is shown:
 ```c
 void __cdecl main_main()
 {
@@ -94,7 +94,7 @@ Although the decompilation seems quite messy, we can infer that the binary:
 
 Thus, we look at the `main_Encode()` function to figure out how input is encrypted:
 ```c
-// Note: I have cleaned up and removed error checking code to make the decompilation more readeable
+// Note: I have cleaned up the code and removed error checking to make the decompilation more readeable
 __int64 __usercall main_Encode@<rax>(
     char *buf,
     unsigned __int64 enc_len,
@@ -114,7 +114,7 @@ __int64 __usercall main_Encode@<rax>(
 
   // Loop while index of input is less than length of input rounded down to nearest 3
   while ( input_i < 3 * (input_len / 3) ) {
-    // Convert 3 bytes from in into binary      
+    // Convert 3 bytes from input into binary      
     binary = (input[input_i] << 16) | (input[input_i + 1] << 8) | input[input_i + 2];
 
     // Convert every 6 bits into an integer, and use it as an index to fetch a character in key
