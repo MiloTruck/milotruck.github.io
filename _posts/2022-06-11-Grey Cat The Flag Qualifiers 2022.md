@@ -4,7 +4,7 @@ date: 2022-06-11
 categories: CTF
 --- 
 
-This CTF was the qualifying round for Grey Cat The Flag 2022, hosted by National University of Singapore (NUS). I participated with my regular teammates [@OceanKoh](https://blog.puddle.sg/) and [@NyxTo](https://github.com/Nyxto) under the name **ItzyBitzySpider**, and we managed to place 10th, which is just enough to qualify for the finals.
+This CTF was the qualifying round for Grey Cat The Flag 2022, hosted by the National University of Singapore (NUS). Under the name **ItzyBitzySpider**, I participated with my regular teammates [@OceanKoh](https://blog.puddle.sg/) and [@NyxTo](https://github.com/Nyxto). We managed to place 10th, which was just enough to qualify for the finals.
 
 ![alt]({{ site.url }}{{ site.baseurl }}/assets/images/Grey Cat The Flag Qualifiers 2022/Scoreboard.JPG)
 
@@ -22,14 +22,12 @@ This CTF was the qualifying round for Grey Cat The Flag 2022, hosted by National
 **Solution**
 
 We are provided with `memory-game.apk`, which is a memory card game with multiple difficulty levels, as shown below:
-![alt]({{ site.url }}{{ site.baseurl }}/assets/images/Grey Cat The Flag Qualifiers 2022/Memory Game (Part 2) - 1.JPG)
 
-![alt]({{ site.url }}{{ site.baseurl }}/assets/images/Grey Cat The Flag Qualifiers 2022/Memory Game (Part 2) - 2.JPG)
+![alt]({{ site.url }}{{ site.baseurl }}/assets/images/Grey Cat The Flag Qualifiers 2022/Memory Game (Part 2) - 1.JPG) ![alt]({{ site.url }}{{ site.baseurl }}/assets/images/Grey Cat The Flag Qualifiers 2022/Memory Game (Part 2) - 2.JPG)
 
+From the challenge description, we know that to get the flag through `logcat`, that the goal is to complete the *Master* difficulty within 20 seconds. Since this is impossible, we will have to find some way to bypass actually winning the game.
 
-From the challenge description, we know that to get the flag through logcat, that the goal is to complete the *Master* difficulty within 20 seconds. Since this is impossible, we will have to find some way to bypass actually winning the game.
-
-When looking through the decompilation with [JEB Decompiler](https://www.pnfsoftware.com/), this part of the code in the `class Engine` seems to handle printing of the flag:
+When looking through the decompilation with [JEB Decompiler](https://www.pnfsoftware.com/), this part of the code in `Engine` seems to handle printing of the flag:
 ```java
 int remainingCards = this.mToFlip - 2;
 this.mToFlip = remainingCards;
@@ -119,7 +117,7 @@ if(remainingCards == 0) {
 }
 ```
 
-From the chunk of code above, the flag will be printed out should these conditions be met:
+From the chunk of code above, we can infer that the flag will be printed out should these conditions be met:
 1. The number of remaining cards has to be `0`.
 ```java
 int remainingCards = this.mToFlip - 2;
@@ -133,18 +131,14 @@ int timeLimit = this.mPlayingGame.boardConfiguration.time;
 if(this.mPlayingGame.boardConfiguration.difficulty == 6 && usedTime < timeLimit) {
 ```
 
-I decided to go with patching instead of **Frida** although the hint suggested using it. The idea is to patch `remainingCards == 0` into this:
-```java
-if(remainingCards != 0) {
-```
-This way, we would win the game whenever we match a pair of cards, as there is no check to ensure there are no cards left to flip.
+Although the hint suggested using **Frida**, I decided to go with patching instead. The idea is to patch `remainingCards == 0` into `remainingCards != 0`. This way, we would win the game whenever we match a pair of cards, as there is no check to ensure there are no cards left to flip.
 
 We use `apktool` to decompile the APK and retrieve the smali code:
 ```bash
 apktool d memory-game.apk
 ```
 In `Engine.smali`, we see that our check corresponds to line `425-433`:
-```smali
+```java
 iget p1, p0, Lcom/snatik/matches/engine/Engine;->mToFlip:I  # Move Engine->mToFlip into p1
 
 const/4 v0, 0x2  # Set v0 to 0x2
@@ -156,7 +150,7 @@ iput p1, p0, Lcom/snatik/matches/engine/Engine;->mToFlip:I  # This is irrelevant
 if-nez p1, :cond_7  # Jump to :cond_7 if p1 != 0, which is the end of the function
 ```
 We simply flip the check by changing `if-nez` to `if-eqz`:
-```smali
+```java
 if-eqz p1, :cond_7  # Jump to :cond_7 if p1 == 0, which is the end of the function
 ```
 
@@ -165,14 +159,15 @@ We recompile the APK using these commands:
 # Create a keystore
 keytool -genkeypair -v -keystore key.keystore -alias example -keyalg RSA -keysize 2048 -validity 10000
 
-# Recompile the apk
+# Recompile the apk, the resulting apk should be in memory-game/dist/
 apktool b memory-game --use-aapt2 
-# memory-game.apk should be in memory-game/dist/
+
+# Align and sign the apk
 zipalign -p -f -v 4 memory-game.apk align.apk
 apksigner sign -ks key.keystore --out patched.apk align.apk
 ```
 
-After creating `patched.apk`, we install it and match one pair of cards under 20 seconds in the *Master* difficulty. Then, we use `adb` to retrieve the flag from `logcat`:
+After installing `patched.apk`, we play the *Master* difficulty and match one pair of cards under 20 seconds. Then, we use `adb` to retrieve the flag from `logcat`:
 ```bash
 $ adb logcat | grep FLAG
 06-11 00:00:08.597  4771  4771 I FLAG    : grey{hum4n_m3m0ry_i5_4lw4y5_b3tt3r_th4n_r4nd0m_4cc3ss_m3m0ry}
