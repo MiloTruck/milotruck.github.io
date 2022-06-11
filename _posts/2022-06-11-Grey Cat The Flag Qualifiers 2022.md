@@ -141,17 +141,17 @@ In `Engine.smali`, we see that our check corresponds to line `425-433`:
 ```java
 iget p1, p0, Lcom/snatik/matches/engine/Engine;->mToFlip:I  # Move Engine->mToFlip into p1
 
-const/4 v0, 0x2  # Set v0 to 0x2
+const/4 v0, 0x2  // Set v0 to 0x2
 
-sub-int/2addr p1, v0  # Subtract 0x2 from p1
+sub-int/2addr p1, v0  // Subtract 0x2 from p1
 
-iput p1, p0, Lcom/snatik/matches/engine/Engine;->mToFlip:I  # This is irrelevant
+iput p1, p0, Lcom/snatik/matches/engine/Engine;->mToFlip:I  // This line is irrelevant
 
-if-nez p1, :cond_7  # Jump to :cond_7 if p1 != 0, which is the end of the function
+if-nez p1, :cond_7  // Jump to :cond_7 if p1 != 0, which is the end of the function
 ```
 We simply flip the check by changing `if-nez` to `if-eqz`:
 ```java
-if-eqz p1, :cond_7  # Jump to :cond_7 if p1 == 0, which is the end of the function
+if-eqz p1, :cond_7  // Jump to :cond_7 if p1 == 0, which is the end of the function
 ```
 
 We recompile the APK using these commands:
