@@ -139,7 +139,7 @@ apktool d memory-game.apk
 ```
 In `Engine.smali`, we see that our check corresponds to line `425-433`:
 ```java
-iget p1, p0, Lcom/snatik/matches/engine/Engine;->mToFlip:I  # Move Engine->mToFlip into p1
+iget p1, p0, Lcom/snatik/matches/engine/Engine;->mToFlip:I  // Move Engine->mToFlip into p1
 
 const/4 v0, 0x2  // Set v0 to 0x2
 
