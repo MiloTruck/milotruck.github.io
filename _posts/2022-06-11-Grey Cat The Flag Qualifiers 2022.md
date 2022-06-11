@@ -10,6 +10,172 @@ This CTF was the qualifying round for Grey Cat The Flag 2022, hosted by the Nati
 
 # Writeups  
 
+## Runtime Environment 1
+
+> GO and try to solve this basic challenge.
+> 
+> FAQ: If you found the input leading to the challenge.txt you are on the right track
+
+[Challenge Files](https://github.com/MiloTruck/CTF-Archive/tree/master/Grey%20Cat%20The%20Flag%20Qualifiers%202022/Runtime%20Environment%201){: .btn .btn--primary}
+
+**Solution**
+
+Upon unzipping `gogogo.tar.gz`, we are provided with a challenge binary and a text file.
+```bash
+$ tar xvzf gogogo.tar.gz
+binary
+challenge.txt
+```
+
+`binary` is a 64-bit ELF, while `challenge.txt` seems to contain some encoded text, which we can assume is output from `binary`:
+```bash
+$ file binary
+binary: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, Go BuildID=OHBJFJh5S4MEkda8Q683/cMydJq6y9QbVjBCjK1KP/8R1f9ddSl9EfpM8KP2Dy/3G9-Ju3BW7WUsgoGNyvl, not stripped
+
+$ cat challenge.txt
+GvVf+fHWz1tlOkHXUk3kz3bqh4UcFFwgDJmUDWxdDTTGzklgIJ+fXfHUh739+BUEbrmMzGoQOyDIFIz4GvTw+j--
+```
+
+When provided with a ELF binary for reversing challenges, I like to run it a few times to get a general idea of what it does:
+```bash
+$ ./binary
+AAAAAAAA
+VbTaVbTaVbJ-
+$ ./binary
+AAA
+VbTa
+$ ./binary
+BBBB
+V7mRVj--
+```
+From the output, we can observe a few things:
+1. `binary` seems to take in plaintext as input and output an encoded text
+2. The encoded output looks *oddly similar* to Base64 encoding
+
+Especially since the `binary` is written in `go`, which might be harder to reverse, I thought that there was no harm in reading up on Base64 before attempting to reverse the binary. From [this website](http://www.herongyang.com/Encoding/Base64-Encoding-Algorithm.html), we can see that the Base64 algorithm is as follows:
+
+> 1. Divide the input byte stream into blocks of 3 bytes.
+> 
+> 2. Divide 24 bits of each 3-byte block into 4 groups of 6 bits.
+> 
+> 3. Map each group of 6 bits to 1 printable character, based on the 6-bit value using the Base64 character set map.
+> 
+> 4. If the last 3-byte block has only 1 byte of input data, pad 2 bytes of zeros `\x00\x00`. After encoding it as a normal block, overwrite the last 2 characters with 2 equal signs `==`, so the decoding process knows 2 bytes of zero were padded.
+> 
+> 5. If the last 3-byte block has only 2 bytes of input data, pad 1 byte of zero `\x00`. After encoding it as a normal block, overwrite the last 1 character with 1 equal sign `=`, so the decoding process knows 1 byte of zero was padded.
+
+Essentially, the input is divided into blocks of 3 characters and converted to binary (24 bit). Then, every 6 bits is converted into a new Base64 character, resulting in 4 bytes of encrypted text. If the last block has less than 3 characters, it is encoded to Base64 and then padded with `=` to become 4 bytes.
+
+Now that we have a rough understanding of how Base64 works, we attempt to reverse the binary. The `main_main()` function of the decompiled code is shown:
+```c
+void __cdecl main_main()
+{
+  v9 = runtime_newobject(&unk_4AB9C0);
+  v11[0] = &unk_4A86A0;
+  v11[1] = v9;
+  v1 = fmt_Fscanln(&go_itab__os_File_io_Reader, os_Stdin, v11);
+  enc_len = 4 * ((((((v9[1] + 2) * 0xAAAAAAAAAAAAAAABLL) >> 64) + v9[1] + 2) >> 1) - ((v9[1] + 2) >> 63));
+  runtime_makeslice(qword_4ABB00, enc_len, enc_len);
+  v8 = v1;
+  runtime_stringtoslicebyte(v7, *v9, v9[1]);
+  main_Encode(v8, enc_len, enc_len, v1, 1uLL);
+  runtime_slicebytetostring(0LL, v4, v5);
+  runtime_convTstring(v2, v3);
+  v10[0] = &unk_4AB9C0;
+  v10[1] = v0;
+  fmt_Fprintln(&go_itab__os_File_io_Writer, os_Stdout, v10, 1LL, 1LL);
+}
+```
+
+Although the decompilation seems quite messy, we can infer that the binary:
+1. Reads in user input using `fmt_Fscanln()`
+2. Passes the input to `main_Encode()` for encryption
+3. Outputs the encrypted text using `fmt_Fprintln()`
+
+Thus, we look at the `main_Encode()` function to figure out how input is encrypted:
+```c
+// Note: I have cleaned up and removed error checking code to make the decompilation more readeable
+__int64 __usercall main_Encode@<rax>(
+    char *buf,
+    unsigned __int64 enc_len,
+    __int64 ret,
+    char *input,
+    unsigned __int64 input_len)
+{
+  // Copy the string into key, which will be used for the character set
+  // NOTE: Notice how key has 64 characters, which suggests this is a Base64 character set
+  qmemcpy(key, "NaRvJT1B/m6AOXL9VDFIbUGkC+sSnzh5jxQ273d4lHPg0wcEpYqruWyfZoM8itKe", sizeof(key));
+
+  // Declare indexes for input and buf
+  // input - input buffer
+  // buf - buffer that contains encoded text
+  input_i = 0LL;
+  buf_i = 0LL;
+
+  // Loop while index of input is less than length of input rounded down to nearest 3
+  while ( input_i < 3 * (input_len / 3) ) {
+    // Convert 3 bytes from in into binary      
+    binary = (input[input_i] << 16) | (input[input_i + 1] << 8) | input[input_i + 2];
+
+    // Convert every 6 bits into an integer, and use it as an index to fetch a character in key
+    // Then, store the character in buf as the encoded text
+    buf[buf_i] = key[(binary >> 18) & 0x3F];
+    buf[buf_i + 1] = key[(binary >> 12) & 0x3F];
+    buf[buf_i + 2] = key[(binary >> 6) & 0x3F];
+    buf[buf_i + 3] = key[binary & 0x3F];
+
+    // Increment input and buf indexes
+    input_i += 3LL;
+    buf_i += 4LL;
+  }
+  
+  // If there is no input left to encode, return the encoded output
+  if ( input_len == input_i )
+    return ret;
+
+  // Get the remaining length of input that has not been encoded
+  remainder = input_len - input_i;
+
+  if ( remainder == 2 ) {
+    // If 2 bytes remaining, convert the last 2 characters into binary
+    binary = (in[input_i] << 16) | (in[input_i + 1] << 8);
+  } else {
+    // If 1 byte remaining, convert the last character into binary
+    binary = in[input_i] << 16;
+  }
+  
+  // Convert every 6 bits into an integer, and use it as an index to fetch a character in key
+  // Then, store the character in buf as the encoded text 
+  buf[buf_i] = key[(binary >> 18) & 0x3F];
+  buf[buf_i + 1] = key[(binary >> 12) & 0x3F];
+  
+
+  if ( remainder == 1 ) {
+    // If 1 byte remaining, append "--" to the encoded text
+    buf[buf_i + 2] = '-';
+    buf[buf_i + 3] = '-';
+  } else if ( remainder == 2 ) {
+    // If 2 bytes remaining, convert the last 6 bits and fetch another character from key
+    // Store it in the 2nd last position in buf
+    buf[buf_i + 2] = key[(binary >> 6) & 0x3F];
+
+    // Append "-" to the last position in buf
+    buf[buf_i + 3] = '-';
+  }
+  
+  // Return the encoded output
+  return ret;
+}
+```
+
+As seen from the decompiled code, `main_Encode()` is very similar to Base64, with the only differences being:
+* `NaRvJT1B/m6AOXL9VDFIbUGkC+sSnzh5jxQ273d4lHPg0wcEpYqruWyfZoM8itKe` is used as the character set instead of the standard `ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/`
+* `-` is used for padding instead of `=`
+
+With this knowledge, we can decrypt the encoded text in `challenge.txt` using [CyberChef with a custom Base64 character set](https://gchq.github.io/CyberChef/#recipe=From_Base64('NaRvJT1B/m6AOXL9VDFIbUGkC%2BsSnzh5jxQ273d4lHPg0wcEpYqruWyfZoM8itKe',true,false)&input=R3ZWZitmSFd6MXRsT2tIWFVrM2t6M2JxaDRVY0ZGd2dESm1VRFd4ZERUVEd6a2xnSUorZlhmSFVoNzM5K0JVRWJybU16R29RT3lESUZJejRHdlR3K2otLQ). After 4 rounds of decryption, the flag is given as output.
+
+**Flag:** `grey{B4s3d_G0Ph3r_r333333}`
+
 ## Memory Game (Part 2)
 
 > Can you finish MASTER difficulty in 20 seconds? If you can, the flag will be given to you through logcat with the tag FLAG.
