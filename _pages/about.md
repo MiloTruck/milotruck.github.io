@@ -5,7 +5,7 @@ layout: single
 classes: wide
 ---
 
-Hi, I'm MiloTruck, a student from Singapore. I often participate in CTF competitions with **HATS SG** and **ItzyBitzySpider**. Also, I have a general interest in tech and cybersecurity related things.
+Hi, I'm MiloTruck, a undergraduate student from Singapore. I often participate in CTF competitions and Hackathons with **ItzyBitzySpider**. Also, I'm interested in mainly security and vulnerability research, including Binary Exploitation and Web3 related topics.
 
 ## CVEs
 
@@ -13,6 +13,12 @@ Microsoft Media Foundation
 * [CVE-2021-33760](/blog/CVE-2021-33760)
 * [CVE-2022-21977](/blog/CVE-2022-21977)
 * [CVE-2022-22010](/blog/CVE-2022-22010)
+
+## Achievements
+Ranked #110 on MSRC 2021 Q4 Security Researchers
+
+![Demo](/assets/images/MSRC 2021 Q4 Leaderboard.png)  
+
 
 ## Competitions
 
@@ -38,3 +44,7 @@ Microsoft Media Foundation
 | Stack the Flags 2020                       | ItzyBitzySpider       | 3rd Place, JC Category           |
 | DSO-NUS CTF 2021                           | It'z Me               | 6th Place                        |
 | Whitehacks 2021                            | ItzyBitzySpider       | 6th Place                        |
+| Stack the Codes Hackathon 2022             | ItzyBitzySpider       | 3rd Place                        |
+| Stack the Flags 2022                       | ItzyBitzySpider       | 2nd Place, University Category   |
+| Cyber League 2022                          | ItzyBitzySpider       | 3rd Place                        |
+| Hack&Roll 2023                             | ItzyBitzySpider       | Most Entertaining Hack           |
