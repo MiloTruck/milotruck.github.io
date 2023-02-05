@@ -5,7 +5,7 @@ layout: single
 classes: wide
 ---
 
-Hi, I'm MiloTruck, a undergraduate student from Singapore. I often participate in CTF competitions and Hackathons with **ItzyBitzySpider**. Also, I'm interested in mainly security and vulnerability research, including Binary Exploitation and Web3 related topics.
+Hi, I'm MiloTruck, a undergraduate student from Singapore. I often participate in CTF competitions and hackathons with **ItzyBitzySpider**. Also, I'm interested in mainly security and vulnerability research, including Binary Exploitation and Web3 related topics.
 
 ## CVEs
 
