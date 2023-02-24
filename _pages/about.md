@@ -38,6 +38,7 @@ Ranked **#110** on [MSRC 2021 Q4 Security Researchers](https://msrc.microsoft.co
 | Cybersecurity Challenge Singapore (CSC) 2019          | Individual            | Individual Winner, Top 6 |
 
 ### 2020
+
 | Name                                                  | Team            | Honors                           |
 | ----------------------------------------------------- | --------------- | -------------------------------- |
 | Cyberthon 2020                                        | ItzyBitzySpider | Overall 3rd, Data Science Winner |
@@ -48,12 +49,14 @@ Ranked **#110** on [MSRC 2021 Q4 Security Researchers](https://msrc.microsoft.co
 | National Olympiad of Informatics (NOI) Singapore 2020 | Individual      | Bronze Medal                     |
 
 ### 2021
+
 | Name             | Team            | Honors    |
 | ---------------- | --------------- | --------- |
 | DSO-NUS CTF 2021 | It'z Me         | 6th Place |
 | Whitehacks 2021  | ItzyBitzySpider | 6th Place |
 
 ### 2022
+
 | Name                           | Team            | Honors                         |
 | ------------------------------ | --------------- | ------------------------------ |
 | Stack the Codes Hackathon 2022 | ItzyBitzySpider | 3rd Place                      |
@@ -61,6 +64,7 @@ Ranked **#110** on [MSRC 2021 Q4 Security Researchers](https://msrc.microsoft.co
 | Cyber League 2022              | ItzyBitzySpider | 3rd Place                      |
 
 ### 2023
+
 | Name           | Team            | Honors                 |
 | -------------- | --------------- | ---------------------- |
 | Hack&Roll 2023 | ItzyBitzySpider | Most Entertaining Hack |
