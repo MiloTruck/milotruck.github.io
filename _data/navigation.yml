@@ -2,9 +2,9 @@
 main:
   - title: "About"
     url: /about/
-  - title: "CTF Writeups"
+  # - title: "Projects"
+  #   url: /projects
+  - title: "Writeups"
     url: /ctf
-  - title: "Projects"
-    url: /projects
   - title: "Blog"
     url: /blog
