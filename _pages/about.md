@@ -30,37 +30,37 @@ Ranked **#110** on [MSRC 2021 Q4 Security Researchers](https://msrc.microsoft.co
 
 ### 2019
 
-| Name                                       | Team                  | Honors                           |
-|--------------------------------------------|-----------------------|----------------------------------|
-| Cyber Defenders Discovery Camp (CDDC) 2019 | ItzyBitzySpider/acsii | Silver Award, 7th Place          |
-| Cyberthon 2019                             | ItzyBitzySpider/acsii | Participation                    |
-| National Olympiad of Informatics (NOI) Singapore 2019 | Individual | Participation            	|
-| Cybersecurity Challenge Singapore (CSC) 2019          | Individual | Individual Winner, Top 6 	|
+| Name                                                  | Team                  | Honors                   |
+| ----------------------------------------------------- | --------------------- | ------------------------ |
+| Cyber Defenders Discovery Camp (CDDC) 2019            | ItzyBitzySpider/acsii | Silver Award, 7th Place  |
+| Cyberthon 2019                                        | ItzyBitzySpider/acsii | Participation            |
+| National Olympiad of Informatics (NOI) Singapore 2019 | Individual            | Participation            |
+| Cybersecurity Challenge Singapore (CSC) 2019          | Individual            | Individual Winner, Top 6 |
 
 ### 2020
-| Name | Team | Honors |
-|---|---|---|
-| Cyberthon 2020                             | ItzyBitzySpider       | Overall 3rd, Data Science Winner |
-| Cyber Defenders Discovery Camp (CDDC) 2020 | ItzyBitzySpider       | 4th Place, JC Category           |
-| Whitehacks 2020                            | ItzyBitzySpider       | 4th Place                        |
-| Cyber SEA Games (CSG) 2020                 | Singapore             | 1st Place                        |
-| Stack the Flags 2020                       | ItzyBitzySpider       | 3rd Place, JC Category           |
-| National Olympiad of Informatics (NOI) Singapore 2020 | Individual | Bronze Medal            	| 
+| Name                                                  | Team            | Honors                           |
+| ----------------------------------------------------- | --------------- | -------------------------------- |
+| Cyberthon 2020                                        | ItzyBitzySpider | Overall 3rd, Data Science Winner |
+| Cyber Defenders Discovery Camp (CDDC) 2020            | ItzyBitzySpider | 4th Place, JC Category           |
+| Whitehacks 2020                                       | ItzyBitzySpider | 4th Place                        |
+| Cyber SEA Games (CSG) 2020                            | Singapore       | 1st Place                        |
+| Stack the Flags 2020                                  | ItzyBitzySpider | 3rd Place, JC Category           |
+| National Olympiad of Informatics (NOI) Singapore 2020 | Individual      | Bronze Medal                     |
 
 ### 2021
-| Name | Team | Honors |
-| - | - | - |
-| DSO-NUS CTF 2021                           | It'z Me               | 6th Place                        |
-| Whitehacks 2021                            | ItzyBitzySpider       | 6th Place                        |
+| Name             | Team            | Honors    |
+| ---------------- | --------------- | --------- |
+| DSO-NUS CTF 2021 | It'z Me         | 6th Place |
+| Whitehacks 2021  | ItzyBitzySpider | 6th Place |
 
 ### 2022
-| Name | Team | Honors |
-| - | - | - |
-| Stack the Codes Hackathon 2022             | ItzyBitzySpider       | 3rd Place                        |
-| Stack the Flags 2022                       | ItzyBitzySpider       | 2nd Place, University Category   |
-| Cyber League 2022                          | ItzyBitzySpider       | 3rd Place                        |
+| Name                           | Team            | Honors                         |
+| ------------------------------ | --------------- | ------------------------------ |
+| Stack the Codes Hackathon 2022 | ItzyBitzySpider | 3rd Place                      |
+| Stack the Flags 2022           | ItzyBitzySpider | 2nd Place, University Category |
+| Cyber League 2022              | ItzyBitzySpider | 3rd Place                      |
 
 ### 2023
-| Name | Team | Honors |
-| - | - | - |
-| Hack&Roll 2023                             | ItzyBitzySpider       | Most Entertaining Hack           |
+| Name           | Team            | Honors                 |
+| -------------- | --------------- | ---------------------- |
+| Hack&Roll 2023 | ItzyBitzySpider | Most Entertaining Hack |
