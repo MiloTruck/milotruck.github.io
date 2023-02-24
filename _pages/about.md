@@ -19,11 +19,11 @@ Microsoft Media Foundation
 
 Ranked **#168** on [Code4rena](https://code4rena.com/) for 2022
 
-<img src="https://github.com/MiloTruck/MiloTruck.github.io/blob/master/assets/images/Code4rena%20Leaderboard%202022.png" width="200">
+<img src="https://raw.githubusercontent.com/MiloTruck/MiloTruck.github.io/master/assets/images/Code4rena%20Leaderboard%202022.png" width="800">
 
 Ranked **#110** on [MSRC 2021 Q4 Security Researchers](https://msrc.microsoft.com/blog/2022/02/congratulations-to-the-top-msrc-2021-q4-security-researchers/)
 
-<img src="https://github.com/MiloTruck/MiloTruck.github.io/blob/master/assets/images/MSRC%202021%20Q4%20Leaderboard.png" width="200">
+<img src="https://raw.githubusercontent.com/MiloTruck/MiloTruck.github.io/master/assets/images/MSRC%202021%20Q4%20Leaderboard.png" width="800">
 
 
 ## Competitions
@@ -39,7 +39,7 @@ Ranked **#110** on [MSRC 2021 Q4 Security Researchers](https://msrc.microsoft.co
 
 ### 2020
 | Name | Team | Honors |
-| - | - | - |
+|---|---|---|
 | Cyberthon 2020                             | ItzyBitzySpider       | Overall 3rd, Data Science Winner |
 | Cyber Defenders Discovery Camp (CDDC) 2020 | ItzyBitzySpider       | 4th Place, JC Category           |
 | Whitehacks 2020                            | ItzyBitzySpider       | 4th Place                        |
