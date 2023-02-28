@@ -4,9 +4,7 @@ date: 2023-02-28
 categories: CTF
 --- 
 
-# Preface
-
-This CTF had two smart contract challenges, **Dragon Slayer** and **Diamond Heist**. I actually solved these challenges after the CTF ended as I was on vacation during the CTF. Nevertheless, I still wanted to give them a try.
+This CTF had two smart contract challenges, **Dragon Slayer** and **Diamond Heist**.
 
 
 # Dragon Slayer
@@ -236,6 +234,9 @@ contract Exploit {
 
 }
 ```
+
+<br>
+<br>
 
 # Diamond Heist
 
