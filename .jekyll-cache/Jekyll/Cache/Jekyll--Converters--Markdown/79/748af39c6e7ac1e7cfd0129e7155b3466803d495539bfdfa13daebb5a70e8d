@@ -1,9 +1,0 @@
-I"ç<ul class="toc__menu">
-  <li><a href="#writeups">Writeups</a>
-    <ul>
-      <li><a href="#syscall-phobia-pwn">Syscall Phobia (pwn)</a></li>
-      <li><a href="#task-tracker-pwn">Task Tracker (pwn)</a></li>
-    </ul>
-  </li>
-</ul>
-:ET

@@ -7,4 +7,14 @@
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
 
+// Change to font size in posts
+.page__content {
+    p,
+    li,
+    dl {
+        font-size: 0.95em;
+    }
+}
+
+// Make posts wider
 $max-width:100%;

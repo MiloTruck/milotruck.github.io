@@ -115,7 +115,27 @@ var store = [{
         "url": "http://localhost:4000/ctf/DSO-NUS-CTF-2021/",
         "teaser":null},{
         "title": "CVE-2021-33760",
-        "excerpt":"Windows Media Foundation Information Disclosure Vulnerability (mfsrcsnk.dll) Summary A vulnerability is present in mfsrcsnk.dll, which is part of the Microsoft Media Foundation framework. An integer underflow leads to an Out-of-Bounds (OOB) Read when parsing an MP3 frame header. The vulnerability can be triggered by right-clicking on the file poc.mp3 in...","categories": ["Blog"],
+        "excerpt":"Microsoft Media Foundation Information Disclosure Vulnerability (mfsrcsnk.dll) Summary A vulnerability is present in mfsrcsnk.dll, which is part of the Microsoft Media Foundation framework. An integer underflow leads to an Out-of-Bounds (OOB) Read when parsing an MP3 frame header. The vulnerability can be triggered by right-clicking on the file poc.mp3 in...","categories": ["Blog"],
         "tags": [],
         "url": "http://localhost:4000/blog/CVE-2021-33760/",
+        "teaser":null},{
+        "title": "CVE-2022-21977",
+        "excerpt":"Microsoft Media Foundation Unchecked Size Vulnerability (mfmp4srcsnk.dll) Summary A vulnerability is present in mfmp4srcsnk.dll, which is part of the Microsoft Media Foundation framework. An Out-of-Bounds (OOB) read is triggered due to a an incorrect size field in a malformed ftyp atom. The vulnerability can be triggered by right-clicking on the...","categories": ["Blog"],
+        "tags": [],
+        "url": "http://localhost:4000/blog/CVE-2022-21977/",
+        "teaser":null},{
+        "title": "CVE-2022-22010",
+        "excerpt":"Microsoft Media Foundation CQTTrack::CreateChildAtom Information Disclosure Vulnerability (mfmp4srcsnk.dll) CVE Number CVE-2022-22010 Description Summary An information disclosure vulnerability exists in mfmp4srcsnk.dll, which is part of the Microsoft Media Foundation framework. An Out-of-Bounds (OOB) read is triggered while parsing an invalid moov atom in a malformed MP4 file. Proof-of-Concept The vulnerability can...","categories": ["Blog"],
+        "tags": [],
+        "url": "http://localhost:4000/blog/CVE-2022-22010/",
+        "teaser":null},{
+        "title": "Grey Cat The Flag Qualifiers 2022",
+        "excerpt":"This CTF was the qualifying round for Grey Cat The Flag 2022, hosted by the National University of Singapore (NUS). Under the name ItzyBitzySpider, I participated with my regular teammates @OceanKoh and @NyxTo. We managed to place 10th, which was just enough to qualify for the finals. Writeups Runtime Environment...","categories": ["CTF"],
+        "tags": [],
+        "url": "http://localhost:4000/ctf/Grey-Cat-The-Flag-Qualifiers-2022/",
+        "teaser":null},{
+        "title": "Exploiting smart contracts in HackTM 2023 CTF Quals",
+        "excerpt":"This CTF had two smart contract challenges, Dragon Slayer and Diamond Heist. Dragon Slayer Prove yourself a true champion. Kill the mighty dragon and earn the right to call yourself a dragon slayer. nc 34.141.16.87 30100 The contracts for this challenge can be found in dragon_slayer_contracts.zip. Overview We are provided...","categories": ["CTF"],
+        "tags": [],
+        "url": "http://localhost:4000/ctf/Exploiting-smart-contracts-in-HackTM-2023-CTF-Quals/",
         "teaser":null}]
