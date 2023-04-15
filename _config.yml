@@ -121,7 +121,7 @@ author:
       # url: "https://milotruck.github.io"
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
-      # url: "https://twitter.com/"
+      url: "https://twitter.com/MiloTruck"
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
       url: "https://www.linkedin.com/in/brandon-chong-286a141a2/"
