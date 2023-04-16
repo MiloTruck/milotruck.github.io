@@ -2,7 +2,6 @@
 title: "About"
 permalink: /about/
 layout: single
-classes: wide
 ---
 
 Hi, I'm MiloTruck, an undergraduate student from Singapore with an interest in cybersecurity, mainly vulnerability research and smart contract security. I often participate in CTF competitions and hackathons with my team **ItzyBitzySpider**, and occasionally participate in [Code4rena](https://code4rena.com/) auditing contests.
