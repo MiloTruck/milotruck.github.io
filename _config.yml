@@ -124,7 +124,7 @@ author:
       url: "https://twitter.com/MiloTruck"
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
-      url: "https://www.linkedin.com/in/brandon-chong-286a141a2/"
+      # url: "https://www.linkedin.com/in/"
     - label: "Facebook"
       icon: "fab fa-fw fa-facebook-square"
       # url: "https://facebook.com/"
