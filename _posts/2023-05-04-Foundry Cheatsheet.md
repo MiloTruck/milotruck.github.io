@@ -22,7 +22,7 @@ forge init --template https://github.com/zobront/paradigm-ctf paradigm_ctf
 
 ## Dependencies
 
-## Adding dependencies
+### Adding dependencies
 
 Install dependencies in an existing project:
 ```sh
@@ -37,7 +37,7 @@ forge install <dependency>
 forge install openzeppelin/openzeppelin-contracts
 ```
 
-## Remappings
+### Remappings
 
 Forge can automatically deduce remappings:
 ```sh
@@ -49,7 +49,7 @@ To customize a remapping, simply add it to `remappings.txt`:
 echo "@openzeppelin/=lib/openzeppelin-contracts/" > remappings.txt
 ```
 
-# Testing
+## Testing
 
 To run tests:
 ```sh
@@ -67,7 +67,7 @@ To run specific tests:
 - `--match-contract` runs tests in contracts matching the specified regex.
 - `--match-path` runs tests in source files matching the specified path.
 
-## Fork testing
+### Fork testing
 
 To fork a network:
 ```sh
@@ -79,11 +79,11 @@ To identify contracts in a forked environment, pass your Etherscan API key using
 forge test --fork-url <rpc_url> --etherscan-api-key <etherscan_api_key>
 ```
 
-## Useful Cheatcodes
+### Useful Cheatcodes
 
 Refer to [Cheatcodes Reference](https://book.getfoundry.sh/cheatcodes/) for all available cheatcodes.
 
-### Global values
+#### Global values
 
 ```solidity
 // Set block.timestamp
@@ -99,7 +99,7 @@ rewind(uint256 time)
 vm.roll(uint256 blockNumber)
 ```
 
-### Storage and memory
+#### Storage and memory
 
 ```solidity
 // Load a storage slot from an address
@@ -112,7 +112,7 @@ vm.store(address account, bytes32 slot)
 vm.etch(address addr, bytes calldata code)
 ```
 
-### Caller address
+#### Caller address
 
 ```solidity
 // Set msg.sender for the next call
@@ -128,7 +128,7 @@ vm.stopPrank()
 changePrank(address msgSender) 
 ```
 
-### Balances
+#### Balances
 
 ```solidity
 // Set ether balance for an address
@@ -150,7 +150,7 @@ dealERC1155(address token, address to, uint256 id, uint256 balance)
 dealERC1155(address token, address to, uint256 id, uint256 balance, bool adjust)
 ```
 
-### Testing reverts
+#### Testing reverts
 
 ```solidity
 // Expect the next call to revert
@@ -163,7 +163,7 @@ vm.expectRevert(bytes calldata message)
 vm.expectRevert(bytes4 data)
 ```
 
-### Others
+#### Others
 
 ```solidity
 // Create a labelled address
@@ -176,7 +176,7 @@ address addr = makeAddr(string memory name)
 (uint8 v, bytes32 r, bytes32 s) = vm.sign(uint256 privateKey, bytes32 digest)
 ```
 
-## Fuzzing
+### Fuzzing
 
 Use `vm.assume()` to specify conditions for inputs. It should only be used for narrow checks:
 ```solidity
