@@ -158,8 +158,10 @@ vm.mockCall(address where, bytes calldata data, bytes calldata retdata);
 
 // Same as the above, but msg.value also has to match `value`
 vm.mockCall(address where, uint256 value, bytes calldata data, bytes calldata retdata);
+```
 
-// Example usage
+Example usage:
+```solidity
 function testMockCall() public {
     // Without value
     vm.mockCall(
