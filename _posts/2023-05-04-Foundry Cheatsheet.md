@@ -150,6 +150,36 @@ dealERC1155(address token, address to, uint256 id, uint256 balance)
 dealERC1155(address token, address to, uint256 id, uint256 balance, bool adjust)
 ```
 
+#### Calls
+
+```solidity
+// Mock calls to an address `where`. If the call data `data` matches, return `retdata`  
+vm.mockCall(address where, bytes calldata data, bytes calldata retdata);
+
+// Same as the above, but msg.value also has to match `value`
+vm.mockCall(address where, uint256 value, bytes calldata data, bytes calldata retdata);
+
+// Example usage
+function testMockCall() public {
+    // Without value
+    vm.mockCall(
+        address(token),
+        abi.encodeWithSelector(token.balanceOf.selector, ALICE),
+        abi.encode(10)
+    );
+    assertEq(token.balanceOf(ALICE), 10);
+
+    // With value
+    vm.mockCall(
+        address(market),
+        10 ether,
+        abi.encodeWithSignature("pay(address,uint256)", ALICE, 10 ether),
+        abi.encode(true)
+    );
+    assertTrue(market.pay{value: 10 ether}(ALICE, 10 ether));
+}
+```
+
 #### Testing reverts
 
 ```solidity
