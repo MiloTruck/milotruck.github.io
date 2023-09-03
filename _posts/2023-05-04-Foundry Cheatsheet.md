@@ -31,7 +31,7 @@ Initialize Foundry:
 # Create required directories
 mkdir out lib
 
-# Add `forge-std` module to `lib`:
+# Add `forge-std` module to `lib`
 git submodule add https://github.com/foundry-rs/forge-std lib/forge-std
 
 # Create foundry.toml
