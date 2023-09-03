@@ -7,6 +7,9 @@ categories: Blog
 A cheatsheet for commonly used commands and cheatcodes in [Foundry](https://github.com/foundry-rs/foundry/tree/master). To get a copy of this cheatsheet, refer to [this gist](https://gist.github.com/MiloTruck/30cd9b051176da8b76fe7dc81996eaf9).
 
 ## Setup
+
+### Creating new projects
+
 Create a new project:
 ```sh
 forge init <project_name>
@@ -18,6 +21,30 @@ forge init --template <template> <project_name>
 
 # Example
 forge init --template https://github.com/zobront/paradigm-ctf paradigm_ctf
+```
+
+### Using Foundry in existing projects
+
+Initialize Foundry:
+
+```sh
+# Create required directories
+mkdir out lib
+
+# Add `forge-std` module to `lib`:
+git submodule add https://github.com/foundry-rs/forge-std lib/forge-std
+
+# Create foundry.toml
+touch foundry.toml
+```
+
+Specify directories in `foundry.toml`:
+
+```toml
+[profile.default]
+src = "contracts"
+out = "out"
+lib = "lib"
 ```
 
 ## Dependencies
@@ -35,6 +62,15 @@ forge install <dependency>
 
 # Example
 forge install openzeppelin/openzeppelin-contracts
+```
+
+To add dependencies to existing git repositories:
+```sh
+# Do not create a commit
+forge install --no-commit <dependency>
+
+# Do not create a git repository
+forge install --no-git <dependency>
 ```
 
 ### Remappings
@@ -106,7 +142,7 @@ vm.roll(uint256 blockNumber)
 vm.load(address account, bytes32 slot) 
 
 // Store a value to an address' storage slot
-vm.store(address account, bytes32 slot)
+vm.store(address account, bytes32 slot, bytes32 value)
 
 // Set code at address
 vm.etch(address addr, bytes calldata code)
