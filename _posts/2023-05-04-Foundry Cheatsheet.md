@@ -23,7 +23,7 @@ forge init --template <template> <project_name>
 forge init --template https://github.com/zobront/paradigm-ctf paradigm_ctf
 ```
 
-### Using Foundry in existing projects
+### Usage in existing projects
 
 Initialize Foundry:
 

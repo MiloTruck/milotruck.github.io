@@ -2,6 +2,8 @@
 main:
   - title: "About"
     url: /about/
+  - title: "Audits"
+    url: https://github.com/MiloTruck/audits
   # - title: "Projects"
   #   url: /projects
   - title: "Writeups"

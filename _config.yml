@@ -109,7 +109,7 @@ analytics:
 author:
   name             : "MiloTruck"
   avatar           : "/assets/images/Logo.png" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "Hi. I'm MiloTruck." #Description
+  bio              : "Independent security researcher focused on blockchain and EVM security." #Description
   location         : "Singapore"
   email            : 
   links:
@@ -125,9 +125,9 @@ author:
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
       # url: "https://www.linkedin.com/in/"
-    - label: "Facebook"
-      icon: "fab fa-fw fa-facebook-square"
-      # url: "https://facebook.com/"
+    - label: "Discord"
+      icon: "fab fa-fw fa-discord"
+      url: "https://discord.com/users/302259685560680460"
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
       # url: "https://instagram.com/"

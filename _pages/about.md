@@ -4,68 +4,46 @@ permalink: /about/
 layout: single
 ---
 
-Hi, I'm MiloTruck, an undergraduate student from Singapore with an interest in cybersecurity, mainly vulnerability research and smart contract security. I often participate in CTF competitions and hackathons with my team **ItzyBitzySpider**, and occasionally participate in [Code4rena](https://code4rena.com/) auditing contests.
+I'm an independent security researcher who specializes in blockchain and EVM security. Currently, I work as a Senior Auditor at [Trust Security](https://www.trust-security.xyz/) and Associate Security Researcher at [Spearbit](https://spearbit.com/).
 
-## Projects
-* [**regast**](https://github.com/MiloTruck/regast): A static analyzer for identifying security vulnerabilities and gas optimizations in Solidity codebases.
+I'm also a top warden at [Code4rena](https://code4rena.com/), where I regularly participate in audit contests. I occasionally hunt for live bugs on [Immunefi](https://immunefi.com/) in my spare time as well.
 
-## CVEs
+## Audit Contests
 
-Microsoft Media Foundation
-* [CVE-2021-33760](/blog/CVE-2021-33760)
-* [CVE-2022-21977](/blog/CVE-2022-21977)
-* [CVE-2022-22010](/blog/CVE-2022-22010)
+My full audit contest history can be found [here](https://github.com/MiloTruck/audits/blob/main/audit-contests.md).
 
-## Bug Bounty History
+### Stats
 
-Ranked **#168** on [Code4rena](https://code4rena.com/) for 2022
+- [Code4rena Profile](https://code4rena.com/@MiloTruck)
+- 17 High, 50 Medium severity vulnerabilities found
+- Ranked #4 on [Code4rena's 2023 leaderboard](https://code4rena.com/leaderboard) as of October 2023
 
-<img src="https://raw.githubusercontent.com/MiloTruck/MiloTruck.github.io/master/assets/images/Code4rena%20Leaderboard%202022.png" width="800">
+<img src="{{site.baseurl}}/assets/images/c4_leaderboard.jpg" width=1000>
 
-Ranked **#110** on [MSRC 2021 Q4 Security Researchers](https://msrc.microsoft.com/blog/2022/02/congratulations-to-the-top-msrc-2021-q4-security-researchers/)
+### Highlights
 
-<img src="https://raw.githubusercontent.com/MiloTruck/MiloTruck.github.io/master/assets/images/MSRC%202021%20Q4%20Leaderboard.png" width="800">
+- [Code4rena: LUKSO Network](https://code4rena.com/contests/2023-06-lukso) - 🥇1st place
+- [Code4rena: Lens Protocol V2](https://code4rena.com/contests/2023-07-lens-protocol-v2) - 🥇1st place
+- [Code4rena: Arbitrum Security Council Elections](https://code4rena.com/contests/2023-08-arbitrum-security-council-election-system) - 🥇1st place
+- Hats Finance: StakeWise V3 - 🥇1st place
+- [Code4rena: Chainlink CCIP](https://code4rena.com/contests/2023-05-chainlink-cross-chain-services-ccip-and-arm-network) - 8th place
 
+## Bug Bounties
 
-## Competitions
+To be added, but my disclosed reports can be found [here](https://github.com/MiloTruck/audits/tree/main/immunefi).
 
-### 2019
+## Previous Work
 
-| Name                                                  | Team                  | Honors                   |
-| ----------------------------------------------------- | --------------------- | ------------------------ |
-| Cyber Defenders Discovery Camp (CDDC) 2019            | ItzyBitzySpider/acsii | Silver Award, 7th Place  |
-| Cyberthon 2019                                        | ItzyBitzySpider/acsii | Participation            |
-| National Olympiad of Informatics (NOI) Singapore 2019 | Individual            | Participation            |
-| Cybersecurity Challenge Singapore (CSC) 2019          | Individual            | Individual Winner, Top 6 |
+I used to work as an Information Security Engineer Intern at [STAR Labs](https://starlabs.sg/), where I performed fuzzing with [WinAFL](https://github.com/googleprojectzero/winafl) to find bugs in targets such as Microsoft Media Foundation and Adobe Reader.
 
-### 2020
+### CVEs
 
-| Name                                                  | Team            | Honors                           |
-| ----------------------------------------------------- | --------------- | -------------------------------- |
-| Cyberthon 2020                                        | ItzyBitzySpider | Overall 3rd, Data Science Winner |
-| Cyber Defenders Discovery Camp (CDDC) 2020            | ItzyBitzySpider | 4th Place, JC Category           |
-| Whitehacks 2020                                       | ItzyBitzySpider | 4th Place                        |
-| Cyber SEA Games (CSG) 2020                            | Singapore       | 1st Place                        |
-| Stack the Flags 2020                                  | ItzyBitzySpider | 3rd Place, JC Category           |
-| National Olympiad of Informatics (NOI) Singapore 2020 | Individual      | Bronze Medal                     |
+Microsoft Media Foundation 
 
-### 2021
+- [CVE-2021-33760](/blog/CVE-2021-33760)
+- [CVE-2022-21977](/blog/CVE-2022-21977)
+- [CVE-2022-22010](/blog/CVE-2022-22010)
 
-| Name             | Team            | Honors    |
-| ---------------- | --------------- | --------- |
-| DSO-NUS CTF 2021 | It'z Me         | 6th Place |
-| Whitehacks 2021  | ItzyBitzySpider | 6th Place |
+### Ranked #110 on [MSRC 2021 Q4 Leaderboard](https://msrc.microsoft.com/blog/2022/02/congratulations-to-the-top-msrc-2021-q4-security-researchers/)
 
-### 2022
-
-| Name                           | Team            | Honors                         |
-| ------------------------------ | --------------- | ------------------------------ |
-| Stack the Codes Hackathon 2022 | ItzyBitzySpider | 3rd Place                      |
-| Stack the Flags 2022           | ItzyBitzySpider | 2nd Place, University Category |
-| Cyber League 2022              | ItzyBitzySpider | 3rd Place                      |
-
-### 2023
-
-| Name           | Team            | Honors                 |
-| -------------- | --------------- | ---------------------- |
-| Hack&Roll 2023 | ItzyBitzySpider | Most Entertaining Hack |
+<img src="{{site.baseurl}}/assets/images/MSRC%202021%20Q4%20Leaderboard.png" width=900>
