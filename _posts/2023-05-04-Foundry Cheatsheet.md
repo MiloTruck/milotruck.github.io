@@ -231,6 +231,16 @@ vm.expectRevert(bytes calldata message)
 vm.expectRevert(bytes4 data)
 ```
 
+#### Snapshots
+
+```solidity
+// Take a snapshot of the current state
+uint256 snapshot = vm.snapshot();
+
+// Restore the state
+vm.revertTo(uint256 snapshot);
+```
+
 #### Others
 
 ```solidity
