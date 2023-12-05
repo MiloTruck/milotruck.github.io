@@ -115,11 +115,11 @@ To identify contracts in a forked environment, pass your Etherscan API key using
 forge test --fork-url <rpc_url> --etherscan-api-key <etherscan_api_key>
 ```
 
-### Useful Cheatcodes
+### Cheatcodes
 
 Refer to [Cheatcodes Reference](https://book.getfoundry.sh/cheatcodes/) for all available cheatcodes.
 
-#### Global values
+#### Context
 
 ```solidity
 // Set block.timestamp
@@ -148,7 +148,7 @@ vm.store(address account, bytes32 slot, bytes32 value)
 vm.etch(address addr, bytes calldata code)
 ```
 
-#### Caller address
+#### Caller
 
 ```solidity
 // Set msg.sender for the next call
@@ -162,28 +162,18 @@ vm.stopPrank()
 
 // Change msg.sender for subsequent calls
 changePrank(address msgSender) 
-```
 
-#### Balances
+// Set msg.sender and give it ether for the next call
+hoax(address who)
+hoax(address who, uint256 give)
+hoax(address who, address origin)
+hoax(address who, address origin, uint256 give)
 
-```solidity
-// Set ether balance for an address
-deal(address to, uint256 balance)
-
-// Set ERC20 token balance for an address
-deal(address token, address to, uint256 balance)
-
-// Set ERC20 token balance for an address and increase totalSupply if `adjust` is true
-deal(address token, address to, uint256 balance, bool adjust)
-
-// Give ERC721 token with `id` to an address
-dealERC721(address token, address to, uint256 id)
-
-// Set ERC1155 token balance for an address
-dealERC1155(address token, address to, uint256 id, uint256 balance)
-
-// Set ERC1155 token balance for an address and adjust totalSupply
-dealERC1155(address token, address to, uint256 id, uint256 balance, bool adjust)
+// Set msg.sender and give it ether for subsequent calls
+startHoax(address who)
+startHoax(address who, uint256 give)
+startHoax(address who, address origin)
+startHoax(address who, address origin, uint256 give)
 ```
 
 #### Calls
@@ -218,7 +208,7 @@ function testMockCall() public {
 }
 ```
 
-#### Testing reverts
+#### Reverts
 
 ```solidity
 // Expect the next call to revert
@@ -241,7 +231,75 @@ uint256 snapshot = vm.snapshot();
 vm.revertTo(uint256 snapshot);
 ```
 
-#### Others
+### Std Libraries
+
+Refer to [Forge Std's `Test`](https://book.getfoundry.sh/reference/forge-std/#forge-stds-test) for all functionality.
+
+#### Balances
+
+```solidity
+// Set ether balance for an address
+deal(address to, uint256 balance)
+
+// Set ERC20 token balance for an address
+deal(address token, address to, uint256 balance)
+
+// Set ERC20 token balance for an address and increase totalSupply if `adjust` is true
+deal(address token, address to, uint256 balance, bool adjust)
+
+// Give ERC721 token with `id` to an address
+dealERC721(address token, address to, uint256 id)
+
+// Set ERC1155 token balance for an address
+dealERC1155(address token, address to, uint256 id, uint256 balance)
+
+// Set ERC1155 token balance for an address and adjust totalSupply
+dealERC1155(address token, address to, uint256 id, uint256 balance, bool adjust)
+```
+
+#### Errors
+
+From [`forge-std/std-errors`](https://book.getfoundry.sh/reference/forge-std/std-errors):
+
+- `stdError.assertionError` - The internal Solidity error when an `assert` fails.
+- `stdError.arithmeticError` - The internal Solidity error when an arithmetic operation fails (e.g. overflow/underflow).
+- `stdError.divisionError` - The internal Solidity error when a division fails (e.g. division by zero).
+- `stdError.indexOOBError` - The internal Solidity error when trying to access an element of an array that is out of bounds.
+- `stdError.popError` - The internal Solidity error when trying to pop an element off of an empty array. Will not work for empty arrays in external contracts.
+- `stdError.enumConversionError` - The internal Solidity error when trying to convert a number to a variant of an enum, if the number is larger than the number of variants in the enum (counting from 0).
+- `stdError.encodeStorageError` - The internal Solidity error when trying to access data in storage that is corrupted. Data cannot be corrupted unless assembly had been used.
+- `stdError.memOverflowError` - The internal Solidity error when trying to allocate a dynamic memory array with more than $2^64-1$ items.
+- `stdError.zeroVarError` - The internal Solidity error when trying to call a function via a function pointer that has not been initialized.
+
+#### Assertions
+
+From [`forge-std/std-assertions`](https://book.getfoundry.sh/reference/forge-std/std-assertions).
+
+```solidity
+// Fail a test with a message
+fail(string memory err)
+
+// Assert true/false
+assertTrue(bool data)
+assertTrue(bool data, string memory error)
+
+assertFalse(bool data)
+assertFalse(bool data, string memory err)
+
+// Assert equal
+assertEq(<type> a, <type> b)
+assertEq(<type> a, <type> b, string memory err)
+
+// Asserts `a` is approximately equal to `b` with delta in absolute value.
+assertApproxEqAbs(uint256 a, uint256 b, uint256 maxDelta)
+assertApproxEqAbs(uint256 a, uint256 b, uint256 maxDelta, string memory err)
+
+// Asserts `a` is approximately equal to `b` with delta in percentage, where `1e18` is 100%. 
+assertApproxEqRel(uint256 a, uint256 b, uint256 maxPercentDelta)
+assertApproxEqRel(uint256 a, uint256 b, uint256 maxPercentDelta, string memory err)
+```
+
+#### Addresses and Keys
 
 ```solidity
 // Create a labelled address
@@ -252,6 +310,23 @@ address addr = makeAddr(string memory name)
 
 // Sign data
 (uint8 v, bytes32 r, bytes32 s) = vm.sign(uint256 privateKey, bytes32 digest)
+```
+
+#### Math
+
+From  [`forge-std/std-math`](https://book.getfoundry.sh/reference/forge-std/std-math).
+
+```solidity
+// Returns the absolute value of a number.
+uint256 v = abs(int256 a)
+
+// Returns the difference between two numbers in absolute value.
+uint256 v = delta(uint256 a, uint256 b)
+uint256 v = delta(int256 a, int256 b)
+
+// Returns the difference between two numbers in percentage, where `1e18` is 100%.
+uint256 v = percentDelta(uint256 a, uint256 b)
+uint256 v = percentDelta(int256 a, int256 b)
 ```
 
 ### Fuzzing
