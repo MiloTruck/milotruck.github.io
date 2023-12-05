@@ -265,10 +265,10 @@ From [`forge-std/std-errors`](https://book.getfoundry.sh/reference/forge-std/std
 - `stdError.arithmeticError` - an arithmetic operation fails (e.g. overflow/underflow).
 - `stdError.divisionError` - a division fails (e.g. division by zero).
 - `stdError.indexOOBError` - accessing an element of an array that is out of bounds.
-- `stdError.popError` - popping an element off of an empty array. Will not work for empty arrays in external contracts.
-- `stdError.enumConversionError` - converting a number to an enum, if the number is larger than the number of enum variants.
+- `stdError.popError` - popping from an empty array. Does not work for empty arrays in external contracts.
+- `stdError.enumConversionError` - converting a number larger than the number of enum variants to an enum.
 - `stdError.encodeStorageError` - accessing data in storage that is corrupted using inline assembly.
-- `stdError.memOverflowError` - allocating a dynamic memory array with more than $2^{64}-1$ items.
+- `stdError.memOverflowError` - allocating a dynamic memory array with more than 2^64-1 items.
 - `stdError.zeroVarError` - calling a function via a function pointer that has not been initialized.
 
 #### Assertions
