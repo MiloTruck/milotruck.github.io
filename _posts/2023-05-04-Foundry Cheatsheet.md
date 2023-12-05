@@ -259,17 +259,17 @@ dealERC1155(address token, address to, uint256 id, uint256 balance, bool adjust)
 
 #### Errors
 
-From [`forge-std/std-errors`](https://book.getfoundry.sh/reference/forge-std/std-errors):
+From [`forge-std/std-errors`](https://book.getfoundry.sh/reference/forge-std/std-errors), used to catch internal Solidity errors:
 
-- `stdError.assertionError` - The internal Solidity error when an `assert` fails.
-- `stdError.arithmeticError` - The internal Solidity error when an arithmetic operation fails (e.g. overflow/underflow).
-- `stdError.divisionError` - The internal Solidity error when a division fails (e.g. division by zero).
-- `stdError.indexOOBError` - The internal Solidity error when trying to access an element of an array that is out of bounds.
-- `stdError.popError` - The internal Solidity error when trying to pop an element off of an empty array. Will not work for empty arrays in external contracts.
-- `stdError.enumConversionError` - The internal Solidity error when trying to convert a number to a variant of an enum, if the number is larger than the number of variants in the enum (counting from 0).
-- `stdError.encodeStorageError` - The internal Solidity error when trying to access data in storage that is corrupted. Data cannot be corrupted unless assembly had been used.
-- `stdError.memOverflowError` - The internal Solidity error when trying to allocate a dynamic memory array with more than $2^64-1$ items.
-- `stdError.zeroVarError` - The internal Solidity error when trying to call a function via a function pointer that has not been initialized.
+- `stdError.assertionError` - an `assert` fails.
+- `stdError.arithmeticError` - an arithmetic operation fails (e.g. overflow/underflow).
+- `stdError.divisionError` - a division fails (e.g. division by zero).
+- `stdError.indexOOBError` - accessing an element of an array that is out of bounds.
+- `stdError.popError` - popping an element off of an empty array. Will not work for empty arrays in external contracts.
+- `stdError.enumConversionError` - converting a number to an enum, if the number is larger than the number of enum variants.
+- `stdError.encodeStorageError` - accessing data in storage that is corrupted using inline assembly.
+- `stdError.memOverflowError` - allocating a dynamic memory array with more than $2^{64}-1$ items.
+- `stdError.zeroVarError` - calling a function via a function pointer that has not been initialized.
 
 #### Assertions
 
