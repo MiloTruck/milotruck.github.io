@@ -4,7 +4,9 @@ date: 2023-05-04
 categories: Blog
 --- 
 
-A cheatsheet for commonly used commands and cheatcodes in [Foundry](https://github.com/foundry-rs/foundry/tree/master). To get a copy of this cheatsheet, refer to [this gist](https://gist.github.com/MiloTruck/30cd9b051176da8b76fe7dc81996eaf9).
+A cheatsheet for commonly used commands and cheatcodes in [Foundry](https://github.com/foundry-rs/foundry/tree/master). 
+
+A can be found in [this gist](https://gist.github.com/MiloTruck/30cd9b051176da8b76fe7dc81996eaf9).
 
 ## Setup
 

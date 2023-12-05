@@ -109,7 +109,7 @@ analytics:
 author:
   name             : "MiloTruck"
   avatar           : "/assets/images/Logo.png" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "Independent security researcher focused on blockchain and EVM security." #Description
+  bio              : "Blockchain & EVM security" #Description
   location         : "Singapore"
   email            : 
   links:
