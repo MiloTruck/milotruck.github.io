@@ -126,7 +126,7 @@ This led to my first time receiving a significant payout (over $500, that's huge
 
 ### Asymmetry Finance
 
-This was the first codebase I actually fully understood in-depth, partially due to its small SLOC. The protocol also wasn't very hard to understand - it's essentially an aggregator for liquid ETH staking over [Rocket Pool](https://rocketpool.net/), [Lido](https://lido.fi/) and [Frax Finance](https://frax.finance/), as such, there wasn't much complexity or math to begin with.
+This was the first codebase I actually fully understood in-depth, partially due to its small SLOC. The protocol also wasn't very hard to understand - it's essentially an aggregator for liquid ETH staking over [Rocket Pool](https://rocketpool.net/), [Lido](https://lido.fi/) and [Frax Finance](https://frax.finance/). As such, there wasn't much complexity or math to begin with.
 
 I believe this was what led me to find 5/8 highs, which I consider a win despite the small payout in the end. Finding 7 H/M bugs in a single contest was no small feat for someone who just started focusing on audits. 
 
@@ -160,7 +160,7 @@ I participated in _another_ five audit contests again in second month.
 This was honestly FOMO at its peak - I would participate in one contest, see a new one pop up and hop over to it after a day or so. Unless you're a genius and have some god-given talent for auditing, no one should be reviewing 5K SLOC over 5 different protocols in their second month of auditing. 
 
 > _"Be like a postage stamp. Stick to one thing until you get there."_
-> <div style="text-align: right"> - Some random quote from Google to make myself sound smart </div>
+> <div style="text-align: right"> - Some random quote from Google </div>
 
 I would end up spending about 3-4 days on each contest due to this, which is a great way to find a whole lot of nothing.
 
@@ -198,7 +198,7 @@ I didn't do too well in this contest either, both of my mediums were generic fin
 
 For this contest, I believe that I actually had a pretty good understanding of the protocol and how it worked in its entirety. My mistake was hopping to another contest too soon instead of looking deeper for more nuanced bugs.
 
-The lesson to learn here - after understanding the code, always spend more time to look for bugs or think of possible attack vectors. There's this idea of diminishing returns and when to stop looking for bugs, written in [cmichel's blog](https://cmichel.io/how-to-become-a-smart-contract-auditor/). But most of the time you'll never reach that point while the contest is ongoing, unless the contest duration is really long or you're a really good auditor.
+The lesson to learn here - after understanding the code, always spend more time to look for bugs or think of possible attack vectors. There's this idea of diminishing returns and when to stop looking for bugs, written in [cmichel's blog](https://cmichel.io/how-to-become-a-smart-contract-auditor/). But most of the time, you'll never reach that point while the contest is ongoing, unless the contest duration is really long or you're a really good auditor.
 
 ### EigenLayer
 
@@ -209,11 +209,11 @@ EigenLayer was my first introduction to the world of [Liquid Ethereum Staking](h
 
 Being new to ETH staking at the time, there was a huge portion of the protocol that was unfamiliar to me. In fact, before I fully understood how the ETH staking portion of the codebase worked, I actually stopped trying to find bugs midway into the contest and started looking at Footium instead.
 
-On hindsight, this was an extremely bad decision. The contest ended up having two bugs related to ETH staking (one of which was a [high](https://code4rena.com/reports/2023-04-eigenlayer#h-01-slot-and-block-number-proofs-not-required-for-verification-of-withdrawal-multiple-withdrawals-possible) worth ~$5k), both of which I missed simply because I didn't try. 
+On hindsight, this was an extremely bad decision. The contest ended up having two bugs related to ETH staking (one of which was [a high worth ~$5k](https://code4rena.com/reports/2023-04-eigenlayer#h-01-slot-and-block-number-proofs-not-required-for-verification-of-withdrawal-multiple-withdrawals-possible)), both of which I missed simply because I didn't try. 
 
 What I learnt from this - don't be afraid of complexity and unfamiliar topics, all you have to do is research harder (we're called security _researchers_ for a reason) and pick up the related concepts as best as you can. This was the approach [@0xVolodya](https://twitter.com/0xVolodya) had going into the contest, which [worked out extremely well for him](https://0xvolodya.hashnode.dev/how-i-earned-25000-auditing-and-ranked-1-on-60-day-leaderboard#heading-eigenlayerhttpscode4renacomcontests2023-04-eigenlayer-contesttop-12200dollar).
 
-I would end up finding 2 out of 4 H/M bugs in this contest - one high due to [a misplaced `++i` in a for-loop](https://github.com/code-423n4/2023-04-eigenlayer-findings/issues/119) and another medium which was [a not very impactful DOS vector](https://github.com/code-423n4/2023-04-eigenlayer-findings/issues/122). Honestly, I don't really understand why the high bug wasn't found by more auditors since it was extremely easy to spot, but I'm not complaining as it resulted in my first four digit payout.
+I would end up finding 2 out of 4 bugs in this contest - one high due to [a misplaced `++i` in a for-loop](https://github.com/code-423n4/2023-04-eigenlayer-findings/issues/119) and another medium which was [a not very impactful DOS vector](https://github.com/code-423n4/2023-04-eigenlayer-findings/issues/122). Honestly, I don't really understand why the high bug wasn't found by more auditors since it was extremely easy to spot, but I'm not complaining as it resulted in my first four digit payout.
 
 ## June - The turning point
 
@@ -227,7 +227,7 @@ The second half of the month was dedicated to Immunefi, during which I found [th
 
 ### Chainlink CCIP
 
-This contest had a $185,000 USD H/M pot, which was what led me to focus only on it for its entire duration.
+This contest had a $185K H/M pot, which was what led me to focus only on it for its entire duration.
 
 For the entire two weeks, nearly all my time went into looking at this codebase. I remember telling myself that I would find every possible bug and do better than all other wardens participating, including  [@trust_90](https://twitter.com/trust__90). Of course, that didn't happen.
 
@@ -273,7 +273,7 @@ Firstly, July had a huge number of contests ongoing. In chronological order, the
 
 That's **11 contests and ~$1.2M in rewards** over the span of one month, and that's not even including invitationals or mitigation reviews. When there are so many contests ongoing during the same period of time, competition becomes spread out, so awards naturally tend to become larger.
 
-Secondly, both contests I took part in this month happened to be what I excelled at - non-typical protocols that didn't fall under your usual categories (e.g. staking, lending, AMM), and required creativity to identify bugs due to their unique implementations.
+Secondly, both contests I took part in this month happened to be what I excelled at - non-typical protocols that didn't fall under your usual categories (e.g. staking, lending, marketplace), and required creativity to identify bugs due to their unique implementations.
 
 ### LUKSO
 
@@ -289,7 +289,7 @@ I think many wardens were scared off by the sight of all their previous audits a
 
 Despite this, I would end up finding [6/8 medium bugs](https://code4rena.com/reports/2023-06-lukso) in this contest. This taught me that a huge number of audits doesn't mean a codebase is 100% secure - there's always one more bug that someone missed, or one more edge-case that the devs didn't consider. 
 
-Another interesting point is that I had actually found the the other two medium bugs, just that I thought they considered "acceptable risks" as part of the protocol's design and didn't think they were bugs at all. 
+Another interesting point is that I had actually found the the other two medium bugs, just that I thought they were considered "acceptable risks" as part of the protocol's design and didn't think they were bugs at all. 
 
 The lesson to learn here - when you're unsure of a bug's severity, always ask the protocol team whether the behavior you observe is intended. If this isn't an option, you can always log what you found as low severity or informational, such that the protocol team can pick up on it when reading your report.
 
@@ -309,7 +309,7 @@ This served me well - I would end up with 8/11 medium findings, which is 72% of 
   <img src="{{site.baseurl}}/assets/images/picodes_msg.jpg" width=500> 
 </p>
 
-The protocol team would later reach out to me and [@0xJuancito](https://twitter.com/0xJuancito) for a review of their fixes, modifications and additions to the codebase. 
+The protocol team would later reach out to me and [@0xJuancito](https://twitter.com/0xJuancito) (who was 2nd) for a review of their fixes, modifications and additions to the codebase. 
 
 ## August - Rising to the top
 
@@ -325,7 +325,7 @@ I participated in two contests in August, but you can already see that. Part of 
 
 This was my first time reviewing a protocol related to governance. 
 
-I was quite familiar with governance-related concepts (e.g. quorum, vote accounting) as I had looked at [SushiSwap's voting](https://medium.com/valixconsulting/sushiswap-voting-vulnerability-of-sushi-token-and-its-forks-56f220d4c9ba#:~:text=Overview%20of%20SUSHI%20Token's%20Voting%20Functionality,-Figure%201.&text=The%20SUSHI%20token%20holders%20can%20even%20delegate%20their%20votes%2C%20representing,as%20portrayed%20in%20Figure%201.) and other mechanisms while doing bug bounties before, but never got the chance to fully audit a codebase centered around governance.
+I was quite familiar with governance-related concepts (e.g. quorum, vote accounting) as I had looked at [SushiSwap's delegate voting](https://medium.com/valixconsulting/sushiswap-voting-vulnerability-of-sushi-token-and-its-forks-56f220d4c9ba#:~:text=Overview%20of%20SUSHI%20Token's%20Voting%20Functionality,-Figure%201.&text=The%20SUSHI%20token%20holders%20can%20even%20delegate%20their%20votes%2C%20representing,as%20portrayed%20in%20Figure%201.) and other mechanisms while doing bug bounties before, but never got the chance to fully audit a codebase centered around governance.
 
 I only spent four days on this contest, which went something like:
 
@@ -333,13 +333,13 @@ I only spent four days on this contest, which went something like:
 - 1.5 days to find bugs
 - A few hours to write up all my findings
 
-Now I don't recommend rushing contests, or any audit for that matter, like this.
+I don't recommend rushing contests, or any audit for that matter, like this.
 
 But it worked out pretty well for me - I would find 1/1 high and 3/5 medium severity bugs. I was quite satisfied with this result - I had identified all the bugs that, in my opinion, were important or worth fixing.
 
 What was interesting was [the high severity bug](https://github.com/code-423n4/2023-08-arbitrum-findings/issues/252) - a signature replay that allowed attackers to use up someone else's votes due to a flawed implementation with Openzeppelin's [`GovernorUpgradeable.sol`](https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable/blob/release-v4.7/contracts/governance/GovernorUpgradeable.sol) library. 
 
-Openzeppelin's governance contracts were modelled after [Compound V2's governance](https://docs.compound.finance/v2/governance/) and were not built to be used for partial voting, which Arbitrum's elections allowed. If I hadn't taken the time to review the codebase's external dependencies and only focused on the contracts in-scope, I would have never found this bug. 
+Openzeppelin's governance contracts were modelled after [Compound V2's governance](https://docs.compound.finance/v2/governance/) and were not built for partial voting, which Arbitrum's elections allowed. If I hadn't taken the time to review the codebase's external dependencies and only focused on the contracts in-scope, I would have never found this bug. 
 
 ### StakeWise V3
 
@@ -385,7 +385,7 @@ A small part of the month also went to Immunefi bug hunting, during which I foun
 
 [@functi0nZer0](https://twitter.com/functi0nZer0) told us to take his money in the [contest's README](https://github.com/code-423n4/2023-10-wildcat/tree/main), so that's what I did.
 
-> # The Wildcat Protocol
+> **The Wildcat Protocol**  
 > Greetings, everyone! It's time to take our money!
 
 Unfortunately, I didn't take enough money for 1st place.
@@ -396,7 +396,7 @@ Unfortunately, I didn't take enough money for 1st place.
 
 Wildcat was a lending protocol with a twist - instead of having a pool of lenders offering loans, borrowers would open markets for lenders to deposit into. In return, they would receive tokens that gradually increased in value by rebasing to reflect the loan's interest rate.
 
-This was my first time reviewing protocol that implemented a rebasing tokens. Apart from that, I was quite familiar with lending protocols at this point in time.
+This was my first time reviewing protocol that implemented rebasing tokens. Apart from that, I was quite familiar with lending protocols at this point in time.
 
 I would end up with 3/5 highs and 7/10 medium findings, including [a bug about using `.codehash` to check for contract existence](https://github.com/code-423n4/2023-10-wildcat-findings/issues/491) that I was thought was a pretty sick find.
 
@@ -523,7 +523,7 @@ Don't take my word for it, [@_hrkrshnn](https://twitter.com/_hrkrshnn) himself s
 
 In fact, this was what happened to me. A few days after I had posted [this tweet](https://twitter.com/milotruck/status/1702502451105165609), he reached out to me to join Spearbit. Soon after, [@trust_90](https://twitter.com/trust__90) also offered me a place in [Trust Security](https://www.trust-security.xyz/).
 
-Additionally, for aspiring individuals that currently aren't performing at the top-level yet, contests are (in my opinion) the best way to hone your skills. The feedback loop that contests provide is invaluable - where else will you have the opportunity to see what bugs you missed in the code immediately after you finish auditing?
+Additionally, for aspiring individuals that currently aren't performing at the top level yet, contests are (in my opinion) the best way to hone your skills. The feedback loop that contests provide is invaluable - where else will you have the opportunity to see what bugs you missed in the code immediately after you finish auditing?
 
 All in all, [this tweet](https://twitter.com/1_00_proof/status/1727106958430519345) sums up my points here pretty neatly:
 
