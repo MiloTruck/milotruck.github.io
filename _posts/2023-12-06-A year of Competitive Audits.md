@@ -17,11 +17,11 @@ Here's an overview of my results:
 | [Polynomial Protocol](https://code4rena.com/contests/2023-03-polynomial-protocol-contest) | Code4rena |  1849 | 1 H, 2 M | #14 | $759.68 |
 | [Asymmetry Finance](https://code4rena.com/contests/2023-03-asymmetry-contest) | Code4rena | 645 |  5 H, 2 M | #29 | $224.11 |
 | [Contest 225](https://code4rena.com/contests/2023-03-contest-225-contest) | Code4rena | 1000 | 2 H, 2 M | #22 | $833.23 |
-| [Teller V2](https://app.sherlock.xyz/audits/contests/62) | Sherlock | 1428 | 1 H, 5 M | #25 | $193.70 |
 | [Caviar Private Pools](https://code4rena.com/contests/2023-04-caviar-private-pools) | Code4rena | 725 | 1 M | #105 | $9.33 | 
+| [Teller V2](https://app.sherlock.xyz/audits/contests/62) | Sherlock | 1428 | 1 H, 5 M | #25 | $193.70 |
+| [Footium](https://app.sherlock.xyz/audits/contests/71) | Sherlock | 524 | 1 H, 1 M | #19 | $120.88 |
 | [Frankencoin](https://code4rena.com/contests/2023-04-frankencoin) | Code4rena | 949 | 2 M | #13 | $832.81 |
 | [EigenLayer](https://code4rena.com/contests/2023-04-eigenlayer-contest) | Code4rena | 1393 | 1 H, 1 M | #9 | $1,978.72 |
-| [Footium](https://app.sherlock.xyz/audits/contests/71) | Sherlock | 524 | 1 H, 1 M | #19 | $120.88 |
 | [Chainlink CCIP](https://code4rena.com/contests/2023-05-chainlink-cross-chain-services-ccip-and-arm-network) | Code4rena | 2985 | 3 H | #8 | $6,300.97 |
 | [LUKSO](https://code4rena.com/contests/2023-06-lukso) | Code4rena | 3469 | 6 M | #1 | $44,459.52 |
 | [Lens Protocol V2](https://code4rena.com/contests/2023-07-lens-protocol-v2) | Code4rena | 4108 | 8 M | #1 | $29,747.31 |
@@ -148,9 +148,9 @@ The results for this contest came out around the same time as Polynomial Protoco
 
 | Contest | Platform | SLOC | Findings | Ranking | Payout | 
 |:--|:--:|:--:|:--:|:--:|:--:|
+| [Caviar Private Pools](https://code4rena.com/contests/2023-04-caviar-private-pools) | Code4rena | 725 | 1 M | #105 | $9.33 | 
 | [Teller V2](https://app.sherlock.xyz/audits/contests/62) | Sherlock | 1428 | 1 H, 5 M | #25 | $193.70 |
 | [Footium](https://app.sherlock.xyz/audits/contests/71) | Sherlock | 524 | 1 H, 1 M | #19 | $120.88 |
-| [Caviar Private Pools](https://code4rena.com/contests/2023-04-caviar-private-pools) | Code4rena | 725 | 1 M | #105 | $9.33 | 
 | [Frankencoin](https://code4rena.com/contests/2023-04-frankencoin) | Code4rena | 949 | 2 M | #13 | $832.81 |
 | [EigenLayer](https://code4rena.com/contests/2023-04-eigenlayer-contest) | Code4rena | 1393 | 1 H, 1 M | #9 | $1,978.72 |
 | Total | | 5019 | 3 H, 10 M | | $3135.44 |
@@ -163,6 +163,10 @@ This was honestly FOMO at its peak - I would participate in one contest, see a n
 > <div style="text-align: right"> - Some random quote from Google </div>
 
 I would end up spending about 3-4 days on each contest due to this, which is a great way to find a whole lot of nothing.
+
+### Caviar Private Pools
+
+I honestly don't remember participating in this contest.
 
 ### Teller V2, Footium
 
@@ -187,10 +191,6 @@ This gave me a lot of points on the [Judging Leaderboard](https://audits.sherloc
 </p>
 
 **A note on Sherlock's judging contests:** I still think this is one of the most effective ways to learn since you have an instant feedback loop - you get to see what bugs you missed and learn from everyone's findings immediately after the contest ends.
-
-### Caviar Private Pools
-
-I honestly don't remember participating in this contest.
 
 ### Frankencoin
 
