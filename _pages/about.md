@@ -6,31 +6,38 @@ layout: single
 
 I'm an independent security researcher who specializes in blockchain and EVM security. Currently, I work as a Senior Auditor at [Trust Security](https://www.trust-security.xyz/) and Associate Security Researcher at [Spearbit](https://spearbit.com/).
 
-I'm also a top warden at [Code4rena](https://code4rena.com/), where I regularly participate in audit contests. I occasionally hunt for live bugs on [Immunefi](https://immunefi.com/) in my spare time as well.
+I'm also a top warden at [Code4rena](https://code4rena.com/), where I regularly participate in audit contests. 
 
 ## Audit Contests
 
-My full audit contest history can be found [here](https://github.com/MiloTruck/audits/blob/main/audit-contests.md).
+My entire history and reports can be found in [this repository](https://github.com/MiloTruck/audits/blob/main/audit-contests.md).
 
 ### Stats
 
 - [Code4rena Profile](https://code4rena.com/@MiloTruck)
-- 17 High, 50 Medium severity vulnerabilities found
-- Ranked #1 on [Code4rena's 2023 leaderboard](https://code4rena.com/leaderboard) as of November 2023
+- Ranked #1 on [Code4rena's 2023 leaderboard](https://code4rena.com/leaderboard) on November 2023
 
 <img src="{{site.baseurl}}/assets/images/c4_leaderboard.png" width=1000>
 
 ### Highlights
 
-- [Code4rena: LUKSO Network](https://code4rena.com/contests/2023-06-lukso) - 🥇1st place
-- [Code4rena: Lens Protocol V2](https://code4rena.com/contests/2023-07-lens-protocol-v2) - 🥇1st place
-- [Code4rena: Arbitrum Security Council Elections](https://code4rena.com/contests/2023-08-arbitrum-security-council-election-system) - 🥇1st place
-- Hats Finance: StakeWise V3 - 🥇1st place
-- [Code4rena: Chainlink CCIP](https://code4rena.com/contests/2023-05-chainlink-cross-chain-services-ccip-and-arm-network) - 8th place
+- [Code4rena: LUKSO Network](https://code4rena.com/contests/2023-06-lukso) - 🥇1st
+- [Code4rena: Lens Protocol V2](https://code4rena.com/contests/2023-07-lens-protocol-v2) - 🥇1st
+- [Code4rena: Arbitrum Security Council Elections](https://code4rena.com/contests/2023-08-arbitrum-security-council-election-system) - 🥇1st
+- [Hats Finance: StakeWise V3](https://app.hats.finance/audit-competitions/stakewise-0xd91cd6ed6c9a112fdc112b1a3c66e47697f522cd/leaderboard) - 🥇1st
+- [Code4rena: Chainlink Staking v0.2](https://code4rena.com/contests/2023-08-chainlink-staking-v02) - 🥇1st
+- [Code4rena: Wildcat](https://code4rena.com/contests/2023-10-the-wildcat-protocol) - 🥈2nd
+- [Code4rena: Chainlink CCIP](https://code4rena.com/contests/2023-05-chainlink-cross-chain-services-ccip-and-arm-network) - 8th
 
 ## Bug Bounties
 
-To be added, but my disclosed reports can be found [here](https://github.com/MiloTruck/audits/tree/main/immunefi).
+I occasionally hunt for live bugs on [Immunefi](https://immunefi.com/) in my spare time.
+
+Here are some publicly disclosed bugs that I've found so far:
+
+- [Beluga Protocol: Permanent freezing of tokens by vote manipulation](https://github.com/MiloTruck/audits/blob/main/immunefi/beluga-C-01.md) - Critical
+- [Arcade.xyz: Forcing users into loans by manipulating EIP-1271 signatures](https://github.com/MiloTruck/audits/blob/main/immunefi/arcadexyz-H-01.md) - High
+- [GYSR: Theft of funds through precision loss](https://github.com/MiloTruck/audits/blob/main/immunefi/gysr-I-01.md) - Informational
 
 ## Previous Work
 
