@@ -66,7 +66,7 @@ If you're a newcomer to the space in 2023, I don't recommend following this as a
 
 Doing those few CTFs actually set me up quite well for audit contests - from my first contest onwards, I was [consistently finding mediums and occasionally finding highs](https://github.com/MiloTruck/audits/blob/main/audit-contests.md#2022). 
 
-However, back in 2022, I didn't have much time for Web3 security and couldn't dedicate more than a day of my week to contests. I would eventually pivot into writing my own static analyzer, [Regast](https://github.com/MiloTruck/regast-public), and running them in contests for QA and gas reports.
+However, back in 2022, I didn't have much time for Web3 security and couldn't dedicate more than a day of my week to contests. I would eventually pivot into writing my own static analyzer, [Regast](https://github.com/MiloTruck/regast), and running them in contests for QA and gas reports.
 
 <img src="{{site.baseurl}}/assets/images/alex_msg.png" width=800>
 
